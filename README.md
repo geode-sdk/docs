@@ -1,1 +1,1 @@
-This repo contains documentation for `insert SDK name here`
+This repo will contain documentation for Geode
