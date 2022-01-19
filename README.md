@@ -3,9 +3,13 @@
 
 **Geode** is a [Geometry Dash](https://store.steampowered.com/app/322170/Geometry_Dash/) mod loader and modding SDK with a modern approach towards mod development. Unlike previous mod loaders, which merely inject the DLLs and let them handle the rest, Geode aims to be a more comprehensive project, which manages loaded mods & hooks itself. Geode utilizes a trap hooking technique for hooks to ensure performance, compatability, portability and ease of use. For modders, Geode means easy development and portability; for end users, Geode means an uniform and easy experience using mods.
 
+## Help, Contributing, Etc.
+
+If you need help using Geode or would like to contribute, feel free to join our [Discord Server](https://discord.gg/9e43WMKzhp).
+
 ## Getting Started
 
-See [Installation](INSTALLATION.md) for instructions on how to install the Geode SDK on your computer.
+See [Installation](INSTALLATION.md) for instructions on how to install the Geode SDK on  your computer.
 
 ## Credits
 
@@ -19,9 +23,9 @@ Developed by
 
  * [Camila314](https://github.com/camila314/)
 
- * [alk1m123](https://github.com/altalk23/)
+ * [Alk1m123](https://github.com/altalk23/)
 
- * [Firecubez](https://github.com/FireCubez)
+ * [FireCubez](https://github.com/FireCubez)
 
 Using
 
@@ -31,4 +35,4 @@ Using
 
 Special Thanks
 
- * [RobTop Games](https://twitter.com/RobTopGames/) for making this amazing game and providing us and so many others with hours of entertainment <3 And an extra special thank you for not disabling RTTI on Windows
+ * [RobTop Games](https://twitter.com/RobTopGames/) for making this amazing game and providing us and so many others with hours of entertainment ❤
