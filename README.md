@@ -1,3 +1,10 @@
+---
+layout: default
+title: Home
+nav_order: 1
+description: "The main page"
+permalink: /
+---
 
 # ![Geode Logo](https://github.com/geode-sdk.png?size=40) Geode SDK
 
