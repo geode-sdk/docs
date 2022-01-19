@@ -11,17 +11,17 @@ See [Installation](INSTALLATION.md) for instructions on how to install the Geode
 
 Developed by
 
- * PoweredByPie | [GitHub](https://github.com/poweredbypie/) | [Twitter](https://twitter.com/PoweredByPie)
+ * [PoweredByPie](https://github.com/poweredbypie/)
 
- * Mat | [GitHub](https://github.com/matcool/) | [Twitter](https://twitter.com/mateus44_/)
+ * [Mat](https://github.com/matcool/)
 
- * HJfod | [GitHub](https://github.com/hjfod) | [Twitter](https://twitter.com/HJfod)
+ * [HJfod](https://github.com/hjfod)
 
- * Camila314 | [GitHub](https://github.com/camila314/) | [Twitter](https://twitter.com/cami314la/)
+ * [Camila314](https://github.com/camila314/)
 
- * alk1m123 | [GitHub](https://github.com/altalk23/)
+ * [alk1m123](https://github.com/altalk23/)
 
- * Firecubez | [Twitter](https://twitter.com/FireCubez)
+ * [Firecubez](https://github.com/FireCubez)
 
 Using
 
