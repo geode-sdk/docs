@@ -1,4 +1,8 @@
-plugins:
-  - jekyll-include-cache
 remote_theme: pmarsceill/just-the-docs
+
+title: Geode Docs
 color_scheme: dark
+
+aux_links:
+  "Geode SDK on GitHub":
+    - "https://github.com/geode-sdk"
