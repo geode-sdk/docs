@@ -7,7 +7,7 @@ description: "Extending classes and adding fields"
 
 # Fields
 
-Say you want to add a property to an existing class, one way you could do this is by storing the property in a global variable like so:
+Say you want to add a property to an existing class. One way you could do this is by storing the property in a global variable like so:
 
 ```cpp
 int totalJumps = 0;
@@ -21,9 +21,9 @@ class $modify(PlayerObject) {
 };
 ```
 
-This would work, however, you may notice the counter never resets back down to 0, and that the same value is shared with the second player.
+This would work, however, it isn't ideal. You may notice that the counter never resets back down to 0, and that the same value is shared with all instances of PlayerObject.
 
-Geode provides a solution: `field_t`
+Geode provides a solution to this problem: `field_t`. `field_t` helps provide instance variables to modified classes. Take a look at an example:
 
 ```cpp
 class $modify(PlayerObject) {
@@ -36,13 +36,13 @@ class $modify(PlayerObject) {
     }
 };
 ```
-However, there are a few caviats to know when using them:
-- They can only be accessed using `->*`, so yes, `this->*m_field` is required
-- Due to the [operator precedence](https://en.cppreference.com/w/cpp/language/operator_precedence) of ->*, sometimes you will have to wrap it in parenthesis (like in the previous code block)
-- They are only initialized on first use, not on class creation
-- They cannot be assigned a default value*
+There are a few caviats to know when using `field_t`:
+- `field_t` can only be accessed using the access operator `->*`. In other words, `this->*m_field` is required
+- Due to the [operator precedence](https://en.cppreference.com/w/cpp/language/operator_precedence) of `->*`, sometimes you will have to wrap the access operator in parenthesis (like in the previous code block)
+- `field_t` variables are initialized on first use, not on class creation
+- `field_t` variables cannot be assigned a default value in the conventional way of doing so
 
-If you must have a default value that is also set when the class is created, you can simply do that by hooking the constructor
+If you need a default value and can't wait for first use, you can simply hook the constructor of the class and set the value of the field.
 
 ```cpp
 class $modify(PlayerObject) {
