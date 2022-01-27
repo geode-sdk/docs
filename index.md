@@ -33,6 +33,8 @@ Developed by
 
  * [FireCubez](https://github.com/FireCubez)
 
+ * [fig](https://github.com/FigmentBoy)
+
 Using
 
  * [Cocos2d-x](https://github.com/cocos2d/cocos2d-x/tree/cocos2d-x-2.2.3)
