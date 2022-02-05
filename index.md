@@ -17,6 +17,8 @@ If you need help using Geode or would like to contribute, feel free to join our 
 
 See [Installation](/docs/installation) for instructions on how to install the Geode SDK on your computer.
 
+See [Building](/docs/building) for instructions on how to build the Geode Loader + SDK from scratch on your computer.
+
 ## Credits
 
 Developed by
@@ -40,6 +42,8 @@ Using
  * [Cocos2d-x](https://github.com/cocos2d/cocos2d-x/tree/cocos2d-x-2.2.3)
 
  * [FMOD](https://www.fmod.com/)
+
+ * [fmt](https://fmt.dev/latest/index.html)
 
 Special Thanks
 

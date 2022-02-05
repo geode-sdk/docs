@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Adding fields
-nav_order: 2
+nav_order: 5
 description: "Extending classes and adding fields"
 ---
 
@@ -21,9 +21,11 @@ class $modify(PlayerObject) {
 };
 ```
 
-This would work, however, it isn't ideal. You may notice that the counter never resets back down to 0, and that the same value is shared with all instances of PlayerObject.
+This works; however, it isn't ideal. The counter never resets back down to 0, and the same value is shared across all instances of PlayerObject.
 
-Geode provides a solution to this problem: `field_t`. `field_t` helps provide instance variables to modified classes. Take a look at an example:
+One could solve this problem by using the `setUserData` function in `CCNode` or by utilizing more complicated systems, but both solutions are less than ideal.
+
+Geode provides a better alternative: `field_t`. `field_t` helps add new instance variables to modified classes. Take a look at an example:
 
 ```cpp
 class $modify(PlayerObject) {
@@ -36,11 +38,15 @@ class $modify(PlayerObject) {
     }
 };
 ```
-However, `field_t` has some quirks when it comes to accessing the value of the field. 
+
+This code works even if you have multiple `PlayerObject`s, and the counter is initialized as 0 for each one, providing an elegant yet simple solution to the problem.
+
+However, `field_t` does come with some quirks when it comes to accessing the value of the field. 
 - `field_t` values can only be accessed using the access operator `->*`. In other words, `this->*m_field` is required to read or write to the field. 
 - Due to the [operator precedence](https://en.cppreference.com/w/cpp/language/operator_precedence) of `->*`, sometimes you will have to wrap the access operator in parenthesis. You can see an example of this in the previous code block (`(this->*m_totalJumps)++`).
 
-If you need a default value, you can just set it like a normal field.
+If you need a default value, you can just set it just like you would for a normal field.
+
 ```cpp
 class $modify(PlayerObject) {
     field_t<int> m_totalJumps = 13; // Starts the amount of jumps at 13
