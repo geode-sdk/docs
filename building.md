@@ -19,7 +19,7 @@ These are instructions for building the [Geode Loader](https://github.com/geode-
 
 ### Quick instructions (for thigh-high programmers)
 
-1. `git clone`
+1. `git clone --recursive https://github.com/geode-sdk/loader.git`
 
 2. `cmake -B build -T host=x64 -A win32`
 
