@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Adding fields
-nav_order: 5
+parent: Usage
+nav_order: 2
 description: "Extending classes and adding fields"
 ---
 

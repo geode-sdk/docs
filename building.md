@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Building
-nav_order: 2
+parent: Installation
+nav_order: 1
 description: "Building instructions"
 ---
 
@@ -20,9 +21,9 @@ These are instructions for building the [Geode Loader](https://github.com/geode-
 
 1. `git clone`
 
-2. `mkdir build; cd build; cmake .. -T host=x64 -A win32`
+2. `cmake -B build -T host=x64 -A win32`
 
-3. `cmake --build`
+3. `cmake --build build --config Release`
 
 ### Recommended way (for newbies)
 

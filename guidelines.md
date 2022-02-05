@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Modding Guidelines
-nav_order: 4
+parent: Usage
+nav_order: 1
 description: "Modding Guidelines"
 ---
 

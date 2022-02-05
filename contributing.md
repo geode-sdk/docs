@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Contributing
-nav_order: 3
+parent: Installation
+nav_order: 2
 description: "Contributing instructions"
 ---
 
