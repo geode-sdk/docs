@@ -8,7 +8,7 @@ description: "Building instructions"
 
 # Building
 
-These are instructions for building the [Geode Loader](https://github.com/geode-sdk/loader). For building your own mods, see `A_PAGE_WE_HAVENT_MADE_YET_PLEASE_ADD_WHEN_ITS_MADE`.
+These are instructions for building the [Geode Loader](https://github.com/geode-sdk/loader). For building your own mods, see [Creating a new Mod](/docs/creatingmod).
 
 ### Prerequisites: 
 
