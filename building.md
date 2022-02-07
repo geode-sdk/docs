@@ -1,14 +1,14 @@
 ---
 layout: default
 title: Building
-parent: Installation
-nav_order: 1
+parent: Loader Documentation
 description: "Building instructions"
+nav_exclude: true
 ---
 
 # Building
 
-These are instructions for building the [Geode Loader](https://github.com/geode-sdk/loader). For building your own mods, see [Creating a new Mod](/docs/creatingmod).
+These are instructions for building the [Geode Loader](https://github.com/geode-sdk/loader). For building your own mods, see [Getting Started](/docs/starting).
 
 ### Prerequisites: 
 
