@@ -2,7 +2,7 @@
 layout: default
 title: Modding Guidelines
 parent: Usage
-nav_order: 1
+nav_order: 2
 description: "Modding Guidelines"
 ---
 
