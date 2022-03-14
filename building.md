@@ -1,14 +1,14 @@
 ---
 layout: default
 title: Building
-parent: Installation
-nav_order: 1
+parent: Loader Documentation
 description: "Building instructions"
+nav_exclude: true
 ---
 
 # Building
 
-These are instructions for building the [Geode Loader](https://github.com/geode-sdk/loader). For building your own mods, see `A_PAGE_WE_HAVENT_MADE_YET_PLEASE_ADD_WHEN_ITS_MADE`.
+These are instructions for building the [Geode Loader](https://github.com/geode-sdk/loader). For building your own mods, see [Getting Started](/docs/starting).
 
 ### Prerequisites: 
 
@@ -19,7 +19,7 @@ These are instructions for building the [Geode Loader](https://github.com/geode-
 
 ### Quick instructions (for thigh-high programmers)
 
-1. `git clone`
+1. `git clone --recursive https://github.com/geode-sdk/loader.git`
 
 2. `cmake -B build -T host=x64 -A win32`
 
