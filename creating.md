@@ -2,7 +2,7 @@
 layout: default
 title: Creating a New Mod
 parent: Getting Started
-nav_order: 1
+nav_order: 2
 description: "How to set up and create a new mod using the Geode CLI"
 ---
 # Creating a new Mod
@@ -13,7 +13,7 @@ These are instructions to create an empty mod.
 
  * [CMake](https://cmake.org/download/) (minimum v3.13.4)
  * A supported C++ compiler ([clang](https://releases.llvm.org/)/[MSVC](https://visualstudio.microsoft.com/downloads/))
- * [Geode CLI](https://github.com/geode-sdk/cli) (Make sure you add the CLI to your path environment variable)
+ * [Geode CLI](https://github.com/geode-sdk/cli) (Make sure you [add the CLI](/docs/installcli) to your path environment variable)
  * [git](https://git-scm.com/downloads) (Highly Recommended)
 
 ### Development Guide
