@@ -264,7 +264,7 @@ Not yet implemented
 
 Here are some common mistakes you (and us) may make:
 
-## Accidental recursion
+## Accidental not recursion
 
 ```cpp
 class $modify(MenuLayer) {
@@ -276,6 +276,19 @@ class $modify(MenuLayer) {
         this->addChild(label);
 
         return true;
+    }
+};
+```
+
+This will not result in an infinite loop because `MenuLayer::init` is a virtual function, but please don't use it. It will confuse us all.
+
+## Accidental recursion
+
+```cpp
+class $modify(MenuLayer) {
+    void onMoreGames(CCObject* target) {
+        Log::get() << "MenuLayer::onMoreGames called woooo";
+        this->onMoreGames(target);
     }
 };
 ```
