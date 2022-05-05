@@ -251,7 +251,6 @@ class $modify(CopyPlayerObject, PlayerObject) {
 
     CCObject* copyWithZone(CCZone* zone) {
         Log::get() << "This function is a meme really";
-        copyWithZone(zone);
     }
 };
 ```
