@@ -2,7 +2,7 @@
 layout: default
 title: Creating a New Mod
 parent: Getting Started
-nav_order: 2
+nav_order: 3
 description: "How to set up and create a new mod using the Geode CLI"
 ---
 # Creating a new Mod

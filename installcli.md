@@ -1,8 +1,7 @@
 ---
 layout: default
 title: Installing Geode CLI
-parent: Getting Started
-nav_order: 1
+nav_exclude: true
 description: "How to set up Geode CLI"
 ---
 
