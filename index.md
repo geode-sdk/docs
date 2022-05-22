@@ -9,6 +9,14 @@ description: "The main page"
 
 **Geode** is a [Geometry Dash](https://store.steampowered.com/app/322170/Geometry_Dash/) mod loader and modding SDK with a modern approach towards mod development. Unlike previous mod loaders, which merely inject the DLLs and let devs handle the rest, Geode aims to be a more comprehensive project, which manages loaded mods & hooks itself. Geode has been built to ensure performance, compatibility, portability and ease of use. For devs, Geode means easy development and portability; for end users, Geode means an uniform and easy experience using mods.
 
+## Why Geode?
+
+Geode is a framework designed specifically for making Geometry Dash mods. It comes with an easy-to-use syntactically sugary hooking system where you don't have to manually input any addresses or deal with calling conventions.
+
+Geode is in many ways a **declarative framework**; you tell it what you want, not how to accomplish it. Geode has been built to let modders focus on what mod they want to make, not how exactly to build it. To this end, it handles things like settings, node placement, keybinds, etc..
+
+One of our main design goals with Geode has been to make a framework so good that after using it once, you never want to go back.
+
 ## Help, Contributing, Etc.
 
 If you need help using Geode or would like to contribute, feel free to join our [Discord Server](https://discord.gg/9e43WMKzhp).
