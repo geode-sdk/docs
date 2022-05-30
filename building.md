@@ -43,6 +43,6 @@ These are instructions for building the [Geode Loader](https://github.com/geode-
 
 8. Click `Build` on the bottom status bar or run `CMake: Build`
 
-9. If building was succesful, Geode will automatically install the mod for your main GD installation. You can change where to install the mod to using the CLI command geode config --cwi <index>, or install it manually by copying the resulting Geode package in build/Release.
+9. If building was succesful, Geode will automatically install the mod for your main GD installation. You can change where to install the mod to using the CLI command `geode config --cwi <index>`, or install it manually by copying the resulting Geode package in build/Release.
 
 
