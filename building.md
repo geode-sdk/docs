@@ -37,10 +37,12 @@ These are instructions for building the [Geode Loader](https://github.com/geode-
 
 5. Open up the directory in VS Code
 
-6. Press F1 to open the Command Palette and run `CMake: Configure` (make sure to select an x86 generator)
+6. Once done with your code, Press F1 to open the Command Palette and run `CMake: Configure` (make sure to select an x86 generator)
 
-7. Open up the Command Palette again and run `CMake: Select Variant` (select either `Release` or `RelWithDebInfo`)
+7. Open up the Command Palette again and run `CMake: Select Variant` (select either `Release` or `RelWithDebInfo`). This may also be done through the bottom status bar. There should be a button that displays `Debug`. Click on this and change it to the option in the dropdown that displays `Release`
 
 8. Click `Build` on the bottom status bar or run `CMake: Build`
+
+9. If building was succesful, Geode will automatically install the mod for your main GD installation. You can change where to install the mod to using the CLI command `geode config --cwi <index>`, or install it manually by copying the resulting Geode package in build/Release.
 
 
