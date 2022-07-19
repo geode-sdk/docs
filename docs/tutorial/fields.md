@@ -1,11 +1,3 @@
----
-layout: default
-title: Adding fields
-parent: Usage
-nav_order: 3
-description: "Extending classes and adding fields"
----
-
 # Fields
 
 Say you want to add a property to an existing class. One way you could do this is by storing the property in a global variable like so:

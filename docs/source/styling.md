@@ -1,10 +1,3 @@
----
-layout: default
-title: Styling guidelines
-nav_order: 3
-description: "Styling guidelines"
----
-
 # Styling guidelines
 
 ## General

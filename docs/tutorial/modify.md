@@ -1,11 +1,3 @@
----
-layout: default
-title: Modifying classes
-parent: Usage
-nav_order: 3
-description: "Modifying classes"
----
-
 # Modifying classes
 
 Haven't found what you need inside the api? Do you want to modify the behaviour of a Geometry Dash class because it is bad? Do you want implement new features? Look no further! Geode has the tool for you!
