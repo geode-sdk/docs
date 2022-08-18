@@ -54,7 +54,27 @@ class $modify(MenuLayer) {
 
 (or you could be questionable and do `this->MenuLayer::init()` but who am I to judge)
 
-This pattern is quite common inside cocos2d, and therefore in GD too. Here, we modify the `MenuLayer::init` so that it will create our label inside the layer after running the original function. If `MenuLayer::init` returns false something has gone horribly wrong and GD will probably crash but it is important to stick to the idioms for code consistency. 
+This pattern is quite common inside cocos2d, and therefore in GD too. Here, we modify the `MenuLayer::init` so that it will create our label inside the layer after running the original function. If `MenuLayer::init` returns false something has gone horribly wrong and GD will probably crash but it is important to stick to the idioms for code consistency.
+
+We may also improve this function by getting GD Window Size that later can be used to place text more precise.
+
+```cpp
+class $modify(MenuLayer) {
+    bool init() {
+        if (!MenuLayer::init()) return false;
+
+        CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+
+        auto label = CCLabelBMFont::create("Hello world!", "bigFont.fnt");
+        label->setPosition(winSize.width / 2, winSize.height / 1.35);
+        this->addChild(label);
+
+        return true;
+    }
+};
+```
+
+Here we use `CCDirector::sharedDirector()->getWinSize();` to get the GD window size and assign it to `CCSize winSize` then we modify the `label->setPosition` setting `winSize.width / 2` (center) and `winSize.height / 1.35` which is right under the main Geometry Dash text in main menu
 
 ## Giving a class name
 
