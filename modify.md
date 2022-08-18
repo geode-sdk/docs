@@ -74,7 +74,7 @@ class $modify(MenuLayer) {
 };
 ```
 
-Here we use `CCDirector::sharedDirector()->getWinSize();` to get the GD window size and assign it to `CCSize winSize` then we modify the `label->setPosition` setting `winSize.width / 2` (center) and `winSize.height / 1.35` which is right under the main Geometry Dash text in main menu
+Here we use `CCDirector::sharedDirector()->getWinSize();` to get the GD window size and assign it to `CCSize winSize` then we modify the `label->setPosition` setting `winSize.width / 2` (center) and `winSize.height / 1.35` which is right under the main Geometry Dash text in main menu.
 
 ## Giving a class name
 
