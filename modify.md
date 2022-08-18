@@ -63,7 +63,7 @@ class $modify(MenuLayer) {
     bool init() {
         if (!MenuLayer::init()) return false;
 
-        CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+        auto winSize = CCDirector::sharedDirector()->getWinSize();
 
         auto label = CCLabelBMFont::create("Hello world!", "bigFont.fnt");
         label->setPosition(winSize.width / 2, winSize.height / 1.35);
