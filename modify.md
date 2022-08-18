@@ -56,7 +56,7 @@ class $modify(MenuLayer) {
 
 This pattern is quite common inside cocos2d, and therefore in GD too. Here, we modify the `MenuLayer::init` so that it will create our label inside the layer after running the original function. If `MenuLayer::init` returns false something has gone horribly wrong and GD will probably crash but it is important to stick to the idioms for code consistency.
 
-We may also improve this function by getting GD Window Size that later can be used to place text more precise.
+We can also improve this function by getting GD Window Size that can later be used to place stuff more precisely.
 
 ```cpp
 class $modify(MenuLayer) {
@@ -74,7 +74,7 @@ class $modify(MenuLayer) {
 };
 ```
 
-Here we use `CCDirector::sharedDirector()->getWinSize();` to get the GD window size and assign it to `CCSize winSize` then we modify the `label->setPosition` setting `winSize.width / 2` (center) and `winSize.height / 1.35` which is right under the main Geometry Dash text in main menu.
+Here we use `CCDirector::sharedDirector()->getWinSize();` to get the GD window size and assign it to `auto winSize` then we modify the `label->setPosition` setting `winSize.width / 2` (center) and `winSize.height / 1.35` which is right under the main Geometry Dash text/logo in main menu.
 
 ## Giving a class name
 
