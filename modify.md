@@ -54,7 +54,27 @@ class $modify(MenuLayer) {
 
 (or you could be questionable and do `this->MenuLayer::init()` but who am I to judge)
 
-This pattern is quite common inside cocos2d, and therefore in GD too. Here, we modify the `MenuLayer::init` so that it will create our label inside the layer after running the original function. If `MenuLayer::init` returns false something has gone horribly wrong and GD will probably crash but it is important to stick to the idioms for code consistency. 
+This pattern is quite common inside cocos2d, and therefore in GD too. Here, we modify `MenuLayer::init` so that it will create our label inside the layer after running the original function. If `MenuLayer::init` returns false something has gone horribly wrong and GD will probably crash but it is important to stick to the idioms for code consistency.
+
+In order to center our label, we can get the window size from GD and move the label to be halfway across horizontally and vertically.
+
+```cpp
+class $modify(MenuLayer) {
+    bool init() {
+        if (!MenuLayer::init()) return false;
+
+        auto winSize = CCDirector::sharedDirector()->getWinSize();
+
+        auto label = CCLabelBMFont::create("Hello world!", "bigFont.fnt");
+        label->setPosition(winSize.width / 2, winSize.height / 2);
+        this->addChild(label);
+
+        return true;
+    }
+};
+```
+
+Here we use `CCDirector::sharedDirector()->getWinSize();` to get the window size and assign it to `auto winSize` then we call the `label->setPosition` with the following parameters: `winSize.width / 2` and `winSize.height / 2`. This will place our Hello World! label in the center of the window
 
 ## Giving a class name
 
