@@ -17,13 +17,15 @@ These are instructions to create an empty mod.
 
 3. Open up the command line and navigate to any directory where you'd like to create the project
 
-4. Run `geode new <name>` and follow the prompts that follow
+4. Run `geode new` and follow the prompts that follow
 
-5. Open up the new directory in VS Code
+5. Open up the new directory in VS Code (hint: you can do this from the command line with `code <directory name>`)
 
-6. Press F1 to open the Command Palette and run `CMake: Configure` (make sure to select an x86 generator)
+6. Press F1 to open the Command Palette and run `CMake: Configure` (**make sure to select an x86/32-bit generator**)
 
 7. Open up the Command Palette again and run `CMake: Select Variant` (select either `Release` or `RelWithDebInfo`)
+
+> :warning: If you built the `ui` branch from source, you may need to change the `set(GEODE_LINK_SOURCE On)` line in `CMakeLists.txt` to `set(GEODE_LINK_NIGHTLY On)`.
 
 Alternatively, you can run CMake manually without using VSCode or using another program (such as Sublime Text), however using the VSCode environment is highly recommended for Geode projects.
 
