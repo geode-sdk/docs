@@ -18,9 +18,9 @@ If you need help using Geode or would like to contribute, feel free to join our 
 
 ## Getting Started
 
-See [Installation](/docs/installation) for instructions on how to install the Geode SDK on your computer.
+See [Installation](/docs/info/installation) for instructions on how to install the Geode SDK on your computer.
 
-See [Building](/docs/building) for instructions on how to build the Geode Loader + SDK from scratch on your computer.
+See [Building](/docs/source/building) for instructions on how to build the Geode Loader + SDK from scratch on your computer.
 
 ## Credits
 

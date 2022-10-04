@@ -1,17 +1,17 @@
 # Building
 
-These are instructions for building the [Geode Loader](https://github.com/geode-sdk/loader). For building your own mods, see [Getting Started](/docs/starting).
+These are instructions for building the [Geode Loader](https://github.com/geode-sdk/geode). For building your own mods, see [Getting Started](/docs/starting).
 
 ### Prerequisites: 
 
  * [CMake](https://cmake.org/download/) (minimum v3.13.4)
  * A supported C++ compiler ([clang](https://releases.llvm.org/)/[MSVC](https://visualstudio.microsoft.com/downloads/))
- * [Geode CLI](https://github.com/geode-sdk/cli) (Highly Recommended)
- * [git](https://git-scm.com/downloads) (Highly Recommended)
+ * [Geode CLI](https://github.com/geode-sdk/cli)
+ * [git](https://git-scm.com/downloads)
 
 ### Quick instructions (for thigh-high programmers)
 
-1. `git clone --recursive https://github.com/geode-sdk/loader.git`
+1. `git clone --recursive https://github.com/geode-sdk/geode.git`
 
 2. `cmake -B build -T host=x64 -A win32`
 
@@ -25,7 +25,7 @@ These are instructions for building the [Geode Loader](https://github.com/geode-
 
 3. Open up the command line and navigate to any directory where you'd like to build the loader
 
-4. `git clone https://github.com/geode-sdk/loader --recurse-submodules`
+4. `git clone https://github.com/geode-sdk/geode --recurse-submodules`
 
 5. Open up the directory in VS Code
 

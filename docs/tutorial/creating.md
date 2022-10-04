@@ -36,3 +36,4 @@ To build with VSCode, simply press the `Build` button on the bottom bar or use t
 1. `cmake -B build -T host=x64 -A win32`
 
 2. `cmake --build build --config Release`
+
