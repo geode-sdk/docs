@@ -1,6 +1,7 @@
 
  * [Home](/)
  * [What is Geode?](/docs/info/whatisgeode.md)
+ * [What is Geode?](/docs/info/installation.md)
 
  * About Geode
 
