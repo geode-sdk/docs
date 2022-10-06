@@ -33,4 +33,4 @@ It is recommended to read through the book chapter-by-chapter. Important concept
 
 > :warning: This is what a warning looks like. If you see one of these boxes, **pay close attention**; it contains tips about how to **avoid common mistakes** in modding.
 
-### And with that, let us start with [Chapter 1](/docs/tutorial/chap1)!
+**And with that, let us start with [Chapter 1](/docs/tutorial/chap1)!**
