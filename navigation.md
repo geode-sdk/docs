@@ -16,6 +16,7 @@
    * [Introduction](/docs/tutorial/chap0.md)
    * [Chapter 1](/docs/tutorial/chap1.md)
    * [Chapter 2](/docs/tutorial/chap2.md)
+   * [Chapter 3](/docs/tutorial/chap3.md)
    * [Chapter X](/docs/tutorial/chapasm.md)
 
  * Other Tutorials
