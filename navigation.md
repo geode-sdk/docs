@@ -5,8 +5,8 @@
 
  * Tutorials
  
-   * [Modifying classes](/docs/tutorials/modify.md)
-   * [Fields](/docs/tutorials/fields.md)
+   * [Hooking](/docs/tutorials/modify.md)
+   * [Extending GD Classes](/docs/tutorials/fields.md)
    * [Popup](/docs/tutorials/popup.md)
    * [Getting nodes](/docs/tutorials/nodetree.md)
    * [Buttons](/docs/tutorials/buttons.md)

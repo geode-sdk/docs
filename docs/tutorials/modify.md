@@ -1,6 +1,6 @@
-# Modifying classes
+# Hooking / Modifying classes
 
-Haven't found what you need inside the api? Do you want to modify the behaviour of a Geometry Dash class because it is bad? Do you want implement new features? Look no further! Geode has the tool for you!
+At the centre of every modder's toolkit is **hooking**. If you don't know what that is, [read the handbook](/docs/handbook/chap0.md). If you know what that is and have made mods using gd.h + cocos-headers before, you should know how it works in Geode.
 
 ## Modifying a function
 
@@ -24,7 +24,7 @@ Wait wait wait, so what does this exactly do?
 
 The function we are modifying is `MenuLayer::onMoreGames`, which is called when you press the "More Games" button. This function takes a single parameter, a `cocos2d::CCObject*`, which is the target object the function is called on. For our use case, we don't need this parameter. 
 
-The syntax is `class $modify(ModifiedClassName)`, which is selected mostly for aesthetics and not breaking the syntax highlighting. Inside this class, we add the functions we will modify. The example will replace the implementation of `MenuLayer::onMoreGames`, making it spawn a FLAlertLayer instead of the More Games screen.
+The syntax is `class $modify(ModifiedClassName)`, which is selected mostly for aesthetics and not breaking the syntax highlighting. Inside this class, we add the functions we will modify. The example will replace the implementation of `MenuLayer::onMoreGames`, making it spawn a [FLAlertLayer](/docs/tutorials/popup.md) instead of the More Games screen.
 
 ## Using the original function
 
@@ -50,7 +50,7 @@ This pattern is quite common inside cocos2d, and therefore in GD too. Here, we m
 
 ## Giving a class name
 
-Maybe you want to name your classes because of needing to categorize your modifications, maybe you need to access a callback function, and this is why you can name your classes with the `$modify` macro. Here is an example:
+You will probably encounter an issue with `$modify` in your very first use case: [**how do you add callbacks for buttons**](/docs/tutorials/buttons.md)? By default, `$modify` gives the inherited class a pretty much random name, but if you want to reference the name of your modified class, that's not very ideal as it's not consistent. Luckily, `$modify` can take a second parameter that specifies the name of the class:
 
 ```cpp
 class $modify(MyAwesomeModification, MenuLayer) {
@@ -81,9 +81,9 @@ class $modify(MyAwesomeModification, MenuLayer) {
 };
 ```
 
-The syntax for this is `class $modify(MyClassName, ModifiedClassName)`. It looks cool.
+The syntax for this is `class $modify(MyClassName, ClassToModify)`. It looks cool.
 
-Creating a `CCMenuItemSpriteExtra` takes a `SEL_MenuHandler`, which is a type alias for `void(cocos2d::CCObject::*)(cocos2d::CCObject*)` (which means a pointer to a member function that has a single parameter of CCObject\*). In order to supply this we need to get access to our function address, which requires us to know the class name. When we don't supply a class name, the macro generates a class which is guaranteed to not create any collision problems. 
+Creating a `CCMenuItemSpriteExtra` takes a `SEL_MenuHandler`, which is a type alias for `void(cocos2d::CCObject::*)(cocos2d::CCObject*)` (which means a pointer to a member function that has a single parameter of CCObject\*). In order to supply this we need to get access to our function address, which requires us to know the class name. When we don't supply a class name, the macro generates a class which is guaranteed to not create any collision problems. [Read more about menu selectors here](/docs/tutorials/buttons.md)
 
 ## Modifying destructors
 
@@ -100,76 +100,13 @@ class $modify(FLAlertLayer) {
 
 You still need to call the base destructor itself for calling the original.
 
-# Adding fields
+**This pattern is the same for constructors.**
 
-Well modifying the functions are good and all but, I need to add some members to my beatiful class `MenuLayer` that I love to massacre. How do I do that? 
+# Adding members
 
-I present to you, fields!
-
-## Adding a field
-
-There is a class inside the `geode::modifier` namespace called `field`. This class allows you to introduce members into the classes you modify. Here is an example:
-
-```cpp
-class $modify(PlayerObject) {
-    field<int> totalJumps;
-
-    void pushButton(PlayerButton button) {
-        Log::get() << "The player has jumped " << this->*totalJumps << " times !";
-        this->*totalJumps += 1;
-        PlayerObject::pushButton(button);
-    }
-};
-```
-
-This provides you with an `int` variable for every `PlayerObject` that gets created. It is initialized to the default `int` value, which is 0. Every field gets initialized with its default value. 
-
-However, using the field is a bit, unusual let's say. The syntax for accessing the field is `this->*myField`. The operator `->*` is needed. This is also the reason why something like `++this->*totalJumps` wouldn't work, and you would need to put the member inside parenthesis since the `++` operator [has higher precedence](https://en.cppreference.com/w/cpp/language/operator_precedence) than `->*`. That is why I like `this->*totalJumps += 1` more, since it doesn't need the ugly parenthesis.
-
-## Setting a default value
-
-To set a default value, you can do it by this:
-
-```cpp
-class $modify(PlayerObject) {
-    field<int> remainingJumps = 50;
-
-    void pushButton(PlayerButton button) {
-        Log::get() << "The player has " << this->*remainingJumps << " jumps remaining!";
-        this->*remainingJumps -= 1;
-        PlayerObject::pushButton(button);
-    }
-};
-```
-
-(oh wow this took me so much time to get it working)
+Geode allows you to add members to your modified classes to extend GD classes nearly seamlessly. [Learn more about fields](/docs/tutorials/fields.md)
 
 # Advanced usage
-
-## Modifier specific functions
-
-In some cases, you may need to specify some properties into a modification, or you may need to run some functions when a modification is applied. Okay I'm being too vague here because the use case of these is absolutely zero without explaining the other parts. So bare with me.
-
-In order to do this, you can create a static function named `onApplyModification` (TBD), which will run when the modification is done. Here is an example:
-
-```cpp
-class $modify(MenuLayer) {
-    template <class Modify> 
-    void onApplyModification(Modify modify) {
-        Log::get() << "My label will now exist when you open the menu layer :)";
-    }
-
-    bool init() {
-        if (!MenuLayer::init()) return false;
-
-        auto label = CCLabelBMFont::create("Hello world!", "bigFont.fnt");
-        label->setPosition(100, 100);
-        this->addChild(label);
-
-        return true;
-    }
-};
-```
 
 ## Using without macros
 
@@ -201,19 +138,19 @@ class $modify(MyComplicatedClass, MenuLayer) {
         TextInput(MyComplicatedClass* ptr) : self(ptr) {}
         MyComplicatedClass* self;
         void textChanged(CCTextInputNode* node) {
-            self->*myString = node->getString();
+            self->m_fields->myString = node->getString();
         }
     }
 
-    field<TextInput> input;
-    field<std::string> myString;
+    TextInput input;
+    std::string myString;
     
     bool init() {
         if (!MenuLayer::init()) return false;
         this->*input = this;
 
         auto input = CCTextInputNode::create(250, 20, "Enter text", "bigFont.fnt");
-        input->setDelegate(&(this->*input));
+        input->setDelegate(&(m_fields->input));
         input->setPosition(100, 100);
         this->addChild(input);
 
@@ -223,7 +160,7 @@ class $modify(MyComplicatedClass, MenuLayer) {
     void onMoreGames(CCObject* target) {
         FLAlertLayer::create(
             "Geode",
-            "Your text is: " + this->*myString,
+            "Your text is: " + m_fields->myString,
             "OK"
         )->show(); 
     }
@@ -266,7 +203,7 @@ class $modify(MenuLayer) {
 };
 ```
 
-This will result in an infinite loop, because `this->` calls the $modified MenuLayer's `onMoreGames` instead of the original's. Name the class you're calling the function from instead.
+This will result in an infinite loop, because `this->` calls the $modified MenuLayer's `onMoreGames` instead of the original's. Name the class you're calling the function from instead (`MenuLayer::onMoreGames`).
 
 ## Accidental not recursion
 
@@ -286,7 +223,6 @@ class $modify(MenuLayer) {
 
 This will not result in an infinite loop because `MenuLayer::init` is a virtual function, but please don't do `this->function`. It will confuse us all.
 
-
 ## Accidentally not using the correct function
 
 ```cpp
@@ -301,7 +237,7 @@ class $modify(MyBrokenClass, MenuLayer) {
 
         auto buttonSprite = CCSprite::createWithSpriteFrameName("GJ_stopEditorBtn_001.png");
         auto button = CCMenuItemSpriteExtra::create(
-            buttonSprite, nullptr, this,
+            buttonSprite, this,
             menu_selector(MyBrokenClass::onMoreGames)
         );
 
