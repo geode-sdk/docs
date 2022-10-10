@@ -10,7 +10,7 @@ You can find the latest release of CLI on the [Release page on its repo](https:/
 
 ### Building from source
 
-You can build the CLI yourself using [Rust](https://doc.rust-lang.org/cargo/getting-started/installation.html). Clone the git repo using `git clone https://github.com/geode-sdk/cli` and then run `cargo build` to build it. Do note that before you can run CLI on Windows, you need to manually move `libgeode.dll` from the `target/debug/deps` directory to `target/debug` (we don't know why Rust doesn't move it for us). You can do this with the command `copy target/debug/deps/libgeode.dll target/debug`.
+You can build the CLI yourself using [Rust](https://doc.rust-lang.org/cargo/getting-started/installation.html). Clone the git repo using `git clone https://github.com/geode-sdk/cli` and then run `cargo build` to build it. If you encounter errors, [let us know through GitHub issues](https://github.com/geode-sdk/cli/issues).
 
 ## Adding CLI to PATH
 

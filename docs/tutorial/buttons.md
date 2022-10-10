@@ -172,52 +172,9 @@ protected:
 
 If you want to pass something like strings, you should use `setUserObject` instead.
 
-### Inline callbacks
-
-Geode comes with a handy `makeMenuSelector` function that lets you bypass a lot of the boilerplate that comes with creating menu selectors.
-
-```cpp
-class MyLayer : public CCLayer {
-protected:
-    // class member that stores how many times 
-    // the button has been clicked
-    size_t m_clicked = 0;
-
-    bool init() {
-        if (!CCLayer::init())
-            return false;
-
-        auto menu = CCMenu::create();
-
-        auto btn = CCMenuItemSpriteExtra::create(
-            ButtonSprite::create("Click me!"),
-            this,
-            makeMenuSelector([this](CCObject*) {
-                // increment click count
-                m_clicked++;
-
-                auto btn = static_cast<CCMenuItemSpriteExtra*>(sender);
-
-                // getNormalImage returns the sprite of the button
-                auto spr = static_cast<ButtonSprite*>(btn->getNormalImage());
-                spr->setString(CCString::createWithFormat(
-                    "Clicked %d times", m_clicked
-                )->getCString());
-            })
-        );
-        btn->setPosition(100.f, 100.f);
-        menu->addChild(btn);
-
-        this->addChild(menu);
-
-        return true;
-    }
-};
-```
-
-`makeMenuSelector` does come with some caveats; every instance of the same menu selector shares the same captures. This means that if you assign inline menu selectors in a loop and capture the current index, each button created in the loop has the same value despite what you might expect.
-
 ### Circle button sprites
+
+> These are actually way more important than what this short paragraph gives off, but I was too lazy to write more.
 
 Geode comes with a concept known as **based button sprites**, which are button sprites that come with common GD button backgrounds and let you add your own sprite on top. These are useful for texture packs, as texture packers can just style the bases and don't have to individually make every mod fit their pack's style.
 
