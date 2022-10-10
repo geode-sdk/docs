@@ -3,6 +3,22 @@
  * [What is Geode?](/docs/info/whatisgeode.md)
  * [Installation](/docs/info/installation.md)
 
+ * Tutorials
+ 
+   * [Modifying classes](/docs/tutorials/modify.md)
+   * [Fields](/docs/tutorials/fields.md)
+   * [Popup](/docs/tutorials/popup.md)
+   * [Getting nodes](/docs/tutorials/nodetree.md)
+   * [Buttons](/docs/tutorials/buttons.md)
+
+ * Handbook (WIP)
+
+   * [Introduction](/docs/handbook/chap0.md)
+   * [Chapter 1](/docs/handbook/chap1.md)
+   * [Chapter 2](/docs/handbook/chap2.md)
+   * [Chapter 3](/docs/handbook/chap3.md)
+   * [Chapter X](/docs/handbook/chapasm.md)
+
  * About Geode
 
    * [How Geode works](/docs/source/howitworks.md)
@@ -10,20 +26,5 @@
    * [Contributing](/docs/source/contributing.md)
    * [Style guidelines](/docs/source/styling.md)
    * [Modding guidelines](/docs/source/guidelines.md)
-
- * Tutorial Handbook
-
-   * [Introduction](/docs/tutorial/chap0.md)
-   * [Chapter 1](/docs/tutorial/chap1.md)
-   * [Chapter 2](/docs/tutorial/chap2.md)
-   * [Chapter 3](/docs/tutorial/chap3.md)
-   * [Chapter X](/docs/tutorial/chapasm.md)
-
- * Other Tutorials
- 
-   * [Popup](/docs/tutorial/popup.md)
-   * [Getting nodes](/docs/tutorial/nodetree.md)
-   * [Modifying classes](/docs/tutorial/modify.md)
-   * [Fields](/docs/tutorial/fields.md)
 
  * Reference

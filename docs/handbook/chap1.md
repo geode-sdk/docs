@@ -8,7 +8,7 @@ A **mod** (also known as an **extension**, **hack**, or **plugin**) is a piece o
 
 Modifying binary code is a bit difficult, however, as it is not meant to be for humans; binary code is strictly for computers, and as such it is unreadable and unmodifiable for a human. Binary code is also **platform-specific**: a mod written purely in binary would only work on one platform, and could not be **ported** over to others without fully rewriting the entire mod from the ground up.
 
-As a historical curiosity, it should be noted that mods used to be written fully in binary. Or, more accurately, they were written in **assembly**, which is a (somewhat) human-readable form of binary. However, to make it very clear, **no sane person does this anymore**. Working with binary code directly is nowadays only done in rare cases, which will be explained in [Chapter 2](/docs/tutorial/chap2.md).
+As a historical curiosity, it should be noted that mods used to be written fully in binary. Or, more accurately, they were written in **assembly**, which is a (somewhat) human-readable form of binary. However, to make it very clear, **no sane person does this anymore**. Working with binary code directly is nowadays only done in rare cases, which will be explained in [Chapter 2](/docs/handbook/chap2.md).
 
 But what's the alternative? We can make modding much easier by knowing two facts:
 
@@ -27,4 +27,4 @@ Usually, the first custom dynamic library we make GD load is a mod loader; that 
 
 At this point, we've gotten our library up and running, and are ready to start writing some code. However, now we enter a new problem: **how do we actually do things?**
 
-[Chapter 2: Hooking & Patching](/docs/tutorial/chap2.md)
+[Chapter 2: Hooking & Patching](/docs/handbook/chap2.md)

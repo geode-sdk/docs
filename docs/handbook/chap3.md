@@ -1,6 +1,6 @@
 # Chapter 3: Functions & Addresses
 
-In [the last chapter](/docs/tutorial/chap2.md), we looked at hooking and how it works. However, the last chapter only touched hooking in theory. The code shown was not what actuals hooks in your code look like. For instance, we do not have access to GD's source code, so we can't exactly just write `return ourDetour()` at the start of the function we want to hook. Instead, we need to figure out some way to **insert hooks into GD's binary code**.
+In [the last chapter](/docs/handbook/chap2.md), we looked at hooking and how it works. However, the last chapter only touched hooking in theory. The code shown was not what actuals hooks in your code look like. For instance, we do not have access to GD's source code, so we can't exactly just write `return ourDetour()` at the start of the function we want to hook. Instead, we need to figure out some way to **insert hooks into GD's binary code**.
 
 The traditiional way of placing hooks used a library called [**MinHook**](https://github.com/TsudaKageyu/minhook). If you've ever developed GD mods or even used them yourself, you almost certainly have heard of MinHook before, or at least seen its 32-bit dynamic library `minhook.x32.dll`. However, using MinHook directly is **no longer considered good practice**. While it can work perfectly fine for a single mod, MinHook has a few issues: it's **Windows-only** and if you don't link to it as a dynamic library, it will cause **hook conflicts**.
 

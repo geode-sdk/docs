@@ -6,7 +6,7 @@ These are instructions to create an empty mod.
 
  * [CMake](https://cmake.org/download/) (minimum v3.13.4)
  * A supported C++ compiler ([clang](https://releases.llvm.org/)/[MSVC](https://visualstudio.microsoft.com/downloads/))
- * [Geode CLI](https://github.com/geode-sdk/cli) (Make sure you [add the CLI](/docs/installcli) to your path environment variable)
+ * [Geode CLI](https://github.com/geode-sdk/cli) (Make sure you [add the CLI](/docs/info/installcli) to your path environment variable)
  * [git](https://git-scm.com/downloads) (Highly Recommended)
 
 ### Development Guide
@@ -24,8 +24,6 @@ These are instructions to create an empty mod.
 6. Press F1 to open the Command Palette and run `CMake: Configure` (**make sure to select an x86/32-bit generator**)
 
 7. Open up the Command Palette again and run `CMake: Select Variant` (select either `Release` or `RelWithDebInfo`)
-
-> :warning: If you built the `ui` branch from source, you may need to change the `set(GEODE_LINK_SOURCE On)` line in `CMakeLists.txt` to `set(GEODE_LINK_NIGHTLY On)`.
 
 Alternatively, you can run CMake manually without using VSCode or using another program (such as Sublime Text), however using the VSCode environment is highly recommended for Geode projects.
 
