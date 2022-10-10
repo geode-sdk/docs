@@ -16,6 +16,18 @@ The official Geode installer is currently under heavy remodelling. It will be br
 
 4. Place the `geode.loader` folder from `resources.zip` into `<Root Geometry Dash folder>/geode/resources`
 
+## Manually (on MacOS)
+
+1. Download [the latest release](https://github.com/geode-sdk/geode/releases/latest) (download the `geode-vX.X.X` zip for your respective platform and `resources.zip`)
+
+2. Rename `libfmod.dylib` inside `Contents/Frameworks` into `libfmod.dylib.original` if you ever need to uninstall Geode
+
+3. Place the ZIP's contents to the `Contents/Frameworks` directory inside `Geometry Dash.app`
+
+4. Open the game once to make sure it works (if it doesn't, **whitelist the GD folder in your antivirus**)
+
+5. Place the `geode.loader` folder from `resources.zip` into `Contents/geode/resources`
+
 # Installing Geode SDK (for Developers)
 
 ## Using the installer
