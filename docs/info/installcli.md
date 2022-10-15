@@ -1,18 +1,18 @@
 # Installing Geode CLI
 
-Geode CLI is the command-line interface for working with Geode, intended mainly for developers. It comes with many important tools such as packaging mods into `.geode` files, creating spritesheets, creating bitmap fonts, etc.. The CLI, if installed, will be automatically invoked by Geode CMake files, so you likely won't need to use it a lot manually; however, for Geode mod development, it is very much recommended to have it installed as you will have to manually create resources and `.geode` files otherwise.
+Geode CLI is the command-line interface for working with Geode, intended mainly for developers. It comes with many important tools such as packaging mods into `.geode` files, creating spritesheets, creating bitmap fonts, etc.. The CLI is required for compiling the Geode loader, and is extremely helpful for working with your own mods, as it automatically packages all the resources into a `.geode` file and installs it to GD.
 
 ## Downloading CLI
 
 ### Latest Release
 
-You can find the latest release of CLI on the [Release page on its repo](https://github.com/geode-sdk/cli). Do note that this release may be a little outdated; please [let us know](/docs/contributing) if it seems to be missing features, and we'll be sure to create a new release.
+You can find the latest release of CLI on the [Release page on its repo](https://github.com/geode-sdk/cli).
 
 ### Building from source
 
 You can build the CLI yourself using [Rust](https://doc.rust-lang.org/cargo/getting-started/installation.html). Clone the git repo using `git clone https://github.com/geode-sdk/cli` and then run `cargo build` to build it. If you encounter errors, [let us know through GitHub issues](https://github.com/geode-sdk/cli/issues).
 
-## Adding CLI to PATH
+## Adding CLI to PATH (on Windows)
 
 > :warning: Note: this section is for Windows.
 
