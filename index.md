@@ -6,11 +6,11 @@
 
 ## Why Geode?
 
-Geode is a framework designed specifically for making Geometry Dash mods. It comes with an easy-to-use syntactically sugary hooking system where you don't have to manually input any addresses or deal with calling conventions.
+The main goal of Geode is to **end mod incompatability**. Traditional modding leads very easily to compatability problems, many of which Geode attempts to address with better solutions.
 
-Geode is in many ways a **declarative framework**; you tell it what you want, not how to accomplish it. Geode has been built to let modders focus on what mod they want to make, not how exactly to build it. To this end, it handles things like settings, node placement, keybinds, etc..
+On top of this, and perhaps more interestingly, **Geode provides much better ergonomics for modding**. Instead of having to deal with calling conventions, trampolines, manually setting hooks (likely in another source file), you can have all the code relevant to hooks in a [nice, clean, readable syntax](/docs/tutorials/modify.md) contained within a single source file.
 
-One of our main design goals with Geode has been to make a framework so good that after using it once, you never want to go back.
+See [What is Geode](/docs/info/whatisgeode.md) for more detailed information about why you should use Geode.
 
 ## Help, Contributing, Etc.
 

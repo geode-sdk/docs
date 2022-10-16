@@ -4,28 +4,38 @@
 
 Geode is a **modding SDK** and **mod loader**. It contains a suite of tools that make developing mods fast and easy, and also has the actual loader for using those mods.
 
-### For users,
+### Geode is a mod loader
 
-Geode makes installing and updating mods as simple as the click of a button. No need to drag any odd `.DLL` files and resources; just select in-game to install a mod, and that's it. Geode also acts as a gateway for mods on different platforms; Geode will be available on Windows, Mac, Linux, iOS and likely Android aswell.
+Geode loads mods packaged as `.geode` files. They are actually just ZIPs that have the platform-specific DLLs, but all Geode mods also contain one extra file: `mod.json`, which contains information about the mod.
 
-### For modders,
+### Geode makes modding simpler
 
-Geode lets you write simple yet refactorable and extensible code, and lets you write mods for multiple platforms from one codebase. It abstracts away unnecessary details while staying low-level, granting you a much easier programming experience without sacrificing customizability or performance. Geode also comes with multiple systems in place to make sure your mod stays compatible with others; as long as you follow Geode modding guidelines, your mod won't magically break when another is installed. Geode also gives you a standardized platform to easily distribute and update your mods.
+Want to create a hook? [Geode's `$modify` syntax makes this incredibly simple and easy to read](/docs/tutorials/modify.md).
 
-## FAQ
+Want to add custom sprites? Add your resources under the `resources` key in mod.json; All the `UHD` and `HD` variants are automatically created and the resources packaged into your `.geode` file, so you don't have to worry about distributing resources with the DLL anymore.
 
-**Can I use normal DLLs with Geode?**
+Want to add settings to your mod? Geode comes with a built-in and very simple solution; just add settings under the `settings` key in your mod's `mod.json` and you're good to go. Using settings is as simple as `Mod::get()->getSettingValue<type>("setting-id-here")`
 
-No, Geode can only load Geode-specific mods. You can't use another modloader alongside Geode either as that will likely cause incompatabilities and crashes. We will do our best to port as many mods as people want for Geode though! :)
+Want to make async web requests, create list nodes, popups, and much more? Geode is filled with utilities meant to make your code much more concise.
 
-**What about mods like Mega Hack v7?**
+### Geode lets you publish mods
 
-Absolute is ready to port Mega Hack v7 to Geode once Geode is done, so no worry. We will ask other modders to port their mods aswell, or port them ourselves.
+Geode also comes with a simple **publishing platform**; you can publish your mods on the [Geode Mods Index](https://github.com/geode-sdk/mods/), after which **users can install and update mods in-game**. No need to set up a Discord server with a downloads channel containing weird .DLLs and trying to ensure users stay up-to-date; all you have to do is make sure the latest version of your mod is on the Index, and Geode will handle the rest.
 
-**When will Geode be finished?**
+### But the main reason for using Geode is mod interoperability.
 
-We don't know. It's a project that is constantly evolving so we have no way of giving a meaningful ETA. A public alpha/beta will hopefully be out mid-May though!
+In traditional modding, what do you do if two mods modify the same layer? Sometimes this happens to work as expected, but more often than not faulty logic in either or both mods leads to **bugs** and **crashes**. And fixing these issues can be more cumbersome than expected. How are you supposed to make sure your mod doesn't glitch out, when you don't even have a reliable way of [traversing the node tree](/docs/tutorials/nodetree.md)? If another mod becomes incompatible, how do you even check for that? You would have to write your own utilities for checking if another `.DLL` is loaded and that can go south very easily.
 
-**Will Geode be free?**
+To solve these problems, the most major thing Geode introduces is **IDs**. Every mod in Geode has an ID, like `geode.loader` or `hjfod.betteredit`. Checking if another mod is loaded is as simple as querying the loader: `Loader::get()->isModLoaded("mod.id")`. If your mod becomes incompatible with another, Geode comes with the tooling to fix that with as little code as possible.
 
-Yes, Geode will be 100% free for all users on all platforms. Some Geode mods may cost money, but our current planned model incentivizes making free mods that are supported by donations :)
+On top of this, Geode also addresses a lot of the sources of incompatability like nodes being added to the wrong places. [Geode comes with string IDs and (soon) automatic layouting tools](/docs/tutorials/nodetree.md), which make writing code that is hard to break very simple. One of the leading philosophies of Geode is that a mod that simply modifies the look of an UI and another that simply adds some buttons into existing menus should **always be compatible**.
+
+### What about non-Geode mods?
+
+Mods made using traditional methods, such as GD Hacker Mode or BetterEdit v4 are unfortunately **never going to be supported** by Geode. Geode does not, and frankly, **can not support other mod loaders**. This is because doing so would be fully at odds with what Geode aims to do; if you let mods create hooks using their own methods, traverse the node tree as they wish and handle saving settings and data manually, **you will end up with the same incompatability issues you started with**. Geode will never be able to load arbitary .DLLs, because doing so simply does not make sense.
+
+Of course, this would be quite unhelpful for end users, so **we're doing our best to get as many mods ported to Geode as possible**. BetterEdit, MegaHack v7, ReplayBot, TextureLdr, Run Info and many others **will be ported as Geode mods**, and ones that aren't will be receiving **alternatives** (for example, an alternative to Sai Mod Pack is planned very soon). If there's a mod you'd like to see ported to Geode, [let us know](https://discord.gg/9e43WMKzhp).
+
+### And, well, it's free.
+
+Geode is 100% free and always will be on all platforms. **Our goal is to just make GD modding better** :)
