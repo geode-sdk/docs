@@ -4,6 +4,10 @@
 
 Geode is a **modding SDK** and **mod loader**. It contains a suite of tools that make developing mods fast and easy, and also has the actual loader for using those mods.
 
+### Geode replaces MinHook and gd.h
+
+Geode acts as replacement for the popular [MinHook](https://github.com/TsudaKageyu/minhook), [gd.h](https://github.com/hjfod/gd.h) and [cocos-headers](https://github.com/HJfod/cocos-headers) toolkit that forms the base for **traditional modding**. Geode comes with its own hooking system, its own Cocos2d headers and its own GD bindings. The main goals of Geode is to **make modding simpler** and to **fix mod incompatability**. For users, Geode replaces traditional mod loaders like Mega Hack v7's extensions folder or QuickLdr.
+
 ### Geode is a mod loader
 
 Geode loads mods packaged as `.geode` files. They are actually just ZIPs that have the platform-specific DLLs, but all Geode mods also contain one extra file: `mod.json`, which contains information about the mod.
