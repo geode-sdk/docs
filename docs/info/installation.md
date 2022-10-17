@@ -50,6 +50,8 @@ The official Geode installer is currently under heavy remodelling. It will be br
 
 4. Run `geode sdk install` to install the SDK (You can provide an argument to `geode sdk install <path>` if you want to install somewhere other than the default path)
 
+  * The installation should automatically set the `GEODE_SDK` environment variable to point to the SDK on Windows, but if it doesn't, **you should set it yourself**. You may want to restart your terminal, editors, and possibly computer after setting it.
+
 5. Run `geode sdk install-binaries` to install prebuilt binaries, or [build Geode yourself](/docs/source/building.md)
 
   * You can pick whether you want the `nightly` or `stable` branch of Geode. `nightly` is the tip of the `main` branch, and contains all of the latest and greatest features but may also feature crashes and possibly not even compile, whereas `stable` is the latest released version. Use `geode sdk update nightly` or `geode sdk update stable` to switch between the two branches.
