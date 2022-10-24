@@ -20,6 +20,14 @@ These nodes form a hierarchy known as a **node tree**, on top of which is a `CCS
 
 Nearly all nodes you see in GD aren't instances of the base `CCNode` class, but of its derivatives. Some of the most commonly used derivatives are `CCSprite`, `CCMenu`, `CCLabelBMFont`, and `CCLayer`, and some of the most used GD-specific ones are `CCMenuItemSpriteExtra`, `FLAlertLayer`, `GameObject`, and `ButtonSprite`.
 
+As Cocos2d is a node-based framework, nearly all nodes are **aggregates** of other nodes. In other words, **most nodes simply consist of other nodes**. For example, a popup might consist of a node for the background, another node for the text, and maybe some extra nodes for buttons and decoration and such. You most likely **won't have to do any rendering yourself**; if you want to show some text in your node, just create a label and add it as a child to it.
+
+For example, here is the structure of a simple comment in GD:
+
+<img src="/imgs/CommentCell_dissected.png" alt="Image showing the structure of a CommentCell in GD" />
+
+### Creating nodes
+
 Every node usually has a `create` function for creating an instance of the class, and then a bunch of methods like `setPosition` and `addChild` for setting the node's properties and adding children to it. For example, to create a simple "Hi mom!" text, you would use code like this:
 
 ```cpp
