@@ -27,6 +27,18 @@ If you're **unsure** that you have sufficient programming skills, here's a **lis
 
 If some of the items in the list aren't familiar to you, **you should read up on some online resources first**. A good place to start is to just write "C++ tutorial" in Google and see what comes up. If only some specific parts are unfamiliar, for example you don't know how namespaces work, search for "C++ namespaces".
 
+### Volumes
+
+This handbook is collected into ?? Volumes, going over the following material:
+
+ * **Volume 1**: The basics of modding (Hello, World!)
+
+ * **Volume 2**: Reverse engineering
+
+ * **Volume 3**: Geode, working with other mods, and publishing your mod
+
+ * **Volume 4**: Making a mod (Project)
+
 ### How to read this handbook
 
 It is recommended to read through the book chapter-by-chapter. Important concepts and keywords are highlighted in **bold**. Variables, functions, registers and all other code entities are written like `this`. Code blocks look like this:
@@ -51,6 +63,10 @@ Sometimes the text has notes like this [Note 1]. They are explained at the end o
 
 > [Note 1] This is what an **explanation of a note** looks like.
 
+### "Traditional" Mods
+
+Many things in this handbook are referred to as "traditional modding". This means mods made and modding methods used before Geode was released; Geode is quite different from all modding libraries that came before it, and as such it differs from them in many ways. The ways things were traditionally done are still included in this tutorial however, both as a historical curiosity and to make this handbook more appealing to Geode haters.
+
 ### Ready, set, go!
 
-**And with that, let us start with [Chapter 1](/docs/handbook/chap1_1)!**
+**And with that, let us start with [Chapter 1.1](/docs/handbook/chap1_1)!**
