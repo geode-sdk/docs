@@ -22,9 +22,13 @@ Nearly all nodes you see in GD aren't instances of the base `CCNode` class, but 
 
 As Cocos2d is a node-based framework, nearly all nodes are **aggregates** of other nodes. In other words, **most nodes simply consist of other nodes**. For example, a popup might consist of a node for the background, another node for the text, and maybe some extra nodes for buttons and decoration and such. You most likely **won't have to do any rendering yourself**; if you want to show some text in your node, just create a label and add it as a child to it.
 
-For example, here is the structure of a simple comment in GD:
+For example, here is **the structure of a comment** in GD:
 
 <img src="./imgs/CommentCell_dissected.png" alt="Image showing the structure of a CommentCell in GD" />
+
+As you can see, the `CommentCell` class consists wholly of other nodes. It does not do any of its own rendering. The position of the nodes (relative to the parent `CommentCell`) is marked in parenthesis; one important thing to note about Cocos2d is that unlike some other game frameworks, **higher Y-coordinate means higher on screen**.
+
+?> Please note that for the sake of simplicity, the above image contains **lies** (regarding positioning and exactly which node's child something is).
 
 ### Creating nodes
 
