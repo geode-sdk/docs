@@ -10,7 +10,7 @@ You can find the **class name** of a given layer using the [DevTools](https://gi
 
 To see how it works, install the **DevTools** mod in-game through the **Download** tab in Geode and then press **F11** to activate it:
 
-<img src="/imgs/DevTools_MenuLayer.png" alt="Image of the DevTools mod open in GD, focused on MenuLayer" />
+<img src="./imgs/DevTools_MenuLayer.png" alt="Image of the DevTools mod open in GD, focused on MenuLayer" />
 
 !> Note that DevTools is, as of writing (24/10/2022), wholly unfinished and will require quite a bit of manual dragging around to get usable and may crash.
 
@@ -20,7 +20,7 @@ One thing you will notice in DevTools is that many of the nodes have **string ID
 
 There may also be multiple layers in a scene at once. For example, if you click the profile button in `MenuLayer`, you will find it adds a layer named `ProfilePage` in the scene:
 
-<img src="/imgs/DevTools_ProfilePage.png" alt="Image of the DevTools mod open in GD, showing MenuLayer with ProfilePage on top" />
+<img src="./imgs/DevTools_ProfilePage.png" alt="Image of the DevTools mod open in GD, showing MenuLayer with ProfilePage on top" />
 
 Using DevTools, you can find the name of any layer. Just navigate to the layer whose name you want to figure out in-game, open up DevTools, and look at the node tree!
 

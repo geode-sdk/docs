@@ -24,7 +24,7 @@ As Cocos2d is a node-based framework, nearly all nodes are **aggregates** of oth
 
 For example, here is the structure of a simple comment in GD:
 
-<img src="/imgs/CommentCell_dissected.png" alt="Image showing the structure of a CommentCell in GD" />
+<img src="./imgs/CommentCell_dissected.png" alt="Image showing the structure of a CommentCell in GD" />
 
 ### Creating nodes
 
