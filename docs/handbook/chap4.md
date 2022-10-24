@@ -21,9 +21,12 @@ Nearly all nodes you see in GD aren't instances of the base `CCNode` class, but 
 Every node usually has a `create` function for creating an instance of the class, and then a bunch of methods like `setPosition` and `addChild` for setting the node's properties and adding children to it. For example, to create a simple "Hi mom!" text, you would use code like this:
 
 ```cpp
-auto label = CCLabelBMFont::create("Hi mom!", "bigFont.fnt"); // first parameter is text, second is font
+// First parameter is the text, second is the font
+auto label = CCLabelBMFont::create("Hi mom!", "bigFont.fnt");
+// Set the position of the label to be at the coordinates 100, 50 (not pixels)
 label->setPosition(100, 50);
-this->addChild(label); // assuming 'this' is some node aswell
+// Assuming 'this' is some node aswell
+this->addChild(label);
 ```
 
 By default, all node `create` functions may return `nullptr` in case something goes wrong. However, nodes like `CCLayer` and `CCMenu` are likely to never fail, and in the rare case they do, something has probably already gone catastrophically wrong and the game is about to crash anyway, so handling the null case with these nodes is not usually necessary. However, with some classes like `CCSprite` **handling `create` returning null may be vital**.
@@ -33,10 +36,12 @@ Cocos2d is a **sprite-based** framework, meaning that instead of rendering thing
 It is important to use the correct `create` function for `CCSprite`, as the wrong one will return `nullptr` and cause an error if not properly handled. If the sprite you're creating is contained in its own file, like `GJ_button_01.png`, then you should use `CCSprite::create`; otherwise, if the sprite is in a spritesheet like `GJ_infoIcon_001.png` in `GJ_GameSheet03`, use `CCSprite::createWithSpriteFrameName` instead.
 
 ```cpp
-// Uh oh! This will return null as GJ_infoIcon_001.png is not its own file but contained in a spritesheet
+// Uh oh! This will return null as GJ_infoIcon_001.png is not its own file but 
+// contained in a spritesheet
 auto infoSpriteFail = CCSprite::create("GJ_infoIcon_001.png");
 
-// You don't have to specify the name of the spritesheet you're loading from anywhere, as GD has already loaded GJ_GameSheet03 into memory
+// You don't have to specify the name of the spritesheet you're loading from anywhere, 
+// as GD has already loaded GJ_GameSheet03 into memory
 auto infoSpriteCorrect = CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
 ```
 
