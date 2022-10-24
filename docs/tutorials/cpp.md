@@ -57,4 +57,4 @@ if (auto b = dynamic_cast<B*>(a)) {
 ```
 In this code, `b` will either be certainly a valid `B` or `nullptr`. `dynamic_cast` comes with a **runtime cost** though, so if you know that `b` will definitely be a valid `B`, you can use `static_cast` instead.
 
-> :warning: For GD mods, you should **not use `dynamic_cast` on Cocos2d nodes**. This is because, due to... problems, `dynamic_cast<ButtonSprite*>(spr)` will **always return null** regardless of what you're expecting. Instead, Geode provides an alternative: `typeinfo_cast`.
+> :warning: For GD mods, you should **not use `dynamic_cast` on Cocos2d nodes**. This is because, due to problems, `dynamic_cast<ButtonSprite*>(spr)` will **always return null** regardless of what you're expecting. Instead, Geode provides an alternative: `typeinfo_cast`.
