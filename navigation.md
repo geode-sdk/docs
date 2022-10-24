@@ -10,6 +10,7 @@
    * [Popup](/docs/tutorials/popup.md)
    * [Getting nodes](/docs/tutorials/nodetree.md)
    * [Buttons](/docs/tutorials/buttons.md)
+   * [General C++ Tips](/docs/tutorials/cpp.md)
 
  * Handbook (WIP)
 
