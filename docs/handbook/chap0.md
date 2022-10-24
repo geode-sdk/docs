@@ -21,7 +21,7 @@ If you're **unsure** that you have sufficient programming skills, here's a **lis
 
  * Pointers & references (if you don't know how pointers work, you can get through this tutorial, but you will also be in big trouble later on)
  * Macros and the C++ Preprocessor
- * Assembly (doesn't mean you should speak or read it fluently; just know what it is)
+ * X86 Assembly (doesn't mean you should speak or read it fluently; just know what it is)
  * Difference between compile-time and runtime
  * Reverse enginering (the basics of using Ghidra will be explained in Chapter TODO)
 
