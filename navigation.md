@@ -18,6 +18,7 @@
    * [Chapter 1](/docs/handbook/chap1.md)
    * [Chapter 2](/docs/handbook/chap2.md)
    * [Chapter 3](/docs/handbook/chap3.md)
+   * [Chapter 4](/docs/handbook/chap4.md)
    * [Chapter X](/docs/handbook/chapasm.md)
 
  * About Geode
