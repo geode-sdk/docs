@@ -48,9 +48,13 @@ The main ones are `static_cast`, `reinterpret_cast`, and `dynamic_cast`. There a
 
 `dynamic_cast` is a safe version of `static_cast` for polymorphic classes. For example:
 ```cpp
-if (auto menu = dynamic_cast<CCMenu*>(node)) {
-    // menu is certainly a valid CCMenu
+class A {};
+class B : A {};
+
+if (auto b = dynamic_cast<B*>(a)) {
+    // b is certainly a valid instance of B
 }
 ```
-In this code, `menu` will either be certainly a valid `CCMenu` or `nullptr`. `dynamic_cast` comes with a **runtime cost** though, so if you know that `node` will definitely be a valid `CCMenu`, you can use `static_cast` instead.
+In this code, `b` will either be certainly a valid `B` or `nullptr`. `dynamic_cast` comes with a **runtime cost** though, so if you know that `b` will definitely be a valid `B`, you can use `static_cast` instead.
 
+> :warning: For GD mods, you should **not use `dynamic_cast` on Cocos2d nodes**. This is because, due to... problems, `dynamic_cast<ButtonSprite*>(spr)` will **always return null** regardless of what you're expecting. Instead, Geode provides an alternative: `typeinfo_cast`.
