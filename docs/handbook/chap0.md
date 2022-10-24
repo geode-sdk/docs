@@ -41,11 +41,11 @@ int main() {
 
 The language presented in the code blocks should be stated right before or after the block in the text, but the majority of code blocks use C++.
 
-> :warning: This is what a warning looks like. If you see one of these boxes, **pay close attention**; it contains tips about how to **avoid common mistakes** in modding.
+!> This is what a warning looks like. If you see one of these boxes, **pay close attention**; it contains tips about how to **avoid common mistakes** in modding.
 
-> :information_source: This is what an info box looks like. It contains **general information** about the current topic that you might find useful.
+?> This is what an info box looks like. It contains **general information** about the current topic that you might find useful.
 
-> :green_book: Boxes like this contain links to **further reading** materials for the interested.
+?> :green_book: These boxes may also contain links to **further reading** materials for the interested.
 
 Sometimes the text has notes like this [Note 1]. They are explained at the end of the paragraph, or at the end of the text at the **Notes** section.
 

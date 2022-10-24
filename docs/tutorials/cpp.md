@@ -42,7 +42,7 @@ int y = static_cast<int>(x);
 ```
 The main ones are `static_cast`, `reinterpret_cast`, and `dynamic_cast`. There are also some others like `const_cast`, some casting functions in the standard library like `std::static_pointer_cast` and `std::duration_cast`, and some very magical and terrifying aliases in Geode like `reference_cast` and `as`, but in general these will only be used in specific situations. For most cases, you should just use `static_cast`.
 
-> :warning: A lot of older mods use `reinterpret_cast` for a lot of things, but this is **not recommended at all**. You should always use `static_cast` over `reinterpret_cast`, unless you are **very sure** about what you are doing.
+!> A lot of older mods use `reinterpret_cast` for a lot of things, but this is **not recommended at all**. You should always use `static_cast` over `reinterpret_cast`, unless you are **very sure** about what you are doing.
 
 `static_cast` is what you would expect type conversion to do: it converts the value to match the requested type. This works for casting between built-in datatypes, downcasting pointers, casting between your own classes etc..
 
@@ -57,4 +57,4 @@ if (auto b = dynamic_cast<B*>(a)) {
 ```
 In this code, `b` will either be certainly a valid `B` or `nullptr`. `dynamic_cast` comes with a **runtime cost** though, so if you know that `b` will definitely be a valid `B`, you can use `static_cast` instead.
 
-> :warning: For GD mods, you should **not use `dynamic_cast` on Cocos2d nodes**. This is because, due to problems, `dynamic_cast<ButtonSprite*>(spr)` will **always return null** regardless of what you're expecting. Instead, Geode provides an alternative: `typeinfo_cast`.
+!> For GD mods, you should **not use `dynamic_cast` on Cocos2d nodes**. This is because, due to problems, `dynamic_cast<ButtonSprite*>(spr)` will **always return null** regardless of what you're expecting. Instead, Geode provides an alternative: `typeinfo_cast`.

@@ -1,14 +1,16 @@
 # Chapter 4: Cocos2d
 
+### GD's Game Engine
+
 In order to modify any game, it's good to find out at least one thing: what engine the game was made with. Luckily, GD tells us this on its help page: **Cocos2d-x**. GD modders have also figured out the specific version of Cocos2d that GD uses: **v2.2.3**. Although, there's a catch.
 
 You see, if we look around the **libcocos2d** file GD comes with and compare it with the [official v2.2.3 branch](https://github.com/cocos2d/cocos2d-x/tree/cocos2d-x-2.2.3/cocos2dx), we will find that there are a bunch of functions and classes present in GD that aren't in the original, like `CCLabelBMFont::limitLabelSize`. As it turns out, **the Cocos2d that GD uses has been modified by RobTop**. These modifications range from small things like a few helper functions added to classes to some entire backends having been rewritten.
 
 Due to this, GD mods can't just use the publicly available Cocos2d headers; they need to use modified headers that account for RobTop's changes. Traditionally, the headers most mods have used have either been [CappuccinoSDK](https://github.com/AndreNIH/CappuccinoSDK/) or [cocos-headers](https://github.com/HJfod/cocos-headers/). However, as with GD headers, **Geode comes with its own set of Cocos2d headers**, that are so far **the most accurate** in the modding community.
 
-> :warning: Some old modding tutorials on YouTube will tell you to use CappuccinoSDK. **You should never use it**. Cappuccino is fully obsolete due to `cocos-headers` (and even more due to Geode), and is in fact incompatible with gd.h, so it's not suited for traditional nor modern mods in any way.
+!> Some old modding tutorials on YouTube will tell you to use CappuccinoSDK. **You should never use it**. Cappuccino is fully obsolete due to `cocos-headers` (and even more due to Geode), and is in fact incompatible with gd.h, so it's not suited for traditional nor modern mods in any way.
 
-**But what is Cocos2d?** How does it work?
+### But what is Cocos2d? How does it work?
 
 Cocos2d, or specifically Cocos2d-x 2.2.3, is a **game engine featuring a sprite and node-based UI**. It is what powers GD's user interface, and many of its core data structures. For most GD mods, the two most important things Cocos2d provides us with are the **node system** and **garbage collector**.
 
@@ -31,6 +33,8 @@ this->addChild(label);
 
 By default, all node `create` functions may return `nullptr` in case something goes wrong. However, nodes like `CCLayer` and `CCMenu` are likely to never fail, and in the rare case they do, something has probably already gone catastrophically wrong and the game is about to crash anyway, so handling the null case with these nodes is not usually necessary. However, with some classes like `CCSprite` **handling `create` returning null may be vital**.
 
+### Sprites
+
 Cocos2d is a **sprite-based** framework, meaning that instead of rendering things at runtime using vectors, nearly everything shown on screen are textures loaded from disk. If you've ever messed around with GD's files, you've probably noticed this; most of GD's textures are contained in **sprite sheets**, such as `GJ_GameSheet03`. The way one shows these textures is with the `CCSprite` class; it is a simple node that loads a texture and displays it. `CCSprite` is a bit unique in that it has two main `create` functions: `CCSprite::create` for creating nodes out of individual images, and `CCSprite::createWithSpriteFrameName` for creating nodes out of spritesheet images.
 
 It is important to use the correct `create` function for `CCSprite`, as the wrong one will return `nullptr` and cause an error if not properly handled. If the sprite you're creating is contained in its own file, like `GJ_button_01.png`, then you should use `CCSprite::create`; otherwise, if the sprite is in a spritesheet like `GJ_infoIcon_001.png` in `GJ_GameSheet03`, use `CCSprite::createWithSpriteFrameName` instead.
@@ -48,6 +52,8 @@ auto infoSpriteCorrect = CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.pn
 Even text in Cocos2d is rendered through sprites, or more accurately, **bitmap fonts**. The class for doing this is `CCLabelBMFont`, as shown in one of the above examples. GD's default [Pusab font](https://www.fontsquirrel.com/fonts/pusab) is defined in the `bigFont.fnt` file.
 
 How to add your own sprites to use in Geode mods will be discussed in a later chapter.
+
+### Menus & Buttons
 
 Another important class to know of is `CCMenu`. Most mods need some sort of [buttons](/docs/tutorials/buttons.md) for their UI, and for that, the most common class to use is `CCMenuItemSpriteExtra`. However, all `CCMenuItem`-derived classes **must be part of a `CCMenu` to work**. In practice, this means that all of your buttons must be the direct children of some menu.
 
@@ -72,6 +78,8 @@ layer->addChild(button);
 ```
 
 At this point, we're getting very close to writing actual mod code. However, before we can get to that, we must first discuss **GD layers** and the `$modify` macro in Geode.
+
+[Chapter 5: Layers](/docs/handbook/chap5.md)
 
 ### Notes
 
