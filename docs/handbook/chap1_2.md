@@ -1,4 +1,4 @@
-# Chapter 2: Hooking & Patching
+# Chapter 1.2: Hooking & Patching
 
 So we've got our own code running inside GD. Now we're faced with a much bigger problem however; **how do we actually do stuff?**
 
@@ -6,7 +6,7 @@ There are two fundamental tools in every GD modder's toolkit: **hooking** and **
 
 ### Patching
 
-In [Chapter 1](/docs/handbook/chap1), it was stated that nowadays modders rarely work with binary code directly. There are, however, some cases in which working with raw binary code is in fact the optimal solution for some functionality in a mod. In these cases, it is done through a method called **patching**, which means applying, well, patches to binary code. Patches are, however, inherently **platform-dependent** and **unportable**, so their use is highly discouraged if higher-level options are available.
+In [Chapter 1.1](/docs/handbook/chap1_1), it was stated that nowadays modders rarely work with binary code directly. There are, however, some cases in which working with raw binary code is in fact the optimal solution for some functionality in a mod. In these cases, it is done through a method called **patching**, which means applying, well, patches to binary code. Patches are, however, inherently **platform-dependent** and **unportable**, so their use is highly discouraged if higher-level options are available.
 
 Patches do, however, still play a seminal role in GD modding. For example, one of the most famous mods, **noclip**, can be achieved with [a single binary patch](https://github.com/absoIute/Mega-Hack-v5/blob/master/bin/hacks/player.json#L7). There are also some cases in complex mods where a few patches can replace writing hundreds of lines of C++ code. However, **it is very uncommon** for binary patches to be optimal. Binary patches should **never be your first solution to a problem**, but when the time comes, don't be afraid to use them if they're clearly the best solution.
 
@@ -143,7 +143,7 @@ However, at this point it should be noted that **the syntax for hooking in Geode
 
 For now, we can leave hooking be, as before we can find any practical applications for it, we must first **find some functions to hook**.
 
-[Chapter 3: Functions & Addresses](/docs/handbook/chap3.md)
+[Chapter 1.3: Functions & Addresses](/docs/handbook/chap1_3.md)
 
 ### Notes
 

@@ -1,6 +1,6 @@
-# Chapter 3: Functions & Addresses
+# Chapter 1.3: Functions & Addresses
 
-In [the last chapter](/docs/handbook/chap2.md), we looked at hooking and how it works. However, the last chapter only touched hooking in theory. The code shown was not what actuals hooks in your code look like. For instance, we do not have access to GD's source code, so we can't exactly just write `return ourDetour()` at the start of the function we want to hook. Instead, we need to figure out some way to **insert hooks into GD's binary code**.
+In [the last chapter](/docs/handbook/chap1_2.md), we looked at hooking and how it works. However, the last chapter only touched hooking in theory. The code shown was not what actuals hooks in your code look like. For instance, we do not have access to GD's source code, so we can't exactly just write `return ourDetour()` at the start of the function we want to hook. Instead, we need to figure out some way to **insert hooks into GD's binary code**.
 
 ### MinHook
 
@@ -45,4 +45,4 @@ However, it is also important to note that **you still need to know how to rever
 
 As noted previously, MinHook is no longer recommended to be used directly. Instead, **Geode comes with its own hooking syntax called `$modify`**. How it works will be explained in a later chapter, but first we must talk a bit about GD's game engine: **Cocos2d**.
 
-[Chapter 4: Cocos2d](/docs/handbook/chap4.md)
+[Chapter 1.4: Cocos2d](/docs/handbook/chap1_4.md)

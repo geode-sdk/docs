@@ -1,6 +1,6 @@
-# Chapter 5: Layers
+# Chapter 1.5: Layers
 
-In [the previous chapter](/docs/handbook/chap3.md), it was mentioned that at all times there exists **one scene at the top of the node tree**. Usually, in practice, this scene has only one child: some **layer**. Scenes are usually only used as containers for layers and for **transitions**; you will likely never have to inherit from `CCScene` in your code. Instead, the class your layers and GD layers usually inherit from is `CCLayer`.
+In [the previous chapter](/docs/handbook/chap1_3.md), it was mentioned that at all times there exists **one scene at the top of the node tree**. Usually, in practice, this scene has only one child: some **layer**. Scenes are usually only used as containers for layers and for **transitions**; you will likely never have to inherit from `CCScene` in your code. Instead, the class your layers and GD layers usually inherit from is `CCLayer`.
 
 Nearly all layers have their own class; for example, the icon kit is `GJGarageLayer`, the editor is `LevelEditorLayer`, and when you go to play a level you enter `PlayLayer`. The first layer most GD modders start modding and also the first layer in the game (after the loading screen) is **the main menu**; it is an instance of the `MenuLayer` class.
 
@@ -26,4 +26,4 @@ Using DevTools, you can find the name of any layer. Just navigate to the layer w
 
 ?> DevTools also comes with many other utilities, such as moving nodes in the scene around. However, this tutorial is not about DevTools, so you will have to look at its (**currently non-existent**) documentation for that ;)
 
-So now we know that the main menu is called `MenuLayer`, but so what? How can we actually modify it? For that, see [Chapter 6: Modifying Layers](/docs/handbook/chap6.md)
+So now we know that the main menu is called `MenuLayer`, but so what? How can we actually modify it? For that, see [Chapter 1.6: Modifying Layers](/docs/handbook/chap1_6.md)

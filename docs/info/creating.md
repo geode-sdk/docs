@@ -21,7 +21,7 @@ These are instructions to create an empty mod.
 
 5. Open up the new directory in VS Code (hint: you can do this from the command line with `code <directory name>`)
 
-6. Press F1 to open the Command Palette and run `CMake: Configure` (**make sure to select an x86/32-bit generator**)
+6. Press F1 to open the Command Palette and run `CMake: Configure` (**make sure to select an x86/32-bit generator**, for example `Visual Studio Community 2019 Release - x86` or `Visual Studio Community 2022 Release - amd64_x86`)
 
 7. Open up the Command Palette again and run `CMake: Select Variant` (select either `Release` or `RelWithDebInfo`)
 

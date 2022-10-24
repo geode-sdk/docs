@@ -1,4 +1,4 @@
-# Chapter 4: Cocos2d
+# Chapter 1.4: Cocos2d
 
 ### GD's Game Engine
 
@@ -10,11 +10,11 @@ Due to this, GD mods can't just use the publicly available Cocos2d headers; they
 
 !> Some old modding tutorials on YouTube will tell you to use CappuccinoSDK. **You should never use it**. Cappuccino is fully obsolete due to `cocos-headers` (and even more due to Geode), and is in fact incompatible with gd.h, so it's not suited for traditional nor modern mods in any way.
 
-### But what is Cocos2d? How does it work?
+### But What is Cocos2d?
 
 Cocos2d, or specifically Cocos2d-x 2.2.3, is a **game engine featuring a sprite and node-based UI**. It is what powers GD's user interface, and many of its core data structures. For most GD mods, the two most important things Cocos2d provides us with are the **node system** and **garbage collector**.
 
-The seminal building block of all Cocos2d UI and by extension GD UI is `CCNode`. A **node** is an UI object that can have **multiple children**, **a single parent**, and **transformations** such as position, rotation, scale, etc.. **All transformations are relative to the node's parent.**
+The seminal building block of all Cocos2d UI and by extension GD UI is the `CCNode` class. A **node** is an UI object that can have **multiple children**, **a single parent**, and **transformations** such as position, rotation, scale, etc.. **All transformations are relative to the node's parent.**
 
 These nodes form a hierarchy known as a **node tree**, on top of which is a `CCScene`. The scene is the only visible node without a parent [[Note 1]](#Notes); at a time, there may only be one scene present. The class that manages scenes is `CCDirector`. At all times in GD, there is one **director** running, which you can get using the `CCDirector::sharedDirector` method, or the Geode-specific `CCDirector::get` shorthand. The director contains information such as the current window size, what scene is running, and getters for many of the other static **singleton managers** in GD. To change to a different scene, you would use the `CCDirector::replaceScene` method. To get the current scene, use `CCDirector::getRunningScene`.
 
@@ -30,7 +30,7 @@ As you can see, the `CommentCell` class consists wholly of other nodes. It does 
 
 ?> Please note that for the sake of simplicity, the above image contains **lies** (regarding positioning and exactly which node's child something is).
 
-### Creating nodes
+### Creating Nodes
 
 Every node usually has a `create` function for creating an instance of the class, and then a bunch of methods like `setPosition` and `addChild` for setting the node's properties and adding children to it. For example, to create a simple "Hi mom!" text, you would use code like this:
 
@@ -91,7 +91,7 @@ layer->addChild(button);
 
 At this point, we're getting very close to writing actual mod code. However, before we can get to that, we must first discuss **GD layers** and the `$modify` macro in Geode.
 
-[Chapter 5: Layers](/docs/handbook/chap5.md)
+[Chapter 1.5: Layers](/docs/handbook/chap1_5.md)
 
 ### Notes
 

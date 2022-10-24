@@ -15,12 +15,14 @@
  * Handbook (WIP)
 
    * [Introduction](/docs/handbook/chap0.md)
-   * [Chapter 1: What is a Mod?](/docs/handbook/chap1.md)
-   * [Chapter 2: Hooking & Patching](/docs/handbook/chap2.md)
-   * [Chapter 3: Functions & Addresses](/docs/handbook/chap3.md)
-   * [Chapter 4: Cocos2d](/docs/handbook/chap4.md)
-   * [Chapter 5: Layers](/docs/handbook/chap5.md)
-   * [Chapter 6: Modifying Layers](/docs/handbook/chap6.md)
+   * [Chapter 1.1: What is a Mod?](/docs/handbook/chap1_1.md)
+   * [Chapter 1.2: Hooking & Patching](/docs/handbook/chap1_2.md)
+   * [Chapter 1.3: Functions & Addresses](/docs/handbook/chap1_3.md)
+   * [Chapter 1.4: Cocos2d](/docs/handbook/chap1_4.md)
+   * [Chapter 1.5: Layers](/docs/handbook/chap1_5.md)
+   * [Chapter 1.6: Modifying Layers](/docs/handbook/chap1_6.md)
+   * [Chapter 1.7: Hello, World!](/docs/handbook/chap1_7.md)
+   * [Chapter 2.1: How Do You The Mod](/docs/handbook/chap2_1.md)
    * [Chapter X](/docs/handbook/chapasm.md)
 
  * About Geode

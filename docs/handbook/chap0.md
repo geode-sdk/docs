@@ -53,4 +53,4 @@ Sometimes the text has notes like this [Note 1]. They are explained at the end o
 
 ### Ready, set, go!
 
-**And with that, let us start with [Chapter 1](/docs/handbook/chap1)!**
+**And with that, let us start with [Chapter 1](/docs/handbook/chap1_1)!**
