@@ -11,6 +11,7 @@
    * [Getting nodes](/docs/tutorials/nodetree.md)
    * [Buttons](/docs/tutorials/buttons.md)
    * [General C++ Tips](/docs/tutorials/cpp.md)
+   * [Publishing Mods](/docs/tutorials/publishing.md)
 
  * Handbook (WIP)
 
