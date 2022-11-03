@@ -12,6 +12,7 @@
    * [Buttons](/docs/tutorials/buttons.md)
    * [General C++ Tips](/docs/tutorials/cpp.md)
    * [Publishing Mods](/docs/tutorials/publishing.md)
+   * [Web requests](/docs/tutorials/fetch.md)
 
  * Handbook (WIP)
 

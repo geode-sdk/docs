@@ -1,8 +1,8 @@
 # Getting nodes
 
-There comes a time in every GD modder's life when they are faced with the same eternal question: how to get a specific node from a certain layer. The easiest, and **incontestably best** way to do this is through **member variable access**. If the desired node is stored as a member in the layer, for example `m_playtestBtn` in `EditorUI`, **you should always access it through that**.
+There comes a time in every GD modder's life when they are faced with the same eternal question: how to get a specific node from a certain layer. The easiest, and **incontestably best** way to do this is through **member variable access**. If the desired node is stored as a member in the layer, for example `m_playtestBtn` in `EditorUI`, you should __always__ access it through that.
 
-However, this is far from always possible, as not all nodes are stored as members in their containing layers. This poses a problem, the easiest solution to which has been the source of hours of pain and misery. The solution referred to here is **getting nodes by their absolute index**.
+However, this is far from always possible, as not all nodes are stored as members in their containing layers. This poses a problem, the easiest solution to which has been the source of **hours of pain and misery**. The solution referred to here is **getting nodes by their absolute index**.
 
 It should be stressed here, at the very start, that **you should __NEVER__ get nodes by their index unless ABSOLUTELY __necessary__**. It should always be left as a last resort. The Cocos2d node tree is _not_ a stabile or predictable environment; child indexes can change rapidly due to game features, Z-order reordering, or most commonly due to other mods. If you do `node->getChildren()->objectAtIndex(5)`, you have no guarantees of getting the same node every time.
 
