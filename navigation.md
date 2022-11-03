@@ -43,5 +43,6 @@
    * [Contributing](/docs/source/contributing.md)
    * [Style guidelines](/docs/source/styling.md)
    * [Modding guidelines](/docs/source/guidelines.md)
+   * [Index review guidelines](/docs/info/indexrules.md)
 
  * Reference
