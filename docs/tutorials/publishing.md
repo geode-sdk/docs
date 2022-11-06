@@ -16,7 +16,7 @@ Getting a mod on the index requires a few things:
 
 2. You're willing to put the mod up [for free](#what-about-paid-mods).
 
-3. Your mod follows all other [required guidelines](/docs/source/guidelines.md).
+3. Your mod follows all other [required guidelines](/docs/source/guidelines.md), and your mod passes the [Index review guidelines](/docs/info/indexrules.md).
 
 That's it. It's mostly formal stuff to make sure your mod is compatible with other mods and not dangerous. If your mod doesn't crash every five seconds, it's probably good to go.
 

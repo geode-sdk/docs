@@ -12,6 +12,7 @@
    * [Buttons](/docs/tutorials/buttons.md)
    * [General C++ Tips](/docs/tutorials/cpp.md)
    * [Publishing Mods](/docs/tutorials/publishing.md)
+   * [Web requests](/docs/tutorials/fetch.md)
 
  * Handbook (WIP)
 
@@ -42,5 +43,6 @@
    * [Contributing](/docs/source/contributing.md)
    * [Style guidelines](/docs/source/styling.md)
    * [Modding guidelines](/docs/source/guidelines.md)
+   * [Index review guidelines](/docs/info/indexrules.md)
 
  * Reference
