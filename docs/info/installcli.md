@@ -26,7 +26,7 @@ In order for the CLI to be accessible from anywhere on your computer, it needs t
 
 4. In the top `User variables` section, select the `Path` variable and click `Edit`
 
-5. Now click `New` and paste the path of the CLI executable you copied at Step 1. Remove the `\geode.exe` from the end.
+5. Now click `New` and paste the path of the CLI executable you copied at Step 1. **Remove the `\geode.exe` from the end;** the path has to point to the _directory_ with Geode CLI, not the CLI itself.
 
 6. Click OK to close the environment variable windows.
 

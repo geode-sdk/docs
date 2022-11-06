@@ -42,7 +42,7 @@ The official Geode installer is currently under heavy remodelling. It will be br
 
 1. Install [Geode CLI](https://github.com/geode-sdk/cli/releases/latest) [(Instructons)](/docs/info/installcli.md)
 
-  * Unzip the download file somewhere, and [add the directory with geode.exe to your user's PATH variable](https://helpdeskgeek.com/windows-10/add-windows-path-environment-variable/). You may need to restart your command line after adding the directory to your path.
+  * Unzip the download file somewhere, and [add the directory with geode.exe to your user's PATH variable](/docs/info/installcli.md?id=adding-cli-to-path-on-windows). You may need to restart your command line after adding the directory to your path.
 
 2. [Install Geode to GD](#installing-geode-for-users)
 
