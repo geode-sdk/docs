@@ -63,7 +63,7 @@ In this code, `b` will either be certainly a valid `B` or `nullptr`. `dynamic_ca
 
 C++ does not have a garbage collector or any sort of memory management, so you have to be careful with handling your own memory. In general, the following tips will help:
 
-### Always pass by value when possible
+### Always allocate on the stack when possible
 
 ```cpp
 struct Thing {
@@ -78,7 +78,7 @@ class OtherThing {
 void someFun(Thing const& thing) {} // pass by const reference
 ```
 
-If you're passing small structs or classes, always pass by value. This is the easiest way to keep track of memory; the one built-in memory management C++ does have is RAII, which means that once your struct is no longer used, its memory will be freed. Passing by value is also generally much faster, as it allocates on the stack and not on the heap.
+If you're passing small structs or classes, always allocate it on the stack by just writing its name. This is the easiest way to keep track of memory; the one built-in memory management C++ does have is RAII, which means that once your struct is no longer used, its memory will be freed. Allocating on the stack is also generally much faster than allocating on the heap.
 
 Allocating objects on the stack also makes dealing with exceptions and early returns easier; no need to add `delete` everywhere, C++ will automatically free the object for you.
 
