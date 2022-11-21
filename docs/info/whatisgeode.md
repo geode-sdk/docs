@@ -4,6 +4,24 @@
 
 Geode is a **modding SDK** and **mod loader**. It contains a suite of tools that make developing mods fast and easy, and also has the actual loader for using those mods.
 
+## What does this mean for players?
+
+### Geode makes installing mods simple
+
+No more need to drag weird .DLL files to barely documented folders, or figuring out what a `settings.txt` file is. **Installing a mod in Geode is as simple as clicking an "Install" button in-game**. Even installing the loader itself is done through a simple [GUI installer](https://github.com/geode-sdk/installer) that manages the installation process for you.
+
+### Geode replaces other mod loaders
+
+Geode fully manages all the mods it loads, and as such is **incompatible with all other mod loaders and mods**. You can't use something like **QuickLdr** or **MHv7 extensions** (Mega Hack itself will be ported over though) alongside Geode.
+
+### What about non-Geode mods?
+
+Mods made using traditional methods, such as GD Hacker Mode or BetterEdit v4 are unfortunately **never going to be supported** by Geode. Geode does not, and frankly, **can not support other mod loaders**. This is because doing so would be fully at odds with what Geode aims to do; if you let mods create hooks using their own methods, traverse the node tree as they wish and handle saving settings and data manually, **you will end up with the same incompatability issues you started with**. Geode will never be able to load arbitary .DLLs, because doing so simply does not make sense.
+
+Of course, this would be quite unhelpful for end users, so **we're doing our best to get as many mods ported to Geode as possible**. BetterEdit, MegaHack v7, ReplayBot, TextureLdr, Run Info and many others **will be ported as Geode mods**, and ones that aren't will be receiving **alternatives** (for example, an alternative to Sai Mod Pack is planned very soon). If there's a mod you'd like to see ported to Geode, [let us know](https://discord.gg/9e43WMKzhp).
+
+## What this means for modders
+
 ### Geode replaces MinHook and gd.h
 
 Geode acts as replacement for the popular [MinHook](https://github.com/TsudaKageyu/minhook), [gd.h](https://github.com/hjfod/gd.h) and [cocos-headers](https://github.com/HJfod/cocos-headers) toolkit that forms the base for **traditional modding**. Geode comes with its own hooking system, its own Cocos2d headers and its own GD bindings. The main goals of Geode is to **make modding simpler** and to **fix mod incompatability**. For users, Geode replaces traditional mod loaders like Mega Hack v7's extensions folder or QuickLdr.
@@ -33,12 +51,6 @@ In traditional modding, what do you do if two mods modify the same layer? Someti
 To solve these problems, the most major thing Geode introduces is **IDs**. Every mod in Geode has an ID, like `geode.loader` or `hjfod.betteredit`. Checking if another mod is loaded is as simple as querying the loader: `Loader::get()->isModLoaded("mod.id")`. If your mod becomes incompatible with another, Geode comes with the tooling to fix that with as little code as possible.
 
 On top of this, Geode also addresses a lot of the sources of incompatability like nodes being added to the wrong places. [Geode comes with string IDs and (soon) automatic layouting tools](/docs/tutorials/nodetree.md), which make writing code that is hard to break very simple. One of the leading philosophies of Geode is that a mod that simply modifies the look of an UI and another that simply adds some buttons into existing menus should **always be compatible**.
-
-### What about non-Geode mods?
-
-Mods made using traditional methods, such as GD Hacker Mode or BetterEdit v4 are unfortunately **never going to be supported** by Geode. Geode does not, and frankly, **can not support other mod loaders**. This is because doing so would be fully at odds with what Geode aims to do; if you let mods create hooks using their own methods, traverse the node tree as they wish and handle saving settings and data manually, **you will end up with the same incompatability issues you started with**. Geode will never be able to load arbitary .DLLs, because doing so simply does not make sense.
-
-Of course, this would be quite unhelpful for end users, so **we're doing our best to get as many mods ported to Geode as possible**. BetterEdit, MegaHack v7, ReplayBot, TextureLdr, Run Info and many others **will be ported as Geode mods**, and ones that aren't will be receiving **alternatives** (for example, an alternative to Sai Mod Pack is planned very soon). If there's a mod you'd like to see ported to Geode, [let us know](https://discord.gg/9e43WMKzhp).
 
 ### And, well, it's free.
 

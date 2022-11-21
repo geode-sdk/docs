@@ -1,6 +1,6 @@
 # Installing Geode (for Users)
 
-> :warning: Please note that Geode is **incompatible with all other mod loaders and mods**. We're porting stuff like MHv7 and BetterEdit over, but don't expect their old releases to work.
+> :warning: Please note that Geode is **incompatible with all other mod loaders and mods**. We're porting stuff like Mega Hack and BetterEdit over, but don't expect their old releases to work.
 
 ## Using the installer
 
@@ -23,8 +23,6 @@ The official Geode installer is currently under heavy remodelling. It will be br
 3. Place the ZIP's contents to the `Contents/Frameworks` directory inside `Geometry Dash.app`
 
 4. Open the game to make sure it works (if it doesn't, **whitelist the GD folder in your antivirus**)
-
-
 
 # Installing Geode SDK (for Developers)
 
