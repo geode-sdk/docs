@@ -5,6 +5,7 @@
 
  * Tutorials
  
+   * [Dictionary](/docs/tutorials/dictionary.md)
    * [Hooking](/docs/tutorials/modify.md)
    * [Extending GD Classes](/docs/tutorials/fields.md)
    * [Popup](/docs/tutorials/popup.md)
