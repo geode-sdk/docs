@@ -36,6 +36,10 @@ jobs:
       with:
         working_directory: 'geode/loader/include/Geode'
         doxyfile-path: 'dist/Doxyfile'
+    
+    - name: Debug
+      run: |
+        ls -l
 
     - name: Setup Pages
       uses: actions/configure-pages@v2
