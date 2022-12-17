@@ -37,7 +37,6 @@ jobs:
           ls -l
           ls dist -l
 
-      # latest version of doxygen is currently not available in ubuntu lts repos
       - name: Install Doxygen
         run: |
           sudo apt-get update
