@@ -1,0 +1,35 @@
+name: Create docs
+
+on:
+  workflow_dispatch:
+
+jobs:
+    - name: Checkout docs repo
+      uses: actions/checkout@v3
+      with:
+        path: 'dist'
+
+    # Clone Geode repo
+    - name: Checkout Geode repo
+      uses: actions/checkout@v3
+      with:
+        repository: 'geode-sdk/geode'
+        path: 'geode'
+  
+    - name: Run Doxygen
+      uses: mattnotmitt/doxygen-action@v1.9.5
+      with:
+        working_directory: 'geode/loader/include/Geode'
+        doxyfile-path: 'dist/Doxyfile'
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v2
+    
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: './dist'
+      
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v1
