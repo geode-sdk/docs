@@ -57,6 +57,7 @@ jobs:
       - name: Debug
         run: |
           ls -l
+          ls dist -l
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
