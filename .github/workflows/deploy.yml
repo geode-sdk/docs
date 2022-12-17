@@ -40,7 +40,7 @@ jobs:
           echo "${GITHUB_WORKSPACE}/doxygen-1.9.5/bin" >> $GITHUB_PATH
         
       - name: Install theme
-        uses: action/checkout@v3
+        uses: actions/checkout@v3
         with:
           repository: jothepro/doxygen-awesome-css
           path: ${{ github.workspace }}/geode/loader/include/Geode/theme
@@ -54,11 +54,6 @@ jobs:
         run: |
           mv ${{ github.workspace }}/geode/loader/include/Geode/doxygenned ${{ github.workspace }}/dist/cpp
       
-      - name: Debug
-        run: |
-          ls -l
-          ls dist -l
-
       - name: Setup Pages
         uses: actions/configure-pages@v2
       
