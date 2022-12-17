@@ -45,12 +45,12 @@ jobs:
         wget https://www.doxygen.nl/files/doxygen-1.9.5.linux.bin.tar.gz
         tar -xvzf doxygen-1.9.5.linux.bin.tar.gz
         echo "${GITHUB_WORKSPACE}/doxygen-1.9.5/bin" >> $GITHUB_PATH
-    
+
     - name: Run Doxygen
       run: doxygen ${{ github.workspace }}/dist/Doxyfile
       working-directory: '${{ github.workspace }}/geode/loader/include/Geode'
         working-directory: '${{ github.workspace }}/geode/loader/include/Geode'
-    
+
     - name: Move generated docs
       run: |
         mv ${{ github.workspace }}/geode/loader/include/Geode/doxygenned ${{ github.workspace }}/dist/cpp
