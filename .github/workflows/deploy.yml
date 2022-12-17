@@ -49,7 +49,6 @@ jobs:
         run: |
           doxygen ${{ github.workspace }}/dist/Doxyfile
         working-directory: '${{ github.workspace }}/geode/loader/include/Geode'
-          working-directory: '${{ github.workspace }}/geode/loader/include/Geode'
 
       - name: Move generated docs
         run: |
