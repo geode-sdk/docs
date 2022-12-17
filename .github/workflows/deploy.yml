@@ -33,6 +33,7 @@ jobs:
     
     - name: Debug
       run: |
+        pwd
         ls -l
         ls dist -l
   
