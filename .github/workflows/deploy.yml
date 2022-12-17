@@ -43,7 +43,6 @@ jobs:
           sudo apt-get install -y libc6 libclang-cpp12 libclang1-12 libgcc-s1 libllvm12 libstdc++6 libxapian30 graphviz python3
           wget https://www.doxygen.nl/files/doxygen-1.9.5.linux.bin.tar.gz
           tar -xvzf doxygen-1.9.5.linux.bin.tar.gz
-          echo "${GITHUB_WORKSPACE}/doxygen-1.9.5/bin" >> $GITHUB_PATH
 
       - name: Run Doxygen
         run: doxygen ${{ github.workspace }}/dist/Doxyfile
