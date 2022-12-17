@@ -2,6 +2,7 @@ name: Create docs
 
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   deploy:
