@@ -35,7 +35,7 @@ jobs:
       uses: mattnotmitt/doxygen-action@v1.9.5
       with:
         working-directory: 'geode/loader/include/Geode'
-        doxyfile-path: 'dist/Doxyfile'
+        doxyfile-path: '${{ github.workspace }}/dist/Doxyfile'
     
     - name: Debug
       run: |
