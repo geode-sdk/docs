@@ -31,12 +31,6 @@ jobs:
           repository: 'geode-sdk/geode'
           path: 'geode'
       
-      - name: Debug
-        run: |
-          pwd
-          ls -l
-          ls dist -l
-
       - name: Install Doxygen
         run: |
           sudo apt-get update
@@ -44,6 +38,12 @@ jobs:
           wget https://www.doxygen.nl/files/doxygen-1.9.5.linux.bin.tar.gz
           tar -xvzf doxygen-1.9.5.linux.bin.tar.gz
           echo "${GITHUB_WORKSPACE}/doxygen-1.9.5/bin" >> $GITHUB_PATH
+        
+      - name: Install theme
+        uses: action/checkout@v3
+        with:
+          repository: jothepro/doxygen-awesome-css
+          path: ${{ github.workspace }}/geode/loader/include/Geode/theme
 
       - name: Run Doxygen
         run: |
