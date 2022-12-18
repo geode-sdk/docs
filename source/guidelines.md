@@ -20,7 +20,7 @@ Write reasonable code, basically.
 
 ### 2.1. Use Geode's solutions (if they exist)
 
-If Geode has a solution to a problem, use that and do **not** create your own solution to it. If you want to add custom keybinds to your mod, use the Geode API. If you feel the solution Geode provides is insufficient for your needs, please [let us know](/docs/contributing) and we'll look into expanding it.
+If Geode has a solution to a problem, use that and do **not** create your own solution to it. If you want to add custom keybinds to your mod, use the Geode API. If you feel the solution Geode provides is insufficient for your needs, please [let us know](/contributing) and we'll look into expanding it.
 
 If Geode comes with a solution for adding nodes to a certain layer, use that instead of hooking the layer yourself.
 

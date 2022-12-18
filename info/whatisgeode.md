@@ -32,7 +32,7 @@ Geode loads mods packaged as `.geode` files. They are actually just ZIPs that ha
 
 ### Geode makes modding simpler
 
-Want to create a hook? [Geode's `$modify` syntax makes this incredibly simple and easy to read](/docs/tutorials/modify.md).
+Want to create a hook? [Geode's `$modify` syntax makes this incredibly simple and easy to read](/tutorials/modify.md).
 
 Want to add custom sprites? Add your resources under the `resources` key in mod.json; All the `UHD` and `HD` variants are automatically created and the resources packaged into your `.geode` file, so you don't have to worry about distributing resources with the DLL anymore.
 
@@ -46,11 +46,11 @@ Geode also comes with a simple **publishing platform**; you can publish your mod
 
 ### But the main reason for using Geode is mod interoperability.
 
-In traditional modding, what do you do if two mods modify the same layer? Sometimes this happens to work as expected, but more often than not faulty logic in either or both mods leads to **bugs** and **crashes**. And fixing these issues can be more cumbersome than expected. How are you supposed to make sure your mod doesn't glitch out, when you don't even have a reliable way of [traversing the node tree](/docs/tutorials/nodetree.md)? If another mod becomes incompatible, how do you even check for that? You would have to write your own utilities for checking if another `.DLL` is loaded and that can go south very easily.
+In traditional modding, what do you do if two mods modify the same layer? Sometimes this happens to work as expected, but more often than not faulty logic in either or both mods leads to **bugs** and **crashes**. And fixing these issues can be more cumbersome than expected. How are you supposed to make sure your mod doesn't glitch out, when you don't even have a reliable way of [traversing the node tree](/tutorials/nodetree.md)? If another mod becomes incompatible, how do you even check for that? You would have to write your own utilities for checking if another `.DLL` is loaded and that can go south very easily.
 
 To solve these problems, the most major thing Geode introduces is **IDs**. Every mod in Geode has an ID, like `geode.loader` or `hjfod.betteredit`. Checking if another mod is loaded is as simple as querying the loader: `Loader::get()->isModLoaded("mod.id")`. If your mod becomes incompatible with another, Geode comes with the tooling to fix that with as little code as possible.
 
-On top of this, Geode also addresses a lot of the sources of incompatability like nodes being added to the wrong places. [Geode comes with string IDs and (soon) automatic layouting tools](/docs/tutorials/nodetree.md), which make writing code that is hard to break very simple. One of the leading philosophies of Geode is that a mod that simply modifies the look of an UI and another that simply adds some buttons into existing menus should **always be compatible**.
+On top of this, Geode also addresses a lot of the sources of incompatability like nodes being added to the wrong places. [Geode comes with string IDs and (soon) automatic layouting tools](/tutorials/nodetree.md), which make writing code that is hard to break very simple. One of the leading philosophies of Geode is that a mod that simply modifies the look of an UI and another that simply adds some buttons into existing menus should **always be compatible**.
 
 ### And, well, it's free.
 

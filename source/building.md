@@ -1,6 +1,6 @@
 # Building
 
-These are instructions for building the [Geode Loader](https://github.com/geode-sdk/geode). For building your own mods, see [Getting Started](/docs/starting).
+These are instructions for building the [Geode Loader](https://github.com/geode-sdk/geode). For building your own mods, see [Getting Started](/starting).
 
 ### Prerequisites: 
 

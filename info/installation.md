@@ -38,9 +38,9 @@ The official Geode installer is currently under heavy remodelling. It will be br
  * A supported C++ compiler ([clang](https://releases.llvm.org/)/[MSVC](https://visualstudio.microsoft.com/downloads/))
  * [git](https://git-scm.com/downloads)
 
-1. Install [Geode CLI](https://github.com/geode-sdk/cli/releases/latest) [(Instructons)](/docs/info/installcli.md)
+1. Install [Geode CLI](https://github.com/geode-sdk/cli/releases/latest) [(Instructons)](/info/installcli.md)
 
-  * Unzip the download file somewhere, and [add the directory with geode.exe to your user's PATH variable](/docs/info/installcli.md?id=adding-cli-to-path-on-windows). You may need to restart your command line after adding the directory to your path.
+  * Unzip the download file somewhere, and [add the directory with geode.exe to your user's PATH variable](/info/installcli.md?id=adding-cli-to-path-on-windows). You may need to restart your command line after adding the directory to your path.
 
 2. [Install Geode to GD](#installing-geode-for-users)
 
@@ -50,9 +50,9 @@ The official Geode installer is currently under heavy remodelling. It will be br
 
   * The installation should automatically set the `GEODE_SDK` environment variable to point to the SDK on Windows, but if it doesn't, **you should set it yourself**. You may want to restart your terminal, editors, and possibly computer after setting it.
 
-5. Run `geode sdk install-binaries` to install prebuilt binaries, or [build Geode yourself](/docs/source/building.md)
+5. Run `geode sdk install-binaries` to install prebuilt binaries, or [build Geode yourself](/source/building.md)
 
   * You can pick whether you want the `nightly` or `stable` branch of Geode. `nightly` is the tip of the `main` branch, and contains all of the latest and greatest features but may also feature crashes and possibly not even compile, whereas `stable` is the latest released version. Use `geode sdk update nightly` or `geode sdk update stable` to switch between the two branches.
 
-6. All done :) See the [instructions for creating a mod](/docs/info/creating.md).
+6. All done :) See the [instructions for creating a mod](/info/creating.md).
 

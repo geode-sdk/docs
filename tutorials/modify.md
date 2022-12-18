@@ -1,6 +1,6 @@
 # Hooking / Modifying classes
 
-At the centre of every modder's toolkit is **hooking**. If you don't know what that is, [read the handbook](/docs/handbook/chap0.md). If you know what that is and have made mods using gd.h + cocos-headers before, you should know how it works in Geode.
+At the centre of every modder's toolkit is **hooking**. If you don't know what that is, [read the handbook](/handbook/chap0.md). If you know what that is and have made mods using gd.h + cocos-headers before, you should know how it works in Geode.
 
 ## Modifying a function
 
@@ -24,7 +24,7 @@ Wait wait wait, so what does this exactly do?
 
 The function we are modifying is `MenuLayer::onMoreGames`, which is called when you press the "More Games" button. This function takes a single parameter, a `cocos2d::CCObject*`, which is the target object the function is called on. For our use case, we don't need this parameter. 
 
-The syntax is `class $modify(ModifiedClassName)`, which is selected mostly for aesthetics and not breaking the syntax highlighting. Inside this class, we add the functions we will modify. The example will replace the implementation of `MenuLayer::onMoreGames`, making it spawn a [FLAlertLayer](/docs/tutorials/popup.md) instead of the More Games screen.
+The syntax is `class $modify(ModifiedClassName)`, which is selected mostly for aesthetics and not breaking the syntax highlighting. Inside this class, we add the functions we will modify. The example will replace the implementation of `MenuLayer::onMoreGames`, making it spawn a [FLAlertLayer](/tutorials/popup.md) instead of the More Games screen.
 
 ## Using the original function
 
@@ -50,7 +50,7 @@ This pattern is quite common inside cocos2d, and therefore in GD too. Here, we m
 
 ## Giving a class name
 
-You will probably encounter an issue with `$modify` in your very first use case: [**how do you add callbacks for buttons**](/docs/tutorials/buttons.md)? By default, `$modify` gives the inherited class a pretty much random name, but if you want to reference the name of your modified class, that's not very ideal as it's not consistent. Luckily, `$modify` can take a second parameter that specifies the name of the class:
+You will probably encounter an issue with `$modify` in your very first use case: [**how do you add callbacks for buttons**](/tutorials/buttons.md)? By default, `$modify` gives the inherited class a pretty much random name, but if you want to reference the name of your modified class, that's not very ideal as it's not consistent. Luckily, `$modify` can take a second parameter that specifies the name of the class:
 
 ```cpp
 class $modify(MyAwesomeModification, MenuLayer) {
@@ -83,7 +83,7 @@ class $modify(MyAwesomeModification, MenuLayer) {
 
 The syntax for this is `class $modify(MyClassName, ClassToModify)`. It looks cool.
 
-Creating a `CCMenuItemSpriteExtra` takes a `SEL_MenuHandler`, which is a type alias for `void(cocos2d::CCObject::*)(cocos2d::CCObject*)` (which means a pointer to a member function that has a single parameter of CCObject\*). In order to supply this we need to get access to our function address, which requires us to know the class name. When we don't supply a class name, the macro generates a class which is guaranteed to not create any collision problems. [Read more about menu selectors here](/docs/tutorials/buttons.md)
+Creating a `CCMenuItemSpriteExtra` takes a `SEL_MenuHandler`, which is a type alias for `void(cocos2d::CCObject::*)(cocos2d::CCObject*)` (which means a pointer to a member function that has a single parameter of CCObject\*). In order to supply this we need to get access to our function address, which requires us to know the class name. When we don't supply a class name, the macro generates a class which is guaranteed to not create any collision problems. [Read more about menu selectors here](/tutorials/buttons.md)
 
 ## Modifying destructors
 
@@ -104,7 +104,7 @@ You still need to call the base destructor itself for calling the original.
 
 # Adding members
 
-Geode allows you to add members to your modified classes to extend GD classes nearly seamlessly. [Learn more about fields](/docs/tutorials/fields.md)
+Geode allows you to add members to your modified classes to extend GD classes nearly seamlessly. [Learn more about fields](/tutorials/fields.md)
 
 # Advanced usage
 

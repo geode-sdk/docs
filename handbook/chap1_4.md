@@ -67,7 +67,7 @@ How to add your own sprites to use in Geode mods will be discussed in a later ch
 
 ### Menus & Buttons
 
-Another important class to know of is `CCMenu`. Most mods need some sort of [buttons](/docs/tutorials/buttons.md) for their UI, and for that, the most common class to use is `CCMenuItemSpriteExtra`. However, all `CCMenuItem`-derived classes **must be part of a `CCMenu` to work**. In practice, this means that all of your buttons must be the direct children of some menu.
+Another important class to know of is `CCMenu`. Most mods need some sort of [buttons](/tutorials/buttons.md) for their UI, and for that, the most common class to use is `CCMenuItemSpriteExtra`. However, all `CCMenuItem`-derived classes **must be part of a `CCMenu` to work**. In practice, this means that all of your buttons must be the direct children of some menu.
 
 You can actually see the effects of this in-game; hold down on some button, and then without releasing move your cursor over other buttons in the same scene. You will find that some buttons display their bounce animation indicating they are usable, and others don't. This is because of the Cocos2d **touch system**, which will be discussed in detail later, but in essence, only buttons in the same menu are clickable when you start holding down from one.
 
@@ -91,7 +91,7 @@ layer->addChild(button);
 
 At this point, we're getting very close to writing actual mod code. However, before we can get to that, we must first discuss **GD layers** and the `$modify` macro in Geode.
 
-[Chapter 1.5: Layers](/docs/handbook/chap1_5.md)
+[Chapter 1.5: Layers](/handbook/chap1_5.md)
 
 ### Notes
 

@@ -112,7 +112,7 @@ Another, more complex file format for storing GD levels, popularized by [GDShare
 
 Hijacking the execution of a function in GD and redirecting it to [your own function](#detour). The part of a mod that actually does the modifying; the most fundamental modding concept alongside [patching](#patching).
 
-> Further reading: [Handbook](/docs/handbook/chap1_2.md), [Wikipedia](https://en.m.wikipedia.org/wiki/Hooking)
+> Further reading: [Handbook](/handbook/chap1_2.md), [Wikipedia](https://en.m.wikipedia.org/wiki/Hooking)
 
 > Related words: [Detour](#detour), [Patching](#patching), [Trampoline](#trampoline)
 
@@ -174,7 +174,7 @@ A program that modifies GD by adding, changing, and removing content using vario
 
 ### Mod Incompatabilities
 
-When two mods become incompatible with each other, for example through a [hook conflict](#hook-conflict) or [accessing the node tree through absolute indices](/docs/tutorials/nodetree.md).
+When two mods become incompatible with each other, for example through a [hook conflict](#hook-conflict) or [accessing the node tree through absolute indices](/tutorials/nodetree.md).
 
 ### Mod Loader
 
@@ -269,6 +269,12 @@ An animation that is played when switching from one [scene](#scene) to another. 
 Also, what most GD modders do once they become experts.
 
 > Related words: [Node tree](#node-tree), [Scene](#scene), [Node](#node), [Menu](#menu), [Popup](#popup), [Layer](#layer)
+
+### Undefined behaviour (UB)
+
+Code where the C++ standard does not say what should happen, and as such the results are completely unpredictable. Your code is most likely full of this.
+
+> Further reading: [cppreference.com](https://en.cppreference.com/w/cpp/language/ub)
 
 ### x32dbg
 
