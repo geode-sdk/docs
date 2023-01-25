@@ -65,7 +65,9 @@ public:
 };
 ```
 
-`Popup` contains one pure virtual member function: `setup`, whose parameters are the class template arguments. This function is called at the end of `Popup::init`, which initializes all the relevant `FLAlertLayer` members and adds a background and a close button. This abstracts away a lot of boilerplate and makes creating complex popups simple. **This is the recommended way to create complex popups in Geode**, although as with question popups this is not an interoperability concern and as such you can do what fits your case.
+`Popup` contains one pure virtual member function: `setup`, whose parameters are the class template arguments. This function is called at the end of `Popup::init`, which initializes all the relevant `FLAlertLayer` members and adds a background and a close button. This abstracts away a lot of boilerplate and makes creating complex popups simple.
+
+**This is the recommended way to create complex popups in Geode**, although as with question popups, this is not an interoperability concern and as such **you can do what fits your case**. If you are porting an existing mod that uses some other setup and it works just fine, no need to change it unless you want to make the codebase more easily refactorable.
 
 ### Colored text
 
@@ -73,24 +75,46 @@ public:
 
 | Tag | Color                               |
 |-----|-------------------------------------|
-| cb  | <span color="#4a52e1">Blue</span>   |
-| cg  | <span color="#40e348">Green</span>  |
-| cl  | <span color="#60abef">Aqua</span>   |
-| cj  | <span color="#32c8ff">Cyan</span>   |
-| cy  | <span color="#ffff00">Yellow</span> |
-| co  | <span color="#ffa54b">Orange</span> |
-| cr  | <span color="#ff5a5a">Red</span>    |
-| cp  | <span color="#ff00ff">Pink</span>   |
+| cb  | <span style="color: #4a52e1">Blue</span>   |
+| cg  | <span style="color: #40e348">Green</span>  |
+| cl  | <span style="color: #60abef">Aqua</span>   |
+| cj  | <span style="color: #32c8ff">Cyan</span>   |
+| cy  | <span style="color: #ffff00">Yellow</span> |
+| co  | <span style="color: #ffa54b">Orange</span> |
+| cr  | <span style="color: #ff5a5a">Red</span>    |
+| cp  | <span style="color: #ff00ff">Pink</span>   |
 
-Note that the closing tag **must be `</c>` only without the color specified again**. Doing otherwise will result in undesired behaviour (a crash).
+```cpp
+FLAlertLayer::create(
+    "Color Example",
+    "This is <cp>pink text</c>!",
+    "OK"
+)->show();
+```
+
+Note that the closing tag **must be `</c>` only without the color specified again**. Doing otherwise will likely result in a crash.
+
+> You might wonder about how to use other colors than the ones listed; there are currently no plans in Geode to add that, but one could easily make a mod that adds support for arbitary color tags.
 
 ### Disabling the popup animation
 
 You can disable the popup's enter animation by setting the `m_noElasticity` member to `true`.
 
+> :warning: Make sure to set the member prior to calling `show()` on the layer; usually this means you have to store the alert in a member
+
+```cpp
+auto alert = FLAlertLayer::create(
+    "BOO!",
+    "Haha! Were you scared?",
+    "EEK!!"
+);
+alert->m_noElasticity = true;
+alert->show();
+```
+
 ### Popup not showing up
 
-Sometimes you will want to create a popup and show it in a layer's `init` function. However, if you do something like this:
+Sometimes you want to create a popup and show it in a layer's `init` function. However, if you do something like this:
 ```cpp
 class $modify(MenuLayer) {
     bool init() {
@@ -107,7 +131,7 @@ class $modify(MenuLayer) {
     }
 };
 ```
-You will find that the popup curiously doesn't show up. This is because `FLAlertLayer::show` by default adds the popup **to the current scene**, and a layer's `init` function is usually called right before leaving a scene, which makes the popup show on the previous scene instead of the current one. The solution to this is to first set the layer's `m_scene` member to the layer in `init` before calling `show`, as in:
+You will find that the popup curiously doesn't show up. This is because `FLAlertLayer::show` by default adds the popup **to the current scene**, and a layer's `init` function is usually called right before leaving the scene, which makes the popup show on the previous scene instead of the new (current) one. The solution to this is to first set the layer's `m_scene` member to the layer in `init` before calling `show`, as in:
 ```cpp
 class $modify(MenuLayer) {
     bool init() {
@@ -126,9 +150,9 @@ class $modify(MenuLayer) {
     }
 };
 ```
-This will make the popup show correctly.
+This will make the popup show correctly by adding it as a child to the new `MenuLayer` instead of the previous scene.
 
 ### Examples
 
- * [`ModSettingsPopup` in Geode, which uses `Popup`](https://github.com/geode-sdk/geode/blob/ui/loader/src/ui/internal/settings/ModSettingsPopup.hpp)
- * [Use of `createQuickPopup` within it](https://github.com/geode-sdk/geode/blob/ui/loader/src/ui/internal/settings/ModSettingsPopup.cpp#L156-L168)
+ * [`ModSettingsPopup` in Geode, which uses `Popup`](https://github.com/geode-sdk/geode/blob/main/loader/src/ui/internal/settings/ModSettingsPopup.hpp)
+ * [Use of `createQuickPopup` within it](https://github.com/geode-sdk/geode/blob/main/loader/src/ui/internal/settings/ModSettingsPopup.cpp#L139-L151)
