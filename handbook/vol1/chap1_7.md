@@ -38,7 +38,7 @@ class $modify(MenuLayer) {
 
 ### Adding the label
 
-Now it's time to actually show the text. As outlined in [Chapter 1.4](/handbook/chap1_4.md), Cocos2d is node-based; we don't do our own rendering, we leverage other nodes to do it for us. In this case, since we want to display text, we go for the standard `CCLabelBMFont` class:
+Now it's time to actually show the text. As outlined in [Chapter 1.4](/handbook/vol1/chap1_4.md), Cocos2d is node-based; we don't do our own rendering, we leverage other nodes to do it for us. In this case, since we want to display text, we go for the standard `CCLabelBMFont` class:
 
 ```cpp
 #include <Geode/modify/MenuLayer.hpp>
@@ -183,4 +183,4 @@ If it works for you, **congratulations!** You have now officially built your fir
 
 After drinking your juice however, it's time to get back into business. So we've got a Hello, World! going, that's great. Now it's time to start crafting something actually useful.
 
-In Volume 2 of the tutorial, we will start looking at **reverse engineering** and how making new mods actually works in practice. To start, let's once again ask the following question: [so how exactly does one make a mod?](/handbook/chap2_1.md).
+In Volume 2 of the tutorial, we will start looking at **reverse engineering** and how making new mods actually works in practice. To start, let's once again ask the following question: [so how exactly does one make a mod?](/handbook/vol2/chap2_1.md).

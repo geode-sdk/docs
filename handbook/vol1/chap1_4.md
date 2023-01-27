@@ -91,7 +91,7 @@ layer->addChild(button);
 
 At this point, we're getting very close to writing actual mod code. However, before we can get to that, we must first discuss **GD layers** and the `$modify` macro in Geode.
 
-[Chapter 1.5: Layers](/handbook/chap1_5.md)
+[Chapter 1.5: Layers](/handbook/vol1/chap1_5.md)
 
 ### Notes
 

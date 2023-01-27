@@ -112,7 +112,7 @@ Another, more complex file format for storing GD levels, popularized by [GDShare
 
 Hijacking the execution of a function in GD and redirecting it to [your own function](#detour). The part of a mod that actually does the modifying; the most fundamental modding concept alongside [patching](#patching).
 
-> Further reading: [Handbook](/handbook/chap1_2.md), [Wikipedia](https://en.m.wikipedia.org/wiki/Hooking)
+> Further reading: [Handbook](/handbook/vol1/chap1_2.md), [Wikipedia](https://en.m.wikipedia.org/wiki/Hooking)
 
 > Related words: [Detour](#detour), [Patching](#patching), [Trampoline](#trampoline)
 

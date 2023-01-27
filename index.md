@@ -10,7 +10,7 @@ The main goal of Geode is to **end mod incompatability**. Traditional modding le
 
 On top of this, and perhaps more interestingly, **Geode provides much better ergonomics for modding**. Instead of having to deal with calling conventions, trampolines, manually setting hooks (likely in another source file), you can have all the code relevant to hooks in a [nice, clean, readable syntax](/tutorials/modify.md) contained within a single source file.
 
-See [What is Geode](/info/whatisgeode.md) for more detailed information about why you should use Geode.
+See [What is Geode](/whatisgeode.md) for more detailed information about why you should use Geode.
 
 ## Help, Contributing, Etc.
 
@@ -18,7 +18,7 @@ If you need help using Geode or would like to contribute, feel free to join our 
 
 ## Getting Started
 
-See [Installation](/info/installation) for instructions on how to install the Geode SDK on your computer.
+See [Installation](/installation) for instructions on how to install the Geode SDK on your computer.
 
 See [Creating a new mod](/info/creating.md) for instructions on how to make your first mod.
 

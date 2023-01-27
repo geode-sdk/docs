@@ -28,4 +28,4 @@ If your code doesn't work, reverse engineer a bit more to find out why, write so
 
 These may seem like completely dull and uninteresting steps for some, and perhaps like a glorified [WikiHow](https://www.youtube.com/watch?v=PSKQ3ZNQ_O8) article, but the point of that is to illustrate that there really is no specific process for making a mod. For example, reverse engineering may involve using Ghidra and IDA to analyze functions, or it may involve just looking around with DevTools. The code you write may be some in-depth template-filled C++ behemoth, or it may just be a few quick lines of test code. Testing may involve a larger group or just be you realizing you forgot to call `retain` on an array. Modding isn't an exact science; it's an art.
 
-Even then, there are many important skills and tools every modder should get acquainted with, and in the next chapter we will look at one of the most important ones: [Reverse Engineering](/handbook/chap2_2.md)
+Even then, there are many important skills and tools every modder should get acquainted with, and in the next chapter we will look at one of the most important ones: [Reverse Engineering](/handbook/vol2/chap2_2.md)

@@ -51,7 +51,7 @@ web::AsyncWebRequest()
 ```
 
 That's it. The web request will then be dispatched, and after it's finished the callback passed to `then` will be run, and on failure the callback passed to `expect` will be run.
-`
+
 There are also callbacks like `progress` for keeping track of the file download, and `cancelled` for checking if the request has been cancelled. The latter is not usually required, as `expect` will be run aswell if the request is cancelled while it is downloading. However, if you're downloading a bunch of files in bulk, a request may be cancelled after it has been finished, in which case you should use `cancelled` to clean up any side-effects the `then` callback caused.
 
 If you want to ensure that a web request is only made once, for example if you want to update a global manager class, you can use the `join` method on `AsyncWebRequest` to make sure only one instance of the same request exists at a time. Join takes a fully arbitary string ID, which can be anything, but you should make sure it's unique.
