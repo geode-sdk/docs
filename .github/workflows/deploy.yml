@@ -52,7 +52,7 @@ jobs:
         
       - name: Build docs with Flash
         run: |
-          cd dist
+          cd dist 
           ./../flash.exe -i ../geode -o . 
 
       - name: Setup Pages
