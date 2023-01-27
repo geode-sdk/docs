@@ -49,10 +49,10 @@ jobs:
       - name: Create dist directory
         run: |
           mkdir dist
-          cd dist
         
       - name: Build docs with Flash
         run: |
+          cd dist
           ./../flash.exe -i ../geode -o . 
 
       - name: Setup Pages
