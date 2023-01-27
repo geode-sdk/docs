@@ -17,12 +17,8 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-2019
     steps:
-      - name: Checkout docs repo
-        uses: actions/checkout@v3
-        with:
-          path: 'dist'
 
       # Clone Geode repo
       - name: Checkout Geode repo
@@ -30,30 +26,36 @@ jobs:
         with:
           repository: 'geode-sdk/geode'
           path: 'geode'
-      
-      - name: Install Doxygen
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libc6 libclang-cpp12 libclang1-12 libgcc-s1 libllvm12 libstdc++6 libxapian30 graphviz python3
-          wget https://www.doxygen.nl/files/doxygen-1.9.5.linux.bin.tar.gz
-          tar -xvzf doxygen-1.9.5.linux.bin.tar.gz
-          echo "${GITHUB_WORKSPACE}/doxygen-1.9.5/bin" >> $GITHUB_PATH
-        
-      - name: Install theme
+
+      - name: Checkout docs repo
         uses: actions/checkout@v3
         with:
-          repository: jothepro/doxygen-awesome-css
-          path: ${{ github.workspace }}/geode/loader/include/Geode/theme
-
-      - name: Run Doxygen
-        run: |
-          doxygen ${{ github.workspace }}/dist/Doxyfile
-        working-directory: '${{ github.workspace }}/geode/loader/include/Geode'
-
-      - name: Move generated docs
-        run: |
-          mv ${{ github.workspace }}/geode/loader/include/Geode/doxygenned ${{ github.workspace }}/dist/cpp
+          path: 'geode/docs'
       
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libc6 libclang-cpp12 libclang1-12 libgcc-s1 libllvm12 libstdc++6 libxapian30
+      
+      - name: Download Flash
+        uses: robinraju/release-downloader@v1.5
+        with:
+          repository: hjfod/flash
+          latest: true
+          fileName: "flash.exe"
+          tarBall: false
+          zipBall: false
+          out-file-path: "flash" 
+        
+      - name: Add Flash to Path
+        run: |
+          echo "${{ github.workspace }}/flash" >> $GITHUB_PATH
+
+      - name: Build docs with Flash
+        run: |
+          cd dist
+          flash -i ../geode -o .
+
       - name: Setup Pages
         uses: actions/configure-pages@v2
       
