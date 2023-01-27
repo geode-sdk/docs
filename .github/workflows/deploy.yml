@@ -17,6 +17,7 @@ concurrency:
 
 jobs:
   deploy:
+    name: Docs
     runs-on: windows-2019
     steps:
 
@@ -32,11 +33,10 @@ jobs:
         with:
           path: 'geode/docs'
       
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libc6 libclang-cpp12 libclang1-12 libgcc-s1 libllvm12 libstdc++6 libxapian30
-      
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x86
+
       - name: Download Flash
         uses: robinraju/release-downloader@v1.5
         with:
