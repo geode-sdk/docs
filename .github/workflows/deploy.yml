@@ -44,7 +44,7 @@ jobs:
           fileName: "flash.exe"
           tarBall: false
           zipBall: false
-          out-file-path: "" 
+          out-file-path: ""
         
       - name: Build docs with Flash
         run: |
