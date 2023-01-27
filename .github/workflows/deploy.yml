@@ -53,6 +53,7 @@ jobs:
 
       - name: Build docs with Flash
         run: |
+          mkdir dist
           cd dist
           flash -i ../geode -o .
 
