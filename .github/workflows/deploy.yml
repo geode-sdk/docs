@@ -33,7 +33,8 @@ jobs:
         with:
           path: 'geode/docs'
       
-      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: x86
 
@@ -47,15 +48,11 @@ jobs:
           zipBall: false
           out-file-path: "flash" 
         
-      - name: Add Flash to Path
-        run: |
-          echo "${{ github.workspace }}/flash" >> $GITHUB_PATH
-
       - name: Build docs with Flash
         run: |
           mkdir dist
           cd dist
-          flash -i ../geode -o .
+          ./../flash/flash.exe -i ../geode -o .
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
