@@ -33,6 +33,9 @@ jobs:
         with:
           path: 'geode/docs'
       
+      - name: Setup Ninja
+        uses: seanmiddleditch/gha-setup-ninja@master
+      
       - name: Download Flash
         uses: robinraju/release-downloader@v1.5
         with:
