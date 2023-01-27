@@ -46,13 +46,13 @@ jobs:
           fileName: "flash.exe"
           tarBall: false
           zipBall: false
-          out-file-path: "flash" 
+          out-file-path: "" 
         
       - name: Build docs with Flash
         run: |
           mkdir dist
           cd dist
-          ./../flash/flash.exe -i ../geode -o .
+          ./../flash.exe -i ../geode -o .
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
