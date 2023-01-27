@@ -54,6 +54,10 @@ jobs:
         run: |
           cd dist 
           ./../flash.exe -i ../geode -o .
+      
+      - name: Debugging in prod like a boss
+        run: |
+          ls dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
