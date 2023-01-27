@@ -52,7 +52,7 @@ jobs:
         run: |
           mkdir dist
           cd dist
-          ./../flash.exe -i ../geode -o .
+          ./../flash.exe -i ../geode -o . 
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
