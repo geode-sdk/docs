@@ -33,11 +33,6 @@ jobs:
         with:
           path: 'geode/docs'
       
-      - name: Setup MSVC
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x86
-
       - name: Download Flash
         uses: robinraju/release-downloader@v1.5
         with:
