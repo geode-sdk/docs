@@ -6,11 +6,11 @@ From here on out however, we're starting to leave the lame theory part and begin
 
 And with that, let's start building our **Hello, World!** mod!
 
-### Constructing the Mod
+## Constructing the Mod
 
 To begin with, we need to outline what our mod will actually do. The goal is simple: add some text to the main menu in GD that says "Hello, World!".
 
-### Modifying the Layer
+## Modifying the Layer
 
 Our first step is to use what we learned in the previous chapter and modify `MenuLayer`:
 
@@ -36,7 +36,7 @@ class $modify(MenuLayer) {
 };
 ```
 
-### Adding the label
+## Adding the label
 
 Now it's time to actually show the text. As outlined in [Chapter 1.4](/handbook/vol1/chap1_4.md), Cocos2d is node-based; we don't do our own rendering, we leverage other nodes to do it for us. In this case, since we want to display text, we go for the standard `CCLabelBMFont` class:
 
@@ -96,7 +96,7 @@ class $modify(MenuLayer) {
 };
 ```
 
-### Positioning the label
+## Positioning the label
 
 The default position for any node is (0, 0) which is at bottom left of the screen; however, we want to center our label in the middle of the screen. To do this, we need to first figure out what the size of the screen is, and to do this we use the `getWinSize` method on `CCDirector`:
 
@@ -150,7 +150,7 @@ All of this means that we can make our `setPosition` call shorter as just:
 label->setPosition(winSize / 2);
 ```
 
-### Finished Mod
+## Finished Mod
 
 And with that, **we have completed our Hello, World! mod**. Here's what the final code looks like:
 
@@ -177,7 +177,7 @@ class $modify(MenuLayer) {
 
 To try the mod out, [create a new mod using `geode new`](/info/creating.md), and then replace the code in `src/main.cpp` with the above. After building the mod, open up GD and you should see this:
 
-<img src="./imgs/hello_world.png" alt="Image showing the main menu in GD with a 'Hello, world' text on top" />
+![Image showing the main menu in GD with a 'Hello, world' text on top](/assets/hello_world.png)
 
 If it works for you, **congratulations!** You have now officially built your first Geometry Dash mod! Go grab a lil juice from the kitchen and give yourself a little treat :)
 

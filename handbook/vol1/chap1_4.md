@@ -1,6 +1,6 @@
 # Chapter 1.4: Cocos2d
 
-### GD's Game Engine
+## GD's Game Engine
 
 In order to modify any game, it's good to find out at least one thing: what engine the game was made with. Luckily, GD tells us this on its help page: **Cocos2d-x**. GD modders have also figured out the specific version of Cocos2d that GD uses: **v2.2.3**. Although, there's a catch.
 
@@ -10,7 +10,7 @@ Due to this, GD mods can't just use the publicly available Cocos2d headers; they
 
 !> Some old modding tutorials on YouTube will tell you to use CappuccinoSDK. **You should never use it**. Cappuccino is fully obsolete due to `cocos-headers` (and even more due to Geode), and is in fact incompatible with gd.h, so it's not suited for traditional nor modern mods in any way.
 
-### But What is Cocos2d?
+## But What is Cocos2d?
 
 Cocos2d, or specifically Cocos2d-x 2.2.3, is a **game engine featuring a sprite and node-based UI**. It is what powers GD's user interface, and many of its core data structures. For most GD mods, the two most important things Cocos2d provides us with are the **node system** and **garbage collector**.
 
@@ -24,13 +24,13 @@ As Cocos2d is a node-based framework, nearly all nodes are **aggregates** of oth
 
 For example, here is **the structure of a comment** in GD:
 
-<img src="./imgs/CommentCell_dissected.png" alt="Image showing the structure of a CommentCell in GD" />
+![Image showing the structure of a CommentCell in GD](/assets/CommentCell_dissected.png)
 
 As you can see, the `CommentCell` class consists wholly of other nodes. It does not do any of its own rendering. The position of the nodes (relative to the parent `CommentCell`) is marked in parenthesis; one important thing to note about Cocos2d is that unlike some other game frameworks, **higher Y-coordinate means higher on screen**.
 
 ?> Please note that for the sake of simplicity, the above image contains **lies** (regarding positioning and exactly which node's child something is).
 
-### Creating Nodes
+## Creating Nodes
 
 Every node usually has a `create` function for creating an instance of the class, and then a bunch of methods like `setPosition` and `addChild` for setting the node's properties and adding children to it. For example, to create a simple "Hi mom!" text, you would use code like this:
 
@@ -45,7 +45,7 @@ this->addChild(label);
 
 By default, all node `create` functions may return `nullptr` in case something goes wrong. However, nodes like `CCLayer` and `CCMenu` are likely to never fail, and in the rare case they do, something has probably already gone catastrophically wrong and the game is about to crash anyway, so handling the null case with these nodes is not usually necessary. However, with some classes like `CCSprite` **handling `create` returning null may be vital**.
 
-### Sprites
+## Sprites
 
 Cocos2d is a **sprite-based** framework, meaning that instead of rendering things at runtime using vectors, nearly everything shown on screen are textures loaded from disk. If you've ever messed around with GD's files, you've probably noticed this; most of GD's textures are contained in **sprite sheets**, such as `GJ_GameSheet03`. The way one shows these textures is with the `CCSprite` class; it is a simple node that loads a texture and displays it. `CCSprite` is a bit unique in that it has two main `create` functions: `CCSprite::create` for creating nodes out of individual images, and `CCSprite::createWithSpriteFrameName` for creating nodes out of spritesheet images.
 
@@ -65,7 +65,7 @@ Even text in Cocos2d is rendered through sprites, or more accurately, **bitmap f
 
 How to add your own sprites to use in Geode mods will be discussed in a later chapter.
 
-### Menus & Buttons
+## Menus & Buttons
 
 Another important class to know of is `CCMenu`. Most mods need some sort of [buttons](/tutorials/buttons.md) for their UI, and for that, the most common class to use is `CCMenuItemSpriteExtra`. However, all `CCMenuItem`-derived classes **must be part of a `CCMenu` to work**. In practice, this means that all of your buttons must be the direct children of some menu.
 
@@ -93,6 +93,6 @@ At this point, we're getting very close to writing actual mod code. However, bef
 
 [Chapter 1.5: Layers](/handbook/vol1/chap1_5.md)
 
-### Notes
+## Notes
 
 > [Note 1] You can also add nodes directly to `CCDirector` and bypass the node tree, but this is very rarely done as nodes in the director don't have access to the touch system or any input for that matter.

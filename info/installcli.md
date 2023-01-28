@@ -4,11 +4,11 @@ Geode CLI is the command-line interface for working with Geode, intended mainly 
 
 ## Downloading CLI
 
-### Latest Release
+## Latest Release
 
 You can find the latest release of CLI on the [Release page on its repo](https://github.com/geode-sdk/cli).
 
-### Building from source
+## Building from source
 
 You can build the CLI yourself using [Rust](https://doc.rust-lang.org/cargo/getting-started/installation.html). Clone the git repo using `git clone https://github.com/geode-sdk/cli` and then run `cargo build` to build it. If you encounter errors, [let us know through GitHub issues](https://github.com/geode-sdk/cli/issues).
 

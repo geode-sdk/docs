@@ -63,7 +63,7 @@ In this code, `b` will either be certainly a valid `B` or `nullptr`. `dynamic_ca
 
 C++ does not have a garbage collector or any sort of memory management, so you have to be careful with handling your own memory. In general, the following tips will help:
 
-### Always allocate on the stack when possible
+## Always allocate on the stack when possible
 
 ```cpp
 struct Thing {
@@ -90,7 +90,7 @@ Allocating objects on the stack also makes dealing with exceptions and early ret
 }
 ```
 
-### Use references over pointers
+## Use references over pointers
 
 If you're passing data to a function or a shared parent class to a child, **use references** instead of pointers. References are safer for a lot of reasons, and also don't increment memory. However, when passing by reference, **you have to make sure your class outlives the reference** - for example, **the following code will crash**:
 
@@ -108,7 +108,7 @@ thing->m_num; // Whoops! x is out of scope and so what
               // m_num is referencing has been deallocated
 ```
 
-### Be aware of lifetimes
+## Be aware of lifetimes
 
 In C++, objects created on the stack live until they go out of scope, and objects created on the heap using `new` live until you call `delete` on them. References and pointers to the object can not extend this lifetime, so make sure that if you're referencing an object, it has not been freed.
 
@@ -119,16 +119,16 @@ someLegacyFun(&x); // make sure from someLegacyFun's docs that it only uses the
                    // pointer to x inside its body, and doesn't store it anywhere
 ```
 
-### Use `CCObject`-based class over normal ones
+## Use `CCObject`-based class over normal ones
 
 Cocos2d comes with its own handy garbage collector, and if you create something like a `CCArray`, its memory will be automatically freed when it's no longer used. Be wary though that this means **you have to make sure any `CCArray` you do actually need doesn't get garbage-collected**. Cocos2d can't know if you've assigned the `CCArray` to a variable or class member, so either use the `Ref` class in Geode to ensure the object stays alive, or manually keep track of it using `retain` if you have to. (**`Ref` should be used in nearly all situations though**)
 
 If you're making your own class that inherits from `CCObject` (for example, a node), **always make sure to call `autorelease`** on it. This will ensure the garbage collector will clean its memory. (Unless you are working with `TableViewCell`s. In that case, never call `autorelease` unless you want to experience the worst bug of all time.)
 
-### Use smart pointers over pointers
+## Use smart pointers over pointers
 
 If you really do have to use pointers and the class you're working with isn't `CCObject`-based, prefer using **smart pointers** like `shared_ptr` and `unique_ptr` over raw pointers. Smart pointers automatically manage the memory being pointed to, and free it when it's no longer needed. 
 
-### For every call to `new` you have, there must exist a matching call to `delete`
+## For every call to `new` you have, there must exist a matching call to `delete`
 
 If none of the other strategies are applicable and you have to use raw pointers, the rule of thumb for memory management there is **for every call to `new` you have, there must be a matching call to `delete`**. The only exception to this are **global manager classes**, which are never freed in lieu of being static. Also, in Cocos2d code, you will call `new` for all of your own node classes, but never `delete`; this is because Cocos2d calls `delete` for you when the garbage collector frees the object.

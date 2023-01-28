@@ -3,12 +3,12 @@
 ## General
 The maximum line limit is 80 characters. In the case of a line exceeding 80 charaters, wrapping rules should be applied. 
 
-### Files & Directories
+## Files & Directories
 Files should be in pascalcase.
 Directories should be in nocase.
 Used file extensions are .cpp, .hpp, .mm and .hmm.
 
-### Comments
+## Comments
 For single line comments, there should be a single space padding.
 ```cpp
 // Correct
@@ -29,7 +29,7 @@ For multiline comments, the contents should start in a next line with a indent.
 wrong lol*/
 ```
 
-### Constants
+## Constants
 For null pointers, `nullptr` should be used.
 ```cpp
 // Correct

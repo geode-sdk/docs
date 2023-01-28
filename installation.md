@@ -6,7 +6,7 @@
 
 The official Geode installer is currently under heavy remodelling. It will be brought back here when it's ready :) For now, you will have to install the Geode loader manually.
 
-## Manually (on Windows)
+### Manually (on Windows)
 
 1. Download [the latest release](https://github.com/geode-sdk/geode/releases/latest) (download the `geode-vX.X.X-win` zip)
 
@@ -14,7 +14,7 @@ The official Geode installer is currently under heavy remodelling. It will be br
 
 3. Open the game to make sure it works (if it doesn't, **whitelist the GD folder in your antivirus**)
 
-## Manually (on MacOS)
+### Manually (on MacOS)
 
 1. Download [the latest release](https://github.com/geode-sdk/geode/releases/latest) (download the `geode-vX.X.X-mac` zip)
 

@@ -25,7 +25,7 @@ class $modify(MenuLayer) {
 
 This creates a button with the text `Hi mom!`.
 
-### Callbacks
+## Callbacks
 
 Button callbacks are called **menu selectors**, and are passed as the third argument to `CCMenuItemSpriteExtra::create`. Menu selectors are non-static class member functions that return `void` and take a single `CCObject*` parameter. For example, this is a menu selector:
 
@@ -70,7 +70,7 @@ class MyLayer : public CCLayer {
 
 !> You can also use `reinterpret_cast` instead of `static_cast`, but using `reinterpret_cast` is generally considered bad practice.
 
-### Example
+## Example
 
 Here is the popular click counter example in cocos2d:
 
@@ -115,7 +115,7 @@ protected:
 };
 ```
 
-### Passing more parameters to callbacks
+## Passing more parameters to callbacks
 
 One of the most common problems encountered when using menu selectors is situations where you want to pass more parameters to a function. For example, what if in the click counter example we also wanted to add a decrement button? We could of course just refreace the whole `onClick` function, but that would be quite wasteful. Instead, we can use **tags**.
 
@@ -172,7 +172,7 @@ protected:
 
 If you want to pass something like strings, you should use `setUserObject` instead.
 
-### Passing non-integer parameters to callbacks
+## Passing non-integer parameters to callbacks
 
 If you want to pass something to a callback that can't be passed through tags like a string, use the `setUserObject` method.
 
@@ -253,7 +253,7 @@ auto parameters = static_cast<MyParameters*>(
 
 !> There also exists a similarly named `setUserData` member in `CCNode`, but using it should be avoided as unlike `setUserObject` it's not garbage collected and will lead to a **memory leak** unless handled carefully.
 
-### Circle button sprites
+## Circle button sprites
 
 !> These are actually way more important than what this short paragraph gives off, but I was too lazy to write more.
 

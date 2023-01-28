@@ -2,14 +2,14 @@
 
 These are instructions for building the [Geode Loader](https://github.com/geode-sdk/geode). For building your own mods, see [Getting Started](/starting).
 
-### Prerequisites: 
+## Prerequisites: 
 
  * [CMake](https://cmake.org/download/) (minimum v3.13.4)
  * A supported C++ compiler ([clang](https://releases.llvm.org/)/[MSVC](https://visualstudio.microsoft.com/downloads/))
  * [Geode CLI](https://github.com/geode-sdk/cli)
  * [git](https://git-scm.com/downloads)
 
-### Quick instructions (for thigh-high programmers)
+## Quick instructions (for thigh-high programmers)
 
 1. `git clone --recursive https://github.com/geode-sdk/geode.git`
 
@@ -17,7 +17,7 @@ These are instructions for building the [Geode Loader](https://github.com/geode-
 
 3. `cmake --build build --config Release`
 
-### Recommended way (for normal people)
+## Recommended way (for normal people)
 
 1. Install [VS Code](https://code.visualstudio.com/)
 

@@ -12,7 +12,7 @@ FLAlertLayer::create(
 ```
 This is the way GD does simple popups and also **the recomended way in Geode** to do simple info popups. If you just need to tell the user some info like that an action was succesful, this is the best way.
 
-### Questions
+## Questions
 
 However, using `FLAlertLayer` directly is **not always ideal**. Say that you want to have multiple buttons in the popup, and do something based on which one was clicked; for example, a confirmation popup for deleting a level. For this case, GD uses the `FLAlertLayerProtocol` member in `FLAlertLayer::create`. However, **this is not recommended**, as doing this comes with a lot of extra boilerplate. To use this, you need to inherit from `FLAlertLayerProtocol` in your class, then override `FLAlert_Clicked`, then pass the layer as the first argument to `FLAlertLayer::create` and in `FLAlert_Clicked` handle the action. And then if you want to introduce multiple popups in the same layer, you will need to keep track of tags and which popup is which and it all becomes a huge mess of unworkable code.
 
@@ -31,7 +31,7 @@ geode::createQuickPopup(
 ```
 This makes working with simple confirmation popups much simpler, as you don't have to bring in any extra inheritance or boilerplate. Just call a function, and pass a callback function for the result. Geode mods are **highly encouraged** to use this over `FLAlertLayerProtocol`. However, as this is not an interoperability concern, you are free to do whatever fits your needs.
 
-### Complex popups
+## Complex popups
 
 However, what if you want to make a popup that's more complex? For example, something with a different background and lots of buttons and other controls, like the move trigger popup? For this, the **unrecommended** GD way is to inherit from `FLAlertLayer` and override `init` with your own code. However, this is not ideal, as most complex popups share a lot of similar base functionality like a close button and a standard `GJ_squareXX` background. For this reason, Geode provides a convenience class `Popup<...>` for creating your own complex popups.
 ```cpp
@@ -69,7 +69,7 @@ public:
 
 **This is the recommended way to create complex popups in Geode**, although as with question popups, this is not an interoperability concern and as such **you can do what fits your case**. If you are porting an existing mod that uses some other setup and it works just fine, no need to change it unless you want to make the codebase more easily refactorable.
 
-### Colored text
+## Colored text
 
 `FLAlertLayer` supports colored text in the content field by default. You can add colors with **color tags**, for example `<cy>Hi mom!</c>` will produce yellow text. The built-in color tags in GD are:
 
@@ -96,7 +96,7 @@ Note that the closing tag **must be `</c>` only without the color specified agai
 
 > You might wonder about how to use other colors than the ones listed; there are currently no plans in Geode to add that, but one could easily make a mod that adds support for arbitary color tags.
 
-### Disabling the popup animation
+## Disabling the popup animation
 
 You can disable the popup's enter animation by setting the `m_noElasticity` member to `true`.
 
@@ -112,7 +112,7 @@ alert->m_noElasticity = true;
 alert->show();
 ```
 
-### Popup not showing up
+## Popup not showing up
 
 Sometimes you want to create a popup and show it in a layer's `init` function. However, if you do something like this:
 ```cpp
@@ -152,7 +152,7 @@ class $modify(MenuLayer) {
 ```
 This will make the popup show correctly by adding it as a child to the new `MenuLayer` instead of the previous scene.
 
-### Examples
+## Examples
 
  * [`ModSettingsPopup` in Geode, which uses `Popup`](https://github.com/geode-sdk/geode/blob/main/loader/src/ui/internal/settings/ModSettingsPopup.hpp)
  * [Use of `createQuickPopup` within it](https://github.com/geode-sdk/geode/blob/main/loader/src/ui/internal/settings/ModSettingsPopup.cpp#L139-L151)

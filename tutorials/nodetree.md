@@ -10,7 +10,7 @@ Using absolute indexes also requires a lot of work, as the **indexes are shuffle
 
 On top of this, in old GD modding frameworks, there were unfortunately basically no alternatives to members and getting by index. There are node **tags**, however tags are mostly used to implement differing functionality for buttons that use the same callback. The result of this was a lot of mods using raw indexes to position their own additions to GD's UI. Surprise surprise, this lead to [even mods by the same developer messing up their button positions due to indexes being different than expected](https://discord.com/channels/822510988409831486/858820729234391063/881436739250585610). Using raw indexes are one of the biggest sources of **mod incompatability**; and as Geode is meant to help with solving that, it introduces a whole new way of getting nodes:
 
-### String IDs
+## String IDs
 
 String IDs are a **Geode-specific addition** to the `CCNode` class that come in three main functions: `CCNode::getID`, `CCNode::setID` and `CCNode::getChildByID`. In all their simplicity, it means that you can assign any `CCNode` a string ID, and get a child by its string ID. On the surface, this may seem quite trivial, but this is actually an **incredibly powerful alternative** to using raw indexes. Whereas raw indexes are shuffled around and unreliable, you can be **almost certain** that `node->getChildByID("specific-node-id")` will **always** return the same node.
 
@@ -35,15 +35,15 @@ However, this does also highlight the **problem with string IDs**: **someone has
 
 This has, however, been taken in mind when designing the string ID system. If you find a layer you want to get a child of is missing string IDs, what you can do is **add them yourself** (using members or raw indexes), and either [send your code for adding them to Geode](https://github.com/geode-sdk/geode/pulls/new) or [let others know your mod adds these IDs](https://discord.gg/9e43WMKzhp). This way, someone else who wants to get the same children from the same layer can easily piggyback off of your logic. While the string ID system is ultimately and unfortunately based on raw indexes, its point is to **provide a single source of truth for those indexes**; once someone has done the work, no one should have to do it again.
 
-### Viewing String IDs
+## Viewing String IDs
 
 You can see if a layer's nodes have string IDs using the [DevTools](https://github.com/hjfod/devtools) mod, which shows them in the **Tree** view.
 
-### String IDs in your own layers
+## String IDs in your own layers
 
 It is recommended for you to also use string IDs in your own layers, as this makes mod-modifying-mod interoperability much easier.
 
-### Naming String IDs
+## Naming String IDs
 
 String IDs you give to nodes should be in kebab case with only lowercase a-z letters and no spaces.
 

@@ -2,14 +2,14 @@
 
 These are instructions to create an empty mod.
 
-### Prerequisites: 
+## Prerequisites: 
 
  * [CMake](https://cmake.org/download/) (minimum v3.13.4)
  * A supported C++ compiler ([clang](https://releases.llvm.org/)/[MSVC](https://visualstudio.microsoft.com/downloads/))
  * [Geode CLI](https://github.com/geode-sdk/cli) (Make sure you [add the CLI](/info/installcli) to your path environment variable)
  * [git](https://git-scm.com/downloads) (Highly Recommended)
 
-### Development Guide
+## Development Guide
 
 1. Install [VS Code](https://code.visualstudio.com/)
 
@@ -27,11 +27,11 @@ These are instructions to create an empty mod.
 
 Alternatively, you can run CMake manually without using VSCode or using another program (such as Sublime Text), however using the VSCode environment is highly recommended for Geode projects.
 
-### Building With VSCode
+## Building With VSCode
 
 To build with VSCode, simply press the `Build` button on the bottom bar or use the hotkey `F7`.
 
-### Building manually
+## Building manually
 
 1. `cmake -B build -T host=x64 -A win32`
 

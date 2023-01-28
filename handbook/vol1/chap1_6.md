@@ -1,6 +1,6 @@
 # Chapter 1.6: Modifying Layers
 
-### What Exactly Are We Doing?
+## What Exactly Are We Doing?
 
 So we know how to figure out the names of layers, but how do we actually modify them and add our own stuff?
 
@@ -12,7 +12,7 @@ Since hooking is only possible on functions, what we want to do is **find some f
 
 Luckily for us, the **design patterns of Cocos2d nodes** provides us with a perfect candidate for nearly all classes.
 
-### The Structure of a Node
+## The Structure of a Node
 
 Let's look at **the general structure of a node**:
 
@@ -55,7 +55,7 @@ The bigger issue with hooking `create` is due to a problem known as **inlining**
 
 On top of this, hooking `init` actually brings us quite close to the actual design pattern Cocos2d uses, although to see that, we need to first hook an init function, which brings us to `$modify`.
 
-### `$modify`
+## `$modify`
 
 One of the most important concepts in all of Geode is the `$modify` macro; it is Geode's **syntactically sugary hooking system**. What it looks like is this:
 
@@ -95,7 +95,7 @@ If you don't provide a name, Geode will automatically generate a random name for
 
 !> As `$modify` does not create a normal class, you should not expect standard C++ class things like adding members to work. Geode does come with [an utility for adding members to classes](/tutorials/fields.md), which is quite close to the normal way of declaring members, but not exactly the same.
 
-### Hooking `init`
+## Hooking `init`
 
 Ok, we know how to start modifying a class, but this doesn't yet do what we want. How exactly are supposed to hook `init`?
 
@@ -142,7 +142,7 @@ That's it. As previously stated, this is [quite close to the standard node desig
 
 Now we are at an interesting point; we know how to hook to hook functions, we know what function from a layer to hook in order to modify it, and we know how to work with nodes. So, let's tie all of this together! Only 7 chapters in, [it's time for **Hello, World!**](/handbook/vol1/chap1_7.md)
 
-### Notes
+## Notes
 
 > [Note 1] There are some very rare cases of nodes that don't have an `init` or `create` function. However, for the purposes of this tutorial, we will pretend those don't exist.
 

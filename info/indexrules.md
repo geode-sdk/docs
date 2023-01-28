@@ -2,7 +2,7 @@
 
 These are the guidelines for how mods are allowed on the [mods index](https://github.com/geode-sdk/mods). Anyone who with [the power to approve mods](#who-can-approve-mods), **please read this document** and adhere to the guidelines specified. For modders, if you are interested in publishing your mods on the index, you can make the review process faster by **making sure your mod adheres to these guidelines** ahead of time :)
 
-### Hard-rejection rules
+## Hard-rejection rules
 
 A mod found breaking any of these rules will be rejected unconditionally from the index.
 
@@ -22,7 +22,7 @@ A mod found breaking any of these rules will be rejected unconditionally from th
 
  * The mod features explicit content (I'm pretty sure this doesn't need to be mentioned, but adding it just in case)
 
-### Strong rules
+## Strong rules
 
 A mod found breaking any of these rules will likely be rejected, although depending on the situation and severity, they could also still be approved.
 
@@ -34,7 +34,7 @@ A mod found breaking any of these rules will likely be rejected, although depend
 
  * The mod has game-crashing bugs
 
-### Ordinary rules
+## Ordinary rules
 
 A mod found breaking any of these can still be approved, although breaking multiple can lead to a rejection.
 
@@ -44,7 +44,7 @@ A mod found breaking any of these can still be approved, although breaking multi
 
  * The mod is incompatible with another mod on the index due to its own fault
 
-### Non-rules
+## Non-rules
 
 These are some things one might expect to result in a rejection, but actually most likely won't.
 
@@ -54,7 +54,7 @@ These are some things one might expect to result in a rejection, but actually mo
 
  * The mod doesn't do anything particularly interesting or useful
 
-### Who can approve mods?
+## Who can approve mods?
 
 Anyone with permission to approve pull requests on the index repository.
 

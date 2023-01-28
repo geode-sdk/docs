@@ -2,7 +2,7 @@
 
 In [the last chapter](/handbook/vol1/chap1_2.md), we looked at hooking and how it works. However, the last chapter only touched hooking in theory. The code shown was not what actuals hooks in your code look like. For instance, we do not have access to GD's source code, so we can't exactly just write `return ourDetour()` at the start of the function we want to hook. Instead, we need to figure out some way to **insert hooks into GD's binary code**.
 
-### MinHook
+## MinHook
 
 The traditional way of placing hooks used a library called [**MinHook**](https://github.com/TsudaKageyu/minhook). If you've ever developed GD mods or even used them yourself, you almost certainly have heard of MinHook before, or at least seen its 32-bit dynamic library `minhook.x32.dll`. However, using MinHook directly is **no longer considered good practice**. While it can work perfectly fine for a single mod, MinHook has a few issues: it's **Windows-only** and if you don't link to it as a dynamic library, it will cause **hook conflicts**.
 
@@ -35,7 +35,7 @@ The most important part of this code is the line `base + 0x1907b0`. This is the 
 
 What this means is that in order to hook a function in GD, **we need to know its address**. On top of that, **we need to know its signature**, as your detour must always have the same signature as the function you're hooking.
 
-### Addresses
+## Addresses
 
 So how do we find out these things? Usually, this is done through **reverse engineering**; however, RE is quite a complex skill and will be saved for later. And on top of that, **most common functions have already been found**. This means that instead of REing the function yourself, you can use **GD headers** that someone else has prepared that come with ready-made function signatures and addresses.
 

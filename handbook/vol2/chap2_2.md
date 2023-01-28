@@ -6,7 +6,7 @@ It should be noted that reverse engineering is also an ever-evolving skill; you'
 
 But that's enough preface. Let's start actually **REing**!
 
-### Tools
+## Tools
 
 There are a lot of tools GD modders use for reverse engineering, but some of the most common ones include:
 
@@ -21,17 +21,17 @@ There are a lot of tools GD modders use for reverse engineering, but some of the
 
 For this tutorial, we will be using **Ghidra** and **x32dbg**. 
 
-### Setting Up Ghidra
+## Setting Up Ghidra
 
 First, [download Ghidra](https://ghidra-sre.org/) and install it on your machine. Open it, **create a new project**, and you should see something like this: 
 
-<img src="./imgs/ghidra_start.png" alt="Image showing the project page of Ghidra" />
+![Image showing the project page of Ghidra](/assets/ghidra_start.png)
 
 Now, drag Geometry Dash's binary (e.g. `GeometryDash.exe`) into the window, add it with the default settings, open it, and **Analyze it** with the default settings (if you're reverse engineering Android, disable the `Non returning functions: discovered` option).
 
 You should now see a window like this:
 
-<img src="./imgs/ghidra_window.png" alt="Image showing the opened project in Ghidra" />
+![Image showing the opened project in Ghidra](/assets/ghidra_window.png)
 
 The three most important windows for our purposes are **Symbol Tree**, **Listing**, and **Decompiler**. You can close the others.
 
