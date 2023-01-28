@@ -1,3 +1,9 @@
+---
+title: Installation
+icon: download
+description: Instructions for installing Geode
+---
+
 # Installing Geode (for Users)
 
 > :warning: Please note that Geode is **incompatible with all other mod loaders and mods**. We're porting stuff like Mega Hack and BetterEdit over, but don't expect their old releases to work.

@@ -1,3 +1,7 @@
+---
+icon: play
+---
+
 # Quick Start for Using Geode to Make Mods
 
 1. [Install Geode SDK](/installation)

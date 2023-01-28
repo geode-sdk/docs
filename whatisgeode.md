@@ -1,3 +1,8 @@
+---
+icon: help-circle
+description: An explanation of what Geode is
+---
+
 # What is Geode?
 
 ## In short, it is to GD what Forge / Fabric are to Minecraft.
