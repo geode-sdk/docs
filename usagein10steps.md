@@ -1,5 +1,5 @@
 ---
-title: How to Use Geode
+title: Using Geode
 icon: play
 ---
 
@@ -19,7 +19,7 @@ Of course, there has to be something to load the mods, and for that there is the
 
 ## 3. Codegen & Headers
 
-As Geode's goal is to be cross-platform, its set of GD headers has to be carefully crafted to include definitions for all platforms. For this reason, Geode uses codegen to generate its headers. Another benefit of this is that if Geode is missing a function you need, **adding new bindings is really easy** - you just have to add it to [your local copy of Geode's GeometryDash.bro](https://github.com/geode-sdk/geode/blob/main/bindings/GeometryDash.bro) - the file Geode uses to codegen all of its GD bindings.
+As Geode's goal is to be cross-platform, its set of GD headers has to be carefully crafted to include definitions for all platforms. For this reason, Geode uses codegen to generate its headers. Another benefit of this is that if Geode is missing a function you need, **adding new bindings is really easy** - you just have to add it to [your local copy of Geode's GeometryDash.bro](https://github.com/geode-sdk/geode/blob/main/bindings/GeometryDash.bro), the file Geode uses to codegen all of its GD bindings.
 
 ## 4. CLI
 

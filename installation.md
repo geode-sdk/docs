@@ -4,13 +4,17 @@ icon: download
 description: Instructions for installing Geode
 ---
 
-# Installing Geode (for Users)
+# Installing Geode
+
+## For Users
 
 > :warning: Please note that Geode is **incompatible with all other mod loaders and mods**. We're porting stuff like Mega Hack and BetterEdit over, but don't expect their old releases to work.
 
 Geode is installed using **its own installer**. You can find the latest version [on the Geode homepage](https://geode-sdk.org) or [on GitHub](https://github.com/geode-sdk/installer/releases/latest).
 
-# Installing Geode SDK (for Developers)
+Geode is currently available on **Windows** and **MacOS**; Android and iOS support is planned in the future.
+
+## Installing Geode SDK (for Developers)
 
 ### Prerequisites
 
