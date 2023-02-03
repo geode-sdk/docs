@@ -56,13 +56,9 @@ The Git repository of the mod.
 
 Describes where users can report problems with the mod. Value is an object with the following properties:
 
-#### `info`
+ * `info` - Free-form description of where / whom to report issues to
 
-Free-form description of where / whom to report issues to
-
-#### `url`
-
-URL to a Discord server, GitHub repository etc. where the issues are reported
+ * `url` - URL to a Discord server, GitHub repository etc. where the issues are reported
 
 ### `dependencies`
 
