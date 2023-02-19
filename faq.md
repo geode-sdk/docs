@@ -2,6 +2,7 @@
 title: FAQ
 description: Answers to common questions about Geode
 icon: info
+style: qna
 ---
 
 # Frequently Asked Questions

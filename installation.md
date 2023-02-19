@@ -2,6 +2,7 @@
 title: Installation
 icon: download
 description: Instructions for installing Geode
+order: 0
 ---
 
 # Installing Geode
