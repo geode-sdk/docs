@@ -15,7 +15,7 @@ There are a lot of tools GD modders use for reverse engineering, but some of the
  * [x32dbg](https://x64dbg.com/) (Windows)
  * [Cheat Engine](https://cheatengine.org/) (Windows)
  * [ReClass](https://github.com/ReClassNET/ReClass.NET) (Windows)
- * [DevTools](https://github.com/HJfod/DevTools) (Traditionally [CocosExplorer](https://github.com/matcool/CocosExplorer))
+ * [DevTools](https://github.com/geode-sdk/DevTools) (Traditionally [CocosExplorer](https://github.com/matcool/CocosExplorer))
  * [Slicer](https://github.com/zorgiepoo/Bit-Slicer) (Mac)
  * [LLDB](https://lldb.llvm.org/)
 

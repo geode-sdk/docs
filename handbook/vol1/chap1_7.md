@@ -74,7 +74,7 @@ class $modify(MenuLayer) {
 };
 ```
 
-?> If you don't want to bring Geode namespaces into scope, you can just use `using namespace cocos2d` instead.
+> :info: If you don't want to bring Geode namespaces into scope, you can just use `using namespace cocos2d` instead.
 
 Now, the label isn't currently a child of any layer, so it won't show up anywhere. Let's add it as a child to `MenuLayer`:
 

@@ -68,7 +68,7 @@ class MyLayer : public CCLayer {
 };
 ```
 
-!> You can also use `reinterpret_cast` instead of `static_cast`, but using `reinterpret_cast` is generally considered bad practice.
+> :warning: You can also use `reinterpret_cast` instead of `static_cast`, but using `reinterpret_cast` is generally considered bad practice.
 
 ## Example
 
@@ -251,11 +251,11 @@ auto parameters = static_cast<MyParameters*>(
 );
 ```
 
-!> There also exists a similarly named `setUserData` member in `CCNode`, but using it should be avoided as unlike `setUserObject` it's not garbage collected and will lead to a **memory leak** unless handled carefully.
+> :warning: There also exists a similarly named `setUserData` member in `CCNode`, but using it should be avoided as unlike `setUserObject` it's not garbage collected and will lead to a **memory leak** unless handled carefully.
 
 ## Circle button sprites
 
-!> These are actually way more important than what this short paragraph gives off, but I was too lazy to write more.
+> :warning: These are actually way more important than what this short paragraph gives off, but I was too lazy to write more.
 
 Geode comes with a concept known as **based button sprites**, which are button sprites that come with common GD button backgrounds and let you add your own sprite on top. These are useful for texture packs, as texture packers can just style the bases and don't have to individually make every mod fit their pack's style.
 

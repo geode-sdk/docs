@@ -1,4 +1,5 @@
 ---
+title: About Page
 description: How to use about.md in a Geode mod
 ---
 

@@ -8,7 +8,7 @@ You see, if we look around the **libcocos2d** file GD comes with and compare it 
 
 Due to this, GD mods can't just use the publicly available Cocos2d headers; they need to use modified headers that account for RobTop's changes. Traditionally, the headers most mods have used have either been [CappuccinoSDK](https://github.com/AndreNIH/CappuccinoSDK/) or [cocos-headers](https://github.com/HJfod/cocos-headers/). However, as with GD headers, **Geode comes with its own set of Cocos2d headers**, that are so far **the most accurate** in the modding community.
 
-!> Some old modding tutorials on YouTube will tell you to use CappuccinoSDK. **You should never use it**. Cappuccino is fully obsolete due to `cocos-headers` (and even more due to Geode), and is in fact incompatible with gd.h, so it's not suited for traditional nor modern mods in any way.
+> :warning: Some old modding tutorials on YouTube will tell you to use CappuccinoSDK. **You should never use it**. Cappuccino is fully obsolete due to `cocos-headers` (and even more due to Geode), and is in fact incompatible with gd.h, so it's not suited for traditional nor modern mods in any way.
 
 ## But What is Cocos2d?
 
@@ -28,7 +28,7 @@ For example, here is **the structure of a comment** in GD:
 
 As you can see, the `CommentCell` class consists wholly of other nodes. It does not do any of its own rendering. The position of the nodes (relative to the parent `CommentCell`) is marked in parenthesis; one important thing to note about Cocos2d is that unlike some other game frameworks, **higher Y-coordinate means higher on screen**.
 
-?> Please note that for the sake of simplicity, the above image contains **lies** (regarding positioning and exactly which node's child something is).
+> :info: Please note that for the sake of simplicity, the above image contains **lies** (regarding positioning and exactly which node's child something is).
 
 ## Creating Nodes
 

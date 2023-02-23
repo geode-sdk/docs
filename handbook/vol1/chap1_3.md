@@ -8,7 +8,7 @@ The traditional way of placing hooks used a library called [**MinHook**](https:/
 
 Hook conflicts are a type of [**race condition**](https://en.m.wikipedia.org/wiki/Race_condition) and it happens when two mods try to hook the same function at the same time. If the mods do this sufficiently close to one another, there is a high chance that **one mod's hook will replace the other's**. The end result of this is that one of the mods functions incorrectly, when it fails to hook the function it expected to. In the best case, this just results in the mod losing functionality, but in the extreme case this **could cause crashes**.
 
-?> This is not to say that MinHook is not a good library for hooking on Windows. It is actually quite good, as it's efficient and it in fact fixes hook conflicts if you link to it dynamically. However, this requires that **every mod** links MinHook dynamically, which is unfortunately not at all the case and also impossible to guarantee. However, **Geode actually uses MinHook under the hood** on Windows, as Geode is always linked dynamically, which solves the hook conflict problem.
+> :info: This is not to say that MinHook is not a good library for hooking on Windows. It is actually quite good, as it's efficient and it in fact fixes hook conflicts if you link to it dynamically. However, this requires that **every mod** links MinHook dynamically, which is unfortunately not at all the case and also impossible to guarantee. However, **Geode actually uses MinHook under the hood** on Windows, as Geode is always linked dynamically, which solves the hook conflict problem.
 
 But how does MinHook work? Let's examine some **real-world code** that uses it:
 ```cpp
@@ -29,7 +29,7 @@ MH_CreateHook(
 
 Now, this code sure is quite a jump from the hooking code in the previous chapter. If you haven't done much low-level C++, you might be confused at a lot of the syntax here. There's a bit too much to take in from the code above, so for now we will just be concentrating on a few key details.
 
-!> The above code contains things like **calling conventions** (`__thiscall` and `__fastcall`). Those will not be explained here as **Geode abstracts away calling conventions**. However, they will be explained in detail later on when talking about **reverse engineering**. The code also contains things like the `MenuLayer` type, which will be explained later when talking about GD types, and **function pointers**, which you can read more about [here](https://www.learncpp.com/cpp-tutorial/function-pointers/).
+> :warning: The above code contains things like **calling conventions** (`__thiscall` and `__fastcall`). Those will not be explained here as **Geode abstracts away calling conventions**. However, they will be explained in detail later on when talking about **reverse engineering**. The code also contains things like the `MenuLayer` type, which will be explained later when talking about GD types, and **function pointers**, which you can read more about [here](https://www.learncpp.com/cpp-tutorial/function-pointers/).
 
 The most important part of this code is the line `base + 0x1907b0`. This is the **address** of the function. When C++ is compiled down to machine code, **all variable and function names are erased** and functions are instead given **memory addresses**. A memory address is just **the location in a binary that the function resides in**. For example, `base + 0x1907b0` means that the function is located `0x1907b0` (or 1640368 in decimal) bytes from the **base address** of the binary.
 
