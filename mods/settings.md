@@ -4,6 +4,8 @@ Geode mods can have settings, specified in `mod.json`. These settings are automa
 
 Settings all have associated with them an ID, as well as a type and default value. There are a number of built-in types for common types of settings, but custom settings are supported aswell. All settings may also have a name and description. Some setting types also provide customizability over controls, such as whether to include a slider or not.
 
+> :info: Settings are intended for values the user can customize in-game. If you're looking for just saving some data, [see the tutorial for saving data](/mods/savedata.md).
+
 ## Example
 
 ```json
@@ -31,6 +33,26 @@ Settings all have associated with them an ID, as well as a type and default valu
             "default": "#f438a2"
         }
     }
+}
+```
+
+## Getting setting value
+
+You can get the current value of a setting using the [getSettingValue](/classes/geode/Mod#getSettingValue) method. Note that the type you get the value as must match the value type of the setting type - see [Supported setting types](#supported-setting-types) for more info.
+
+```cpp
+auto value = Mod::get()->getSettingValue<int64_t>("my-int-setting");
+```
+
+## Detecting setting value changes
+
+You can detect whenever the value of a setting is changed by using the [listenForSettingChanges] function. In most situations, you should call this function in an `$execute` block, so it gets enabled immediately when your mod is loaded. **The function will not be called on startup**, only when the value is changed afterwards. Note that the type you get the value as must match the value type of the setting type - see [Supported setting types](#supported-setting-types) for more info.
+
+```cpp
+$execute {
+    listenForSettingChanges("my-float-setting", +[](double value) {
+        // do something with the value
+    });
 }
 ```
 

@@ -1,0 +1,63 @@
+# Saving data
+
+Pretty much every mod will eventually enter the point where it needs to save some data on the user's machine, such as configuration settings or other user-customizable values. Geode has built-in support for **two kinds of savedata**: **user-editable settings** and **non-editable saved values**.
+
+Settings are covered [in their own tutorial](/mods/settings.md) - **this tutorial is about non-user-editable save data**.
+
+Unlike settings, save data does not need to be declared in `mod.json`, or anywhere else for that matter. Save data is automatically brought to life when you set it for the first time. Save data is, as the name implies, saved when the game is closed, and its previous state loaded back up the next time the game is opened.
+
+You can save any type of value as long as it implements `json::Serialize` (see the [STL container implementations](https://github.com/geode-sdk/json/blob/main/include/json/stl_serialize.hpp) for an example).
+
+## Setting & getting save data
+
+You can set save data using [setSavedValue](/classes/geode/Mod#setSavedValue)
+
+```cpp
+Mod::get()->setSavedValue<float>("my-saved-value", .5f);
+Mod::get()->setSavedValue<std::string>("my-other-value", "Garlagan!!!");
+
+struct MyCustomSaveData {
+    int x;
+    int y;
+};
+
+template<>
+struct json::Serialize<MyCustomSaveData> {
+    static MyCustomSaveData from_json(json::Value const& value) {
+        return MyCustomSaveData {
+            .x = value.as_object()["x"],
+            .y = value.as_object()["y"]
+        };
+    }
+
+    static json::Value to_json(MyCustomSaveData const& value) {
+        auto obj = json::Object();
+        obj["x"] = value.x;
+        obj["y"] = value.y;
+        return obj;
+    }
+};
+
+Mod::get()->setSavedValue("data", MyCustomSaveData { .x = 5, .y = 2 });
+```
+
+You can similarly get the current saved value using [getSavedValue](/classes/geode/Mod#getSavedValue). If the value has not been saved, a default value can be explicitly provided, or otherwise a default value will be created by invoking the save value's default constructor:
+
+```cpp
+auto value = Mod::get()->getSavedValue<float>("my-saved-value");
+auto data = Mod::get()->getSavedValue<MyCustomSaveData>("data", MyCustomSaveData { .x = 0, .y = 0 });
+```
+
+As an useful little tip, `setSavedValue` returns the previous saved value, and if there is no previous saved value, default constructs it and returns that. You can use this knowledge, and combined with the knowledge that the default constructor for `bool` is false, to write one-time info popups using a single self-contained if statement:
+
+```cpp
+if (!Mod::get()->setSavedValue("shown-upload-guidelines", true)) {
+    FLAlertLayer::create(
+        "Upload guidelines",
+        "You are only allowed to post pictures of cute catgirls",
+        "OK"
+    )->show();
+}
+```
+
+This popup is only shown the first time the user enters it, and never again.
