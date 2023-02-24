@@ -7,7 +7,7 @@ int totalJumps = 0;
 
 class $modify(PlayerObject) {
     void pushButton(PlayerButton button) {
-        log::info("the player has jumped ", totalJumps, " times !");
+        log::info("the player has jumped {} times !", totalJumps);
         totalJumps++;
         PlayerObject::pushButton(button);
     }
@@ -25,7 +25,7 @@ class $modify(PlayerObject) {
     int m_totalJumps;
 
     void pushButton(PlayerButton button) {
-        log::info("The player has jumped ", m_fields->m_totalJumps, " times !");
+        log::info("The player has jumped {} times !", m_fields->m_totalJumps);
         m_fields->m_totalJumps++;
         PlayerObject::pushButton(button);
     }
@@ -45,7 +45,7 @@ class $modify(MyPlayerObject, PlayerObject) {
     MyPlayerObject() : m_totalJumps(13) {}
 
     void pushButton(PlayerButton button) {
-        log::info("the player has jumped ", m_fields->m_totalJumps, " times !");
+        log::info("the player has jumped {} times !", m_fields->m_totalJumps);
         m_fields->m_totalJumps++;
         PlayerObject::pushButton(button);
     }

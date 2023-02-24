@@ -93,7 +93,7 @@ Mostly because of specific cases of destructors, modifying them is a bit differe
 class $modify(FLAlertLayer) {
     void destructor() {
         FLAlertLayer::~FLAlertLayer();
-        Log::get() << "this alert layer is destructed: " << this;
+        log::info("this alert layer is destructed: {}", this);
     }
 };
 ```
@@ -147,10 +147,10 @@ class $modify(MyComplicatedClass, MenuLayer) {
     
     bool init() {
         if (!MenuLayer::init()) return false;
-        this->*input = this;
+        m_fields->input = this;
 
         auto input = CCTextInputNode::create(250, 20, "Enter text", "bigFont.fnt");
-        input->setDelegate(&(m_fields->input));
+        input->setDelegate(&m_fields->input);
         input->setPosition(100, 100);
         this->addChild(input);
 
@@ -179,7 +179,7 @@ class $modify(CopyPlayerObject, PlayerObject) {
     }
 
     CCObject* copyWithZone(CCZone* zone) {
-        Log::get() << "This function is a meme really";
+        log::info("This function is a meme really");
     }
 };
 ```
@@ -197,7 +197,7 @@ Here are some common mistakes you (and we) may make:
 ```cpp
 class $modify(MenuLayer) {
     void onMoreGames(CCObject* target) {
-        Log::get() << "MenuLayer::onMoreGames called woooo";
+        log::info("MenuLayer::onMoreGames called woooo");
         this->onMoreGames(target); // !!
     }
 };
@@ -228,7 +228,7 @@ This will not result in an infinite loop because `MenuLayer::init` is a virtual 
 ```cpp
 class $modify(MyBrokenClass, MenuLayer) {
     void onMoreGames(CCObject* target) {
-        Log::get() << "MenuLayer::onMoreGames called woooo";
+        log::info("MenuLayer::onMoreGames called woooo");
         MenuLayer::onMoreGames(target);
     }
 
@@ -268,4 +268,4 @@ class $modify(MenuLayer) {
 };
 ```
 
-This will result in not modifying the intended function at all, because `onMoreGames` is `void` in MenuLayer.
+This will result in not modifying the intended function at all, because `onMoreGames` has return type `void` in MenuLayer, not `bool`.
