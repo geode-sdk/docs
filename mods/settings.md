@@ -190,13 +190,16 @@ public:
 };
 ```
 
-The last this the mod needs to do is register their setting value class to Geode. This should be done immediately when the mod is loaded, to ensure that the value of the setting is loaded from disk on time.
+The last this the mod needs to do is register their setting value class to Geode. This should be done immediately when the mod is loaded, to ensure that the value of the setting is loaded from disk on time. Registering can either be done using the raw [registerCustomSetting](/classes/geode/Mod#registerCustomSetting) method, or the [addCustomSetting](/classes/geode/Mod#addCustomSetting) convenience function.
 
 ```cpp
 $on_mod(Loaded) {
+    Mod::get()->addCustomSetting<MySettingValue>("my-setting", ...);
+    
+    // or, alternatively:
     Mod::get()->registerCustomSetting(
         "my-setting",
-        std::make_unique<MySettingValue>(...)
+        std::make_unique<MySettingValue>("my-setting", Mod::get()->getID(), ...)
     );
 }
 ```
