@@ -31,14 +31,11 @@ In order for mods to do something, they need to place hooks. If you are new to m
 ```cpp
 // this magical syntax is basically just the entry point, like int main()
 $on_mod(Loaded) {
-    Mod::get()->addHook(Hook::create(
-        Mod::get(),
-        reinterpret_cast<void*>(geode::base::get() + address),
+    Mod::get()->addHook<tulip::hook::ThiscallConvention>(
+        reinterpret_cast<void*>(base::get() + address),
         &myAwesomeHook,
-        "My awesome hook!",
-        {},
-        {}
-    ));
+        "My awesome hook!"
+    );
 }
 ```
 However, as this is quite verbose and having to manually specify all of your hooks kinda blows, Geode comes with incredibly magical syntactic sugar known as **`$modify`**:
