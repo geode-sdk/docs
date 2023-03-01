@@ -241,7 +241,7 @@ class $modify(MenuLayer) {
 };
 ```
 
-This will result in an infinite loop, because `this->` calls the $modified MenuLayer's `onMoreGames` instead of the original's. Name the class you're calling the function from instead (`MenuLayer::onMoreGames`).
+This will result in an infinite loop, because `this->` calls the modified MenuLayer's `onMoreGames` instead of the original's. Name the class you're calling the function from instead (`MenuLayer::onMoreGames`).
 
 ## Accidental not recursion
 
