@@ -36,13 +36,11 @@ This code works even if you have multiple `PlayerObject`s, and the counter is in
 
 **Fields must be accessed through the `m_fields` member**. If you access them directly through `this`, you will get **undefined behaviour** (most likely a crash).
 
-Fields are declared just like normal member variables, except that **default values must be applied in the constructor**. 
+Fields are declared just like normal member variables, even constructors and destructors work\*. 
 
 ```cpp
-class $modify(MyPlayerObject, PlayerObject) {
-    int m_totalJumps;
-
-    MyPlayerObject() : m_totalJumps(13) {}
+class $modify(PlayerObject) {
+    int m_totalJumps = 13;
 
     void pushButton(PlayerButton button) {
         log::info("the player has jumped {} times !", m_fields->m_totalJumps);
@@ -52,5 +50,5 @@ class $modify(MyPlayerObject, PlayerObject) {
 };
 ```
 
-Fields are constructed and destructed in a different address than they exist normally (yes I know ub but we kinda need the space optimization), so if you have a class that depends on the value of this inside the constructor/destructor, I would recommend using `std::unique_ptr` to contain the said object. One such example would be Geode's events, since they are registered to a global map in their constructor.
+\* Fields are constructed and destructed in a different address than they exist normally (yes I know ub but we kinda need the space optimization), so if you have a class that depends on the value of this inside the constructor/destructor, I would recommend using `std::unique_ptr` to contain the said object. One such example would be Geode's events, since they are registered to a global map in their constructor.
 
