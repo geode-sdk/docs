@@ -81,7 +81,7 @@ class $modify(MyAwesomeModification, MenuLayer) {
 };
 ```
 
-The syntax for this is `class $modify(MyClassName, ClassToModify)`. It looks cool.
+The syntax for this is `class $modify(MyClassName, ClassToModify)`. 
 
 Creating a `CCMenuItemSpriteExtra` takes a `SEL_MenuHandler`, which is a type alias for `void(cocos2d::CCObject::*)(cocos2d::CCObject*)` (which means a pointer to a member function that has a single parameter of CCObject\*). In order to supply this we need to get access to our function address, which requires us to know the class name. When we don't supply a class name, the macro generates a class which is guaranteed to not create any collision problems. [Read more about menu selectors here](/tutorials/buttons.md)
 
@@ -102,19 +102,12 @@ You still need to call the base destructor itself for calling the original.
 
 **This pattern is the same for constructors.**
 
-# Adding members
-
-Geode allows you to add members to your modified classes to extend GD classes nearly seamlessly. [Learn more about fields](/tutorials/fields.md)
-
-# Advanced usage
-
 ## Using without macros
 
-Creating a modification uses the `$modify` macro but if you are a cool kid you can not use it. Here is how:
+If you need to refrain from using the `$modify` macro (clang-format really cries when it sees the macro so), here is how you would do it:
 
 ```cpp
-class MyCoolModification : public MenuLayer {
-public:
+struct MyCoolModification : Modify<MyCoolModification, MenuLayer> {
     void onMoreGames(CCObject* target) {
         FLAlertLayer::create(
             "Geode",
@@ -123,34 +116,80 @@ public:
         )->show(); 
     }
 };
-Modify<MyCoolModification, MenuLayer> someDummyName;
 ```
 
-It wasn't that bad was it?
+Yeah we improved the clean usage a lot, and honestly I prefer this over the macro. But who am I to judge?
+
+# Adding members
+
+Geode allows you to add members to your modified classes to extend GD classes nearly seamlessly. [Learn more about fields](/tutorials/fields.md)
+
+# Advanced usage
+
+## Accessing the hooks
+
+Even with this ~sugary~ (wow i hate that word) clean syntax hooking, there are still some stuff we can't do without a way of interacting with the hooks, like giving it a priority, manually enabling/disabling even though I'm against it. That's why there is the `onModify` function. This function is called when the hooks are registered to Geode, more specifically the static constructor time of the mod load. Here is how:
+
+```cpp
+class $modify(MenuLayer) {
+    static void onModify(auto& self) {
+        auto res = self.getHook("MenuLayer::init");
+        if (!res) {
+            log::error("Something went horribly wrong");
+            return;
+        }
+        log::info("I hooked {}!", res.unwrap()->getDisplayName());
+    }
+
+    bool init() {
+        if (!MenuLayer::init()) return false;
+        log::debug("Hi mom I made a modding framework with some friends!")
+        return true;
+    }
+};
+```
+
+See the ModifyBase<ModifyDerived> class to see what functions are available (there aren't much to be honest). Also please don't manually enable/disable hooks unless you need to. Oh also did I told you to never manually enable/disable hooks? Do you still need it? Well, you will need to use `Hook::setAutoEnable` for Geode to not automatically enable your hooks when the mod is enabled, so have fun with that I guess. Just one more thing: please don't manually enable/disable your hooks unless you have to.
+
+## Setting hook priority
+
+You might want to do this because your code may need to run before others ([Geode string id system](/tutorials/nodetree.md) for example). Or you don't call the original so you might want your function to get called last. This is where the priority system is helpful. Here is how you use it:
+
+```cpp
+class $modify(GJGarageLayer) {
+    static void onModify(auto& self) {
+        self.setHookPriority("GJGarageLayer::init", 1024);
+    }
+
+    bool init() {
+        if (!GJGarageLayer::init()) return false;
+        NodeIDs::get()->provide(this);
+        return true;
+    }
+};
+```
 
 ## Adding delegates
 
-We currently don't have a shortcut way of implementing this, sorry. But if you need it for some reason here is how you would do it:
+Even though it is kinda inconvenient, this is how you would do it. Be careful about that comment!
 
 ```cpp
-class $modify(MyComplicatedClass, MenuLayer) {
-    struct TextInput : TextInputDelegate {
-        TextInput(MyComplicatedClass* ptr) : self(ptr) {}
-        MyComplicatedClass* self;
-        void textChanged(CCTextInputNode* node) {
-            self->m_fields->myString = node->getString();
-        }
-    }
-
-    TextInput input;
+struct MyComplicatedClass : Modify<MyComplicatedClass, MenuLayer>, TextInputDelegate {
+    MenuLayer* self;
     std::string myString;
+    
+    void textChanged(CCTextInputNode* node) override {
+        // here, this points to m_fields, so you will need that self
+        // variable in order to access the MenuLayer itself
+        myString = node->getString();
+    }
     
     bool init() {
         if (!MenuLayer::init()) return false;
-        m_fields->input = this;
+        m_fields->self = this;
 
         auto input = CCTextInputNode::create(250, 20, "Enter text", "bigFont.fnt");
-        input->setDelegate(&m_fields->input);
+        input->setDelegate(static_cast<MyComplicatedClass*>(m_fields));
         input->setPosition(100, 100);
         this->addChild(input);
 
@@ -169,13 +208,12 @@ class $modify(MyComplicatedClass, MenuLayer) {
 
 ## Adding new virtual functions
 
-We currently don't support this yet, but here is how you *would* do it anyway:
+We currently don't support this yet, but here is how you *would* do it anyway (I promise I will add this soon :tm:):
 
 ```cpp
 class $modify(CopyPlayerObject, PlayerObject) {
-    template <class Modify> 
-    void onApplyModification(Modify modify) {
-        modify.registerVirtualFunction(&CopyPlayerObject::copyWithZone);
+    static void onModify(auto& self) {
+        self.registerVirtual(&CopyPlayerObject::copyWithZone);
     }
 
     CCObject* copyWithZone(CCZone* zone) {
@@ -251,7 +289,7 @@ class $modify(MyBrokenClass, MenuLayer) {
 };
 ```
 
-This will result in the modification getting called twice when you press the newly created button, then the original function will be called.
+This will result in the modification getting called twice when you press the newly created button, then the original function will be called. (MyBrokenClass::onMoreGames -> handler -> MyBrokenClass::onMoreGames -> handler -> MenuLayer::onMoreGames)
 
 ## Not supplying the correct signature
 
@@ -268,4 +306,4 @@ class $modify(MenuLayer) {
 };
 ```
 
-This will result in not modifying the intended function at all, because `onMoreGames` has return type `void` in MenuLayer, not `bool`.
+This will result in not modifying the intended function at all, because `onMoreGames` has return type `void` in MenuLayer, not `bool`. I previously tried to implement a check for this in the old version of the modify, but failed miserably. I should honestly try again, but I'm kinda scared that it may increase compile times.
