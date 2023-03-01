@@ -128,7 +128,7 @@ Geode allows you to add members to your modified classes to extend GD classes ne
 
 ## Accessing the hooks
 
-Even with this ~sugary~ (wow i hate that word) clean syntax hooking, there are still some stuff we can't do without a way of interacting with the hooks, like giving it a priority, manually enabling/disabling even though I'm against it. That's why there is the `onModify` function. This function is called when the hooks are registered to Geode, more specifically the static constructor time of the mod load. Here is how:
+Even with this ~~sugary~~ (wow i hate that word) clean syntax hooking, there are still some stuff we can't do without a way of interacting with the hooks, like giving it a priority, manually enabling/disabling even though I'm against it. That's why there is the `onModify` function. This function is called when the hooks are registered to Geode, more specifically the static constructor time of the mod load. Here is how:
 
 ```cpp
 class $modify(MenuLayer) {
@@ -149,7 +149,7 @@ class $modify(MenuLayer) {
 };
 ```
 
-See the ModifyBase<ModifyDerived> class to see what functions are available (there aren't much to be honest). Also please don't manually enable/disable hooks unless you need to. Oh also did I told you to never manually enable/disable hooks? Do you still need it? Well, you will need to use `Hook::setAutoEnable` for Geode to not automatically enable your hooks when the mod is enabled, so have fun with that I guess. Just one more thing: please don't manually enable/disable your hooks unless you have to.
+See the ModifyBase<ModifyDerived> class to see what functions are available (there aren't much to be honest). Also please don't manually enable/disable hooks unless you need to. Oh also did I tell you to never manually enable/disable hooks? Do you still need it? Well, you will need to use `Hook::setAutoEnable` for Geode to not automatically enable your hooks when the mod is enabled, so have fun with that I guess. Just one more thing: please don't manually enable/disable your hooks unless you have to.
 
 ## Setting hook priority
 
