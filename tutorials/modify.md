@@ -174,7 +174,7 @@ class $modify(GJGarageLayer) {
 Even though it is kinda inconvenient, this is how you would do it. Be careful about that comment!
 
 ```cpp
-struct MyComplicatedClass : Modify<MyComplicatedClass, MenuLayer>, TextInputDelegate {
+struct MyDelegateClass : Modify<MyDelegateClass, MenuLayer>, TextInputDelegate {
     MenuLayer* self;
     std::string myString;
     
@@ -189,7 +189,7 @@ struct MyComplicatedClass : Modify<MyComplicatedClass, MenuLayer>, TextInputDele
         m_fields->self = this;
 
         auto input = CCTextInputNode::create(250, 20, "Enter text", "bigFont.fnt");
-        input->setDelegate(static_cast<MyComplicatedClass*>(m_fields));
+        input->setDelegate(m_fields.self());
         input->setPosition(100, 100);
         this->addChild(input);
 
