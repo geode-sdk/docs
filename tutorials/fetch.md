@@ -13,7 +13,7 @@ Example:
 ```cpp
 #include <Geode/utils/fetch.hpp>
 
-USE_GEODE_NAMESPACE();
+using namespace geode::prelude;
 
 // download a- uh...
 auto res = web::fetch("https://pastebin.com/raw/vNi1WHNF");
@@ -37,7 +37,7 @@ Creating an async web request is really simple:
 ```cpp
 #include <Geode/utils/fetch.hpp>
 
-USE_GEODE_NAMESPACE();
+using namespace geode::prelude;
 
 web::AsyncWebRequest()
     .fetch("https://pastebin.com/raw/vNi1WHNF")
