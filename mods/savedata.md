@@ -25,8 +25,8 @@ template<>
 struct json::Serialize<MyCustomSaveData> {
     static MyCustomSaveData from_json(json::Value const& value) {
         return MyCustomSaveData {
-            .x = value.as_object()["x"],
-            .y = value.as_object()["y"]
+            .x = value["x"].as_int(),
+            .y = value["y"].as_int()
         };
     }
 

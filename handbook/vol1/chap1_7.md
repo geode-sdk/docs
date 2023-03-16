@@ -55,12 +55,12 @@ class $modify(MenuLayer) {
 };
 ```
 
-Everything Cocos2d-related lies in the `cocos2d` namespace, so we must prefix our usage of `CCLabelBMFont::create` with it. However, as you keep modding, having to stick `cocos2d::` everywhere gets annoying really fast. In addition, Geode comes with a bunch of namespaces you probably also don't want to rewrite every time. For this reason, Geode comes with a `USE_GEODE_NAMESPACE` macro that automatically brings all Cocos2d and Geode-related namespaces to scope:
+Everything Cocos2d-related lies in the `cocos2d` namespace, so we must prefix our usage of `CCLabelBMFont::create` with it. However, as you keep modding, having to stick `cocos2d::` everywhere gets annoying really fast. In addition, Geode comes with a bunch of namespaces you probably also don't want to rewrite every time. For this reason, Geode provides a `geode::prelude` namespace that automatically brings all Cocos2d and Geode-related namespaces to scope:
 
 ```cpp
 #include <Geode/modify/MenuLayer.hpp>
 
-USE_GEODE_NAMESPACE();
+using namespace geode::prelude;
 
 class $modify(MenuLayer) {
 	bool init() {
@@ -81,7 +81,7 @@ Now, the label isn't currently a child of any layer, so it won't show up anywher
 ```cpp
 #include <Geode/modify/MenuLayer.hpp>
 
-USE_GEODE_NAMESPACE();
+using namespace geode::prelude;
 
 class $modify(MenuLayer) {
 	bool init() {
@@ -103,7 +103,7 @@ The default position for any node is (0, 0) which is at bottom left of the scree
 ```cpp
 #include <Geode/modify/MenuLayer.hpp>
 
-USE_GEODE_NAMESPACE();
+using namespace geode::prelude;
 
 class $modify(MenuLayer) {
 	bool init() {
@@ -125,7 +125,7 @@ Next, to actually position our label, we call the `setPosition` method on it, pl
 ```cpp
 #include <Geode/modify/MenuLayer.hpp>
 
-USE_GEODE_NAMESPACE();
+using namespace geode::prelude;
 
 class $modify(MenuLayer) {
 	bool init() {
@@ -157,7 +157,7 @@ And with that, **we have completed our Hello, World! mod**. Here's what the fina
 ```cpp
 #include <Geode/modify/MenuLayer.hpp>
 
-USE_GEODE_NAMESPACE();
+using namespace geode::prelude;
 
 class $modify(MenuLayer) {
 	bool init() {

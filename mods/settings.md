@@ -119,7 +119,7 @@ First, to declare a custom setting, the mod should specify that the setting's ty
 The first class that the mod needs to provide for the setting is one that inherits [SettingValue](/classes/geode/SettingValue). This class manages the current value of the setting as well as saving and loading that value.
 
 ```cpp
-USE_GEODE_NAMESPACE();
+using namespace geode::prelude;
 
 class MySettingValue : public SettingValue {
     // store the current value in some form. 
@@ -151,7 +151,7 @@ The setting node is provided the current width of the setting layer available in
 Whenever the value of the setting is changed using the node's controls, the node should call the `dispatchChanged` method to let Geode's UI know.
 
 ```cpp
-USE_GEODE_NAMESPACE();
+using namespace geode::prelude;
 
 class MySettingNode : public SettingNode {
 protected:
