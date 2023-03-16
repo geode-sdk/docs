@@ -6,7 +6,7 @@ Now, of course, it is obligatory to note that **there is no right or wrong way t
 
 ## Step 1: Concretize Your Idea
 
-**The first step is to really concretize your idea.** Often times, the ideas for the mods you want to make can be quite gradiose, like "I want to make GD more optimized" or "I want to make the editor better". Unfortunately, figuring out where to start actually working on the mod can prove to be a problem with large-scale ideas. In cases like these, you should try to **break the problem down into smaller parts**, like "I want to fix the scale controls in the editor being unable to rescale multiple objects at once" or "I want to add a 'Select by Group ID' button". Break down your idea into smaller parts, until you have something tangible you can actually start approaching.
+**The first step is to really concretize your idea.** Often times, the ideas for the mods you want to make can be quite grandiose, like "I want to make GD more optimized" or "I want to make the editor better". Unfortunately, figuring out where to start actually working on the mod can prove to be a problem with large-scale ideas. In cases like these, you should try to **break the problem down into smaller parts**, like "I want to fix the scale controls in the editor being unable to rescale multiple objects at once" or "I want to add a 'Select by Group ID' button". Break down your idea into smaller parts, until you have something tangible you can actually start approaching.
 
 ## Step 2: Reverse Engineer
 

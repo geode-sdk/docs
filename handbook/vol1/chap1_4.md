@@ -14,9 +14,9 @@ Due to this, GD mods can't just use the publicly available Cocos2d headers; they
 
 Cocos2d, or specifically Cocos2d-x 2.2.3, is a **game engine featuring a sprite and node-based UI**. It is what powers GD's user interface, and many of its core data structures. For most GD mods, the two most important things Cocos2d provides us with are the **node system** and **garbage collector**.
 
-The seminal building block of all Cocos2d UI and by extension GD UI is the `CCNode` class. A **node** is an UI object that can have **multiple children**, **a single parent**, and **transformations** such as position, rotation, scale, etc.. **All transformations are relative to the node's parent.**
+The seminal building block of all Cocos2d UI and by extension GD UI is the `CCNode` class. A nodw is an UI object that can have multiple children, a single parent, and transformations such as position, rotation, scale, etc., with all transformations being also applied to a node's children.
 
-These nodes form a hierarchy known as a **node tree**, on top of which is a `CCScene`. The scene is the only visible node without a parent [[Note 1]](#Notes); at a time, there may only be one scene present. The class that manages scenes is `CCDirector`. At all times in GD, there is one **director** running, which you can get using the `CCDirector::sharedDirector` method, or the Geode-specific `CCDirector::get` shorthand. The director contains information such as the current window size, what scene is running, and getters for many of the other static **singleton managers** in GD. To change to a different scene, you would use the `CCDirector::replaceScene` method. To get the current scene, use `CCDirector::getRunningScene`.
+These nodes form a hierarchy known as a **node tree**, on top of which is a `CCScene`. The scene is the only visible node without a parent [[Note 1]](#notes); at a time, there may only be one scene present. The class that manages scenes is `CCDirector`. At all times in GD, there is one director running, which you can get using the `CCDirector::sharedDirector` method, or the Geode-specific `CCDirector::get` shorthand. The director contains information such as the current window size, what scene is running, and getters for many of the other static **singleton managers** in GD. To change to a different scene, you would use the `CCDirector::replaceScene` method. To get the current scene, use `CCDirector::getRunningScene`.
 
 Nearly all nodes you see in GD aren't instances of the base `CCNode` class, but of its derivatives. Some of the most commonly used derivatives are `CCSprite`, `CCMenu`, `CCLabelBMFont`, and `CCLayer`, and some of the most used GD-specific ones are `CCMenuItemSpriteExtra`, `FLAlertLayer`, `GameObject`, and `ButtonSprite`.
 
@@ -28,7 +28,7 @@ For example, here is **the structure of a comment** in GD:
 
 As you can see, the `CommentCell` class consists wholly of other nodes. It does not do any of its own rendering. The position of the nodes (relative to the parent `CommentCell`) is marked in parenthesis; one important thing to note about Cocos2d is that unlike some other game frameworks, **higher Y-coordinate means higher on screen**.
 
-> :info: Please note that for the sake of simplicity, the above image contains **lies** (regarding positioning and exactly which node's child something is).
+> :warning: Please note that the above image has been simplified and some of the positions do not reflect the actual arrangement of `CommentCell`.
 
 ## Creating Nodes
 
@@ -37,17 +37,17 @@ Every node usually has a `create` function for creating an instance of the class
 ```cpp
 // First parameter is the text, second is the font
 auto label = CCLabelBMFont::create("Hi mom!", "bigFont.fnt");
-// Set the position of the label to be at the coordinates 100, 50 (not pixels)
+// Set the position of the label to be at the coordinates 100, 50 (in units, not pixels)
 label->setPosition(100, 50);
 // Assuming 'this' is some node aswell
 this->addChild(label);
 ```
 
-By default, all node `create` functions may return `nullptr` in case something goes wrong. However, nodes like `CCLayer` and `CCMenu` are likely to never fail, and in the rare case they do, something has probably already gone catastrophically wrong and the game is about to crash anyway, so handling the null case with these nodes is not usually necessary. However, with some classes like `CCSprite` **handling `create` returning null may be vital**.
+By default, all node `create` functions may return `nullptr` in case something goes wrong. However, nodes like `CCLayer` and `CCMenu` are likely to never fail, and in the rare case they do, something has probably already gone catastrophically wrong and the game is about to crash anyway, so handling the null case with these nodes is not usually necessary. However, with some classes like `CCSprite` **handling `create` returning null may be vital**, as `CCSprite::create` will fail if the sprite doesn't exist, which is entirely possible.
 
 ## Sprites
 
-Cocos2d is a **sprite-based** framework, meaning that instead of rendering things at runtime using vectors, nearly everything shown on screen are textures loaded from disk. If you've ever messed around with GD's files, you've probably noticed this; most of GD's textures are contained in **sprite sheets**, such as `GJ_GameSheet03`. The way one shows these textures is with the `CCSprite` class; it is a simple node that loads a texture and displays it. `CCSprite` is a bit unique in that it has two main `create` functions: `CCSprite::create` for creating nodes out of individual images, and `CCSprite::createWithSpriteFrameName` for creating nodes out of spritesheet images.
+Cocos2d is a **sprite-based** framework, meaning that instead of rendering things at runtime using vector graphics, nearly everything shown on screen are textures loaded from disk. If you've ever messed around with GD's files, you've probably noticed this; most of GD's textures are contained in **sprite sheets**, such as `GJ_GameSheet03`. The way one shows these textures is with the `CCSprite` class; it is a simple node that loads a texture and displays it. `CCSprite` is a bit unique in that it has two main `create` functions: `CCSprite::create` for creating nodes out of individual images, and `CCSprite::createWithSpriteFrameName` for creating nodes out of spritesheet images.
 
 It is important to use the correct `create` function for `CCSprite`, as the wrong one will return `nullptr` and cause an error if not properly handled. If the sprite you're creating is contained in its own file, like `GJ_button_01.png`, then you should use `CCSprite::create`; otherwise, if the sprite is in a spritesheet like `GJ_infoIcon_001.png` in `GJ_GameSheet03`, use `CCSprite::createWithSpriteFrameName` instead.
 

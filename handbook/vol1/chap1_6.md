@@ -1,7 +1,5 @@
 # Chapter 1.6: Modifying Layers
 
-## What Exactly Are We Doing?
-
 So we know how to figure out the names of layers, but how do we actually modify them and add our own stuff?
 
 If we want to modify what another node does, we must remember how hooking works: via hooking, we can modify **functions**. This is great, but unfortunately, classes aren't functions, so we can't exactly just "hook a layer". Instead, let's break down our problem a bit.
@@ -79,7 +77,7 @@ class $modify(MenuLayer) {
 };
 ```
 
-For the sake of compile-time performance, Geode's modifiers are split into files, which you can include by simply including `Geode/modify/{Name of the class}.hpp`. **You can only use `$modify` on classes that have it implemented**; in practice, this includes nearly all GD classes but does not include any of your own classes or Geode's classes.
+For the sake of compile-time performance, Geode's modifiers are split into files, which you can include by simply including `Geode/modify/{Name of the class}.hpp`. **You can only use `$modify` on classes that have been included**; in practice, this includes nearly all GD classes but does not include any of your own classes or Geode's classes.
 
 You will sometimes see `$modify` be used with two arguments; this is to provide a **name** for the modified class, which is useful in many common situations.
 

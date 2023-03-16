@@ -30,9 +30,9 @@ class $modify(MenuLayer) {
 	bool init() {
 		if (!MenuLayer::init())
 			return false;
-        
-        return true;
-    }
+		
+		return true;
+	}
 };
 ```
 
@@ -48,10 +48,10 @@ class $modify(MenuLayer) {
 		if (!MenuLayer::init())
 			return false;
 
-        auto label = cocos2d::CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-        
-        return true;
-    }
+		auto label = cocos2d::CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+		
+		return true;
+	}
 };
 ```
 
@@ -67,14 +67,14 @@ class $modify(MenuLayer) {
 		if (!MenuLayer::init())
 			return false;
 
-        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-        
-        return true;
-    }
+		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+		
+		return true;
+	}
 };
 ```
 
-> :info: If you don't want to bring Geode namespaces into scope, you can just use `using namespace cocos2d` instead.
+> :information_source: If you don't want to bring Geode namespaces into scope, you can just use `using namespace cocos2d` instead.
 
 Now, the label isn't currently a child of any layer, so it won't show up anywhere. Let's add it as a child to `MenuLayer`:
 
@@ -88,11 +88,11 @@ class $modify(MenuLayer) {
 		if (!MenuLayer::init())
 			return false;
 
-        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-        this->addChild(label);
+		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+		this->addChild(label);
 
-        return true;
-    }
+		return true;
+	}
 };
 ```
 
@@ -135,7 +135,7 @@ class $modify(MenuLayer) {
 		auto winSize = CCDirector::get()->getWinSize();
 
 		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-        label->setPosition(winSize.width / 2, winSize.height / 2);
+		label->setPosition(winSize.width / 2, winSize.height / 2);
 		this->addChild(label);
 
 		return true;
@@ -167,7 +167,7 @@ class $modify(MenuLayer) {
 		auto winSize = CCDirector::get()->getWinSize();
 
 		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-        label->setPosition(winSize / 2);
+		label->setPosition(winSize / 2);
 		this->addChild(label);
 
 		return true;
@@ -179,7 +179,7 @@ To try the mod out, [create a new mod using `geode new`](/info/creating.md), and
 
 ![Image showing the main menu in GD with a 'Hello, world' text on top](/assets/hello_world.png)
 
-If it works for you, **congratulations!** You have now officially built your first Geometry Dash mod! Go grab a lil juice from the kitchen and give yourself a little treat :)
+If it works for you, **congratulations!** You have now officially built your first Geometry Dash mod! Go grab a lil orange juice from the kitchen and give yourself a little treat :)
 
 After drinking your juice however, it's time to get back into business. So we've got a Hello, World! going, that's great. Now it's time to start crafting something actually useful.
 

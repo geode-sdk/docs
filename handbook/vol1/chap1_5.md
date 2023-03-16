@@ -12,11 +12,11 @@ To see how it works, install the **DevTools** mod in-game through the **Download
 
 ![Image of the DevTools mod open in GD, focused on MenuLayer](/assets/DevTools_MenuLayer.png)
 
-> :warning: Note that DevTools is, as of writing (24/10/2022), wholly unfinished and will require quite a bit of manual dragging around to get usable and may crash.
-
 If you look at the **Tree** view on the left, you will see that the current scene contains one layer named **MenuLayer**, which then further contains a bunch of `CCMenu`s and other nodes. The menus contain all of the buttons in the scene; for example, the bottom center row of buttons is contained in one menu.
 
 One thing you will notice in DevTools is that many of the nodes have **string IDs**; this is a **Geode-specific addition** meant to make modding simpler. You can read more about string IDs [in its dedicated article](/tutorials/nodetree.md).
+
+> :warning: In addition to string IDs, some of the menus in Geode are different from the ones in vanilla GD. This is because of the [layout system](/tutorials/layouts.md) in Geode, which handles positioning - in traditional mods, all position has to be done manually!
 
 There may also be multiple layers in a scene at once. For example, if you click the profile button in `MenuLayer`, you will find it adds a layer named `ProfilePage` in the scene:
 
@@ -24,6 +24,6 @@ There may also be multiple layers in a scene at once. For example, if you click 
 
 Using DevTools, you can find the name of any layer. Just navigate to the layer whose name you want to figure out in-game, open up DevTools, and look at the node tree!
 
-> :info: DevTools also comes with many other utilities, such as moving nodes in the scene around. However, this tutorial is not about DevTools, so you will have to look at its (**currently non-existent**) documentation for that ;)
+> :information_source: DevTools also comes with many other utilities, such as moving nodes in the scene around. However, this tutorial is not about DevTools, so you will have to look at its (currently non-existent) documentation for that ;)
 
 So now we know that the main menu is called `MenuLayer`, but so what? How can we actually modify it? For that, see [Chapter 1.6: Modifying Layers](/handbook/vol1/chap1_6.md)

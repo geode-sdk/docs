@@ -2,7 +2,19 @@
 
 So we've got our own code running inside GD. Now we're faced with a much bigger problem however; **how do we actually do stuff?**
 
-There are two fundamental tools in every GD modder's toolkit: **hooking** and **patching**. These are the building blocks from which we can start getting something interesting done.
+For example, let's say we want to do something as simple as adding a button to the main menu that displays a message when clicked. The first thing we would want to figure out is how to even add stuff to the main menu; that is, figure out when the main menu is entered, and how to add a thing to it.
+
+We can reasonably infer that the way GD enters the main menu is by calling some function that creates it, probably in a way reminiscent of this:
+
+```cpp
+void onLoadingFinished() {
+    createMainMenu();
+}
+```
+
+If we could somehow listen for when this function is called, then that's problem #1 solved - we would know that now the main menu is created. Let's leave problem #2 (actually adding things to it) for later, and first focus on how to listen for that function call.
+
+There are two fundamental tools in every GD modder's toolkit: **patching** and **hooking**.
 
 ## Patching
 
@@ -10,9 +22,11 @@ In [Chapter 1.1](/handbook/vol1/chap1_1), it was stated that nowadays modders ra
 
 Patches do, however, still play a seminal role in GD modding. For example, one of the most famous mods, **noclip**, can be achieved with [a single binary patch](https://github.com/absoIute/Mega-Hack-v5/blob/master/bin/hacks/player.json#L7). There are also some cases in complex mods where a few patches can replace writing hundreds of lines of C++ code. However, **it is very uncommon** for binary patches to be optimal. Binary patches should **never be your first solution to a problem**, but when the time comes, don't be afraid to use them if they're clearly the best solution.
 
+Patches also serve another very important purpose: they are the base on top of which hooking is built. Although, you won't see this directly - basically every mod uses a hooking library that abstracts away the patching part for them.
+
 ## Hooking
 
-In contrast to patching, **hooking** is not only more portable(*-ish*) but also arguably the most important tool in a GD modder's toolkit. Understanding hooking is vitally important for modding, as it is most often the entrypoint from which a mod starts.
+In contrast to patching, **hooking** is not only more portable(*-ish*) but also arguably the most important tool in a GD modder's toolkit - understanding it is vitally important for all modding.
 
 Consider the following function:
 
@@ -36,7 +50,7 @@ int addTwoHook(int a, int b) {
 }
 ```
 
-A hook **always has the signature [[Note 1]](#Notes) as the function being hooked**. This means that we couldn't hook `addTwo` with something that takes two strings. Likewise, the return type has to be the same; if `addTwo` returns an `int`, so does our hook.
+A hook **always has the signature [[Note 1]](#notes) as the function being hooked**. This means that we couldn't hook `addTwo` with something that takes two strings. Likewise, the return type has to be the same; if `addTwo` returns an `int`, so does our hook.
 
 This is the basic premise of hooking: when the function you're hooking is called, the first thing you do is hop into your own code, and then hop back into the original once you're finished. The function that contains your own code is called a **detour**, and the funtion being hooked is called the **original**.
 
@@ -57,9 +71,9 @@ int addTwoDetour(int a, int b) {
 }
 ```
 
-When you hook a function like `addTwo`, what first happens is that the body of the hooked function is stored somewhere else, and then the function body is **replaced** with a call to your detour [[Note 2]](#Notes). Then in your detour, you execute your own code and then return, either by calling the original or by giving your own return value.
+When you hook a function like `addTwo`, what first happens is that the body of the hooked function is stored somewhere else, and then the function body is replaced with a call to your detour [[Note 2]](#notes). Then in your detour, you execute your own code and then return, either by calling the original or by giving your own return value.
 
-Notice that you are not actually required to **call the original**, or return its value. We could just as easily make `addTwoDetour` do something completely different, for example like this:
+Notice that you are not actually required to call the original, or return its value. We could just as easily make `addTwoDetour` do something completely different, for example like this:
 
 ```cpp
 // never called!
