@@ -61,3 +61,11 @@ if (!Mod::get()->setSavedValue("shown-upload-guidelines", true)) {
 ```
 
 This popup is only shown the first time the user enters it, and never again.
+
+## Saving other data
+
+Mods should save other data (files, backups, etc.) to their specific save directory, which they can access with `Mod::get()->getSaveDir()`. Using Geode's provided directories ensures that when the user uninstalls the mod, Geode can properly uninstall all its data. Geode's provided directories are also guaranteed to be readable and writable on all platforms.
+
+It should be noted that a mod can have a good reason to save data elsewhere - for example a mod that saves created levels as individual files instead of CCLocalLevels would be justified in saving directly under the GD save folder instead of the mod save folder, since the data its saving is not related to the mod.
+
+If you have data that the user should be able to edit (for example config files), these should go in the directory provided by `Mod::get()->getConfigDir()`.
