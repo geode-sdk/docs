@@ -6,7 +6,7 @@ description: How to include resources in Geode mods
 
 Geode mods may include any number of resources/assets in the mod package. Geode also provides utilities for automatically **generating spritesheets**, **turning TTF fonts to Bitmap ones**, and **creating Medium/Low versions of sprites**.
 
-In order for Geode to create the resources, [you must have Geode CLI installed](/info/installcli.md).
+In order for Geode to create the resources, [you must have Geode CLI installed](/geode/installcli).
 
 ## Adding sprites
 
