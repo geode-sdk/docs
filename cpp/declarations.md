@@ -4,7 +4,7 @@ One of the first errors new C++ developers always face is something along the li
 
 ## Declarations
 
-Unlike a lot of modern languages, C++ is what is known as **single-pass**; meaning that it goes through your source code from the top of the file to the bottom of the file only once, and it doesn't perform any sort of lookahead to know what there will be in the file later on. Due to this, you sometimes have to manually tell the compiler know what's coming up, as you can't always define symbols immediately.
+Unlike a lot of modern languages, C++ doesn't lookahead very often to know what there will be in the file later on. Due to this, you sometimes have to manually tell the compiler know what's coming up, as you can't always define symbols immediately.
 
 A **declaration** is a short piece of code that tells the C++ compiler that something exists somewhere in your codebase:
 
@@ -69,7 +69,7 @@ void SomeClass::memberFunc() {
 
 ## One-definition rule
 
-Another quirk of C++ that causes new programmers quite a bit of headache is [ODR](https://en.m.wikipedia.org/wiki/One_Definition_Rule). In essence, what ODR means is that each and every class and function may only have at most one definition.
+Another quirk of C++ that causes new programmers quite a bit of headache is [ODR](https://en.wikipedia.org/wiki/One_Definition_Rule). In essence, what ODR means is that each and every class and function may only have at most one definition.
 
 For example, the following code *will not compile*:
 
