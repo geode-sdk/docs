@@ -24,7 +24,7 @@ See [Installation](/installation) for instructions on how to install the Geode S
 
 See [Creating a new mod](/geode/creating) for instructions on how to make your first mod.
 
-See [Building](/source/building) for instructions on how to build the Geode Loader + SDK from scratch on your computer.
+See [Building](/source/building) for instructions on how to build Geode itself from scratch on your computer.
 
 See [Handbook](/handbook/chap0) for a beginner-friendly tutorial series on using Geode and GD Modding in general (WIP!!).
 
