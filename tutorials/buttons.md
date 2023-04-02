@@ -9,18 +9,20 @@ The first argument of `CCMenuItemSpriteExtra` is a `CCNode*` parameter. This is 
 If you want to create a button with some text, the most common option is the `ButtonSprite` class. If you want to create something like a circle button (like the 'New' button in GD), you can either use `CCSprite` or [the Geode-specific `CircleButtonSprite` class](#circle-button-sprites).
 
 ```cpp
-class $modify(MenuLayer) {
-    bool init() {
-        auto menu = CCMenu::create();
+bool MyLayer::init() {
+    // ...
 
-        auto spr = ButtonSprite::create("Hi mom!");
+    auto spr = ButtonSprite::create("Hi mom!");
 
-        auto btn = CCMenuItemSpriteExtra::create(
-            spr, this, nullptr
-        );
-        menu->addChild(btn);
-    }
-};
+    auto btn = CCMenuItemSpriteExtra::create(
+        spr, this, nullptr
+    );
+
+    // some CCMenu*
+    menu->addChild(btn);
+
+    // ...
+}
 ```
 
 This creates a button with the text `Hi mom!`.
@@ -42,11 +44,15 @@ It is conventional to have all menu selectors names be in the form of `onSomethi
 class MyLayer : public CCLayer {
 protected:
     bool init() {
+        // ...
+
         auto btn = CCMenuItemSpriteExtra::create(
             /* sprite */,
             this,
             menu_selector(MyLayer::onButton)
         );
+
+        // ...
     }
 
 public:
@@ -261,6 +267,8 @@ Geode comes with a concept known as **based button sprites**, which are button s
 
 ```cpp
 #include <Geode/ui/BasedButtonSprite.hpp>
+
+// ...
 
 auto spr = CircleButtonSprite::createWithSpriteFrameName("top-sprite.png"_spr);
 ```
