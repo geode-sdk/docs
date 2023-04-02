@@ -175,7 +175,7 @@ class $modify(MenuLayer) {
 };
 ```
 
-To try the mod out, [create a new mod using `geode new`](/info/creating.md), and then replace the code in `src/main.cpp` with the above. After building the mod, open up GD and you should see this:
+To try the mod out, [create a new mod using `geode new`](/geode/creating), and then replace the code in `src/main.cpp` with the above. After building the mod, open up GD and you should see this:
 
 ![Image showing the main menu in GD with a 'Hello, world' text on top](/assets/hello_world.png)
 
