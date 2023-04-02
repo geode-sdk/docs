@@ -1,5 +1,5 @@
 ---
-title: Configuring mod description
+title: Mod description
 description: How to use about.md in a Geode mod
 ---
 
