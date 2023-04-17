@@ -47,8 +47,6 @@ Once you have added a dependency to your `mod.json`, if you have [Geode CLI v1.4
 
 ## Example
 
-> :warning: At the time of writing, GMD API has not been released on the mods index yet, so the following example may not work.
-
 The mod `hjfod.gmd-api` contains utilities for working with [.GMD files](https://fileinfo.com/extension/gmd). You can add it to your mod by adding the following to your `mod.json`:
 
 ```json
@@ -80,7 +78,30 @@ As mentioned before, a dependency may be marked optional by setting `"required":
 
 The key system Geode provides for optional mod interop are events. For example, a mod that adds support for drag-and-dropping files on the GD window could define a drag-and-drop event that other mods can then listen to.
 
-> :warning: The dispatcher system in Geode is, at the time of writing, not yet functional, so while events do exist the system that makes it possible to deal with them without linking doesn't. This page will be updated when dispatcher is available with instructions to use it
+Usually however, events are defined in code in a way that requires linking by inheriting from the `Event` class. To avoid this, mods that want to support being used optionally should also provide events that are specializations of the `DispatchEvent` class:
+
+```cpp
+using DragDropEvent = geode::DispatchEvent<ghc::filesystem::path>;
+using DragDropFilter = geode::DispatchFilter<ghc::filesystem::path>;
+
+// Posting events in source
+DragDropEvent("geode.drag-drop/default", "path/to/file").post();
+```
+
+All `DispatchEvent`s have an associated ID, which is specific for each `DispatchEvent` specialization. This can be used to differentiate between events; for example, the drag drop API might use this to let dependencies determine which file types they listen to.
+
+Mods that use the dependency can now listen for drag-and-drop events:
+
+```cpp
+$execute {
+    new EventListener(+[](ghc::filesystem::path const& path) {
+        log::info("File dropped: {}", path);
+        return ListenerResult::Propagate;
+    }, DragDropFilter("geode.drag-drop/default"));
+};
+```
+
+An example of using dispatch events in practice [can be found in MouseAPI](https://github.com/geode-sdk/MouseAPI/blob/main/src/test.cpp#L54-L94).
 
 ### Attributes
 
@@ -93,3 +114,16 @@ if (layer->getAttribute<bool>("hjfod.cool-scrollbars/enable")) {
 ```
 
 Other mods can set this attribute on their layers with the `CCNode::setAttribute` function.
+
+Mods can also add an event listener to listen for when attributes are added/changed:
+
+```cpp
+$execute {
+    new EventListener<AttributeSetFilter>(
+        +[](AttributeSetEvent* event) {
+            addScrollbar(event->node);
+        },
+        AttributeSetFilter("hjfod.cool-scrollbars/enable")
+    );
+}
+```
