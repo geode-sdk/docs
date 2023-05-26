@@ -14,7 +14,7 @@ Due to this, GD mods can't just use the publicly available Cocos2d headers; they
 
 Cocos2d, or specifically Cocos2d-x 2.2.3, is a **game engine featuring a sprite and node-based UI**. It is what powers GD's user interface, and many of its core data structures. For most GD mods, the two most important things Cocos2d provides us with are the **node system** and **garbage collector**.
 
-The seminal building block of all Cocos2d UI and by extension GD UI is the `CCNode` class. A nodw is an UI object that can have multiple children, a single parent, and transformations such as position, rotation, scale, etc., with all transformations being also applied to a node's children.
+The seminal building block of all Cocos2d UI and by extension GD UI is the `CCNode` class. A node is an UI object that can have multiple children, a single parent, and transformations such as position, rotation, scale, etc., with all transformations being also applied to a node's children.
 
 These nodes form a hierarchy known as a **node tree**, on top of which is a `CCScene`. The scene is the only visible node without a parent [[Note 1]](#notes); at a time, there may only be one scene present. The class that manages scenes is `CCDirector`. At all times in GD, there is one director running, which you can get using the `CCDirector::sharedDirector` method, or the Geode-specific `CCDirector::get` shorthand. The director contains information such as the current window size, what scene is running, and getters for many of the other static **singleton managers** in GD. To change to a different scene, you would use the `CCDirector::replaceScene` method. To get the current scene, use `CCDirector::getRunningScene`.
 
