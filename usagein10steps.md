@@ -31,10 +31,11 @@ In order for mods to do something, they need to place hooks. If you are new to m
 ```cpp
 // this magical syntax is basically just the entry point, like int main()
 $on_mod(Loaded) {
-    Mod::get()->addHook<tulip::hook::ThiscallConvention>(
+    Mod::get()->addHook(
         reinterpret_cast<void*>(base::get() + address),
         &myAwesomeHook,
-        "My awesome hook!"
+        "My awesome hook!",
+        tulip::hook::TulipConvention::Thiscall
     );
 }
 ```
