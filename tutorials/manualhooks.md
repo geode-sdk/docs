@@ -8,18 +8,18 @@ Say I wanted to hook `MenuLayer::onNewgrounds` on windows (**this function can b
 
 ```cpp
 void MenuLayer_onNewgrounds(MenuLayer* self, CCObject* sender) {
-	log::info("Hook reached!");
-	self->onNewgrounds(sender);
-	log::info("After original!");
+    log::info("Hook reached!");
+    self->onNewgrounds(sender);
+    log::info("After original!");
 }
 
 $execute {
-	Mod::get()->addHook(
-		reinterpret_cast<void*>(geode::base::get() + 0x191E90), // address
-		&MenuLayer_onNewgrounds, // detour
-		"MenuLayer::onNewgrounds", // display name, shows up on the console
-		tulip::hook::TulipConvention::Thiscall // calling convention
-	);
+    Mod::get()->addHook(
+        reinterpret_cast<void*>(geode::base::get() + 0x191E90), // address
+        &MenuLayer_onNewgrounds, // detour
+        "MenuLayer::onNewgrounds", // display name, shows up on the console
+        tulip::hook::TulipConvention::Thiscall // calling convention
+    );
 }
 ```
 
@@ -30,23 +30,23 @@ Say you want to hook some function thats available to you through some dll impor
 ```cpp
 void myDrawCircle(const cocos2d::CCPoint& center, float radius, float angle, unsigned int segments, bool drawLineToCenter) {
     // calling orig
-	cocos2d::ccDrawCircle(center, radius, angle, segments, drawLineToCenter);
-	log::info("alright {}", radius);
+    cocos2d::ccDrawCircle(center, radius, angle, segments, drawLineToCenter);
+    log::info("alright {}", radius);
 }
 
 $execute {
-	Mod::get()->addHook(
-		reinterpret_cast<void*>(
+    Mod::get()->addHook(
+        reinterpret_cast<void*>(
             // all of this is to get the address
-			geode::addresser::getNonVirtual(
+            geode::addresser::getNonVirtual(
                 // this is used because this function is OVERLOADED,
                 // otherwise just a regular function pointer would suffice (&foobar)
-				geode::modifier::Resolve<const cocos2d::CCPoint&, float, float, unsigned int, bool>::func(&cocos2d::ccDrawCircle)
-			)
-		),
-		&myDrawCircle, // detour
-		"cocos2d::ccDrawCircle", // display name, shows up on the console
-		tulip::hook::TulipConvention::Cdecl // static cocos2d functions are cdecl
-	);
+                geode::modifier::Resolve<const cocos2d::CCPoint&, float, float, unsigned int, bool>::func(&cocos2d::ccDrawCircle)
+            )
+        ),
+        &myDrawCircle, // detour
+        "cocos2d::ccDrawCircle", // display name, shows up on the console
+        tulip::hook::TulipConvention::Cdecl // static cocos2d functions are cdecl
+    );
 }
 ```
