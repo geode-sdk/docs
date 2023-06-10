@@ -11,7 +11,7 @@ This is the easiest form of web request you can make. Want to fetch some simple 
 Example:
 
 ```cpp
-#include <Geode/utils/fetch.hpp>
+#include <Geode/utils/web.hpp>
 
 using namespace geode::prelude;
 
@@ -35,7 +35,7 @@ Of course, you could just create an `std::thread` and call `fetch` inside that, 
 Creating an async web request is really simple:
 
 ```cpp
-#include <Geode/utils/fetch.hpp>
+#include <Geode/utils/web.hpp>
 
 using namespace geode::prelude;
 
