@@ -6,7 +6,7 @@ As Geode is currently imcompatible with traditional mods, migration of old mods 
 
 This one may be one of the most tedious parts. First of all, all of the GD classes are removed from the `gd` namespace. And since older gd.h's use the `m_tVariable` convention with t being the type identifier, all of those variables will give errors when given Geode's `m_variable` convention. Let's see an example of this.
 
-Here is a code snippet from HJFod's [BetterEdit](https://github.com/HJfod/BetterEdit/blob/v4-min/hooks/EditorUI.cpp#L39-L53):
+Here is a code snippet from HJFod's [BetterEdit v4](https://github.com/HJfod/BetterEdit/blob/v4-min/hooks/EditorUI.cpp#L39-L53):
 
 ```cpp
 CCPoint getShowButtonPosition(EditorUI* self) {
