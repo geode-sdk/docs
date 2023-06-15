@@ -50,7 +50,7 @@ MH_CreateHook((void*)base + 0x1907b0, (void*)&MenuLayer_init_H, (void**)&MenuLay
 MH_EnableHook(MH_ALL_HOOKS);
 ```
 
-## MAT dash
+### MAT dash
 
 This is also used by some people, mainly by newer traditional modders. Compared to other methods, MAT dash uses the return type of the hook to infer the calling convention (example: `matdash::cc::thiscall<void>`) unless it's membercall, a GD specific calling convention, which needs to be removed for migration. The original is called using `matdash::orig` with a template parameter of a reference to the hook, the parameters are the same with the hook itself.
 
