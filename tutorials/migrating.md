@@ -39,8 +39,8 @@ This is the most common used method. Minhook hooks have a static function pointe
 The Minhook is first initialized with `MH_Initialize`, then hooks are added with `MH_CreateHook` with parameters address, the address of the hook function, and the address of the static function pointer, then `MH_EnableHook` is called to enable the hooks themselves.
 
 ```cpp
-bool (__thiscall* MenuLayer_init_O)(CCLayer* self);
-bool __fastcall MenuLayer_init_H(CCLayer* self, void*) {
+bool (__thiscall* MenuLayer_init_O)(gd::MenuLayer* self);
+bool __fastcall MenuLayer_init_H(gd::MenuLayer* self, void*) {
     if (!MenuLayer_init_O(self)) return false;
     return true;
 }
@@ -71,7 +71,7 @@ No one will need this section but I'm adding it for the completeness sake. GDMak
 
 ```cpp
 GDMAKE_HOOK(0x1907b0, "_ZN9MenuLayer4initEv")
-bool __fastcall MenuLayer_init(CCLayer* self, void* edx) {
+bool __fastcall MenuLayer_init(gd::MenuLayer* self, void* edx) {
     if (!GDMAKE_ORIG(self, edx)) return false;
     return true;
 }
