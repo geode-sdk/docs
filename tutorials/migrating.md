@@ -79,7 +79,7 @@ bool __fastcall MenuLayer_init(CCLayer* self, void* edx) {
 
 ### Shared
 
-Since all of these hooks are static functions, a `self` parameter and a parameter for clobbing the edx register is added (except MAT dash) to match the calling convention for member functions. These parameters need to be removed when moving the hook inside a modify class.
+Since all of these hooks are static functions, a `self` parameter and a parameter for clobbing the edx register is added (except MAT dash) to match the calling convention for member functions. These parameters need to be removed when moving the hook inside a modify class. Likewise, all uses of `self->` need to be either removed or replaced with `this->`.
 
 Otherwise, all of the hooks can be replaced by a `Modify` class and the original calls can be replaced with a call the `OriginalClass::function` inside the modify hook with the needed parameters. 
 
