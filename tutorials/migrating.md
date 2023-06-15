@@ -1,6 +1,6 @@
 # Migrating your mods from the traditional
 
-As Geode is currently imcompatible with traditional mods, migration of old mods is a must in order to use them with Geode. This page shows how to do just that.
+As Geode is currently incompatible with traditional mods, migration of old mods is a must in order to use them with Geode. This page shows how to do just that.
 
 ## Migrating from gd.h and cocos-headers
 
