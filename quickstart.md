@@ -6,7 +6,7 @@ icon: play
 
 1. [Install Geode SDK](/installation)
 
-2. [Install Geode CLI](/installcli)
+2. [Install Geode CLI](/geode/installcli)
 
 3. [Install Geode VS Code extension](https://marketplace.visualstudio.com/items?itemName=GeodeSDK.geode)
 
