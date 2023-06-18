@@ -11,7 +11,9 @@ order: 0
 
 Geode is currently available on **Windows** and **MacOS**; Android and iOS support is planned in the future.
 
-Geode is installed using **its own installer**. You can find the latest version [on the Geode homepage](https://geode-sdk.org) or [on GitHub](https://github.com/geode-sdk/installer/releases/latest). 
+Geode is installed using **its own installer**. You can find the latest version [on the Geode homepage](https://geode-sdk.org) or [on GitHub](https://github.com/geode-sdk/installer/releases/latest).
+
+You can uninstall Geode from the installer aswell incase you want to play vanilla GD, or if you want to switch versions.
 
 You can also [install the files manually](#installing-geode-manually), should the installer not work.
 
@@ -19,17 +21,21 @@ You can also [install the files manually](#installing-geode-manually), should th
 
 ## Installing Geode Manually
 
-In most cases, you should be fine by using the installer for installing Geode. However, timeouts and other WiFi shenanigans can make it difficult at times for the installer to do it's job properly as of writing this. To get around it, you can simply drop the Geode files into the Geometry Dash folder following the instructions below.
+In most cases, you should be fine by using the installer for installing Geode. However, shenanigans can make it difficult at times for the installer to do it's job properly as of writing this. To get around it, you can simply drop the Geode files into the Geometry Dash folder following the instructions below.
 
-1. Download the most recent .zip release of Geode [from here](https://github.com/geode-sdk/geode/releases). It should contain several files, the v1.0.0-beta.18 release being shown below for example: 
+1. Download the most recent .zip release of Geode. You can get any of the releases **including betas** [from here](https://github.com/geode-sdk/geode/releases). It should contain several files, the v1.0.0-beta.18 release being shown below for example: 
 
-![Image of the files in the .zip, listed in this order: 1. Geode.dll, 2. Geode.lib, 3. Geode.pdb, 4. GeodeBootstrapper.dll, 5. XInput9_1_0.dll.](/assets/(Jarten)GeodeFilesExample.png)
+(Older and/or newer releases including v0.6.1 or earlier may have slightly different files, but that's fine. You just need something similar to this.) 
 
-2. Find your Geometry Dash folder. For Windows, it should be stored in `C:\Program Files (x86)\Steam\steamapps\common\Geometry Dash`. For MacOS, it should be stored in `<User>/Library/Application Support/Steam/steamapps/common/Geometry Dash`. The `Library` directory is usually hidden, so using the Finder is ideal.
+![Image of the files in the .zip, listed in this order: 1. Geode.dll, 2. Geode.lib, 3. Geode.pdb, 4. GeodeBootstrapper.dll, 5. XInput9_1_0.dll.](/assets/GeodeFilesExample.png)
+
+2. Find your Geometry Dash folder. For Windows, it should be stored in `C:\Program Files (x86)\Steam\steamapps\common\Geometry Dash`. For MacOS, it should be stored in `<User>/Library/Application Support/Steam/steamapps/common/Geometry Dash`. The `Library` directory is usually hidden, so using the Finder is ideal. Another easier way to find it is through Steam by right clicking Geometry Dash>Manage>Browse Local Files.
+
+![Image showing the easier method shown above](/assets/BrowseLocalFilesForGD.png)
 
 3. Extract all of the files from the Geode .zip folder into the Geometry Dash folder so that all the files from the .zip are on the same level as the Geometry Dash executable.
 
-Then launch the game. If it didn't work, go yell at Jarten#4513 on Discord because he was the one who wrote this. Including this last bit. Please yell at me if it goes wrong since I have almost zero experience with Geode as of yet and still decided to do this anyway.
+Then launch the game. If it didn't work, yell at me @ Jarten#4513 on Discord because I wrote this section despite my experience with Geode being close to naught.
 
 ## Installing Geode SDK (for Developers)
 
