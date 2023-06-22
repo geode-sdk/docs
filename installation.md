@@ -49,7 +49,7 @@ Geometry Dash doesn't have a build for Linux, so to run it we need to use **Wine
 ```
 WINEDLLOVERRIDES="Xinput9_1_0=n,b" %command%
 ```
-This tells Wine to inject the Xinput9_1_0.dll found in the Geometry Dash folder, which is used by Geode.
+This tells Wine to use the Xinput9_1_0.dll found in the Geometry Dash folder, which is used by Geode.
 
 3. (optional) A stable version of Proton for Geometry Dash is **GE-Proton 7.43**. You can install it using **ProtonUp**, from Flathub. Try using that if you have trouble with launching the game. This isn't guaranteed to work on all machines, but it's worth a shot. If GD runs fine for you, **don't change the Proton version**.
 
