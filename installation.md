@@ -9,7 +9,7 @@ order: 0
 
 ## For Users
 
-Geode is currently available on **Windows** and **MacOS**; Android and iOS support is planned in the future.
+Geode is currently available on **Windows** and **MacOS**; Android and iOS support is planned in the future. If you are running **Linux**, go to the [sections below](#installing-geode-on-linux).
 
 Geode is installed using **its own installer**. You can find the latest version [on the Geode homepage](https://geode-sdk.org) or [on GitHub](https://github.com/geode-sdk/installer/releases/latest).
 
@@ -36,6 +36,22 @@ In most cases, you should be fine by using the installer for installing Geode. H
 3. Extract all of the files from the Geode .zip folder into the Geometry Dash folder so that all the files from the .zip are on the same level as the Geometry Dash executable.
 
 Then launch the game.
+
+## Installing Geode on Linux
+
+> :warning: Installing Geode on Linux is **not fully supported** as of now. It is not guaranteed that it will work without some tweaking. Ask around the community for help if something goes wrong!
+
+Geometry Dash doesn't have a build for Linux, so to run it we need to use **Wine**. More specifically, **Proton**. Because of this, installing Geode on Linux is pretty similar to [installing it manually on Windows](#installing-geode-manually), you only have a bit of configuring to do after that.
+
+1. Find Geometry Dash in Steam, right-click it, and click on **Properties**
+![Opening the properties page for GD](/assets/steam_gd_properties.png)
+2. In the **Launch options** field, enter the following:
+```
+WINEDLLOVERRIDES="Xinput9_1_0=n,b" %command%
+```
+This tells Wine to inject the Xinput9_1_0.dll found in the Geometry Dash folder, which is used by Geode.
+
+3. (optional) A stable version of Proton for Geometry Dash is **GE-Proton 7.43**. You can install it using **ProtonUp**, from Flathub. Try using that if you have trouble with launching the game. This isn't guaranteed to work on all machines, but it's worth a shot. If GD runs fine for you, **don't change the Proton version**.
 
 ## Installing Geode SDK (for Developers)
 
