@@ -35,7 +35,7 @@ In most cases, you should be fine by using the installer for installing Geode. H
 
 3. Extract all of the files from the Geode .zip folder into the Geometry Dash folder so that all the files from the .zip are on the same level as the Geometry Dash executable.
 
-Then launch the game. If it didn't work, yell at me @ Jarten#4513 on Discord because I wrote this section despite my experience with Geode being close to naught.
+Then launch the game.
 
 ## Installing Geode SDK (for Developers)
 
