@@ -4,15 +4,13 @@
 
 **Geode** is a [Geometry Dash](https://store.steampowered.com/app/322170/Geometry_Dash/) mod loader and modding SDK with a modern approach towards mod development. Unlike previous mod loaders, which merely inject the DLLs and let devs handle the rest, Geode aims to be a more comprehensive project, which manages loaded mods & hooks itself. Geode has been built to ensure performance, compatibility, portability and ease of use. For devs, Geode means easy development and portability; for end users, Geode means an uniform and easy experience using mods.
 
-**These docs are intended for developers looking to use Geode.** If you're someone who would just like to use mods, [see our homepage](https://geode-sdk.org/install).
+> :warning: These docs are intended for **developers** looking to use Geode. If you're someone who would just like to use mods, [see our homepage](https://geode-sdk.org/install).
 
 ## Why Geode?
 
 The main goal of Geode is to **end mod incompatability**. Traditional modding leads very easily to compatability problems, many of which Geode attempts to address with better solutions.
 
 On top of this, and perhaps more interestingly, **Geode provides much better ergonomics for modding**. Instead of having to deal with calling conventions, trampolines, manually setting hooks (likely in another source file), you can have all the code relevant to hooks in a [nice, clean, readable syntax](/tutorials/modify.md) contained within a single source file.
-
-See [What is Geode](/whatisgeode.md) for more detailed information about why you should use Geode.
 
 ## Help, Contributing, Etc.
 
@@ -37,12 +35,6 @@ See [Handbook](/handbook/chap0) for a beginner-friendly tutorial series on using
 <a href="https://github.com/geode-sdk/geode/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=geode-sdk/geode" />
 </a>
-
-### Libraries
-
- * [Cocos2d-x](https://github.com/cocos2d/cocos2d-x/tree/cocos2d-x-2.2.3)
- * [FMOD](https://www.fmod.com/)
- * [fmt](https://fmt.dev/latest/index.html)
 
 ### Special Thanks
 

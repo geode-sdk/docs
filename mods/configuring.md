@@ -46,7 +46,7 @@ The name of the mod's developer. Should be a single name, like "HJfod" or "Alk".
 
 ### `description`
 
-A short description of the mod. Should only be a single sentence; for longer descriptions, see [about.md](/mods/description.md).
+A short description of the mod. Should only be a single sentence; for longer descriptions, see [about.md](/mods/md-files.md).
 
 ### `repository`
 
