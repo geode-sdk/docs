@@ -29,3 +29,5 @@ Now register CMake as the **Configuration Provider** for the C++ extension by ru
 Scroll down to **Advanced** options, and set the Configuration Provider as `ms-vscode.cmake-tools`.
 
 Now if you run `CMake: Configure`, assuming you have Geode properly installed, the include errors should go away.
+
+If the errors still persist, try building the mod with `CMake: Build`. If the build is succesful but the errors don't disappear, try restarting VS Code.
