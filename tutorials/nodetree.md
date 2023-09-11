@@ -31,13 +31,15 @@ Notice that there are no hardcoded indexes. Even if `main-menu` is at a complete
 
 Although, this code does also have another interoperability concern: sure, we can be sure we added our node to the right place, but what if some other mod does the same? If another mod adds a button to the left of the icon kit button, they would overlap. To solve this issue, Geode introduces [layouts](/tutorials/layouts.md), which are discussed in their own tutorial.
 
-This also highlights the **problem with string IDs**: **someone has to assign them**. Whereas raw indexes are an intrinsic property of all CCNodes, the default ID of a node is an empty string (`""`). Geode does come with [default IDs for common classes like `MenuLayer`](https://github.com/geode-sdk/geode/blob/91cecf3843d246939be4057cdf8e7d5d607aeeb1/loader/src/hooks/MenuLayer.cpp#L150-L197), but there are unfortunately too many layers in GD to label all of them.
+This also highlights the **problem with string IDs**: **someone has to assign them**. Whereas raw indexes are an intrinsic property of all CCNodes, the default ID of a node is an empty string (`""`). Geode fortunately comes with [IDs for most classes in GD](https://github.com/geode-sdk/geode/tree/main/loader/src/ids). It is worth noting that there are unfortunately too many layers in GD to label all of them, so it may be missing some of them.
 
 This has, however, been taken in mind when designing the string ID system. If you find a layer you want to get a child of is missing string IDs, what you can do is **add them yourself** (using members or raw indexes), and either [send your code for adding them to Geode](https://github.com/geode-sdk/geode/pulls/new) or [let others know your mod adds these IDs](https://discord.gg/9e43WMKzhp). This way, someone else who wants to get the same children from the same layer can easily piggyback off of your logic. While the string ID system is ultimately and unfortunately based on raw indexes, its point is to **provide a single source of truth for those indexes**; once someone has done the work, no one should have to do it again.
 
 ## Viewing String IDs
 
 You can see if a layer's nodes have string IDs using the [DevTools](https://github.com/geode-sdk/devtools) mod, which shows them in the **Tree** view.
+
+![Image showing the node string IDs, visible from the DevTools mod](/assets/DevTools_stringIDs.png)
 
 ## String IDs in your own layers
 
