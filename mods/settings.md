@@ -68,15 +68,26 @@ A 64-bit integer value. Value may be limited with the `min`, `max`, and `one-of`
 
 In code, the value type is `int64_t`.
 
+Inside the `control` property, you can also set:
+ * `arrows`: Whether to show the arrow buttons or not
+ * `arrow-step`: How much to step when clicking the arrow buttons
+ * `big-arrows`: Whether to add bigger arrows that step further than the regular ones
+ * `big-arrow-step`: How much to step when clicking the big arrows
+ * `slider-step`: How much to step per slider interval
+ * `input`: Whether to allow a text input along with the slider
+
 ### `float`
 
 A 64-bit floating point (decimal) value. Value may be limited with the `min`, `max`, and `one-of` properties. Available controls include a slider, arrows (buttons that increment/decrement by a predetermined amount), and a text input.
 
 In code, the value type is `double`.
 
+Inside the `control` property, you can also set:
+ * `slider-step`: How much to step per slider interval
+
 ### `string`
 
-A piece of text. Value may be constrained with the `regex` key that specifies a regex that the string is matched against.
+A piece of text. Value may be constrained with the `match` key that specifies a regex that the string is matched against.
 
 In code, the value type is `std::string`.
 
@@ -95,6 +106,9 @@ In code, the value type is `ccColor4b`.
 ### `path` / `file`
 
 A file input, useful for example for configuration files. Controls include what file extension filters to show in the in-game file picker.
+
+Inside the `control` property, you can also set:
+ * `filters`: Filter what file extensions can be submitted
 
 ### `custom`
 
