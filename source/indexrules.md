@@ -68,5 +68,6 @@ In general, all Lead Geode Devs can add new mods to the index. However, in pract
  * Pie (Windows) | poweredbypie
  * Mat (Windows) | mat.4
  * fig (Windows) | figmentboy
+ * ConfiG (Windows) | cgytrus
  * Alk (MacOS) | alk1m123
  * Camila (MacOS) | camila314
