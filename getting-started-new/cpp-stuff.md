@@ -23,6 +23,8 @@ After launching the installer, look for **Desktop development with C++**. You ma
 Once its installed, you should now have a working C++ compiler installed that is suited for GD mod development.
 
 ### MacOS
+
+<!-- TODO: -->
 For macos u install clang somehow sorry
 
 ### Linux

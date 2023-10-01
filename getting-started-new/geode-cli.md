@@ -37,6 +37,7 @@ It is recommended that you [set up a profile now](#profile-setup).
 
 ## MacOS
 
+<!-- TODO: -->
 i dont know either sorry mac ppl
 
 It is recommended that you [set up a profile now](#profile-setup).
