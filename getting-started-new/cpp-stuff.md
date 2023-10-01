@@ -24,8 +24,10 @@ Once its installed, you should now have a working C++ compiler installed that is
 
 ### MacOS
 
-<!-- TODO: -->
-For macos u install clang somehow sorry
+Install [brew](https://brew.sh/) if you don't already have it, and then run:
+```bash
+brew install llvm
+```
 
 ### Linux
 Linux is well.. complicated
