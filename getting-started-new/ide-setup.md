@@ -23,6 +23,8 @@ None of these extensions are "required", but they will make your experience much
 
 There are a few steps you should follow to get proper intellisense (you should only need to do these once per project, ideally):
 
+<!-- TODO: i dont like how much text there is here :( its kinda confusing -->
+
 1. With VSCode open on your project, press **F1** and run `CMake: Select a Kit`. This will bring up a list of installed compilers on your machine.
 ![Image showing a bunch of compilers CMake detected in VS Code](/assets/win_compilers.png)\
 On **Windows**, you should go with a Visual Studio compiler that is either `x86` or `amd64_x86`. Note that there is also an `x86_amd64` compiler - you don't want to pick that one!\
@@ -40,7 +42,7 @@ Scroll down to **Advanced** options, and set the Configuration Provider as `ms-v
 
 Now if you run `CMake: Configure`, assuming you have Geode properly installed, the include errors should go away.
 
-If the errors still persist, try building the mod with `CMake: Build`. If the build is succesful but the errors don't disappear, try restarting VS Code.
+If the errors still persist, try building the mod with `CMake: Build`. If the build is successful but the errors don't disappear, try restarting VS Code.
 
 # Visual Studio
 TODO
