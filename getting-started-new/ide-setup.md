@@ -1,5 +1,5 @@
 ---
-title: 3.1. Creating a new mod
+title: 3.1. IDE Setup
 order: 6
 ---
 
@@ -24,11 +24,12 @@ None of these extensions are "required", but they will make your experience much
 There are a few steps you should follow to get proper intellisense (you should only need to do these once per project, ideally):
 
 1. With VSCode open on your project, press **F1** and run `CMake: Select a Kit`. This will bring up a list of installed compilers on your machine.
-![Image showing a bunch of compilers CMake detected in VS Code](/assets/win_compilers.png)
+![Image showing a bunch of compilers CMake detected in VS Code](/assets/win_compilers.png)\
 On **Windows**, you should go with a Visual Studio compiler that is either `x86` or `amd64_x86`. Note that there is also an `x86_amd64` compiler - you don't want to pick that one!\
+\
 On **Mac**, you should go with Clang.
 
-    1. If you're on **Windows**, press **F1** again and run `CMake: Select Variant`.
+    * If you're on **Windows**, press **F1** again and run `CMake: Select Variant`.
 ![Image showing available build types on Windows: Debug, Release, MinSizeRel, and RelWithDebInfo](/assets/win_relwithdebinfo.png)\
 You should go with either `RelWithDebInfo` (recommended at least for development) or `Release`.
 
