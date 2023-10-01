@@ -1,6 +1,6 @@
 ---
 title: 1.1. Required C++ Tools
-order: 3
+order: 2
 ---
 
 # Required C++ Tools
