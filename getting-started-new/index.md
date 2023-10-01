@@ -1,5 +1,6 @@
 ---
-title: Getting Started
+title: Getting Started (new)
+order: 1
 ---
 
 1. Prerequisites

@@ -1,5 +1,5 @@
 ---
-title: Getting started
+title: Getting started (old)
 icon: play
 description: Instructions for creating mods with the Geode SDK & other developer tools
 order: 1
