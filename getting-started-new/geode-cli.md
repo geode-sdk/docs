@@ -23,7 +23,7 @@ Otherwise, you can manually install it by:
 1. Download the latest windows release over at [GitHub](https://github.com/geode-sdk/cli/releases/latest)
 1. Extract the `geode.exe` into some folder on your computer
 1. Select the CLI executable in File Explorer, Shift + Right-Click it and select `Copy as Path`
-1. Search `Edit the system environment variables` on Windows search. Alternatively, you can open up Control Panel and search for it, then select `Edit the system environment variables` or **to skip straight to step 3 select `Edit environment variables for your account`**.
+1. Search `Edit the system environment variables` on Windows search. Alternatively, you can open up Control Panel and search for it, then select `Edit the system environment variables` or **to skip straight to step 6 select `Edit environment variables for your account`**.
 1. Click `Environment Variables...`
 1. In the top `User variables` section, select the `Path` variable and click `Edit`
 1. Now click `New` and paste the path of the CLI executable you copied at Step 1. **Remove the `\geode.exe` from the end;** the path has to point to the _directory_ with Geode CLI, not the CLI itself.
