@@ -37,8 +37,10 @@ It is recommended that you [set up a profile now](#profile-setup).
 
 ## MacOS
 
-<!-- TODO: -->
-i dont know either sorry mac ppl
+You can easily install the CLI via [brew](https://brew.sh)
+```bash
+brew install geode-sdk/geode/geode-cli
+```
 
 It is recommended that you [set up a profile now](#profile-setup).
 
