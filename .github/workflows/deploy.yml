@@ -45,15 +45,13 @@ jobs:
           tarBall: false
           zipBall: false
           out-file-path: "" 
-      
-      - name: Create dist directory
-        run: |
-          mkdir dist
-        
+    
       - name: Build docs with Flash
         run: |
+          mkdir dist
           cd dist 
-          ./../flash.exe -i ../geode -o .
+          mkdir docs
+          ./../flash.exe -i ../geode -o ./docs
       
       - name: Setup Pages
         uses: actions/configure-pages@v2
@@ -61,7 +59,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: './dist'
+          path: './dist/docs'
         
       - name: Deploy to GitHub Pages
         id: deployment
