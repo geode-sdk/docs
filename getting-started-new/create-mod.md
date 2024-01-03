@@ -1,5 +1,5 @@
 ---
-title: 3. Creating a new mod
+title: 3. Creating and building a new mod
 order: 5
 ---
 
