@@ -20,11 +20,7 @@ Alternatively, if you hate joining Discord servers to work with a framework, you
 
 ## Getting Started
 
-See [Installation](/installation) for instructions on how to install the Geode SDK on your computer.
-
-See [Creating a new mod](/geode/creating) for instructions on how to make your first mod.
-
-See [Building](/source/building) for instructions on how to build Geode itself from scratch on your computer.
+See [Getting Started](/getting-started) for a step by step tutorial on getting started with Geode SDK.
 
 See [Handbook](/handbook/chap0) for a beginner-friendly tutorial series on using Geode and GD Modding in general (WIP!!).
 

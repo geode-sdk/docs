@@ -1,5 +1,4 @@
 ---
-title: C++ Tutorials
 order: 999
 ---
 
