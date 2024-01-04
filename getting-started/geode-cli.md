@@ -12,10 +12,13 @@ The Geode SDK has its own command line utility program to aid in many tasks invo
 * [MacOS](#macos)
 
 ## Windows
-(Recommended) If you have [scoop](https://scoop.sh/) you can easily install the cli by doing:
+(Recommended) You can use [scoop](https://scoop.sh/) to easily install the cli by doing:
 ```bash
 scoop install https://geode-sdk.org/geode-sdk-cli.json
 ```
+
+If you don't have scoop, you can follow the installation instructions on their page:
+[https://scoop.sh](https://scoop.sh)
 
 ---
 
