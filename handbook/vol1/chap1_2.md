@@ -52,7 +52,7 @@ int addTwoHook(int a, int b) {
 
 A hook **always has the signature [[Note 1]](#notes) as the function being hooked**. This means that we couldn't hook `addTwo` with something that takes two strings. Likewise, the return type has to be the same; if `addTwo` returns an `int`, so does our hook.
 
-This is the basic premise of hooking: when the function you're hooking is called, the first thing you do is hop into your own code, and then hop back into the original once you're finished. The function that contains your own code is called a **detour**, and the funtion being hooked is called the **original**.
+This is the basic premise of hooking: when the function you're hooking is called, the first thing you do is hop into your own code, and then hop back into the original once you're finished. The function that contains your own code is called a **detour**, and the function being hooked is called the **original**.
 
 However, the code above is **actually misleading**. It would be more accurate to say that hooking does this:
 
