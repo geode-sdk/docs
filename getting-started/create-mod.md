@@ -31,7 +31,7 @@ Geode will also look for these special files within your mod folder:
 
 # Build
 Now, to build your mod you have a few options: \
-If youre using an IDE such as Clion, VScode or Visual Studio, head over to the [IDE Setup](/getting-started-new/ide-setup) page.
+If youre using an IDE such as Clion, VScode or Visual Studio, head over to the [IDE Setup](/getting-started/ide-setup) page.
 
 Otherwise if you want to build your mods manually from the command line you can do that by simply running these commands in your mod's folder:
 ```bash
