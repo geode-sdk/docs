@@ -30,4 +30,8 @@ brew install llvm
 ```
 
 ### Linux
-Linux is well.. complicated
+Linux is a bit more complicated, as obviously there's no linux release of GD (yet). Of course, you can run the Windows version of GD through software like [wine](https://www.winehq.org/) quite well, which is probably what you're already doing.
+
+Because of that, this guide will set you up to [cross-compile](https://en.wikipedia.org/wiki/Cross_compiler) windows Geode mods from linux.
+
+We recommend reading this gist: [linux-win-cross.md](https://gist.github.com/matcool/abb65ee59ded3766717c673014c3a2a7) for up to date information on how to cross compile.

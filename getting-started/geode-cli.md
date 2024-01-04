@@ -10,6 +10,7 @@ The Geode SDK has its own command line utility program to aid in many tasks invo
 
 * [Windows](#windows)
 * [MacOS](#macos)
+* [Linux](#linux)
 
 ## Windows
 (Recommended) You can use [scoop](https://scoop.sh/) to easily install the cli by doing:
@@ -47,8 +48,19 @@ brew install geode-sdk/geode/geode-cli
 
 It is recommended that you [set up a profile now](#profile-setup).
 
+## Linux
+
+We provide prebuilt linux binaries in the CLI releases page, which you can find here: \
+https://github.com/geode-sdk/cli/releases/latest
+
+Since this is different per distro, you must figure out how to add this binary to your path for CMake to find it.
+
+Once you figure that out, it is recommended that you [set up a profile now](#profile-setup).
+
+
 # Profile Setup
 
 A profile is just an instance of Geometry Dash. It's a good idea to set up one up for CLI so your mods can be automatically installed post build.
 
 To setup a new profile, simply run the `geode config setup` command on your terminal.
+
