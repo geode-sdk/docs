@@ -51,7 +51,7 @@ It is recommended that you [set up a profile now](#profile-setup).
 ## Linux
 
 We provide prebuilt linux binaries in the CLI releases page, which you can find here: \
-https://github.com/geode-sdk/cli/releases/latest
+[https://github.com/geode-sdk/cli/releases/latest](https://github.com/geode-sdk/cli/releases/latest)
 
 Since this is different per distro, you must figure out how to add this binary to your path for CMake to find it.
 
