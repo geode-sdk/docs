@@ -6,9 +6,7 @@ Nearly all layers have their own class; for example, the icon kit is `GJGarageLa
 
 ## Finding Layer Names
 
-You can find the **class name** of a given layer using the [DevTools](https://github.com/geode-sdk/devtools) mod in Geode. Traditionally, the most common mod for inspecting the scene was [CocosExplorer](https://github.com/matcool/CocosExplorer), however as it is a traditional mod, it does not work with Geode.
-
-To see how it works, install the **DevTools** mod in-game through the **Download** tab in Geode and then press **F11** to activate it:
+You can find the **class name** of a given layer using the [DevTools](https://github.com/geode-sdk/devtools) mod in Geode. To see how it works, install the **DevTools** mod in-game through the **Download** tab in Geode and then press **F11** to activate it:
 
 ![Image of the DevTools mod open in GD, focused on MenuLayer](/assets/DevTools_MenuLayer.png)
 

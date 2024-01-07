@@ -20,14 +20,14 @@ If you're **unsure** that you have sufficient programming skills, here's a **lis
    * Inheritance (including multiple inheritance)
  * Namespaces
  * The C++ Standard Library
+ * Pointers & references (if you don't know how pointers work, you can get through this tutorial, but you will also be in big trouble later on)
+ * Macros and the C++ Preprocessor
+ * Difference between compile-time and runtime
 
 **Other concepts that are very good to know beforehand but not strictly required**:
 
- * Pointers & references (if you don't know how pointers work, you can get through this tutorial, but you will also be in big trouble later on)
- * Macros and the C++ Preprocessor
  * X86 Assembly (doesn't mean you should speak or read it fluently; just know what it is)
- * Difference between compile-time and runtime
- * Reverse enginering (the basics of using Ghidra will be explained in Chapter TODO)
+ * Reverse enginering (the basics of using Ghidra will be explained in Volume 2)
 
 If some of the items in the list aren't familiar to you, **you should read up on some online resources first**. A good place to start is to just write "C++ tutorial" in Google and see what comes up. If only some specific parts are unfamiliar, for example you don't know how namespaces work, search for "C++ namespaces".
 
@@ -69,7 +69,7 @@ Sometimes the text has notes like this [Note 1]. They are explained at the end o
 
 ## "Traditional" Mods
 
-Many things in this handbook are referred to as "traditional modding". This means mods made and modding methods used before Geode was released; Geode is quite different from all modding libraries that came before it, and as such it differs from them in many ways. The ways things were traditionally done are still included in this tutorial however, both as a historical curiosity and to make this handbook more appealing to Geode haters.
+Many things in this handbook are referred to as "traditional modding". This means mods made and modding methods used in 2.1; Geode is currently the only major mod loader available for 2.2 and beyond, and differs in some major ways from traditional modding practices. Traditional practices are still included in this tutorial however as a historical curiosity, and to help you spot where old tutorials differ from modern practices.
 
 ## Ready, set, go!
 

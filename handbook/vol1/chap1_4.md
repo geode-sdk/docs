@@ -2,13 +2,11 @@
 
 ## GD's Game Engine
 
-In order to modify any game, it's good to find out at least one thing: what engine the game was made with. Luckily, GD tells us this on its help page: **Cocos2d-x**. GD modders have also figured out the specific version of Cocos2d that GD uses: **v2.2.3**. Although, there's a catch.
+In order to modify any game, it's good to find out at least one thing: what engine the game was made with. Luckily, GD tells us this on its loading page: **Cocos2d-x**. GD modders have also figured out the specific version of Cocos2d that GD uses: **v2.2.3**. Although, there's a catch.
 
-You see, if we look around the **libcocos2d** file GD comes with and compare it with the [official v2.2.3 branch](https://github.com/cocos2d/cocos2d-x/tree/cocos2d-x-2.2.3/cocos2dx), we will find that there are a bunch of functions and classes present in GD that aren't in the original, like `CCLabelBMFont::limitLabelSize`. As it turns out, **the Cocos2d that GD uses has been modified by RobTop**. These modifications range from small things like a few helper functions added to classes to some entire backends having been rewritten.
+You see, if we look around the **libcocos2d** file GD comes with and compare it with the [official v2.2.3 branch](https://github.com/cocos2d/cocos2d-x/tree/cocos2d-x-2.2.3/cocos2dx), we will find that there are a bunch of functions and classes present in GD that aren't in the original, like `CCLabelBMFont::limitLabelSize`. As it turns out, **the Cocos2d that GD uses has been modified by RobTop**. These modifications range from small things like a few helper functions added to classes to some entire backends having been rewritten. Due to this, GD mods can't just use the publicly available Cocos2d headers; they need to use modified headers that account for RobTop's changes (which are, naturally, included in Geode).
 
-Due to this, GD mods can't just use the publicly available Cocos2d headers; they need to use modified headers that account for RobTop's changes. Traditionally, the headers most mods have used have either been [CappuccinoSDK](https://github.com/AndreNIH/CappuccinoSDK/) or [cocos-headers](https://github.com/HJfod/cocos-headers/). However, as with GD headers, **Geode comes with its own set of Cocos2d headers**, that are so far **the most accurate** in the modding community.
-
-> :warning: Some old modding tutorials on YouTube will tell you to use CappuccinoSDK. **You should never use it**. Cappuccino is fully obsolete due to `cocos-headers` (and even more due to Geode), and is in fact incompatible with gd.h, so it's not suited for traditional nor modern mods in any way.
+> :warning: Some old modding tutorials on YouTube might tell you to use libraries such as CappuccinoSDK or Cocos-Headers - these are the traditional 2.1 libraries used, however they are nowadays obsolete.
 
 ## But What is Cocos2d?
 

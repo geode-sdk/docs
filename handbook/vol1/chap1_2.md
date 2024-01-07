@@ -20,9 +20,9 @@ There are two fundamental tools in every GD modder's toolkit: **patching** and *
 
 In [Chapter 1.1](/handbook/vol1/chap1_1), it was stated that nowadays modders rarely work with binary code directly. There are, however, some cases in which working with raw binary code is in fact the optimal solution for some functionality in a mod. In these cases, it is done through a method called **patching**, which means applying, well, patches to binary code. Patches are, however, inherently **platform-dependent** and **unportable**, so their use is highly discouraged if higher-level options are available.
 
-Patches do, however, still play a seminal role in GD modding. For example, one of the most famous mods, **noclip**, can be achieved with [a single binary patch](https://github.com/absoIute/Mega-Hack-v5/blob/master/bin/hacks/player.json#L7). There are also some cases in complex mods where a few patches can replace writing hundreds of lines of C++ code. However, **it is very uncommon** for binary patches to be optimal. Binary patches should **never be your first solution to a problem**, but when the time comes, don't be afraid to use them if they're clearly the best solution.
+Patches do, however, still play a seminal role in GD modding. For example, one of the most famous mods, **noclip**, can be achieved with [a single binary patch](https://github.com/absoIute/Mega-Hack-v5/blob/master/bin/hacks/player.json#L7) (in 2.1; in 2.2, it's a little harder). There are also some cases in complex mods where a few patches can replace writing hundreds of lines of C++ code. However, **it is very uncommon** for binary patches to be optimal. Binary patches should **never be your first solution to a problem**, but when the time comes, don't be afraid to use them if they're clearly the best solution.
 
-Patches also serve another very important purpose: they are the base on top of which hooking is built. Although, you won't see this directly - basically every mod uses a hooking library that abstracts away the patching part for them.
+Patches also serve another very important purpose: they are the base on top of which **hooking** is built. Although, you won't use them directly - Geode will handle hooking for you.
 
 ## Hooking
 
@@ -163,4 +163,4 @@ For now, we can leave hooking be, as before we can find any practical applicatio
 
 > [Note 1] **Signature** means the parameter and return types of a function, i.e. `int addTwo(int, int)`.
 
-> [Note 2] This, too, is not actually how hooking is implemented most of the time. What actually is the case is that **only the first few statements** of a function are replaced by the call to the detour, and then the call to the original function does a bunch of jumps and redirects to execute the whole original body. For the purposes of this tutorial however, **it is easier to think of the whole function body as being replaced** instead of just a part of it.
+> [Note 2] This, too, is not actually how hooking is implemented. Geode uses the purpose-built [TulipHook](https://github.com/geode-sdk/TulipHook) library for hooking, which does a lot of crazy stuff under the hood like automatically translating between calling conventions and other tricks to allow calling the original without needing a trampoline. For the purposes of this tutorial however, **it is easier to think of the whole function body as being replaced** instead of just a part of it.
