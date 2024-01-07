@@ -25,7 +25,7 @@ Almost every platform GD is on has some sort of **dynamic library support**. On 
 
 > :information_source: There is one platform that doesn't have dynamic library support: iOS (unless jailbroken). Modding on iOS without jailbreaking requires basically baking all the mods you want into a premodified game, like [iCreate](https://icreate.pro/) has done, but a general mod loader like Geode will likely never see iOS support unless some major changes to the OS happen first.
 
-> :green_book: If you are interested in **learning more about binary injection**, [the Wikipedia article on DLL injection](https://en.m.wikipedia.org/wiki/DLL_injection) is a pretty good place to start. 
+> :green_book: If you are interested in **learning more about binary injection**, [the Wikipedia article on DLL injection](https://en.wikipedia.org/wiki/DLL_injection) is a pretty good place to start. 
 
 Usually, the first custom dynamic library we make GD load is a mod loader; that is, a mod whose purpose is to load other mods. This is because the methods we use for injection are not easily scalable, but once we have our one library running, we can invent much simpler ways of loading more of them. For example, on Windows, loading a library from another library that you control is as simple as calling the `LoadLibrary` function. This can also be done an arbitary number of times within our initial library, so we can for example automatically find all the .DLL files in some directory and load them. This is how old 2.1 mod loaders such as **Mega Hack v7** used to work: they would search for all of the `.dll` files in a predefined folder like `extensions` and call `LoadLibrary` on them.
 

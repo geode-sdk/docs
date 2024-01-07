@@ -33,7 +33,7 @@ auto node = CCNode::create();
 node->release();
 ```
 
-You can think of `retain` and `release` like the following: `retain` tells Cocos2d "Hey, I'm still using this object, please don't free it!", and `release` tells it "Okay, you can free the memory now!"
+You can think of `retain` and `release` like the following: `retain` tells Cocos2d "Hey, I'm still using this object, please don't free it!", and `release` tells it "Okay, I don't need this object anymore!"
 
 In practice, if you have to do manual memory management, you likely won't be using the `retain` and `release` functions directly and instead use the `CC_SAFE_RETAIN` and `CC_SAFE_RELEASE` macros:
 

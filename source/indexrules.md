@@ -64,8 +64,10 @@ However, if your mod is closed source, you will have to send it source code priv
 
 In general, all Lead Geode Devs can add new mods to the index. However, in practice, for most mods you should ask **HJfod** for mods available on Windows and **alk** or **Camila** for mods on MacOS. For cross-platform mods, ask anyone.
 
- * HJfod (Windows) | HJfod#1795
- * Pie (Windows) | pie#1593
- * Mat (Windows) | Mat#7533
- * Alk (MacOS) | alk1m123#3076
- * Camila (MacOS) | camila314#4124
+ * HJfod (Windows) | hjfod
+ * Pie (Windows) | poweredbypie
+ * Mat (Windows) | mat.4
+ * fig (Windows) | figmentboy
+ * ConfiG (Windows) | cgytrus
+ * Alk (MacOS) | alk1m123
+ * Camila (MacOS) | camila314

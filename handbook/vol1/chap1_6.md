@@ -138,7 +138,7 @@ That's it. As previously stated, this is [quite close to the standard node desig
 
 > :warning: It should be noted that not all layer's `init` functions have the same signature, and `$modify` requires the signature to **exactly match** in order to create a hook. Unfortunately, due to implementation problems, it also (currently) doesn't tell you if your signature is wrong, so you may find yourself scratching your head as to why your mod isn't working, only to realize the signature of `init` is off. Check [GeometryDash.bro](https://github.com/geode-sdk/geode/blob/main/bindings/GeometryDash.bro) to make sure the signature of your hook is correct!
 
-Now we are at an interesting point; we know how to hook to hook functions, we know what function from a layer to hook in order to modify it, and we know how to work with nodes. So, let's tie all of this together! Only 7 chapters in, [it's time for **Hello, World!**](/handbook/vol1/chap1_7.md)
+Now we are at an interesting point; we know how to hook functions, we know what function from a layer to hook in order to modify it, and we know how to work with nodes. So, let's tie all of this together! Only 7 chapters in, [it's time for **Hello, World!**](/handbook/vol1/chap1_7.md)
 
 ## Notes
 

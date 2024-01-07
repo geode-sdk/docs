@@ -50,5 +50,7 @@ class $modify(PlayerObject) {
 };
 ```
 
-\* Fields are constructed and destructed in a different address than they exist normally (yes I know ub but we kinda need the space optimization), so if you have a class that depends on the value of this inside the constructor/destructor, I would recommend using `std::unique_ptr` to contain the said object. One such example would be Geode's events, since they are registered to a global map in their constructor.
+## Note about addresses
+
+> :warning: Fields are constructed and destructed in a different address than they exist normally (required for space optimization), so **if you have a class that depends on the address of `this` inside the constructor/destructor**, use `std::unique_ptr` to contain the said object. One such example would be Geode's events, since they are registered to a global map in their constructor.
 

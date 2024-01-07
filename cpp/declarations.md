@@ -16,7 +16,7 @@ int someFunction(int a, int b);
 class SomeClass;
 ```
 
-These are also known as **forward declarations**. They are telling the compiler that you a symbol will exists, but you will only define it later on.
+These are also known as **forward declarations**. They are telling the compiler that a symbol will exist, but you will only define it later on.
 
 Forward declarations are most useful (and also necessary) when dealing with symbols that depend on each other, for example functions that call each other:
 
@@ -84,7 +84,23 @@ void sayHi() {
 }
 ```
 
-Of course, this example is quite simple, and not what most commonly causes headaches for new modders. The most common source of ODR problems is due to headers.
+Another important thing to note about ODR is that **it applies across all source files**. That is, if you have two different source files:
+
+```cpp
+// hi.cpp
+void sayHi() {
+    std::cout << "Hi mom!" << std::endl;
+}
+
+// hello.cpp
+void sayHi() {
+    std::cout << "Hello mom!" << std::endl;
+}
+```
+
+**This will also be considered an ODR violation.** Any definition of a C++ symbol in a source file is (usually) automatically visible to all other files, so the compiler will notice you have defined a function in multiple different sources and won't be able to decide which one to use.
+
+However, you will most likely rarely encounter ODR due to source files; rather, the most common source of ODR problems is due to headers.
 
 Say you have the following header, `hi.hpp`:
 

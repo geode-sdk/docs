@@ -6,7 +6,7 @@ Settings are covered [in their own tutorial](/mods/settings.md) - **this tutoria
 
 Unlike settings, save data does not need to be declared in `mod.json`, or anywhere else for that matter. Save data is automatically brought to life when you set it for the first time. Save data is, as the name implies, saved when the game is closed, and its previous state loaded back up the next time the game is opened.
 
-You can save any type of value as long as it implements `json::Serialize` (see the [STL container implementations](https://github.com/geode-sdk/json/blob/main/include/json/stl_serialize.hpp) for an example).
+You can save any type of value as long as it implements `matjson::Serialize` (see the [STL container implementations](https://github.com/geode-sdk/json/blob/main/include/matjson/stl_serialize.hpp) for an example).
 
 ## Setting & getting save data
 
@@ -22,16 +22,16 @@ struct MyCustomSaveData {
 };
 
 template<>
-struct json::Serialize<MyCustomSaveData> {
-    static MyCustomSaveData from_json(json::Value const& value) {
+struct matjson::Serialize<MyCustomSaveData> {
+    static MyCustomSaveData from_json(matjson::Value const& value) {
         return MyCustomSaveData {
             .x = value["x"].as_int(),
             .y = value["y"].as_int()
         };
     }
 
-    static json::Value to_json(MyCustomSaveData const& value) {
-        auto obj = json::Object();
+    static matjson::Value to_json(MyCustomSaveData const& value) {
+        auto obj = matjson::Object();
         obj["x"] = value.x;
         obj["y"] = value.y;
         return obj;

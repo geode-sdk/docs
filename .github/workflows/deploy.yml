@@ -39,20 +39,20 @@ jobs:
       - name: Download Flash
         uses: robinraju/release-downloader@v1.5
         with:
-          repository: hjfod/flash
+          repository: geode-sdk/flash
           latest: true
           fileName: "flash.exe"
           tarBall: false
           zipBall: false
           out-file-path: "" 
-      
+
       - name: Create dist directory
         run: |
           mkdir dist
-        
+
       - name: Build docs with Flash
         run: |
-          cd dist 
+          cd dist
           ./../flash.exe -i ../geode -o .
       
       - name: Setup Pages

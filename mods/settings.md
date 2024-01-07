@@ -128,11 +128,11 @@ class MySettingValue : public SettingValue {
     // you are free to do whatever!
 
 public:
-    bool load(json::Value const& json) override {
+    bool load(matjson::Value const& json) override {
         // load the value of the setting from json, 
         // returning true if loading was succesful
     }
-    bool save(json::Value& json) const override {
+    bool save(matjson::Value& json) const override {
         // save the value of the setting into json,
         // returning true if saving was succesful
     }
