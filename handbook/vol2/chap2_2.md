@@ -1,40 +1,45 @@
-# Chapter 2.2: Reverse Engineering
+# Chapter 2.2: Finding `MenuLayer::init`
 
-At this point in this handbook, **reverse engineering** (RE for short) has been alluded to and referred to numerous times. At its core, it is quite simply **the process of figuring out how something works**. However, in practice with GD, this often involves having to read assembly code, understanding how your computer works, and a lot of other deeply low-level stuff. And even so, it is fundamental to making mods, as **you can't modify something you don't understand**. This is why this handbook has an entire dedicated Volume just for reverse engineering; **it is difficult, it is complicated, and yet it's super important**. Every modder has to learn reverse engineering at some point or another, and it's best to start early.
+The first thing we have to figure out when finding functions is exactly what function we want to find. Often times, this is some layer's `init` function - however, it can also be any function responsible for some behaviour we want to alter, like the function that is responsible for scaling objects, the function that plays a level's song, or anything else.
 
-It should be noted that reverse engineering is also an ever-evolving skill; you're **never going to be done learning it**. This Volume covers many important aspects of it, but it should by no means be treated as a comprehensive list.
+Luckily for us, **pretty much all functions in GD are part of some class**. This means that to find a function, we first have to make an educated guess about what class it might be in, and use that as a starting point for figuring out where it actually is.
 
-But that's enough preface. Let's start actually **REing**!
+If you look at the Symbol Tree window in Ghidra, you will see it has a folder named Classes. Opening this folder reveals, to great surprise, every class in GD:
 
-## Tools
+![Picture showing the list of classes in GD open in Ghidra](/assets/handbook/vol2/classes_in_symbol_tree.png)
 
-There are a lot of tools GD modders use for reverse engineering, but some of the most common ones include:
+Now, there is one problem with this list: **there are a lot of classes in GD**. Just browsing this list is most likely not going to help you figure out where the function you're looking for is. Instead, first you need to make some guess about where to start.
 
- * [Ghidra](https://ghidra-sre.org/)
- * [IDA Pro](https://hex-rays.com/IDA-pro/) (which every modder most definitely has legally bought :wink:)
- * [x32dbg](https://x64dbg.com/) (Windows)
- * [Cheat Engine](https://cheatengine.org/) (Windows)
- * [ReClass](https://github.com/ReClassNET/ReClass.NET) (Windows)
- * [DevTools](https://github.com/geode-sdk/DevTools) (Traditionally [CocosExplorer](https://github.com/matcool/CocosExplorer))
- * [Slicer](https://github.com/zorgiepoo/Bit-Slicer) (Mac)
- * [LLDB](https://lldb.llvm.org/)
+For finding layers' `init` functions, this guess is very easy to make: just figure out the layer's name using DevTools, and it's probably in that class. 
 
-For this tutorial, we will be using **Ghidra** and **x32dbg**. 
+So, to find the `init` function for `MenuLayer`, lets first navigate to `MenuLayer`:
 
-## Setting Up Ghidra
+![Picture showing MenuLayer's vtable open in Ghidra](/assets/handbook/vol2/MenuLayer_in_ghidra.png)
 
-First, [download Ghidra](https://ghidra-sre.org/) and install it on your machine. Open it, **create a new project**, and you should see something like this: 
+Unfortunately, there are no functions listed, as Ghidra can't really know which functions belong to which class. However, what there is listed are the class's **virtual function tables**; in other words, a list of all the virtual functions a class has. While not every class's `init` function is virtual, in `MenuLayer`'s case it is, so we can actually find the `init` function through the vtable directly.
 
-![Image showing the project page of Ghidra](/assets/ghidra_start.png)
+Now, knowing exactly which index in the vtable is which virtual function is a bit difficult to figure out, but the jist is that virtual functions are in the order they were declared in the class itself. For `CCNode`, the first virtual function declared is `init` - however, as `CCNode` inherits from `CCObject` which has a bunch of a virtual functions of its own, `init` is not the first virtual function in the vtable, but instead the 10th.
 
-Now, drag Geometry Dash's binary (e.g. `GeometryDash.exe`) into the window, add it with the default settings, open it, and **Analyze it** with the default settings (if you're reverse engineering Android, disable the `Non returning functions: discovered` option). Depending on your computer, analyzing might take a while - go grab a cup of coffee while waiting for it to finish.
+If we look at the 10th function in `MenuLayer`'s vtable, we notice that it has a different name from the others:
 
-You should now see a window like this:
+![Picture showing MenuLayer's vtable open in Ghidra, focused on the index #9 which shows a function named FUN_005907b0 surrounded by other functions with human-readable names](/assets/handbook/vol2/MenuLayer_init.png)
 
-![Image showing the opened project in Ghidra](/assets/ghidra_window.png)
+The reason for this is that this function is the only one that's overridden - `MenuLayer` does not overwrite `setZOrder` for instance, so the function included in `MenuLayer`'s vtable is `CCNode::setZOrder`, whose name Ghidra knows as it is an exported symbol from `libcocos2d.dll`. However, because this function is overridden and defined in GD itself, Ghidra can't know its name. However, we know what its name is - it is `MenuLayer::init`!
 
-The three most important windows for our purposes are **Symbol Tree**, **Listing**, and **Decompiler**. You can close the others.
+![Picture showing MenuLayer::init's decompiled code open in Ghidra](/assets/handbook/vol2/MenuLayer_init_code.png)
 
-Now that we have Ghidra setup, it's time to learn how we can find a layer's `init` function.
+Double-clicking the function name to enter it, we can look at its decompiled code. Since it uses sprites like `logo.png` which we can know is only used in the main menu by playing the game, we can verify that this is most certainly the function we're looking for. We can give it the correct name by selecting the function name and pressing L:
 
-[Chapter 2.3: Finding Functions](/handbook/vol2/chap2_3.md)
+![Picture showing renaming MenuLayer::init in Ghidra](/assets/handbook/vol2/rename_MenuLayer_init.png)
+
+Now the function also appears under the `MenuLayer` class in the class list, which is very convenient.
+
+We can also fix the function's signature by right-clicking on it and selecting `Edit Function Signature`, setting its calling convention as `thiscall` and making it return a `bool`:
+
+![Picture showing fixing MenuLayer::init's signature in Ghidra using the Edit Function Signature option](/assets/handbook/vol2/correct_MenuLayer_init_sig.png)
+
+![Picture showing MenuLayer::init under MenuLayer in Ghidra](/assets/handbook/vol2/MenuLayer_init_in_list.png)
+
+Congratulations, you have reverse-engineered your first function! However, let's not stop here - let's find some other, a little more obscure `init` functions:
+
+[Chapter 2.3: Finding `LevelSettingsLayer::init`](/handbook/vol2/chap2_4.md)

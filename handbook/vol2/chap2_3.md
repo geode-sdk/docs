@@ -1,39 +1,84 @@
-# Chapter 2.3: Finding Functions
+# Chapter 2.3: Finding `LevelSettingsLayer::init`
 
-The first thing we have to figure out when finding functions is exactly what function we want to find. Often times, this is some layer's `init` function - however, it can also be any function responsible for some behaviour we want to alter, like the function that is responsible for scaling objects, the function that plays a level's song, or anything else.
+Not all `init` functions are found on the vtable however. The only reason `MenuLayer::init` is on there is because it takes no extra parameters - so it overrides `CCNode::init`. However, if the init function has any parameters, it has a different name, or the class doesn't inherit from `CCNode`, then you most likely won't find it on the vtable (unless it is explicitly marked virtual).
 
-Luckily for us, **pretty much all functions in GD are part of some class**. This means that to find a function, we first have to make an educated guess about what class it might be in, and use that as a starting point for figuring out where it actually is.
+Luckily, finding non-virtual `init` functions is still quite easy! As an example, let's find the `init` function for `LevelSettingsLayer`!
 
-If you look at the Symbol Tree window in Ghidra, you will see it has a folder named Classes. Opening this folder reveals, to great surprise, every class in GD:
+![Picture showing LevelSettingsLayer open in the Ghidra class list](/assets/handbook/vol2/LevelSettingsLayer_in_tree.png)
 
-![Picture showing the list of classes in GD open in Ghidra](/assets/classes_in_symbol_tree.png)
+Let's start as before by finding `LevelSettingsLayer` in the Ghidra class list (tip: you can use the search function at the bottom!). Click any of the vtables to navigate to that vtable in the disassembly view.
 
-Now, there is one problem with this list: **there are a lot of classes in GD**. Just browsing this list is most likely not going to help you figure out where the function you're looking for is. Instead, first you need to make some guess about where to start.
+![Picture showing a vtable for LevelSettingsLayer, with two XREFs](/assets/handbook/vol2/LevelSettingsLayer_vtable_ctor_xref.png)
 
-For finding layers' `init` functions, this guess is very easy to make: just figure out the layer's name using DevTools, and it's probably in that class. 
+Now, check the XREFs - for most classes, there should be two [[Note 1]](#notes). One of these is the constructor, and the other is the destructor. Pick one, and see which one it is - we are looking for the constructor.
 
-So, to find the `init` function for `MenuLayer`, lets first navigate to `MenuLayer`:
+![Picture showing one of the XREFs for LevelSettingsLayer open in the decompiler, likely being the constructor](/assets/handbook/vol2/LevelSettingsLayer_ctor.png)
 
-![Picture showing MenuLayer's vtable open in Ghidra](/assets/classes_in_symbol_tree.png)
+Ah, this is likely the constructor! You can tell this by the fact that it initializes a bunch of fields in the class pointer to their default values, as well as that it contains a single call to the base constructor. Although, the base constructor is unknown - double-click it to find out what it is!
 
-Unfortunately, there are no functions listed, as Ghidra can't really know which functions belong to which class. However, what there is listed are the class's **virtual function tables**; in other words, a list of all the virtual functions a class has. While not every class's `init` function is virtual, in `MenuLayer`'s case it is, so we can actually find the `init` function through the vtable directly.
+![Picture showing FLAlertLayer's constructor open in the decompiler](/assets/handbook/vol2/FLAlertLayer_ctor.png)
 
-Now, knowing exactly which index in the vtable is which virtual function is a bit difficult to figure out, but the jist is that virtual functions are in the order they were declared in the class itself. For `CCNode`, the first virtual function declared is `init` - however, as `CCNode` inherits from `CCObject` which has a bunch of a virtual functions of its own, `init` is not the first virtual function in the vtable, but instead the 10th.
+Judging by the vtables, this seems to quite clearly be `FLAlertLayer`'s constructor. So let's rename the function to `FLAlertLayer::FLAlertLayer` and press `Alt + Left Arrow` to go back to the previous constructor (note: you may have to press it multiple times because Ghidra is quirky like that).
 
-If we look at the 10th function in `MenuLayer`'s vtable, we notice that it has a different name from the others:
+![Picture showing LevelSettingsLayer constructor renamed to the correct name](/assets/handbook/vol2/LevelSettingsLayer_ctor_renamed.png)
 
-![Picture showing MenuLayer's vtable open in Ghidra, focused on the index #9 which shows a function named FUN_005907b0 surrounded by other functions with human-readable names](/assets/MenuLayer_init.png)
+Now check the XREFs for the `LevelSettingsLayer` constructor. There's likely only one [[Note 1]](#notes) - click it to follow the reference.
 
-The reason for this is that this function is the only one that's overridden - `MenuLayer` does not overwrite `setZOrder` for instance, so the function included in `MenuLayer`'s vtable is `CCNode::setZOrder`, whose name Ghidra knows as it is an exported symbol from `libcocos2d.dll`. However, because this function is overridden and defined in GD itself, Ghidra can't know its name. However, we know what its name is - it is `MenuLayer::init`!
+![Picture showing `LevelSettingsLayer::create`](/assets/handbook/vol2/LevelSettingsLayer_create.png)
 
-![Picture showing MenuLayer::init's decompiled code open in Ghidra](/assets/MenuLayer_init_code.png)
+Hm, okay, let's analyze this code a little bit. First it calls `operator new`, then it checks if that was null, then calls a function on the returned value, and if that function returned a truthy value, it calls `autorelease` and returns the value.
 
-Double-clicking the function name to enter it, we can look at its decompiled code. Since it uses sprites like `logo.png` which we can know is only used in the main menu by playing the game, we can verify that this is most certainly the function we're looking for. We can give it the correct name by selecting the function name and pressing L:
+This looks very familiar - this is the structure of a `create` function:
 
-![Picture showing renaming MenuLayer::init in Ghidra](/assets/rename_MenuLayer_init.png)
+```cpp
+LevelSettingsLayer* LevelSettingsLayer::create(...) {
+    auto ret = new LevelSettingsLayer();
+    if (ret) {
+        if (ret->init(...)) {
+            ret->autorelease();
+            return ret;
+        }
+        delete ret;
+    }
+    return nullptr;
+}
+```
 
-Now the function also appears under the `MenuLayer` class in the class list, which is very convenient.
+We can be almost certain that this is the `create` function, which means that the one unknown function call we have before the call to `autorelease` must be `LevelSettingsLayer::init` - double click the function to make sure!
 
-![Picture showing MenuLayer::init under MenuLayer in Ghidra](/assets/MenuLayer_init_in_list.png)
+![Picture showing an unknown function call at the start of what we assume to be `LevelSettingsLayer::init`](/assets/handbook/vol2/LevelSettingsLayer_base_init_call.png)
 
-## Finding non-virtual init functions
+Hm, there's a call to some unknown function at the start, whose return value the code checks to be truthy before doing anything else, and if it's false then it does nothing but propagate that information up to the original caller. Sounds very similar to the structure of an `init` function:
+
+```cpp
+bool LevelSettingsLayer::init(...) {
+    if (!FLAlertLayer::init(...))
+        return false;
+
+    ...
+
+    return true;
+}
+```
+
+Let's make sure by checking out the unknown function's body:
+
+![Picture showing what is clearly `FLAlertLayer::init`](/assets/handbook/vol2/FLAlertLayer_init.png)
+
+OK, this is clearly an `init` function. Since we know from the constructor that the base class of `LevelSettingsLayer` is `FLAlertLayer`, that means that this is most likely `FLAlertLayer::init` [[Note 2]](#notes). That means that the other function we found is very likely `LevelSettingsLayer::init` as well, so let's rename both approppriately:
+
+![Picture showing fixing `LevelSettingsLayer::init`'s signature](/assets/handbook/vol2/LevelSettingsLayer_init_rename.png)
+
+Well. Hmm. We know that any `init` function returns a bool, but what about these parameters? `LevelSettingsLayer` probably doesn't actually take a bare `CCObject*` and `undefined4` is definitely not the correct type - but how do we find the real ones?
+
+And besides, what we have done know is still just educated guesses, though they are very good guesses. For example, we guessed that the name of the init function is `init` - however, it could also just as well be something like `initWithObject`. Could we gain a little more certainty? It would be really convenient if there was something we could compare this against - something we know to be correct.
+
+Well, luckily, there is: Android!
+
+[Chapter 2.4: Comparing against Android](/handbook/vol2/chap2_4.md)
+
+## Notes
+
+> [Note 1] If there are multiple XREFs, it's likely that either the create function for the class has either been inlined, or there are multiple or them - RE to find out what is the case!
+
+> [Note 2] The base `init` call is not necessarily a call to the actual base class's `init` for two reasons: inlining and the code not doing that. You can figure out what is the case by comparing against Android (explained in Chapter 3)

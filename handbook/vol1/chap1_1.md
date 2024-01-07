@@ -6,7 +6,7 @@ A **mod** (also known as an **extension**, **hack**, or **plugin**) is a piece o
 
 But how exactly does a mod work? The actual executable file for Geometry Dash that you have installed on your computer is what is known as an **executable binary program**. If you open the game's executable with a text editor, you will see a bunch of random-looking characters. This is, in fact, the game's code; however it is _not_ its **source code**. This is **binary code**, the raw low-level instructions your CPU executes. If we had the game's source code, we could create a fork of it and add built-in mod loader support. However, as Geometry Dash is closed-source, we have to deal with modifying the binary code.
 
-![Image showcasing GeometryDash.exe open in Notepad, showing garbled characters that are the game's binary code interpreted as ASCII](/assets/gd_in_notepad.png)
+![Image showcasing GeometryDash.exe open in Notepad, showing garbled characters that are the game's binary code interpreted as ASCII](/assets/handbook/vol1/gd_in_notepad.png)
 
 Modifying binary code is a bit difficult, however, as it is not meant to be for humans; binary code is strictly for computers, and as such it is unreadable and unmodifiable for a human. Binary code is also **platform-specific**: a mod written purely in binary would only work on one platform, and could not be ported over to others without fully rewriting the entire mod from the ground up.
 

@@ -22,7 +22,7 @@ As Cocos2d is a node-based framework, nearly all nodes are **aggregates** of oth
 
 For example, here is **the structure of a comment** in GD:
 
-![Image showing the structure of a CommentCell in GD](/assets/CommentCell_dissected.png)
+![Image showing the structure of a CommentCell in GD](/assets/handbook/vol1/CommentCell_dissected.png)
 
 As you can see, the `CommentCell` class consists wholly of other nodes. It does not do any of its own rendering. The position of the nodes (relative to the parent `CommentCell`) is marked in parenthesis; one important thing to note about Cocos2d is that unlike some other game frameworks, **higher Y-coordinate means higher on screen**.
 

@@ -177,7 +177,7 @@ class $modify(MenuLayer) {
 
 To try the mod out, [create a new mod using `geode new`](/geode/creating), and then replace the code in `src/main.cpp` with the above. After building the mod, open up GD and you should see this:
 
-![Image showing the main menu in GD with a 'Hello, world' text on top](/assets/hello_world.png)
+![Image showing the main menu in GD with a 'Hello, world' text on top](/assets/handbook/vol1/hello_world.png)
 
 If it works for you, **congratulations!** You have now officially built your first Geometry Dash mod! Go grab a lil orange juice from the kitchen and give yourself a little treat :)
 
