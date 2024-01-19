@@ -20,7 +20,7 @@ void MenuLayer_onNewgrounds(MenuLayer* self, CCObject* sender) {
 }
 
 $execute {
-    Mod::get()->addHook(
+    Mod::get()->hook(
         reinterpret_cast<void*>(geode::base::get() + 0x191E90), // address
         &MenuLayer_onNewgrounds, // detour
         "MenuLayer::onNewgrounds", // display name, shows up on the console
@@ -41,7 +41,7 @@ void myDrawCircle(const cocos2d::CCPoint& center, float radius, float angle, uns
 }
 
 $execute {
-    Mod::get()->addHook(
+    Mod::get()->hook(
         reinterpret_cast<void*>(
             // All of this is to get the address of ccDrawCircle
             geode::addresser::getNonVirtual(
