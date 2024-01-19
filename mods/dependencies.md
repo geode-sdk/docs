@@ -33,7 +33,7 @@ Dependencies can be added to your mod by simply adding it to the `dependencies` 
         {
             "id": "someone-elses.mod",
             "version": ">=v1.2.5",
-            "required": true
+            "importance": "required"
         }
     ]
 }
@@ -55,7 +55,7 @@ The mod `hjfod.gmd-api` contains utilities for working with [.GMD files](https:/
         {
             "id": "hjfod.gmd-api",
             "version": ">=v1.0.0",
-            "required": true
+            "importance": "required"
         }
     ]
 }
