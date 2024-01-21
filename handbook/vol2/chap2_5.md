@@ -64,4 +64,4 @@ Right now, reverse engineering should seem a little less mystifying, however the
 
 Before we can delve into that, we first need to learn a bit about assembly:
 
-[Chapter 2.6: Introduction to Assembly](/handbook/vol2/chap2_5.md)
+[Chapter 2.6: Introduction to Assembly](/handbook/vol2/chap2_6.md)
