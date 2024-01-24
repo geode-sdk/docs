@@ -6,12 +6,12 @@ order: 2
 # Required C++ Tools
 To be able to use the Geode SDK, you **will** need at least the following:
 * [A C++ compiler](#compiler)
-* [CMake](https://cmake.org/download/)
+* [CMake](https://cmake.org/download/) - Version 3.21+ is required, and make sure to add to PATH when installing on windows.
 * [git](https://git-scm.com/downloads)
 
 ## Compiler
 To use the Geode SDK, and in turn make Geometry Dash mods, you will need either:
-* [Visual Studio](#windows) on Windows
+* [Visual Studio 2022+](#windows) on Windows
 * [clang](#macos) on MacOS
 * [A secret third thing](#linux) on Linux
 
@@ -21,6 +21,8 @@ From the [Visual Studio](https://visualstudio.microsoft.com/downloads/) website,
 After launching the installer, look for **Desktop development with C++**. You may choose other features, but you **will** need at least ***MSVC*** and ***Windows SDK*** installed.
 
 Once its installed, you should now have a working C++ compiler installed that is suited for GD mod development.
+
+Please note that Visual Studio **2022** or higher is required. 2019 might work but anything lower will definitely not, as they don't support C++20 properly.
 
 ### MacOS
 
