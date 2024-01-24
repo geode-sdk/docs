@@ -13,36 +13,57 @@ If youre using some IDE you may want to do a few things for your Geode projects.
 
 # Visual Studio Code
 
-For VSCode, we recommend a few extensions:
-- `C/C++` on Windows
-- `clangd` on MacOS
-- `CMake Tools`
-- `Geode`
+* [VSCode on Windows](#vscode-on-windows)
+* [VSCode on Mac](#vscode-on-mac)
 
-None of these extensions are "required", but they will make your experience much better.
+## VSCode on Windows
+
+For VSCode, we recommend a few extensions:
+- `C/C++`
+- `CMake Tools`
+- `Geode` - Not required, but will provide some nice features.
 
 There are a few steps you should follow to get proper intellisense (you should only need to do these once per project, ideally):
 
-<!-- TODO: i dont like how much text there is here :( its kinda confusing -->
 
-1. With VSCode open on your project, press **F1** and run `CMake: Select a Kit`. This will bring up a list of installed compilers on your machine.
-![Image showing a bunch of compilers CMake detected in VS Code](/assets/win_compilers.png)\
-On **Windows**, you should go with a Visual Studio compiler that is either `x86` or `amd64_x86`. Note that there is also an `x86_amd64` compiler - you don't want to pick that one!\
+1. With VSCode open on your project, **press F1** and run `CMake: Select a Kit`. This will bring up a list of installed compilers on your machine.
+![Image showing a bunch of compilers CMake detected in VS Code](/assets/win_compilers.png) \
 \
-On **Mac**, you should go with Clang.
+You should pick a **Visual Studio** compiler, using either the `x86` or `amd64_x86` version. Nothing else!!
 
-    * If you're on **Windows**, press **F1** again and run `CMake: Select Variant`.
-![Image showing available build types on Windows: Debug, Release, MinSizeRel, and RelWithDebInfo](/assets/win_relwithdebinfo.png)\
-You should go with either `RelWithDebInfo` (recommended at least for development) or `Release`.
+> :warning: Please pay attention to this
+2. Now select the build variant, **press F1** and run `CMake: Select Variant`. \
+**YOU MUST PICK ANYTHING BUT DEBUG** or your mod will not compile. We recommend **RelWithDebInfo** for easier debugging.
+![Image showing available build types on Windows: Debug, Release, MinSizeRel, and RelWithDebInfo](/assets/win_relwithdebinfo.png)
 
-2. On **Windows**, register CMake as the **Configuration Provider** for the C++ extension by running `C/C++: Edit Configurations (UI)`.\
-\
+3. Register CMake as the **Configuration Provider** for the C++ extension by **pressing F1** and running `C/C++: Edit Configurations (UI)`:\
 Scroll down to **Advanced** options, and set the Configuration Provider as `ms-vscode.cmake-tools`.
 ![Image showing the "C/C++: Edit Configurations (UI)" command being run in VS Code](/assets/win_usecmake.png)
 
-Now if you run `CMake: Configure`, assuming you have Geode properly installed, the include errors should go away.
+Now, **build your mod** by **pressing F1** and running `CMake: Build`. \
+You **must** build your mod first so that errors such as `#include <Geode/modify/MenuLayer.hpp> not found` go away.
 
-If the errors still persist, try building the mod with `CMake: Build`. If the build is successful but the errors don't disappear, try restarting VS Code.
+Make sure your mod built successfully, the exit code at the end should be 0.
+
+If the errors still persist, try restarting VS Code.
+
+## VSCode on Mac
+
+For VSCode, we recommend a few extensions:
+- `clangd`
+- `CMake Tools`
+- `Geode` - Not required, but will provide some nice features.
+
+There are a few steps you should follow to get proper intellisense (you should only need to do these once per project, ideally):
+
+1. With VSCode open on your project, **press F1** and run `CMake: Select a Kit`. You should choose **clang**
+
+Now, **build your mod** by **pressing F1** and running `CMake: Build`. \
+You **must** build your mod first so that errors such as `#include <Geode/modify/MenuLayer.hpp> not found` go away.
+
+Make sure your mod built successfully, the exit code at the end should be 0.
+
+If the errors still persist, try restarting VS Code.
 
 # Visual Studio
 TODO
