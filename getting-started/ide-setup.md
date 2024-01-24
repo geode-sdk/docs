@@ -33,11 +33,12 @@ You should pick a **Visual Studio** compiler, using either the `x86` or `amd64_x
 
 > :warning: Please pay attention to this
 2. Now select the build variant, **press F1** and run `CMake: Select Variant`. \
-**YOU MUST PICK ANYTHING BUT DEBUG** or your mod will not compile. We recommend **RelWithDebInfo** for easier debugging.
+**YOU MUST PICK ANYTHING BUT DEBUG** or your mod will not compile. \
+We recommend **RelWithDebInfo** for easier debugging. \
 ![Image showing available build types on Windows: Debug, Release, MinSizeRel, and RelWithDebInfo](/assets/win_relwithdebinfo.png)
 
 3. Register CMake as the **Configuration Provider** for the C++ extension by **pressing F1** and running `C/C++: Edit Configurations (UI)`:\
-Scroll down to **Advanced** options, and set the Configuration Provider as `ms-vscode.cmake-tools`.
+Scroll down to **Advanced** options, and set the Configuration Provider as `ms-vscode.cmake-tools`. \
 ![Image showing the "C/C++: Edit Configurations (UI)" command being run in VS Code](/assets/win_usecmake.png)
 
 Now, **build your mod** by **pressing F1** and running `CMake: Build`. \
