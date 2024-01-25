@@ -22,7 +22,7 @@ After launching the installer, look for **Desktop development with C++**. You ma
 
 Once its installed, you should now have a working C++ compiler installed that is suited for GD mod development.
 
-Please note that Visual Studio **2022** or higher is required. 2019 might work but anything lower will definitely not, as they don't support C++20 properly.
+Please note that Visual Studio **2022** or higher is required. 2019 or lower will not work, as they don't support C++20 properly.
 
 ### MacOS
 
