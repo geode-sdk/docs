@@ -4,15 +4,21 @@ Once your awesome mod that adds sex to Geometry Dash is finished, it's time to p
 
 ## Getting Your Mod on the Repo
 
-The mods repo uses an automated system, where the mods' built `.geode` packages are hosted on a repository of your own known as an **indexer**, and automatically merged into the main `mods` repository from there. To get started, build your mod, then run `geode project publish` in the project's directory (or `geode project publish -p <path/to/the/.geode>`, if it's built from a Github Action or the `.geode` package is otherwise located elsewhere than the project's `build` directory). Follow the instructions provided by CLI to create a fork of the indexer.
+> :warning: If you want to submit a mod to the official mod index, **please** provide source code! Create a GitHub repository for it or something.
 
-Once you have the fork created, you can publish mods by just running `geode project publish` in the mods' project directory after building it.
+*This process might change in the future, whenever we switch to a server.*
 
-**If your mod is built with a Github Action** (for cross-platform support), you can provide an explicit path argument with `-p` to `geode project publish`.
+Submitting a mod to the official mod index is quite simple.
+1. Build and release your mod somewhere. We highly recommend GitHub releases.
+1. Create an issue on the [indexer](https://github.com/geode-sdk/indexer) repository, using the "Add an entry" template.
+1. Provide a **direct download link** to the .geode file
+1. Create the issue.
 
-`geode project publish` will tell you to open up a pull request on your indexer – do so to let us know you are ready to publish! Once your pull request has been made, one of the lead Geode developers will check that [it adheres to all guidelines](/source/guidelines.md), and approve the mod to the repo, or say what needs to be changed for it to be approved.
+Now, you will just have to wait until one of the staff accepts the mod.
 
-To release an update, just follow the same process as for publishing new mods.
+**To release an update**, just follow the same process as for publishing new mods. If you are using GitHub release, **please** do not update the same release over and over, create new ones instead.
+
+> :warning: Make sure to increase your mod version when updating it!!
 
 ## Guidelines
 
