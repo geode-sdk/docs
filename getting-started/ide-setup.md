@@ -67,6 +67,17 @@ Make sure your mod built successfully, the exit code at the end should be 0.
 If the errors still persist, try restarting VS Code.
 
 # Visual Studio
-TODO
+
+Modern Visual Studio can handle CMake projects, so assuming your VS has CMake support, just open your mod project folder.
+
+Now, before you build, make sure to change these settings:
+
+1. Click the Debug options
+1. Manage Configurations
+1. Change config type to Release or RelWithDebInfo. You **cannot** use Debug for this..
+1. Change toolset to x86
+
+Now you may build your mod!
+
 # Clion
 TODO
