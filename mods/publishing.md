@@ -10,7 +10,7 @@ Once your awesome mod that adds sex to Geometry Dash is finished, it's time to p
 
 Submitting a mod to the official mod index is quite simple.
 1. Build and release your mod somewhere. We highly recommend GitHub releases.
-1. Create an issue on the [indexer](https://github.com/geode-sdk/indexer) repository, using the "Add an entry" template.
+1. Create an issue on the [indexer](https://github.com/geode-sdk/indexer) repository, using the "Add/Update an entry" template.
 1. Provide a **direct download link** to the .geode file
 1. Create the issue.
 
