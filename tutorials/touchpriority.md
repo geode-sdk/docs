@@ -34,6 +34,6 @@ If your popup subclasses `geode::Popup<>`, the registering and unregistering is 
 
 If you're adding new touch layers after the initiation has been done, you can again call `geode::cocos::handleTouchPriority` for redoing the touch priorities for the new layers.
 
-If you're not using `geode::Popup<>` class and directly subclassing `FLAlertLayer` instead, you should call `FLAlertLayer::int(int opacity)` inside your init. This will handle the registering of the force priority, along with creating the `m_mainLayer`. The `FLAlertLayer::registerWithTouchDispatcher` handles the delegate, and `~FLAlertLayer` handles unregistering of the force priority.
+If you're not using `geode::Popup<>` class and directly subclassing `FLAlertLayer` instead, you should call `FLAlertLayer::init(int opacity)` inside your init. This will handle the registering of the force priority, along with creating the `m_mainLayer`. The `FLAlertLayer::registerWithTouchDispatcher` handles the delegate, and `~FLAlertLayer` handles unregistering of the force priority.
 
 If you don't want to use the geode utility and set the priorities manually, you can call `CCLayer::setTouchPriority`/`CCMenu::setHandlerPriority` on your layer with the `CCTouchDispatcher::getTargetPrio` value.
