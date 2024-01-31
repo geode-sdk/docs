@@ -7,7 +7,7 @@ order: 2
 To be able to use the Geode SDK, you **will** need at least the following:
 * [A C++ compiler](#compiler)
 * [CMake](https://cmake.org/download/) - Version 3.21+ is required, and make sure to add to PATH when installing on windows.
-* [git](https://git-scm.com/downloads)
+* [git](https://git-scm.com/downloads) - Hey you. yes you. I know a lot of people skip this **but you will need it**. Don't come at us asking for why "could not find git for clone of json-populate"
 
 ## Compiler
 To use the Geode SDK, and in turn make Geometry Dash mods, you will need either:
