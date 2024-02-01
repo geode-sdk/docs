@@ -88,7 +88,7 @@ Here you need to make sure that:
 
 1. Build type is set to Release or RelWithDebInfo, it **cannot** be Debug
 2. Toolchain is set to *Visual Studio*
-3. Generator is set to *Visual Studio 17 2022*
+3. Generator is set to *Visual Studio 17 2022* or newer
 4. Build directory is set to *build*
 5. CMake options contains `-A win32`
 
@@ -121,10 +121,3 @@ reload CMake now, this run should end successfully with a message saying `[Finis
 ![Image showing how to rerun CMake in CLion](/assets/clion_reloadcmake.png)
 
 Don't forget to reload CMake after you add new files to the project.
-
-
-
-
-
-
-
