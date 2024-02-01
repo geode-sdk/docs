@@ -134,4 +134,3 @@ reload CMake now, this run should end successfully with a message saying `[Finis
 ![Image showing how to rerun CMake in CLion](/assets/clion_reloadcmake.png)
 
 Don't forget to reload CMake after you add new files to the project.
-0 comments on commit 86166a5
