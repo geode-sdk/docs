@@ -5,7 +5,7 @@ order: 6
 
 # IDE Setup
 
-If you're using some IDE you may want to do a few things for your Geode projects.
+If youre using some IDE you may want to do a few things for your Geode projects.
 
 * [Visual Studio Code](#visual-studio-code)
 * [Visual Studio](#visual-studio)
@@ -68,56 +68,30 @@ If the errors still persist, try restarting VS Code.
 
 # Visual Studio
 
-Modern Visual Studio can handle CMake projects, so assuming your VS has CMake support, just open your mod project folder.
+Some Visual Studio experience is recommended before you try to use this, but if you don't then you'll probably be fine.
 
-Now, before you build, make sure to change these settings:
+Modern Visual Studio can handle CMake projects automatically, so assuming your VS has CMake support, just open your mod project folder. You'll know it's working if a console opens up at the bottom of your Visual Studio, and it starts gathering information from CMake.
 
-1. Click the Debug options
-2. Manage Configurations
-3. Change config type to Release or RelWithDebInfo. You **cannot** use Debug for this.
-4. Change toolset to x86
+Now, before you build, make sure to change these settings (these need to be changed in every single project you make):
 
-Now you may build your mod! If your mod successfully built (you should see some info about your .geode file being installed) and you still have errors, **restart Visual Studio** to make them go away.
+1. Click the Debug options (This is usually a drop-down menu at the top of your screen that says "x64-Debug")
+1. Click "Manage Configurations" inside that drop-down \
+![Image showing the Manage Configurations button in the drop-down](/assets/vs_manage_configurations.png)
 
-# CLion
+1. Change config type to Release or RelWithDebInfo. We recommend RelWithDebInfo, since it provides easier debugging. You **cannot** use Debug for this!
+1. Change toolset to x86 (`msvc_x86`)
+1. At this point you can also give your configuration a friendly name such as "default" or "release" or "mat" or something like that.
+1. And make sure to press Ctrl+S to save your changes
 
-No additional plugins are needed, the only thing you need to do is to set the CMake options correctly. When you open your mod's directory in CLion for the first time, you'll be met with an Open Project Wizard:
-![Image showing the CLion Open Project Wizard](/assets/clion_openprojectwizard.png)
+Here's an example of a configuration that should work:
+![Image showing a config that should work](/assets/vs_example_config.png)
 
-Here you need to make sure that:
 
-1. Build type is set to Release or RelWithDebInfo, it **cannot** be Debug
-2. Toolchain is set to *Visual Studio*
-3. Generator is set to *Visual Studio 17 2022* or newer
-4. Build directory is set to *build*
-5. CMake options contains `-A win32`
+Now you may build your mod, by pressing F7 or Ctrl+B (If those keybinds don't work, click Build at the top, then either Build or Build All)
 
-In the end it should look like this:  
-![Image showing the CLion Open Project Wizard set up for Geode](/assets/clion_openprojectwizardsetup.png)
+If there are errors similar to VSCode (such as `#include <Geode/modify/MenuLayer.hpp> not found`) after you've built, restarting Visual Studio should make them go away.
 
-Now you can click OK and CMake will run for the first time. The setup **will fail** until you build the project for the first time. \
-In order to do that, go to the top right corner of the window where you'll see a dropdown saying *Add Configuration...*  
-![Image showing the CLion Add Configuration dropdown](/assets/clion_addconfiguration.png)
+If you get an error about Geode needing to be compiled for 32-bit, that means you didn't change your toolset to x86 above.
 
-Click it and choose *Edit Configurations...* and you'll be met with the Run/Debug Configurations window. Inside of it, click \
-the plus button in the top left corner of the window and choose *CMake Application* from the popup:  
-![Image showing the CLion Run/Debug Configurations window](/assets/clion_rundebugwindow.png)
-
-In the created configuration, click the *Target* dropdown and choose *All Targets*. You can also change the name to \
-something else than "Unnamed".  
-![Image showing the CLion Run/Debug Configurations window with a configuration set up to compile the mod](/assets/clion_rundebugsetup.png)
-
-Once that's done, you can click Apply and then OK. If it hasn't already, wait for CMake to finish its run. It might look \
-something like this, with a line at the end saying `[Failed to reload]`  
-![Image showing the failed CMake run output](/assets/clion_cmakerunfailed.png)
-
-Now click the hammer icon in the top right corner next to build the mod for the first time - **make sure** that the dropdowns \
-next to it say *RelWithDebInfo* and *Build Mod* (or however you called your build task in the step before):  
-![Image showing the build button in CLion](/assets/clion_buildmod.png)
-
-The build should end with a message saying `Build finished` (assuming you ran `geode config setup` before) and the empty mod \
-should now be installed in the specified Geometry Dash instance. In order to make all the IDE features work correctly, \
-reload CMake now, this run should end successfully with a message saying `[Finished]` at the end:  
-![Image showing how to rerun CMake in CLion](/assets/clion_reloadcmake.png)
-
-Don't forget to reload CMake after you add new files to the project.
+# Clion
+TODO
