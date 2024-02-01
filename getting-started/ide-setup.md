@@ -5,7 +5,7 @@ order: 6
 
 # IDE Setup
 
-If youre using some IDE you may want to do a few things for your Geode projects.
+If you're using some IDE you may want to do a few things for your Geode projects.
 
 * [Visual Studio Code](#visual-studio-code)
 * [Visual Studio](#visual-studio)
