@@ -77,7 +77,7 @@ Now, before you build, make sure to change these settings:
 3. Change config type to Release or RelWithDebInfo. You **cannot** use Debug for this.
 4. Change toolset to x86
 
-Now you may build your mod!
+Now you may build your mod! If your mod successfully built (you should see some info about your .geode file being installed) and you still have errors, **restart Visual Studio** to make them go away.
 
 # CLion
 
