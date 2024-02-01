@@ -9,7 +9,7 @@ If you're using some IDE you may want to do a few things for your Geode projects
 
 * [Visual Studio Code](#visual-studio-code)
 * [Visual Studio](#visual-studio)
-* [Clion](#clion)
+* [CLion](#clion)
 
 # Visual Studio Code
 
@@ -68,19 +68,32 @@ If the errors still persist, try restarting VS Code.
 
 # Visual Studio
 
-Modern Visual Studio can handle CMake projects, so assuming your VS has CMake support, just open your mod project folder.
+Some Visual Studio experience is recommended before you try to use this, but if you don't then you'll probably be fine.
 
-Now, before you build, make sure to change these settings:
+Modern Visual Studio can handle CMake projects automatically, so assuming your VS has CMake support, just open your mod project folder. You'll know it's working if a console opens up at the bottom of your Visual Studio, and it starts gathering information from CMake.
 
-1. Click the Debug options
-2. Manage Configurations
-3. Change config type to Release or RelWithDebInfo. You **cannot** use Debug for this.
-4. Change toolset to x86
+Now, before you build, make sure to change these settings (these need to be changed in every single project you make):
 
-Now you may build your mod! If your mod successfully built (you should see some info about your .geode file being installed) and you still have errors, **restart Visual Studio** to make them go away.
+1. Click the Debug options (This is usually a drop-down menu at the top of your screen that says "x64-Debug")
+1. Click "Manage Configurations" inside that drop-down \
+![Image showing the Manage Configurations button in the drop-down](/assets/vs_manage_configurations.png)
+
+1. Change config type to Release or RelWithDebInfo. We recommend RelWithDebInfo, since it provides easier debugging. You **cannot** use Debug for this!
+1. Change toolset to x86 (`msvc_x86`)
+1. At this point you can also give your configuration a friendly name such as "default" or "release" or "mat" or something like that.
+1. And make sure to press Ctrl+S to save your changes
+
+Here's an example of a configuration that should work:
+![Image showing a config that should work](/assets/vs_example_config.png)
+
+
+Now you may build your mod, by pressing F7 or Ctrl+B (If those keybinds don't work, click Build at the top, then either Build or Build All)
+
+If there are errors similar to VSCode (such as `#include <Geode/modify/MenuLayer.hpp> not found`) after you've built, restarting Visual Studio should make them go away.
+
+If you get an error about Geode needing to be compiled for 32-bit, that means you didn't change your toolset to x86 above.
 
 # CLion
-
 No additional plugins are needed, the only thing you need to do is to set the CMake options correctly. When you open your mod's directory in CLion for the first time, you'll be met with an Open Project Wizard:
 ![Image showing the CLion Open Project Wizard](/assets/clion_openprojectwizard.png)
 
