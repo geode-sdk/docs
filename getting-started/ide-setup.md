@@ -9,7 +9,7 @@ If you're using some IDE you may want to do a few things for your Geode projects
 
 * [Visual Studio Code](#visual-studio-code)
 * [Visual Studio](#visual-studio)
-* [Clion](#clion)
+* [CLion](#clion)
 
 # Visual Studio Code
 
@@ -93,7 +93,7 @@ If there are errors similar to VSCode (such as `#include <Geode/modify/MenuLayer
 
 If you get an error about Geode needing to be compiled for 32-bit, that means you didn't change your toolset to x86 above.
 
-# Clion
+# CLion
 No additional plugins are needed, the only thing you need to do is to set the CMake options correctly. When you open your mod's directory in CLion for the first time, you'll be met with an Open Project Wizard:
 ![Image showing the CLion Open Project Wizard](/assets/clion_openprojectwizard.png)
 
