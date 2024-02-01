@@ -5,7 +5,7 @@ order: 6
 
 # IDE Setup
 
-If youre using some IDE you may want to do a few things for your Geode projects.
+If you're using some IDE you may want to do a few things for your Geode projects.
 
 * [Visual Studio Code](#visual-studio-code)
 * [Visual Studio](#visual-studio)
@@ -73,9 +73,9 @@ Modern Visual Studio can handle CMake projects, so assuming your VS has CMake su
 Now, before you build, make sure to change these settings:
 
 1. Click the Debug options
-1. Manage Configurations
-1. Change config type to Release or RelWithDebInfo. You **cannot** use Debug for this..
-1. Change toolset to x86
+2. Manage Configurations
+3. Change config type to Release or RelWithDebInfo. You **cannot** use Debug for this.
+4. Change toolset to x86
 
 Now you may build your mod!
 
