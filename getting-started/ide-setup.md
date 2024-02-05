@@ -29,7 +29,7 @@ There are a few steps you should follow to get proper intellisense (you should o
 1. With VSCode open on your project, **press F1** and run `CMake: Select a Kit`. This will bring up a list of installed compilers on your machine.
 ![Image showing a bunch of compilers CMake detected in VS Code](/assets/win_compilers.png) \
 \
-You should pick a **Visual Studio** compiler, using either the `x86` or `amd64_x86` version. Nothing else!!
+You should pick a **Visual Studio 2022+** compiler, using either the `x86` or `amd64_x86` version. Nothing else!!
 
 > :warning: Please pay attention to this
 2. Now select the build variant, **press F1** and run `CMake: Select Variant`. \
