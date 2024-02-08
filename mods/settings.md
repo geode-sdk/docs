@@ -4,7 +4,7 @@ Geode mods can have settings, specified in `mod.json`. These settings are automa
 
 Settings all have associated with them an ID, as well as a type and default value. There are a number of built-in types for common types of settings, but custom settings are supported aswell. All settings may also have a name and description. Some setting types also provide customizability over controls, such as whether to include a slider or not.
 
-> :info: Settings are intended for values the user can customize in-game. If you're looking for just saving some data, [see the tutorial for saving data](/mods/savedata.md).
+> :information_source: Settings are intended for values the user can customize in-game. If you're looking for just saving some data, [see the tutorial for saving data](/mods/savedata.md).
 
 ## Example
 
