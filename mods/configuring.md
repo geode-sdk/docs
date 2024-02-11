@@ -22,6 +22,18 @@ There are 6 required properties for every mod: the target Geode version, the ID 
     "developer": "Me"
 }
 ```
+You can also use the `developers` property instead of `developer`
+
+```json
+{
+    "geode": "v1.0.0",
+    "gd": "2.200",
+    "id": "my.awesome-mod",
+    "name": "My Awesome Mod",
+    "version": "v1.0.0",
+    "developers": ["Me","Friendly Developer"]
+}
+```
 
 ## List of keys
 
@@ -71,6 +83,10 @@ The version of the mod; should follow [semver](https://semver.org), especially i
 ### `developer`
 
 The name of the mod's developer. Should be a single name, like "HJfod" or "Alk". If the mod has multiple developers, this should be a team name like "Geode Team".
+
+### `developers` 
+
+The name of the mod's developers. Replaces `developer`. Can be a single name, like \["HJfod"\] or \["Alk"\]. If the mod has multiple developers, this can be a team name like \["Geode Team"\], or you can list multiple developers names because, the `developers` property is a list/array. First developer listed is the main developer. If you have 3 or more developers listed, it will show `main developer + 2 more`. If you have 2 developers listed, it will show `Developer 1 & Developer 2`. If you list multiple developers, when someone clicks on your name(s), it will show the list of the developers, then you can click on one to see other mods they have made or are apart of.
 
 ### `description`
 
