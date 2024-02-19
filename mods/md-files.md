@@ -25,7 +25,7 @@ If you like this mod, please check [my other mod](mod:my.other-mod)!
 
 # `changelog.md`
 
-You may also provide a markdown file that contains a changelog for your mod. In future updates, Geode may use this file to show release notes for the mod.
+You may also provide a markdown file that contains a changelog for your mod. Geode uses this file to show release notes for the mod.
 
 ```md
 # v1.1.0
