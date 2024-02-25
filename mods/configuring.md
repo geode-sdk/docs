@@ -86,7 +86,7 @@ The name of the mod's developer. Should be a single name, like "HJfod" or "Alk".
 
 ### `developers` 
 
-The name of the mod's developers. Replaces `developer`. Can be a single name, like \["HJfod"\] or \["Alk"\]. If the mod has multiple developers, you should list the names of each developer because, the `developers` property is a list/array. First developer listed is the main developer. If you have 3 or more developers listed, it will show `main developer + 2 more`. If you have 2 developers listed, it will show `Developer 1 & Developer 2`. If you list multiple developers, when someone clicks on your name(s), it will show the list of the developers, then you can click on one to see other mods they have made or are apart of.
+The name of the mod's developers. Replaces developer. Can be a single name, like ["HJfod"] or ["Alk"]. If the mod has multiple developers, you should list the names of each developer, as the developers property is a(n) list/array. The first developer listed is the main developer. If you have 3 or more developers listed, the developers names will show main developer + 2 more. If you have 2 developers listed, the developers names will show Developer 1 & Developer 2. 
 
 ### `description`
 
