@@ -226,4 +226,4 @@ $on_mod(Loaded) {
 }
 ```
 
-You can find an example of custom settings [in the test dependency mod in Geode](https://github.com/geode-sdk/geode/blob/main/loader/test/dependency/main.cpp#L19-L136).
+You can find an example of custom settings [in the test dependency mod in Geode](https://github.com/geode-sdk/geode/blob/main/loader/test/dependency/main.cpp#L60-L145).
