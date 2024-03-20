@@ -1,41 +1,47 @@
 # Publishing Geode Mods
 
-Once your awesome mod that adds sex to Geometry Dash is finished, it's time to publish it for all the world to see! Geode comes with an in-game "Download" section where users can download mods from, which gets its content from [the Geode Mods repo](https://github.com/geode-sdk/mods) (also known as the **mods index**)
+Once your awesome mod is finished, it's time to publish it for all the world to see! Geode comes with an in-game "Download" section where users can download mods from, which gets its content from [the Geode Mods repo](https://github.com/geode-sdk/mods), also known as the **mods index**.
+
+> :warning: This is subject to change once Geode moves to its [new servers](https://github.com/geode-sdk/server), which will be in the near future! This page will be updated when they are ready for use.
 
 ## Getting Your Mod on the Repo
 
-> :warning: If you want to submit a mod to the official mod index, **please** provide source code! Create a GitHub repository for it or something.
+> :warning: All mods submitted on the index **must provide the source code**! If your mod is open source, just include a link to a Github repository or equivalent. For closed source mods, see [the dedicated section](#what-about-closed-source-mods)
 
-*This process might change in the future, whenever we switch to a server.*
+Submitting a mod to the official mod index is as follows:
+1. Build and release your mod somewhere - we highly recommend using GitHub releases, as this provides a straight-forward way to deal with versioning.
+1. Create an issue on the [indexer](https://github.com/geode-sdk/indexer) repository, using the **"Add/Update an entry" template**.
+1. Provide a **direct download link** to the .geode file (for example `https://github.com/HJfod/BetterEdit/releases/download/v6.3.3/hjfod.betteredit.geode`)
+1. Submit the issue.
 
-Submitting a mod to the official mod index is quite simple.
-1. Build and release your mod somewhere. We highly recommend GitHub releases.
-1. Create an issue on the [indexer](https://github.com/geode-sdk/indexer) repository, using the "Add/Update an entry" template.
-1. Provide a **direct download link** to the .geode file
-1. Create the issue.
+Afterwards, you will just have to wait until a staff member verifies the mod.
 
-Now, you will just have to wait until one of the staff accepts the mod.
+## Releasing updates
 
-**To release an update**, just follow the same process as for publishing new mods. If you are using GitHub release, **please** do not update the same release over and over, create new ones instead.
+To release an update, just **follow the same process as for publishing new mods**.
 
-> :warning: Make sure to increase your mod version when updating it!!
+If you are using GitHub releases (or any other system), **do not update an existing release** - create a new one instead. Updating an existing release **will break that version of the mod**, as the Geode package is checksummed.
 
-## Guidelines
+Make sure to **increase your mod version** when updating it! You should be following [Semantic Versioning](https://semver.org), especially if you're developing a mod with a public API.
 
-Getting a mod on the index requires a few things:
+## What about closed source mods?
 
-1. You haven't put a virus in your mod.
+Even if your mod is **closed source**, you still need to submit the source code for verification. Do so by asking [someone who can approve new mods](#who-can-approve-mods) on the index repository and send them the source code privately, for example by adding them temporarily as a contributor to your private repository.
 
-2. You're willing to put the mod up [for free](#what-about-paid-mods).
-
-3. Your mod follows all other [required guidelines](/source/guidelines.md), and your mod passes the [Index review guidelines](/source/indexrules).
-
-That's it. It's mostly formal stuff to make sure your mod is compatible with other mods and not dangerous. If your mod doesn't crash every five seconds, it's probably good to go.
-
-If a mod on the index is later found to be breaking guidelines, for example it starts crashing or becomes incompatible with other mods (that it should be compatible with), we will let you know that you should update it. If the problems become severe and you don't do anything to fix the problem, we may remove your mod from the index.
+**Geode developers will never leak or steal your source code!** If you find that the person who verified your mod has breached this vital level of trust, **do let the other Geode lead developers know immediately**.
 
 ## What about paid mods?
 
-If your mod is paid, publish it yourself! Unfortunately, the Geode team doesn't want to handle processing user authentification and payments. You will have to set up your own system if you want to make your mod paid.
+If your mod is fully paid, you will have to **publish it yourself on a separate platform**, as the Geode team doesn't want to handle processing user authentification and payments. However, there are many options for still getting the mod on the index:
 
-However, we still believe in paying creators for their work; if you want your mod on the index, but would still like to make some money out of it, you can [include a `support.md` file](/mods/publishing.md) in your mod that will show a big donate button in the mod's info page in-game. In there, you can include links to your PayPal, Patreon, OnlyFans, and whatnot :)
+ - If your mod has a **free / lite version** that is usable on its own (like [BetterEdit](https://github.com/HJfod/BetterEdit) does), then publishing that is on the index is perfectly okay! In the same vain, if an otherwise free mod **contains paid features**, that is allowed - you just have to **make it clear that the mod contains paid content** in the mod description. In the future you will also be required to add a `Contains Paid Content` tag for free mods that have paid features.
+
+ - If your mod has no free version, you may also publish an **installer mod** for your paid mod on the index that just asks the user to authenticate / purchase the mod and installs the paid version. However, you will have to make it **unambiguously and obviously clear that the mod is a link to a paid mod before the user installs it**, for example by naming the mod "Trial Version" or equivalent. In the future you will also be required to add a `Paid` tag for mods that act as just wrapper for paid mods.
+
+ - All mods can also include a [`support.md` file](/mods/md-files#supportmd) in your mod that will show a big donate button in the mod's info page in-game. In there, you can include links to your PayPal, Patreon, OnlyFans, and whatnot :)
+
+## Who can approve mods?
+
+> :warning: This is going to change soon once the [new server](https://github.com/geode-sdk/server) is rolled out, where any **verified user** can automatically submit their own mods, and any **admin** can verify new mods & new users.
+
+**New mods** and **updates** for mods can be verified by anyone with `staff` priviledges on the [mods repository config file](https://github.com/geode-sdk/mods/blob/main/config.json). Additionally, anyone with the `verified` priviledge can automatically submit new mods / update their own mods without needing to wait for a staff member to verify it.

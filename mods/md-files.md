@@ -25,7 +25,9 @@ If you like this mod, please check [my other mod](mod:my.other-mod)!
 
 # `changelog.md`
 
-You may also provide a markdown file that contains a changelog for your mod. Geode uses this file to show release notes for the mod.
+A markdown file that contains a changelog for your mod. Geode uses this file to show release notes for the mod.
+
+## Example
 
 ```md
 # v1.1.0
@@ -43,4 +45,10 @@ You may also provide a markdown file that contains a changelog for your mod. Geo
 
 # `support.md`
 
-You may also provide a markdown file that contains free-form information about how to support you, the mod's developer. This may include things like Patreon links, PayPal links, catgirl picture donation links, anything you wish to say!
+A markdown file that contains free-form information about how to support you, the mod's developer. This may include things like links to your Patreon, PayPal, Ko-Fi, etc. - anything you wish to include!
+
+```md
+# Thank You for using Rattledasher 5000!
+
+If you like this mod and would like to support me, I have an [OnlyFans](https://globed.dev/soggy/)! You can see me rattle my dashes like a pro if you know what I mean ;)
+```
