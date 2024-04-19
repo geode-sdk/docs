@@ -8,8 +8,11 @@ It is the responsiblity of both the mod developer and the [person who verifies t
 
 A mod found breaking any of these rules will be rejected unconditionally from the index, as well as very likely leading to a total and permanent ban from posting on the index and a removal of all existing mods on the index.
 
- * The mod contains **malware**.
- * The mod is **stolen**. This means that it consists fully or nearly fully of the original code of another person with credit explicitly erased.
+ * The mod contains **malware**. This means any code with the purpose of causing harm to someone or something
+ * The mod **collects user data without consent**. Collecting data locally for the purpose of statistics is fine, but all sort of online data collection must be unambiguously explicit and able to be opted out of.
+ * The mod is **stolen**. This means that it consists fully or nearly fully of the original code of another person with credit explicitly erased
+
+Please note that a mod purposefully altering the experience of specific users (such as making gameplay unplayable) **is considered malware**, regardless of the users in question. This specific form of malware is unlikely to lead to an index-wide ban, though that depends on the gravity of the situation.
 
 ## Hard-rejection rules
 
@@ -41,3 +44,14 @@ These are some things one might expect to result in a rejection, but actually mo
 
  * The mod is **logically incompatible** with another mod on the index (for example, two mods that completely reshape `MenuLayer` in different ways are never going to be compatible)
  * The mod **looks bad**. We won't shame you for not having HJfod's UI skills
+
+## Mods using Generative AI
+
+Due to controversy among developers regarding the subject, mods that utilize **Generative AI** have to follow these additional guidelines in relation to their AI usage.
+
+ * The mod **may not grant an unfair advantage** in gameplay or anything else to people through the use of AI
+ * The mod **may not compromise the integrity of user-created content**. In essence, this means that **no mod is allowed to use AI for placing, modifying, or deleting objects**, though it is not limited to just those.
+ * The AI model is only, and as provably as one can reasonably expect, **trained on consentually and transparently obtained data**. Any mod found to be breaking this rule would be found to be in violation of the "collecting user data without consent" hard-ban rule, and subsequently result in the developer being immediately and permanently banned from the index
+ * The mod **must visibly and unambiguously communicate to the user its use of AI** prior to them clicking on it (similar to [paid mods](/mods/publishing#what-about-paid-mods)).
+
+In addition, all mods utilizing AI **must be manually verified** on the index and **approved unilaterally by Geode lead developers**, regardless of whether the developer is verified on the index or not.
