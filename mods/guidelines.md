@@ -49,6 +49,8 @@ These are some things one might expect to result in a rejection, but actually mo
 
 Due to controversy among developers regarding the subject, mods that utilize **Generative AI** have to follow these additional guidelines in relation to their AI usage.
 
+> :information_source: TL;DR; All mods using AI must be trained on consentually obtained data, and may not be used for creating levels.
+
  * The mod **may not grant an unfair advantage** in gameplay or anything else to people through the use of AI
  * The mod **may not compromise the integrity of user-created content**. In essence, this means that **no mod is allowed to use AI for placing, modifying, or deleting objects**, though it is not limited to just those.
  * The AI model is only, and as provably as one can reasonably expect, **trained on consentually and transparently obtained data**. Any mod found to be breaking this rule would be found to be in violation of the "collecting user data without consent" hard-ban rule, and subsequently result in the developer being immediately and permanently banned from the index
