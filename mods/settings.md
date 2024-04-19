@@ -128,6 +128,12 @@ class MySettingValue : public SettingValue {
     // you are free to do whatever!
 
 public:
+    // Make sure to have a public constructor!
+    // Typically you always have these first two args,
+    // since Mod::addCustomSetting expects them.
+    MySettingValue(std::string const& key, std::string const& mod, T someValue)
+      : SettingValue(key, mod), m_someMember(someValue) {}
+
     bool load(matjson::Value const& json) override {
         // load the value of the setting from json, 
         // returning true if loading was succesful
