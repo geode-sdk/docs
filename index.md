@@ -8,7 +8,7 @@
 
 ## Why Geode?
 
-The main goal of Geode is to **end mod incompatability**. Traditional modding leads very easily to compatability problems, many of which Geode attempts to address with better solutions.
+The main goal of Geode is to **end mod incompatibility**. Traditional modding leads very easily to compatability problems, many of which Geode attempts to address with better solutions.
 
 On top of this, and perhaps more interestingly, **Geode provides much better ergonomics for modding**. Instead of having to deal with calling conventions, trampolines, manually setting hooks (likely in another source file), you can have all the code relevant to hooks in a [nice, clean, readable syntax](/tutorials/modify.md) contained within a single source file.
 
