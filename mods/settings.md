@@ -58,25 +58,49 @@ $execute {
 
 ## Supported setting types
 
+*Tip: If you have our VSCode extension, you will get validation for these setting types*
+
+Most of these can have a `default` key to set a default value.
+```json
+"my-setting": {
+    "type": "string",
+    "default": "John"
+}
+```
+
+It can also be an object, for specifying the default value per platform:
+```json
+"my-setting": {
+    "type": "string",
+    "default": {
+        "win": "Bill",
+        "mac": "Steve",
+        "android": "John"
+    }
+}
+```
+
+---
+
 ### `bool`
 
 A simple boolean toggle.
 
 ### `int`
 
-A 64-bit integer value. Value may be limited with the `min`, `max`, and `one-of` properties. Available controls include a slider, arrows (buttons that increment/decrement by a predetermined amount), and a text input.
+A 64-bit integer value. Value may be limited with the `min` and `max` properties. Available controls include a slider, arrows (buttons that increment/decrement by a predetermined amount), and a text input.
 
 In code, the value type is `int64_t`.
 
 ### `float`
 
-A 64-bit floating point (decimal) value. Value may be limited with the `min`, `max`, and `one-of` properties. Available controls include a slider, arrows (buttons that increment/decrement by a predetermined amount), and a text input.
+A 64-bit floating point (decimal) value. Value may be limited with the `min` and `max` properties. Available controls include a slider, arrows (buttons that increment/decrement by a predetermined amount), and a text input.
 
 In code, the value type is `double`.
 
 ### `string`
 
-A piece of text. Value may be constrained with the `regex` key that specifies a regex that the string is matched against.
+A piece of text. Value may be constrained with the `match` key that specifies a regex that the string is matched against.
 
 In code, the value type is `std::string`.
 
