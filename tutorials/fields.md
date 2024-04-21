@@ -22,7 +22,9 @@ Geode provides a better alternative: **fields**. Fields let you add new member v
 
 ```cpp
 class $modify(PlayerObject) {
-    int m_totalJumps;
+    struct Fields {
+        int m_totalJumps = 0;
+    };
 
     void pushButton(PlayerButton button) {
         log::info("The player has jumped {} times !", m_fields->m_totalJumps);
@@ -40,7 +42,9 @@ Fields are declared just like normal member variables, even constructors and des
 
 ```cpp
 class $modify(PlayerObject) {
-    int m_totalJumps = 13;
+    struct Fields {
+        int m_totalJumps = 13;
+    };
 
     void pushButton(PlayerButton button) {
         log::info("the player has jumped {} times !", m_fields->m_totalJumps);
@@ -52,5 +56,5 @@ class $modify(PlayerObject) {
 
 ## Note about addresses
 
-> :warning: Fields are constructed and destructed in a different address than they exist normally (required for space optimization), so **if you have a class that depends on the address of `this` inside the constructor/destructor**, use `std::unique_ptr` to contain the said object. One such example would be Geode's events, since they are registered to a global map in their constructor.
+> :warning: If you are still using the old fields (which do not use the `Fields` struct), those ones are constructed and destructed in a different address than they exist normally (required for space optimization), so **if you have a class that depends on the address of `this` inside the constructor/destructor**, use `std::unique_ptr` to contain the said object. One such example would be Geode's events, since they are registered to a global map in their constructor.
 
