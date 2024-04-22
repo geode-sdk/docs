@@ -171,18 +171,20 @@ class $modify(GJGarageLayer) {
 
 ## Adding delegates
 
-Even though it is kinda inconvenient, this is how you would do it. Be careful about that comment!
+Sometimes you need to add delegates to classes. This is how you would do that:
 
 ```cpp
-struct MyDelegateClass : Modify<MyDelegateClass, MenuLayer>, TextInputDelegate {
-    MenuLayer* self;
-    std::string myString;
-    
-    void textChanged(CCTextInputNode* node) override {
-        // here, this points to m_fields, so you will need that self
-        // variable in order to access the MenuLayer itself
-        myString = node->getString();
-    }
+struct $modify(MyDelegateClass) {
+    struct Fields : TextInputDelegate {
+        MenuLayer* self;
+        std::string myString;
+        
+        void textChanged(CCTextInputNode* node) override {
+            // here, this points to m_fields, so you will need that self
+            // variable in order to access the MenuLayer itself
+            myString = node->getString();
+        }
+    };
     
     bool init() {
         if (!MenuLayer::init()) return false;
