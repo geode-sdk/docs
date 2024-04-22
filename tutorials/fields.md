@@ -36,14 +36,20 @@ class $modify(PlayerObject) {
 
 This code works even if you have multiple `PlayerObject`s, and the counter is initialized as 0 for each one, providing an elegant yet simple solution to the problem.
 
-**Fields must be accessed through the `m_fields` member**. If you access them directly through `this`, you will get **undefined behaviour** (most likely a crash).
+> :warning: If you are using old fields behavior, then **fields must be accessed through the `m_fields` member**. If you access them directly through `this`, you will get **undefined behaviour** (most likely a crash).
 
 Fields are declared just like normal member variables, even constructors and destructors work\*. 
 
 ```cpp
 class $modify(PlayerObject) {
     struct Fields {
-        int m_totalJumps = 13;
+        Fields() : m_totalJumps(13) {
+            log::debug("Constructed!");
+        }
+        int m_totalJumps;
+        ~Fields() {
+            log::debug("Destructed!");
+        }
     };
 
     void pushButton(PlayerButton button) {
