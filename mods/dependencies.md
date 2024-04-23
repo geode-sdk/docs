@@ -39,7 +39,7 @@ Dependencies can be added to your mod by simply adding it to the `dependencies` 
 }
 ```
 
-Dependencies have two required properties: the ID of the dependency and the version depended on. Additionally, the dependency may be specified as optional using `"required": false`.
+Dependencies have two required properties: the ID of the dependency and the version depended on. Additionally, the dependency may have an [importance](#importance), which specifies if the dependency is required or not.
 
 The `version` field of a dependency may be written as `>=version`, `=version`, or `<=version`. The comparisons work as expected, with the addition that if the major versions are different, the comparison is always false. This means that if you depend on version `>=1.2.5` of a mod, version `v1.8.0` will be considered acceptable but `v2.0.0` will not. For this reason, [if you make a mod that is depended upon, you should follow strict semver](https://semver.org).
 
@@ -54,8 +54,7 @@ The mod `hjfod.gmd-api` contains utilities for working with [.GMD files](https:/
     "dependencies": [
         {
             "id": "hjfod.gmd-api",
-            "version": ">=v1.0.0",
-            "importance": "required"
+            "version": ">=v1.0.0"
         }
     ]
 }
@@ -70,9 +69,14 @@ Now, if you reconfigure your CMake (or if you're using CMake Tools in VS Code, i
 
 If you now go to compile and test your mod, everything should work out-of-the-box.
 
-## Optional dependencies
+## Importance
 
-As mentioned before, a dependency may be marked optional by setting `"required": false` in `mod.json`. In this case, the dependency is not linked to, which in turn means that you can't use any of its exported functions. In cases like these, the dependency should provide ways through Geode to dynamically call its functions, such as through events.
+> Possible values:
+> - `required` (default) - Dependency must be installed for this mod to work
+> - `recommended` - Dependency is not required, but is recommended and will be downloaded by default.
+> - `suggested` - Dependency is not required, and will not be downloaded by default.
+
+In case the dependency is **not required**, it is not linked to, which in turn means that you can't use any of its exported functions. In cases like these, the dependency should provide ways through Geode to dynamically call its functions, such as through events.
 
 ### Events
 
