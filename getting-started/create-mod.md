@@ -33,7 +33,16 @@ Geode will also look for these special files within your mod folder:
 Now, to build your mod you have a few options: \
 If youre using an IDE such as Clion, VScode or Visual Studio, head over to the [IDE Setup](/getting-started/ide-setup) page.
 
+If you're building for *android*, check out the [android section](#build-for-android).
+
 Otherwise if you want to build your mods manually from the command line you can do that by simply running these commands in your mod's folder:
+```bash
+# Configures & builds for the current platform
+geode build
+```
+> Check out `geode build --help` for other options!
+
+If you have an issue running that command for whatever reason ([let us know!](https://github.com/geode-sdk/cli/issues)), you can build your mod the same way using these commands:
 ```bash
 # Configure CMake (WINDOWS)
 cmake -B build -A win32
@@ -43,4 +52,25 @@ cmake -B build
 
 # Build the project
 cmake --build build --config RelWithDebInfo
+```
+
+If you [created a profile in CLI](/getting-started/geode-cli), then the mod should be automatically copied over to your mods folder, if not, then the built `your.mod.geode` file should be in your build folder.
+
+## Build for Android
+
+To build mods for android you must install the [Android NDK](https://developer.android.com/ndk/downloads). \
+Extract it somewhere and set the `ANDROID_NDK_ROOT` enviroment variable to its path.
+
+On **Windows** you must also install [ninja](https://github.com/ninja-build/ninja/releases). You can do this via scoop `scoop install ninja`
+
+Now you can build your mod for android by just doing:
+```bash
+geode build -p android64
+# or if you're using a 32 bit phone
+geode build -p android32
+```
+
+You can then copy the built .geode file from the `build-android64` folder to your phone at this location:
+```
+/storage/emulated/0/Android/media/com.geode.launcher/game/geode/mods/
 ```
