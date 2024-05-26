@@ -27,7 +27,7 @@ First, [download Ghidra](https://ghidra-sre.org/) and install it on your machine
 
 ![Image showing the project page of Ghidra](/assets/handbook/vol2/ghidra_start.png)
 
-> :information_source: The dark theme used is [Mat Dark](https://cdn.discordapp.com/attachments/651480005536383009/1186912004775092345/Mat_Dark_Theme.theme)
+> :information_source: You can switch themes by going in `Edit > Theme > Switch...`
 
 Now, drag Geometry Dash's binary (e.g. `GeometryDash.exe`) into the window, add it with the default settings, open it, and **Analyze it** with the default settings (if you're reverse engineering Android, disable the `Non returning functions: discovered` option). Depending on your computer, analyzing might take a while - go grab another cup of orange juice while waiting for it to finish.
 
