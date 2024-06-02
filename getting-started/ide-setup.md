@@ -29,7 +29,7 @@ There are a few steps you should follow to get proper intellisense (you should o
 1. With VSCode open on your project, **press F1** and run `CMake: Select a Kit`. This will bring up a list of installed compilers on your machine.
 ![Image showing a bunch of compilers CMake detected in VS Code](/assets/win_compilers.png) \
 \
-You should pick a **Visual Studio 2022+** compiler, using either the `x86` or `amd64_x86` version. Nothing else!!
+You should pick a **Visual Studio 2022+** compiler, specifically the `amd64` version. Nothing else!!
 
 > :warning: Please pay attention to this
 2. Now select the build variant, **press F1** and run `CMake: Select Variant`. \
@@ -79,7 +79,7 @@ Now, before you build, make sure to change these settings (these need to be chan
 ![Image showing the Manage Configurations button in the drop-down](/assets/vs_manage_configurations.png)
 
 1. Change config type to Release or RelWithDebInfo. We recommend RelWithDebInfo, since it provides easier debugging. You **cannot** use Debug for this!
-1. Change toolset to x86 (`msvc_x86`)
+1. Make sure the toolset is set to x64
 1. At this point you can also give your configuration a friendly name such as "default" or "release" or "mat" or something like that.
 1. And make sure to press Ctrl+S to save your changes
 
@@ -103,7 +103,6 @@ Here you need to make sure that:
 2. Toolchain is set to *Visual Studio*
 3. Generator is set to *Visual Studio 17 2022* or newer
 4. Build directory is set to *build*
-5. CMake options contains `-A win32`
 
 In the end it should look like this:  
 ![Image showing the CLion Open Project Wizard set up for Geode](/assets/clion_openprojectwizardsetup.png)

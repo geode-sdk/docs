@@ -44,10 +44,7 @@ geode build
 
 If you have an issue running that command for whatever reason ([let us know!](https://github.com/geode-sdk/cli/issues)), you can build your mod the same way using these commands:
 ```bash
-# Configure CMake (WINDOWS)
-cmake -B build -A win32
-
-# Configure CMake (Other platforms)
+# Configure CMake
 cmake -B build
 
 # Build the project
