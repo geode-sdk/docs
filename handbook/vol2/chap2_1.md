@@ -12,14 +12,14 @@ There are a lot of tools GD modders use for reverse engineering, but some of the
 
  * [Ghidra](https://ghidra-sre.org/)
  * [IDA Pro](https://hex-rays.com/IDA-pro/) (which every modder most definitely has legally bought :wink:)
- * [x32dbg](https://x64dbg.com/) (Windows)
+ * [x64dbg](https://x64dbg.com/) (Windows)
  * [Cheat Engine](https://cheatengine.org/) (Windows)
  * [ReClass](https://github.com/ReClassNET/ReClass.NET) (Windows)
  * [DevTools](https://github.com/geode-sdk/DevTools) (Traditionally [CocosExplorer](https://github.com/matcool/CocosExplorer))
  * [Slicer](https://github.com/zorgiepoo/Bit-Slicer) (Mac)
  * [LLDB](https://lldb.llvm.org/)
 
-For this tutorial, we will be using **Ghidra** and **x32dbg**. 
+For this tutorial, we will be using **Ghidra** and **x64dbg**. 
 
 ## Setting Up Ghidra
 

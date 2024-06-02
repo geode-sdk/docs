@@ -52,7 +52,7 @@ A popular library used in [traditional mods](#traditional-modding) consisting of
 
 ## Debugger
 
-A tool used for debugging another application (usually GD) for issues (usually crashes), such as [x32dbg](#x32dbg) or [Cheat Engine](#cheat-engine).
+A tool used for debugging another application (usually GD) for issues (usually crashes), such as [x64dbg](#x64dbg) or [Cheat Engine](#cheat-engine).
 
 > Further reading: [Wikipedia](https://en.m.wikipedia.org/wiki/Debugger)
 
@@ -276,7 +276,7 @@ Code where the C++ standard does not say what should happen, and as such the res
 
 > Further reading: [cppreference.com](https://en.cppreference.com/w/cpp/language/ub)
 
-## x32dbg
+## x64dbg
 
 A [debugger](#debugger) commonly used by Windows modders.
 
