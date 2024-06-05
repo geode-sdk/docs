@@ -8,7 +8,7 @@ Let's say you have to make an expensive calculation inside your mod. For educati
 
 Here's our incredibly complex code:
 
-```c++
+```cpp
 int sum = 0;
 for (int i = 1; i <= 10000000; i++) {
     sum += i;
@@ -17,14 +17,14 @@ for (int i = 1; i <= 10000000; i++) {
 
 Let's first take a look at the Task class:
 
-```c++
+```cpp
 template <std::move_constructible T, std::move_constructible P = std::monostate>
 class Task final;
 ```
 
 We can see that it is templated, with 2 arguments. The first one is the **actual return type we will get from the Task**. Depending on whether the Task can fail, you might decide to return a **Result** type. In our case, we will just return an **int**. The second argument is the **progress type of the task**. This can be anything you want, from the simplest int (0-100, like a percentage) to a more complex class. We can use a simple **int** that counts from 0 to 100, like a percentage value, as progress. It is also recommended to **alias your task type**, to prevent code duplication. Only the first argument is required.
 
-```c++
+```cpp
 Task<int, int>
 // Or, if we're aliasing
 using PointlessTask = Task<int, int>;
@@ -40,7 +40,7 @@ To wrap our calculation inside of a Task, we can use the `Task<int, int>::run()`
 
 Here's what the final result might look like:
 
-```c++
+```cpp
 PointlessTask calculation() {
     return PointlessTask::run([] (auto progress, auto hasBeenCancelled) ->  {
         int sum = 0;
@@ -71,7 +71,7 @@ We have created a Task, now we just need to run it, and listen to the result. No
 
 To listen for Task events, we need to create an `EventListener`:
 
-```c++
+```cpp
 #include <Geode/loader/Event.hpp>
 
 class MyCoolClass {
@@ -83,7 +83,7 @@ class MyCoolClass {
 
 If you are **hooking** a layer, you can add a listener to the Modify class' **fields**:
 
-```c++
+```cpp
 class $modify(MenuLayer) {
     struct Fields {
         EventListener<PointlessTask> m_taskListener;
@@ -93,7 +93,7 @@ class $modify(MenuLayer) {
 
 First of all, we need to **bind** a listener function to our listener. We have 2 choices: a **lambda**, or a **member function**.
 
-```c++
+```cpp
 // Lambda
 m_taskListener.bind([] (PointlessTask::Event* event) {
 
@@ -109,7 +109,7 @@ void MyCoolClass::onTask(PointlessTask::Event* event) {
 
 Notice that we used the `PointlessTask::Event` type as the argument to our functions. This type is defined by `Task.hpp`, and it contains all the necessary information we need about the running Task. Here is how you should handle it.
 
-```c++
+```cpp
 void MyCoolClass::onTask(PointlessTask::Event* event) {
     // Check if we have a value. We will always receive a reference to the result.
     // You can also use a const reference.
@@ -127,7 +127,7 @@ You can structure your code in any way inside the callback, this is just the way
 
 After binding the function that will handle the Task result, we now need to actually start the task. You can do this with the following:
 
-```c++
+```cpp
 // calculation() is the function we created earlier, that returns the Task.
 m_taskListener.setFilter(calculation());
 ```
