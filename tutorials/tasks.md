@@ -134,6 +134,10 @@ m_taskListener.setFilter(calculation());
 
 > :warning: `setFilter` should always be called after `bind`
 
+## Lifetime of a Task
+
+> :warning: The Task lives as long as the handle (the Task object) is not destroyed. If the handle is destroyed, then the task will be marked as **cancelled**. At the same time, you should also not destroy **the listener** while the request is running. Since all callbacks run on the next frame (on the main thread), then if the listener is destroyed before that, **the callback will never be called**.
+
 ## Other ways of creating Tasks
 
 There are other ways to create Tasks. We will go summarily through them, you can find out more info about them by **reading the header file**.
