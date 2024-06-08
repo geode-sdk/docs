@@ -119,10 +119,11 @@ class $modify(MenuLayer) {
         }
 
         m_fields->m_listener.bind([] (web::WebTask::Event* e) {
-            // We don't really care about the request progress, so we won't use it here
-
             if (web::WebResponse* res = e->getValue()) {
                 log::info("{}", res->string()->unwrapOr("Uh oh!"));
+            } else if (web::WebProgress* p = e->getProgress()) {
+                log::info("progress: {}", p->downloadProgress().)
+            }
             } else if (e->isCancelled()) {
                 log::info("The request was cancelled... So sad :(");
             }
