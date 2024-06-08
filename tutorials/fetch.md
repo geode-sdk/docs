@@ -1,4 +1,4 @@
-# The new web request API (web.hpp)
+# Making web requests
 
 > :warning: This is the documentation for the new web API. We have left the old documentation at the bottom of the page, for the time being
 
