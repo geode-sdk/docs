@@ -101,7 +101,7 @@ res->json();
 
 ## The old web APIs
 
-The old web APIs were deprecated as of **v3.0.0-alpha.1**, you can still find them on older versions of Geode. They contains functions resembling a familiar web API: **fetch**. Geode has two types of web requests: **synchronous** and **asynchronous**.
+The old web APIs were deprecated as of **v3.0.0-alpha.1**, you can still find them on older versions of Geode. They contain functions resembling a familiar web API: **fetch**. Geode has two types of web requests: **synchronous** and **asynchronous**.
 
 ## Synchronous requests
 
