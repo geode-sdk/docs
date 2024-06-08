@@ -55,7 +55,7 @@ auto task = req.post(url);
 
 ## Getting the response from our request
 
-If you remember the [Tasks](/tutorials/tasks) tutorial, you probably also remember that Tasks have to listened to using the [Events](/tutorials/events) system. We can create an `EventListener` for our request and use it to get our response.
+If you remember the [Tasks](/tutorials/tasks) tutorial, you probably also remember that Tasks have to be listened to using the [Events](/tutorials/events) system. We can create an `EventListener` for our request and use it to get our response.
 
 ```cpp
 class MyCoolClass {
