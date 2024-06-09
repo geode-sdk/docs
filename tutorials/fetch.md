@@ -122,8 +122,7 @@ class $modify(MenuLayer) {
             if (web::WebResponse* res = e->getValue()) {
                 log::info("{}", res->string()->unwrapOr("Uh oh!"));
             } else if (web::WebProgress* p = e->getProgress()) {
-                log::info("progress: {}", p->downloadProgress().)
-            }
+                log::info("progress: {}", p->downloadProgress().value_or(0.f));
             } else if (e->isCancelled()) {
                 log::info("The request was cancelled... So sad :(");
             }
