@@ -120,7 +120,7 @@ class $modify(MenuLayer) {
 
         m_fields->m_listener.bind([] (web::WebTask::Event* e) {
             if (web::WebResponse* res = e->getValue()) {
-                log::info("{}", res->string()->unwrapOr("Uh oh!"));
+                log::info("{}", res->string()->unwrapOr("Nuh uh"));
             } else if (web::WebProgress* p = e->getProgress()) {
                 log::info("progress: {}", p->downloadProgress().value_or(0.f));
             } else if (e->isCancelled()) {
