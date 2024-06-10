@@ -26,10 +26,10 @@ For VSCode, we recommend a few extensions:
 There are a few steps you should follow to get proper intellisense (you should only need to do these once per project, ideally):
 
 
-1. With VSCode open on your project, **press F1** and run `CMake: Select a Kit`. This will bring up a list of installed compilers on your machine.
+1. With VSCode open on your project, **press F1** and run `CMake: Select a Kit`. This will bring up a list of installed compilers on your machine. \
 ![Image showing a bunch of compilers CMake detected in VS Code](/assets/win_compilers.png) \
 \
-You should pick a **Visual Studio 2022+** compiler, specifically the `amd64` version. Nothing else!!
+You should pick a **Visual Studio 2022+** compiler (specifically the `amd64` version), or Clang, but Nothing else!!
 
 > :warning: Please pay attention to this
 2. Now select the build variant, **press F1** and run `CMake: Select Variant`. \
