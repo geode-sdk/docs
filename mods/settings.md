@@ -100,7 +100,8 @@ In code, the value type is `double`.
 
 ### `string`
 
-A piece of text. Value may be constrained with the `match` key that specifies a regex that the string is matched against.
+A piece of text. Value may be constrained with the `match` key that specifies a regex that the string is matched against. \
+The allowed characters can be set via the `filter` key, for example, `012345679,.` would only allow numbers and punctuation.
 
 In code, the value type is `std::string`.
 
