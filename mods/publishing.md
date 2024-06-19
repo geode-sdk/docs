@@ -1,24 +1,23 @@
 # Publishing Geode Mods
 
-Once your awesome mod is finished, it's time to publish it for all the world to see! Geode comes with an in-game "Download" section where users can download mods from, which gets its content from [the Geode Mods repo](https://github.com/geode-sdk/mods), also known as the **mods index**.
-
-> :warning: This is subject to change once Geode moves to its [new servers](https://github.com/geode-sdk/server), which will be in the near future! This page will be updated when they are ready for use.
+Once your awesome mod is finished, it's time to publish it for all the world to see! Geode comes with an in-game "Download" section where users can download mods from, which gets its content from [the Geode Index](https://api.geode-sdk.org/v1/mods).
 
 ## Getting Your Mod on the Repo
 
 > :warning: All mods submitted on the index **must provide the source code**! If your mod is open source, just include a link to a Github repository or equivalent. For closed source mods, see [the dedicated section](#what-about-closed-source-mods)
 
 Submitting a mod to the official mod index is as follows:
-1. Build and release your mod somewhere - we highly recommend using GitHub releases, as this provides a straight-forward way to deal with versioning.
-1. Create an issue on the [indexer](https://github.com/geode-sdk/indexer) repository, using the **"Add/Update an entry" template**.
-1. Provide a **direct download link** to the .geode file (for example `https://github.com/HJfod/BetterEdit/releases/download/v6.3.3/hjfod.betteredit.geode`)
-1. Submit the issue.
 
-Afterwards, you will just have to wait until a staff member verifies the mod.
+1. Download the latest release of the [CLI](https://github.com/geode-sdk/cli/releases/latest). You can also use [Scoop](https://scoop.sh/), or a [brew cask on macOS](https://github.com/geode-sdk/cli/releases/latest). Also make sure the CLI is added to your **path**
+2. Build and release your mod somewhere - we highly recommend using GitHub releases, as this provides a straight-forward way to deal with versioning.
+3. Login to the index using the **CLI**: `geode index login`. This will prompt you to login using your GitHub account.
+4. `geode index mods update`
+5. Provide a **direct download link** to the .geode file (for example `https://github.com/HJfod/BetterEdit/releases/download/v6.3.3/hjfod.betteredit.geode`)
+6. If you are **verified** on the index, then the mod will be available to download immediately. If you are not verified, then an **index admin** will have to validate that your mod meets the [index guidelines](/mods/guidelines) and approve your mod.
 
 ## Releasing updates
 
-To release an update, just **follow the same process as for publishing new mods**.
+To release an update, use `geode index mods update`. You will have to be already logged in with the index to use this command.
 
 If you are using GitHub releases (or any other system), **do not update an existing release** - create a new one instead. Updating an existing release **will break that version of the mod**, as the Geode package is checksummed.
 
@@ -42,6 +41,4 @@ If your mod is fully paid, you will have to **publish it yourself on a separate 
 
 ## Who can approve mods?
 
-> :warning: This is going to change soon once the [new server](https://github.com/geode-sdk/server) is rolled out, where any **verified user** can automatically submit their own mods, and any **admin** can verify new mods & new users.
-
-**New mods** and **updates** for mods can be verified by anyone with `staff` priviledges on the [mods repository config file](https://github.com/geode-sdk/mods/blob/main/config.json). Additionally, anyone with the `verified` priviledge can automatically submit new mods / update their own mods without needing to wait for a staff member to verify it.
+**New mods** and **updates** for mods can be verified by **lead developers** and **index admins**. Additionally, anyone with the `verified` priviledge can automatically submit new mods / update their own mods without needing to wait for a staff member to verify it.
