@@ -8,12 +8,13 @@ Once your awesome mod is finished, it's time to publish it for all the world to 
 
 Submitting a mod to the official mod index is as follows:
 
-1. Download the latest release of the [CLI](https://github.com/geode-sdk/cli/releases/latest). You can also use [Scoop](https://scoop.sh/), or a [brew cask on macOS](https://github.com/geode-sdk/cli/releases/latest). Also make sure the CLI is added to your **path**
+1. Make sure you have the [**latest** CLI](/getting-started/geode-cli) set up.
 2. Build and release your mod somewhere - we highly recommend using GitHub releases, as this provides a straight-forward way to deal with versioning.
-3. Login to the index using the **CLI**: `geode index login`. This will prompt you to login using your GitHub account.
-4. `geode index mods update`
-5. Provide a **direct download link** to the .geode file (for example `https://github.com/HJfod/BetterEdit/releases/download/v6.3.3/hjfod.betteredit.geode`)
-6. If you are **verified** on the index, then the mod will be available to download immediately. If you are not verified, then an **index admin** will have to validate that your mod meets the [index guidelines](/mods/guidelines) and approve your mod.
+   - Do **NOT** replace existing uploaded versions! This will change the hash and thus users will be unable to download the old version.
+4. Login to the index using the **CLI**: `geode index login`. This will prompt you to login using your GitHub account.
+5. Run `geode index mods create`
+6. Provide a **direct download link** to the .geode file (for example `https://github.com/HJfod/BetterEdit/releases/download/v6.3.3/hjfod.betteredit.geode`)
+7. If you are **verified** on the index, then the mod will be available to download immediately. If you are not verified, then an **index admin** will have to validate that your mod meets the [index guidelines](/mods/guidelines) and approve your mod.
 
 ## Releasing updates
 
