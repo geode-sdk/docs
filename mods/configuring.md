@@ -15,7 +15,10 @@ There are 6 required properties for every mod: the target Geode version, the ID 
 ```json
 {
     "geode": "v1.0.0",
-    "gd": "2.200",
+    "gd": {
+        "win": "2.206",
+        "android": "2.206"
+    }
     "id": "my.awesome-mod",
     "name": "My Awesome Mod",
     "version": "v1.0.0",
@@ -27,7 +30,10 @@ You can also use the `developers` property instead of `developer`
 ```json
 {
     "geode": "v1.0.0",
-    "gd": "2.200",
+    "gd": {
+        "win": "2.206",
+        "android": "2.206"
+    }
     "id": "my.awesome-mod",
     "name": "My Awesome Mod",
     "version": "v1.0.0",
@@ -45,13 +51,7 @@ The target Geode version. Should be in the format of an exact version, such as `
 
 The target Geometry Dash version exactly, or `*` for **any** GD version (whether your mod actually works on any GD version is your responsibility.) 
 
-This key can either be a string, or an object for specifying per platform GD version:
-```json
-{
-    "gd": "2.204"
-}
-```
-or
+This key is an object for specifying per platform GD version:
 ```json
 {
     "gd": {
@@ -63,7 +63,9 @@ or
 The valid platform keys are `win`, `mac`, `android` and `ios`.
 ```json
 {
-    "gd": "*" // Mod works on any gd version
+    "gd": {
+        "android": "*" // Mod works on any android gd version
+    }
 }
 ```
 
