@@ -55,12 +55,12 @@ Remembering to manage every object you have ever created is a real problem, thou
 ```cpp
 auto node = CCNode::create();
 auto other = CCNode::create();
-// CCNode increments other's ref count by 1, and decrements it when the child 
+// CCNode increments other's ref count by 1, and decrements it when the child
 // is removed or when node is freed
 node->addChild(other);
 
 auto array = CCArray::create();
-// CCArray increment node's ref count by 1, and decrements it when the child 
+// CCArray increment node's ref count by 1, and decrements it when the child
 // is removed or when the node is freed
 array->addObject(node);
 ```
@@ -70,7 +70,7 @@ This means that if you store your created object as a child to something or add 
 ```cpp
 {
     auto array = CCArray::create();
-    // If this array is never used anywhere, it's ref count stays at 0 but 
+    // If this array is never used anywhere, it's ref count stays at 0 but
     // nothing calls release on it, so the memory is leaked - except it's not!
 }
 ```
@@ -80,12 +80,13 @@ This code looks like it should cause a memory leak, since nothing ever calls `re
 ```cpp
 SomeNode* SomeNode::create() {
     auto ret = new SomeNode();
-    if (ret && ret->init()) {
+    if (ret->init()) {
         // Make the node be automatically garbage collected
         ret->autorelease();
         return ret;
     }
-    CC_SAFE_DELETE(ret);
+
+    delete ret;
     return nullptr;
 }
 ```

@@ -147,9 +147,9 @@ The first class that the mod needs to provide for the setting is one that inheri
 using namespace geode::prelude;
 
 class MySettingValue : public SettingValue {
-    // store the current value in some form. 
-    // this may be an enum, a class, or 
-    // whatever it is your setting needs - 
+    // store the current value in some form.
+    // this may be an enum, a class, or
+    // whatever it is your setting needs -
     // you are free to do whatever!
 
 public:
@@ -160,7 +160,7 @@ public:
       : SettingValue(key, mod), m_someMember(someValue) {}
 
     bool load(matjson::Value const& json) override {
-        // load the value of the setting from json, 
+        // load the value of the setting from json,
         // returning true if loading was succesful
     }
     bool save(matjson::Value& json) const override {
@@ -189,23 +189,23 @@ protected:
     bool init(MySettingValue* value, float width) {
         if (!SettingNode::init(value))
             return false;
-        
-        // You may change the height to anything, but make sure to call 
+
+        // You may change the height to anything, but make sure to call
         // setContentSize!
         this->setContentSize({ width, 40.f });
 
-        // Set up the UI. Note that Geode provides a background for the 
+        // Set up the UI. Note that Geode provides a background for the
         // setting automatically
 
         return true;
     }
 
-    // Whenever the user interacts with your controls, you should call 
+    // Whenever the user interacts with your controls, you should call
     // this->dispatchChanged()
 
 public:
-    // When the user wants to save this setting value, this function is 
-    // called - this is where you should actually set the value of your 
+    // When the user wants to save this setting value, this function is
+    // called - this is where you should actually set the value of your
     // setting
     void commit() override {
         // Set the actual value
@@ -214,13 +214,13 @@ public:
         this->dispatchCommitted();
     }
 
-    // Geode calls this to query if the setting value has been changed, 
+    // Geode calls this to query if the setting value has been changed,
     // and those changes haven't been committed
     bool hasUncommittedChanges() override {
         // todo
     }
 
-    // Geode calls this to query if the setting has a value that is 
+    // Geode calls this to query if the setting has a value that is
     // different from its default value
     bool hasNonDefaultValue() override {
         // todo
@@ -233,11 +233,12 @@ public:
 
     static MySettingNode* create(MySettingValue* value, float width) {
         auto ret = new MySettingNode();
-        if (ret && ret->init(value, width)) {
+        if (ret->init(value, width)) {
             ret->autorelease();
             return ret;
         }
-        CC_SAFE_DELETE(ret);
+
+        delete ret;
         return nullptr;
     }
 };
@@ -248,7 +249,7 @@ The last this the mod needs to do is register their setting value class to Geode
 ```cpp
 $on_mod(Loaded) {
     Mod::get()->addCustomSetting<MySettingValue>("my-setting", ...);
-    
+
     // or, alternatively:
     Mod::get()->registerCustomSetting(
         "my-setting",

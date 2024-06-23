@@ -41,7 +41,7 @@ protected:
     bool setup(std::string const& value) override {
         auto winSize = CCDirector::sharedDirector()->getWinSize();
 
-        // convenience function provided by Popup 
+        // convenience function provided by Popup
         // for adding/setting a title to the popup
         this->setTitle("Hi mom!");
 
@@ -55,11 +55,12 @@ protected:
 public:
     static MyPopup* create(std::string const& text) {
         auto ret = new MyPopup();
-        if (ret && ret->init(240.f, 160.f, text)) {
+        if (ret->init(240.f, 160.f, text)) {
             ret->autorelease();
             return ret;
         }
-        CC_SAFE_DELETE(ret);
+
+        delete ret;
         return nullptr;
     }
 };
@@ -120,7 +121,7 @@ class $modify(MenuLayer) {
     bool init() {
         if (!MenuLayer::init())
             return false;
-        
+
         FLAlertLayer::create(
             "Title",
             "Hi mom!",
@@ -137,7 +138,7 @@ class $modify(MenuLayer) {
     bool init() {
         if (!MenuLayer::init())
             return false;
-        
+
         auto alert = FLAlertLayer::create(
             "Title",
             "Hi mom!",

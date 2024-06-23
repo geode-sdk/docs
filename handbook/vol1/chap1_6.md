@@ -20,7 +20,7 @@ protected:
     bool init() {
         if (!CCNode::init())
             return false;
-        
+
         // Initialize SomeNode
 
         return true;
@@ -29,11 +29,12 @@ protected:
 public:
     static SomeNode* create() {
         auto ret = new SomeNode();
-        if (ret && ret->init()) {
+        if (ret->init()) {
             ret->autorelease();
             return ret;
         }
-        CC_SAFE_DELETE(ret);
+
+        delete ret;
         return nullptr;
     }
 };
