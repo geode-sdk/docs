@@ -24,12 +24,13 @@ A mod found breaking any of these rules will be rejected unconditionally from th
  * The mod does not use Geode's provided systems for hooking and patching, resulting in almost guaranteed **mod incompatability**
  * The mod introduces **severe security vulnerabilities** like RCE
  * The mod features **explicit content and/or profanity**. Note that the source code having comments, variable names, etc. containing profanity is fine, as long as they aren't visible to the end user
+ * The mod **does not have appropriate metadata**. All mods on the Index must have a proper name, description, icon, and tags, [including jokes](#joke-mods)
 
 A mod found breaking any of these rules will likely be rejected, although depending on the situation, they could also still be approved.
 
  * The mod **breaks other mods** for no good reason
  * The mod has several common **game-crashing bugs** that haven't been fixed despite reports
- * The mod **doesn't do anything meaningful**. Jokes, pranks, and test mods are likely to be rejected
+ * The mod **doesn't do anything meaningful**. Note that joke mods can be considered meaningful; see [our policy on them](#joke-mods)
 
 A mod found breaking any of these rules will likely still be approved, although constant and/or prolific breaking can result in a rejection.
 
@@ -42,7 +43,7 @@ A mod found breaking any of these rules will likely still be approved, although 
 These are some things one might expect to result in a rejection, but actually most likely won't.
 
  * The mod is **logically incompatible** with another mod on the index (for example, two mods that completely reshape `MenuLayer` in different ways are never going to be compatible)
- * The mod **looks bad**. We won't shame you for not having HJfod's UI skills
+ * The mod **looks bad**. We won't shame you for not having HJfod's UI skills! However, if the mod's UI/UX is not just bad but actively harmful, it probably violates the "no false information" rule
  * The mod is **not in English**. That's just cool! It might take us a while to verify a mod whose source code is written in another language though
 
 There are also some **code patterns** that one might assume would be rejected, but are actually allowed:
@@ -71,6 +72,20 @@ Some mods may want to **extend Geode's own UI**, for example to add custom featu
 4. If the mod finds any missing IDs, it must **undo any/all of its changes** and not make any more. The recommended way to do this is to first use `querySelector` to grab all the nodes in the scene it intends to modify beforehand, and then returning early if any of them are null
 
 These rules are in place because the Geode UI is a highly volatile place that **may change at any time**, and any mod causing the Geode UI itself to crash would make it impossible to disable without safe mode.
+
+## Joke mods
+
+Joke mods, as in mods whose whole function is to just be a funny little goof and nothing else, **are allowed**, as long as they have a proper name, description, icon, and tags, particularly the `Joke` tag.
+
+However, do note that for a mod to be listed on the Index it has to be **meaningful**. That is, it needs to be something that people might actually want to have and use. The precise definition is up to whoever is approving the mod, but in general **if a mod is something you would install once for five minutes then uninstall and never use again, it's probably not meaningful**. This mostly includes mods that actively make playing the game worse without adding new kinds of fun, but it can also include visual tweaks so small and unintrusive you forget you even have it installed.
+
+For example:
+
+ - A mod that just changes the title of the game to Geometry Fart and nothing else is probably not enough to be accepted
+ - A mod that deliberately crashes the game on every death is very unlikely to be accepted, as that is something which is funny for one YouTube video but so actively harmful no one would use it normally
+ - A mod that changes physics to super weird ones might be enough to be accepted, as while most users won't have it permanently enabled, they may enable it every now and then to use together with other mods like Globed
+ - A mod that turns the player icon into a badly drawn Sonic the Hedgehog is probably enough to be accepted
+ - A mod that is a compilation of multiple different toggleable small jokes is absolutely enough to be accepted, provided it doesn't break any other rules
 
 ## Mods using Generative AI
 
