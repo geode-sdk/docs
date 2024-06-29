@@ -26,6 +26,12 @@ To develop mods, you should also download the prebuilt binaries for Geode, which
 geode sdk install-binaries
 ```
 
+## Cache
+
+It is **highly** recommended to set the [CPM_SOURCE_CACHE](https://github.com/cpm-cmake/CPM.cmake?tab=readme-ov-file#cpm_source_cache) environment variable. This will prevent CMake from cloning repositories you've already cloned, and allow you to build mods offline (given you have built them online at least once).
+
+To do this, create a directory somewhere permanent, and set the environment variable `CPM_SOURCE_CACHE` to the full path to that folder.
+
 ## Updating
 You will need to manually update your local SDK every once in a while, which you do by running this command:
 ```bash
