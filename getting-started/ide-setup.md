@@ -33,8 +33,7 @@ You should pick a **Visual Studio 2022+** compiler (specifically the `amd64` ver
 
 > :warning: Please pay attention to this
 2. Now select the build variant, **press F1** and run `CMake: Select Variant`. \
-**YOU MUST PICK ANYTHING BUT DEBUG** or your mod will not compile. \
-We recommend **RelWithDebInfo** for easier debugging. \
+We recommend **RelWithDebInfo** for easier debugging, as Debug may sometimes cause obscure crashes. \
 ![Image showing available build types on Windows: Debug, Release, MinSizeRel, and RelWithDebInfo](/assets/win_relwithdebinfo.png)
 
 3. Register CMake as the **Configuration Provider** for the C++ extension by **pressing F1** and running `C/C++: Edit Configurations (UI)`:\

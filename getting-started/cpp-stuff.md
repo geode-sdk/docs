@@ -36,4 +36,26 @@ Linux is a bit more complicated, as obviously there's no linux release of GD (ye
 
 Because of that, this guide will set you up to [cross-compile](https://en.wikipedia.org/wiki/Cross_compiler) windows Geode mods from linux.
 
-We recommend reading this gist: [linux-win-cross.md](https://gist.github.com/matcool/abb65ee59ded3766717c673014c3a2a7) for up to date information on how to cross compile.
+First, besides git and cmake, make sure you have `clang` and `lld` installed.
+
+On Ubuntu:
+
+```bash
+apt install clang-17 clang-tools-17 lld-17
+```
+
+On Arch-based systems:
+
+```bash
+pacman -S clang lld
+```
+
+The next step will install the Windows SDK and a CMake toolchain. For ease of installation, first install [Geode CLI](/getting-started/geode-cli.md) and then come back here. If you want to do it manually, you can follow [this guide](https://gist.github.com/matcool/abb65ee59ded3766717c673014c3a2a7).
+
+After installing the CLI, run this command to install all the needed tools:
+
+```bash
+geode sdk install-linux
+```
+
+Now you can proceed to [setting up the SDK](/getting-started/sdk.md).
