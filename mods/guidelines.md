@@ -25,6 +25,7 @@ A mod found breaking any of these rules will be rejected unconditionally from th
  * The mod introduces **severe security vulnerabilities** like RCE
  * The mod features **explicit content and/or profanity**. Note that the source code having comments, variable names, etc. containing profanity is fine, as long as they aren't visible to the end user
  * The mod **does not have appropriate metadata**. All mods on the Index must have a proper name, description, icon, and tags, [including jokes](#joke-mods)
+ * The mod **removes Vanilla features** for no good reason
 
 A mod found breaking any of these rules will likely be rejected, although depending on the situation, they could also still be approved.
 
