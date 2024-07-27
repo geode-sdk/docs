@@ -21,7 +21,7 @@ Please note that a mod purposefully altering the experience of specific users (s
 A mod found breaking any of these rules will be rejected unconditionally from the index.
 
  * The mod contains **false information** about what it does
- * The mod does not use Geode's provided systems for hooking and patching, resulting in almost guaranteed **mod incompatability**
+ * The mod does not use Geode's provided systems, resulting in almost guaranteed **mod incompatability**
  * The mod introduces **severe security vulnerabilities** like RCE
  * The mod features **explicit content and/or profanity**. Note that the source code having comments, variable names, etc. containing profanity is fine, as long as they aren't visible to the end user
  * The mod **does not have appropriate metadata**. All mods on the Index must have a proper name, description, icon, and tags, [including jokes](#joke-mods)
