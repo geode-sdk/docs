@@ -65,14 +65,7 @@ Checking that another mod is loaded by looking for identifying effects of them i
 
 ## Mods modifying the Geode UI
 
-Some mods may want to **extend Geode's own UI**, for example to add custom features to their own mod's page. This is allowed, however on the following conditions:
-
-1. The mod may **only access nodes by ID**. No matching types or indices, if the node the mod wants to modify doesn't have an ID, the mod can not edit it
-2. The mod must **always check for null** on every node they access. It should never assume the existence of a node, even if it's trivial
-3. The mod must **safely handle all possible failure states**, such as missing sprites
-4. If the mod finds any missing IDs, it must **undo any/all of its changes** and not make any more. The recommended way to do this is to first use `querySelector` to grab all the nodes in the scene it intends to modify beforehand, and then returning early if any of them are null
-
-These rules are in place because the Geode UI is a highly volatile place that **may change at any time**, and any mod causing the Geode UI itself to crash would make it impossible to disable without safe mode.
+Some mods may want to **extend Geode's own UI**, for example to add custom features to their own mod's page. This is allowed, however with some caveats. See [the tutorial page](/tutorials/modify-geode) for more.
 
 ## Joke mods
 
