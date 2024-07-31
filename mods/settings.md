@@ -49,6 +49,8 @@ auto value = Mod::get()->getSettingValue<int64_t>("my-int-setting");
 You can detect whenever the value of a setting is changed by using the [listenForSettingChanges] function. In most situations, you should call this function in an `$execute` block, so it gets enabled immediately when your mod is loaded. **The function will not be called on startup**, only when the value is changed afterwards. Note that the type you get the value as must match the value type of the setting type - see [Supported setting types](#supported-setting-types) for more info.
 
 ```cpp
+#include <Geode/loader/SettingEvent.hpp>
+
 $execute {
     listenForSettingChanges("my-float-setting", +[](double value) {
         // do something with the value
