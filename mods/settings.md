@@ -64,7 +64,7 @@ Most of these can have a `default` key to set a default value.
 ```json
 "my-setting": {
     "type": "string",
-    "default": "John"
+    "default": "Rich"
 }
 ```
 
@@ -75,7 +75,7 @@ It can also be an object, for specifying the default value per platform:
     "default": {
         "win": "Bill",
         "mac": "Steve",
-        "android": "John"
+        "android": "Rich"
     }
 }
 ```
