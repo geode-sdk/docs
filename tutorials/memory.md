@@ -11,25 +11,14 @@ Unfortunately, due to how C++ works, the ref counting is not directly automatic 
 The easiest way to concretize this is to look at **manual memory management** in Cocos2d, which works by using the [`retain`](/classes/cocos2d/CCObject#retain) and [`release`](/classes/cocos2d/CCObject#release) functions. In their simplicity, `retain` increments the object's ref count by one, and `release` decrements it by one.
 
 ```cpp
-// Ref count of created object is 0
+// Ref count of a created object is always 1
 auto node = CCNode::create();
 
-// Increment ref count to 1
+// Increment ref count to 2
 node->retain();
 
-// Decrement ref count to 0, freeing the object
+// Decrement ref count to 1, and then to 0, freeing the object
 node->release();
-```
-
-As a small bit of confusion, the ref count of a newly created object is always 0. However, the object is not freed, as the call to `delete` only happens inside `release`. As we are doing memory management manually, if you forget to call `release` on the retained object, you will get a memory leak as its ref count will never decrement back down to 0.
-
-If you want to release a just-created object, you don't have to call `retain` on it - `release` will notice the ref count is already at 0 and free the object:
-
-```cpp
-// Ref count of created object is 0
-auto node = CCNode::create();
-
-// Ref count is already at 0, so this frees the object
 node->release();
 ```
 
@@ -60,8 +49,8 @@ auto other = CCNode::create();
 node->addChild(other);
 
 auto array = CCArray::create();
-// CCArray increment node's ref count by 1, and decrements it when the child
-// is removed or when the node is freed
+// CCArray increments node's ref count by 1, and decrements it when the node
+// is removed or when the array is freed
 array->addObject(node);
 ```
 
@@ -70,7 +59,7 @@ This means that if you store your created object as a child to something or add 
 ```cpp
 {
     auto array = CCArray::create();
-    // If this array is never used anywhere, it's ref count stays at 0 but
+    // If this array is never used anywhere, its ref count stays at 1 and
     // nothing calls release on it, so the memory is leaked - except it's not!
 }
 ```
