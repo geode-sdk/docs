@@ -169,6 +169,8 @@ class $modify(GJGarageLayer) {
 };
 ```
 
+You can find more details on hook priority at the [Hook Priority tutorial](/tutorials/hookpriority.md).
+
 ## Adding delegates
 
 Sometimes you need to add delegates to classes. This is how you would do that:
