@@ -25,7 +25,7 @@ At this point, the function call is finished and execution returns to the origin
 
 An example is shown by this diagram and its accompanying code:
 
-![Diagram detailing the flow of execution for a hooked function](/assets/hook_priority.drawio.svg)
+![Diagram detailing the flow of execution for a hooked function](/assets/hook_priority.png)
 
 ```cpp
 // priority of -1'000'000
