@@ -28,7 +28,7 @@ Now, we know that the button that shows this has an info button sprite, whose sp
 
 Let's find `LevelInfoLayer::init` and then find where it uses the info sprite:
 
-![Code showing a `CCSprite` being created with `GJ_infoIcon_001.png`](/assets/handbook/vol2/LevelStats.png)
+![Code showing a `CCSprite` being created with `GJ_infoIcon_001.png`](/assets/handbook/vol2/infoiconuse.png)
 
 Hm, this doesn't seem right. Let's check the unknown function call after:
 
