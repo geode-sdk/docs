@@ -10,8 +10,8 @@ The syntax, as previously mentioned in the [Hooking tutorial](/tutorials/modify.
 class $modify(cocos2d::CCLabelBMFont) {
     static void onModify(auto& self) {
         if (!self.setHookPriority("cocos2d::CCLabelBMFont::init", 1'000'000'000)) {
-						geode::log::warn("Failed to set hook priority.");
-				}
+            geode::log::warn("Failed to set hook priority.");
+        }
     }
 };
 ```
@@ -110,6 +110,6 @@ This section details some additional tricks to the hook priority system.
 
 - Using a stub function with a very low hook priority is an effective way to disable a function. In this scenario, it becomes impossible for other mods to call the original (as their hooks wouldn't be called either), so this is not recommended.
 
-- Manual hooks can have their priorities set through the [Hook::setPriority](/classes/geode/Hook#setPriority) method.
+- Manual hooks can have their priorities set through the [Hook::setPriority](/classes/geode/Hook/#setPriority) method.
 
 - It is not possible to set the priorities of multiple functions with overloaded parameters in the same modify class (as this would require specifying arguments). In this situation, either split the hooks into separate modify classes or manually hook.
