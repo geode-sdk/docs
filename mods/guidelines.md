@@ -18,7 +18,7 @@ Please note that a mod purposefully altering the experience of specific users (s
 
 > :information_source: As a TL;DR; the rule of thumb for whether something is allowed on the index is **compatability**. If the mod is or might be incompatible with other mods that it *should* be compatible with, that is usually grounds for a rejection.
 
-A mod found breaking any of these rules will be rejected unconditionally from the index.
+A mod found breaking any of these rules will be **rejected unconditionally** from the index.
 
  * The mod contains **false information** about what it does
  * The mod does not use Geode's provided systems for hooking and patching, resulting in almost guaranteed **mod incompatability**
@@ -26,6 +26,7 @@ A mod found breaking any of these rules will be rejected unconditionally from th
  * The mod features **explicit content and/or profanity**. Note that the source code having comments, variable names, etc. containing profanity is fine, as long as they aren't visible to the end user
  * The mod **does not have appropriate metadata**. All mods on the Index must have a proper name, description, icon, and tags, [including jokes](#joke-mods)
  * The mod **removes Vanilla features** for no good reason
+ * The mod **installs other mods from outside the Geode index**. You are not allowed to run any arbitary code downloaded off the internet. There are two exceptions to this rule: mods that introduce some sort of scripting system that runs *sandboxed* arbitary code, and mods installing additional paid features as a runtime library. Do note that for the purposes of verification, the code for all of those paid features must be included, including the code used to load them.
 
 A mod found breaking any of these rules will likely be rejected, although depending on the situation, they could also still be approved.
 
