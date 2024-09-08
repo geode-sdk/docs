@@ -12,6 +12,8 @@ All settings have an associated key, or ID. This is the key of the settings obje
 
 ## Using settings
 
+> :information_source: It is heavily recommended to have [the Geode VS Code Extension](/getting-started/ide-setup) installed, as it gives you automatic code completion and checking for settings in `mod.json`.
+
 Adding new settings to your mod happens through `mod.json`. Define the `settings` key as an object and then list out the settings you want to have: 
 
 ```json
@@ -64,7 +66,9 @@ auto myInt  = Mod::get()->template getSettingValue<int64_t>("my-int-setting");
 You can detect whenever the value of a setting is changed by using the [listenForSettingChanges] function. In most situations, you should call this function in an `$execute` block, so it gets enabled immediately when your mod is loaded. **The function will not be called on startup**, only when the value is changed afterwards. Note that the type you get the value as must match the value type of the setting type - if you are using a custom setting, make sure to specialize `geode::SettingTypeForValueType<T>`.
 
 ```cpp
-#include <Geode/loader/SettingEvent.hpp>
+#include <Geode/loader/SettingV3.hpp>
+
+using namespace geode::prelude;
 
 $execute {
     listenForSettingChanges("my-float-setting", [](double value) {
