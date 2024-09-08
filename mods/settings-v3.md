@@ -94,6 +94,8 @@ All setting types, including custom ones if they opt-in, share a common set of b
 | `enable-if` | [`enable-if` Scheme](#enable-if) | A way to disable settings based on other settings; see [Enable If Schemes](#enable-if) for more |
 | `enable-if-description` | String | Human-readable description for what the `enable-if` scheme does. If not provided, Geode will try to synthesize a legible one from the `enable-if` scheme itself. However, specifying a custom description is heavily recommended if you use saved values, or have more complex schemes |
 
+---
+
 ### Title (`title`)
 
 ![An image showcasing a basic title setting](/assets/settings/title.png)
@@ -109,6 +111,8 @@ Title settings are cosmetic settings that can be used to group other settings.
     "description": "These settings control how groovy you are"
 }
 ```
+
+---
 
 ### Boolean (`bool`)
 
@@ -128,6 +132,8 @@ Boolean settings are a simple toggle for whether the setting is enabled or not.
 ```cpp
 auto value = Mod::get()->template getSettingValue<bool>("bool-setting-example");
 ```
+
+---
 
 ### Integer (`int`)
 
@@ -171,11 +177,13 @@ Integer settings are a whole number. By default, they have a slider, arrows to i
 auto value = Mod::get()->template getSettingValue<int64_t>("int-setting-example");
 ```
 
+---
+
 ### Float (`float`)
 
 ![An image showcasing a basic float setting](/assets/settings/float.png)
 
-Float settings are just like int settings, but for floats!.
+Float settings are just like int settings, but for floats!
 
 ```json
 "float-setting-example": {
@@ -207,9 +215,12 @@ Float settings are just like int settings, but for floats!.
 }
 ```
 
+---
+
 ### String (`string`)
 
 ![An image showcasing a basic string setting](/assets/settings/string.png)
+![An image showcasing a basic enum string setting via the `one-of` property](/assets/settings/string-one-of.png)
 
 String settings are simple strings that can be controlled by character limits or a regex pattern. These can also be used to create **enum settings** via the `one-of` key.
 
@@ -232,6 +243,8 @@ String settings are simple strings that can be controlled by character limits or
 ```cpp
 auto value = Mod::get()->template getSettingValue<std::string>("string-setting-example");
 ```
+
+---
 
 ### File (`file`)
 
@@ -280,6 +293,8 @@ The default value for file settings support a set of known path prefixes to allo
 auto value = Mod::get()->template getSettingValue<std::filesystem::path>("file-setting-example");
 ```
 
+---
+
 ### Folder (`folder`)
 
 ![An image showcasing a basic folder setting](/assets/settings/folder.png)
@@ -301,6 +316,8 @@ The default value for folder settings support the same set of known path setting
 ```cpp
 auto value = Mod::get()->template getSettingValue<std::filesystem::path>("folder-setting-example");
 ```
+
+---
 
 ### Color (`color` / `rgb` / `rgba`)
 
@@ -326,6 +343,8 @@ Color settings prompt the user to pick a specified color. The `color` and `rgb` 
 auto rgb  = Mod::get()->template getSettingValue<cocos2d::ccColor3B>("rgb-setting-example");
 auto rgba = Mod::get()->template getSettingValue<cocos2d::ccColor4B>("rgba-setting-example");
 ```
+
+---
 
 ## Custom Settings
 
