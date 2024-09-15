@@ -449,7 +449,7 @@ public:
 
         // This is where we parse any properties specific to this setting. In 
         // our case, that will be splorgyness, which is optionally defined:
-        root.has("splorgy").into(m_splorgy);
+        root.has("splorgy").into(res->m_splorgy);
 
         // This logs a warning into the console if the object contains keys you 
         // haven't defined. You can remove it if you don't like logspam
