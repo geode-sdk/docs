@@ -1,6 +1,6 @@
 # Mod Guidelines
 
-These are the guidelines for how mods are allowed to the [mods index](https://geode-sdk.org/mods). **All mods on the index are required to follow these rules.**
+These are the guidelines for mods publihsed on the [mods index](https://geode-sdk.org/mods). **All mods on the index are required to follow these rules.**
 
 It is the responsiblity of both the mod developer and the [person who verifies the mod](/mods/publishing#who-can-approve-mods) to make sure the mod abides by the rules. If a mod is mistakingly approved, or it receives an update the breaks the rules, **they may be applied retroactively**.
 
@@ -12,7 +12,7 @@ A mod found breaking any of these rules will be rejected unconditionally from th
  * The mod **collects user data without consent**. Collecting data locally for the purpose of statistics is fine, but all sort of online data collection must be unambiguously explicit and able to be opted out of.
  * The mod is **stolen**. This means that it consists fully or nearly fully of the original code of another person with credit explicitly erased
 
-Please note that a mod purposefully altering the experience of specific users (such as making gameplay unplayable) **is considered malware**, regardless of the users in question. This specific form of malware is unlikely to lead to an index-wide ban, though that depends on the gravity of the situation.
+Please note that a mod purposefully altering the experience of specific users (such as making gameplay unplayable) and mods harrassing specific people and/or their work **is considered malware**, regardless of the users in question, unless those users have personally consented to it. This specific form of malware is unlikely to lead to an index-wide ban and will just get the mod delisted, though that depends on the gravity of the situation.
 
 ## Other rules
 
@@ -31,7 +31,7 @@ A mod found breaking any of these rules will be **rejected unconditionally** fro
 A mod found breaking any of these rules will likely be rejected, although depending on the situation, they could also still be approved.
 
  * The mod **breaks other mods** for no good reason
- * The mod has several common **game-crashing bugs** that haven't been fixed despite reports
+ * The mod has several common **game-breaking bugs** that haven't been fixed despite reports
  * The mod **doesn't do anything meaningful**. Note that joke mods can be considered meaningful; see [our policy on them](#joke-mods)
 
 A mod found breaking any of these rules will likely still be approved, although constant and/or prolific breaking can result in a rejection.
@@ -82,6 +82,14 @@ For example:
  - A mod that turns the player icon into a badly drawn Sonic the Hedgehog is probably enough to be accepted
  - A mod that is a compilation of multiple different toggleable small jokes is absolutely enough to be accepted, provided it doesn't break any other rules
 
+## Paid mods
+
+Paid mods, aka mods that require payment to be used, **are allowed on the index as long as they have the `Paid` tag**. Do however note that Geode does not handle any payments - you will need to set up all of the payment infrastructure, DRM, etc. by yourself.
+
+Mods that are usable for free but have extra integrated paid features, such as a Pro version or a Supporter tier, do not need to include the `Paid` tag unless the paid features are essential to the functioning of the mod. For example, a multiplayer mod that has a paid tier for private rooms but free public rooms for everyone would likely not need the tag.
+
+It is also okay to publish an **installer mod** for a paid mod on the index, aka something that just asks the user to authenticate and then installs the paid content. These mods also need to have the `Paid` tag.
+
 ## Mods using Generative AI
 
 Due to controversy among developers regarding the subject, mods that utilize **Generative AI** have to follow these additional guidelines in relation to their AI usage.
@@ -91,7 +99,7 @@ Due to controversy among developers regarding the subject, mods that utilize **G
  * The mod **may not grant an unfair advantage** in gameplay or anything else to people through the use of AI
  * The mod **may not compromise the integrity of user-created content**. In essence, this means that **no mod is allowed to use AI for placing, modifying, or deleting objects**, though it is not limited to just those.
  * The AI model is only, and as provably as one can reasonably expect, **trained on consentually and transparently obtained data**. Any mod found to be breaking this rule would be found to be in violation of the "collecting user data without consent" hard-ban rule, and subsequently result in the developer being immediately and permanently banned from the index
- * The mod **must visibly and unambiguously communicate to the user its use of AI** prior to them clicking on it (similar to [paid mods](/mods/publishing#what-about-paid-mods)).
+ * The mod **must visibly and unambiguously communicate to the user its use of AI** prior to them clicking on it. This can be as simple as adding "AI" or "GPT" to the name of the mod.
 
 In addition, all mods utilizing AI **must be manually verified** on the index and **approved unilaterally by Geode lead developers**, regardless of whether the developer is verified on the index or not.
 
@@ -109,3 +117,7 @@ This ruling is in place to ensure that Geode stays a **safe and welcoming place 
 Do take note that **the list above is not comprehensive nor set in stone**, and what qualifies as hateful conduct may and will change and mold over time, with the final say always being left to the Geode team of that time.
 
 Do also note that these rules may very well be enforced retroactively. While we do believe in and hope for people to grow to be better, any person ruled to have committed hateful conduct in the past must give reason for the Geode Team to believe they actually have changed to overturn the verdict.
+
+## The "Too Big to Ignore" Rule
+
+Like everything else in this world, the Geode index also does have one set of rules for the ultra rich and another for the rest. Although this is undesirable and we try our best to be fair and equal, some mods are officially considered "too big to ignore" and may be granted small exceptions to index rules that other mods would have to follow. Do note that we do still of course have hard limits; even a mod that is too big to ignore can't go around stealing user data. In addition, "too big to ignore" status also usually just naturally brings with it responsibility for the mod developer to do good; a big mod being caught stealing user data would result in massive outrage immediately. So, for this reason, mods that are too big to ignore may be granted exceptions in some rules, such as not requiring source code to be submitted.
