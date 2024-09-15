@@ -32,13 +32,7 @@ Even if your mod is **closed source**, you still need to submit the source code 
 
 ## What about paid mods?
 
-If your mod is fully paid, you will have to **publish it yourself on a separate platform**, as the Geode team doesn't want to handle processing user authentification and payments. However, there are many options for still getting the mod on the index:
-
- - If your mod has a **free / lite version** that is usable on its own (like [BetterEdit](https://github.com/HJfod/BetterEdit) does), then publishing that is on the index is perfectly okay! In the same vain, if an otherwise free mod **contains paid features**, that is allowed - you just have to **make it clear that the mod contains paid content** in the mod description. In the future you will also be required to add a `Contains Paid Content` tag for free mods that have paid features.
-
- - If your mod has no free version, you may also publish an **installer mod** for your paid mod on the index that just asks the user to authenticate / purchase the mod and installs the paid version. However, you will have to make it **unambiguously and obviously clear that the mod is a link to a paid mod before the user installs it**, for example by naming the mod "Trial Version" or equivalent. In the future you will also be required to add a `Paid` tag for mods that act as just wrapper for paid mods.
-
- - All mods can also include a [`support.md` file](/mods/md-files#supportmd) in your mod that will show a big donate button in the mod's info page in-game. In there, you can include links to your PayPal, Patreon, OnlyFans, and whatnot :)
+Paid mods may be published on the index, as long as they follow the [guidelines for paid mods](/mods/guidelines#paid-mods). Do note that the rules for closed source mods still apply to paid mods; paid mods must submit their source code for verification, including any extra closed-source components that are downloaded at runtime.
 
 ## Who can approve mods?
 
