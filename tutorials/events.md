@@ -142,7 +142,7 @@ In these cases, there exists a Geode-specific helper called [`CCNode::addEventLi
 
 ```cpp
 auto dragDropNode = CCNode::create();
-dragDropNode->template addEventListener<DragDropOnNodeFilter>(
+dragDropNode->addEventListener<DragDropOnNodeFilter>(
     [dragDropNode](auto const& files) {
         // Handle dropped files
     },

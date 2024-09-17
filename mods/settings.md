@@ -59,8 +59,8 @@ Adding new settings to your mod happens through `mod.json`. Define the `settings
 Once you have defined your settings, you can use them in your mod via the [`Mod::getSettingValue`](/classes/geode/Mod#getSettingValue) function:
 
 ```cpp
-auto myBool = Mod::get()->template getSettingValue<bool>("my-bool-setting");
-auto myInt  = Mod::get()->template getSettingValue<int64_t>("my-int-setting");
+auto myBool = Mod::get()->getSettingValue<bool>("my-bool-setting");
+auto myInt  = Mod::get()->getSettingValue<int64_t>("my-int-setting");
 ```
 
 You can detect whenever the value of a setting is changed by using the [listenForSettingChanges] function. In most situations, you should call this function in an `$execute` block, so it gets enabled immediately when your mod is loaded. **The function will not be called on startup**, only when the value is changed afterwards. Note that the type you get the value as must match the value type of the setting type - if you are using a custom setting, make sure to specialize `geode::SettingTypeForValueType<T>`.
@@ -130,7 +130,7 @@ Boolean settings are a simple toggle for whether the setting is enabled or not.
 ```
 
 ```cpp
-auto value = Mod::get()->template getSettingValue<bool>("bool-setting-example");
+auto value = Mod::get()->getSettingValue<bool>("bool-setting-example");
 ```
 
 ---
@@ -174,7 +174,7 @@ Integer settings are a whole number. By default, they have a slider, arrows to i
 ```
 
 ```cpp
-auto value = Mod::get()->template getSettingValue<int64_t>("int-setting-example");
+auto value = Mod::get()->getSettingValue<int64_t>("int-setting-example");
 ```
 
 ---
@@ -241,7 +241,7 @@ String settings are simple strings that can be controlled by character limits or
 ```
 
 ```cpp
-auto value = Mod::get()->template getSettingValue<std::string>("string-setting-example");
+auto value = Mod::get()->getSettingValue<std::string>("string-setting-example");
 ```
 
 ---
@@ -292,7 +292,7 @@ The default value for file settings support a set of known path prefixes to allo
 ```
 
 ```cpp
-auto value = Mod::get()->template getSettingValue<std::filesystem::path>("file-setting-example");
+auto value = Mod::get()->getSettingValue<std::filesystem::path>("file-setting-example");
 ```
 
 ---
@@ -316,7 +316,7 @@ The default value for folder settings support the same set of known path setting
 ```
 
 ```cpp
-auto value = Mod::get()->template getSettingValue<std::filesystem::path>("folder-setting-example");
+auto value = Mod::get()->getSettingValue<std::filesystem::path>("folder-setting-example");
 ```
 
 ---
@@ -342,8 +342,8 @@ Color settings prompt the user to pick a specified color. The `color` and `rgb` 
 ```
 
 ```cpp
-auto rgb  = Mod::get()->template getSettingValue<cocos2d::ccColor3B>("rgb-setting-example");
-auto rgba = Mod::get()->template getSettingValue<cocos2d::ccColor4B>("rgba-setting-example");
+auto rgb  = Mod::get()->getSettingValue<cocos2d::ccColor3B>("rgb-setting-example");
+auto rgba = Mod::get()->getSettingValue<cocos2d::ccColor4B>("rgba-setting-example");
 ```
 
 ---
@@ -466,7 +466,7 @@ public:
 
 // If you want to be able to use `Mod::getSettingValue` with your custom setting, 
 // specialize this type!
-// Afterwards, you can simply do `Mod::get()->template getSettingValue<MyCustomEnum>("my-setting")`
+// Afterwards, you can simply do `Mod::get()->getSettingValue<MyCustomEnum>("my-setting")`
 template <>
 struct geode::SettingTypeForValueType<MyCustomEnum> {
     using SettingType = MyCustomSettingV3;
