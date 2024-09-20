@@ -39,15 +39,13 @@ However, what if you want to make a popup that's more complex? For example, some
 class MyPopup : public geode::Popup<std::string const&> {
 protected:
     bool setup(std::string const& value) override {
-        auto winSize = CCDirector::sharedDirector()->getWinSize();
-
         // convenience function provided by Popup
         // for adding/setting a title to the popup
         this->setTitle("Hi mom!");
 
         auto label = CCLabelBMFont::create(value.c_str(), "bigFont.fnt");
-        label->setPosition(winSize / 2);
-        this->addChild(label);
+        label->setPosition(this->m_mainLayer->getContentSize() / 2);
+        this->m_mainLayer->addChild(label);
 
         return true;
     }
@@ -55,7 +53,7 @@ protected:
 public:
     static MyPopup* create(std::string const& text) {
         auto ret = new MyPopup();
-        if (ret->init(240.f, 160.f, text)) {
+        if (ret->initAnchored(240.f, 160.f, text)) {
             ret->autorelease();
             return ret;
         }
