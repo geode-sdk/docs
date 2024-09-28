@@ -70,7 +70,7 @@ If the errors still persist, try restarting VS Code.
 
 The setup is very similar to [VSCode on Mac](#vscode-on-mac), so you can follow that. The primary difference is you have to manually create a kit, which can be done like so:
 
-1. Open the Command Palette (with **F1** or **Ctrl+Shift+P**) and locate the command **CMake: Edit User-Local CMake Kits** (requires CMake Tools extension and an opened CMake project)
+1. Open the Command Palette (with **F1** or **Ctrl+Shift+P**) and run the command **CMake: Edit User-Local CMake Kits** (requires CMake Tools extension and an opened CMake project)
 
 2. Add a new kit to the list:
 
