@@ -15,6 +15,7 @@ If you're using some IDE you may want to do a few things for your Geode projects
 
 * [VSCode on Windows](#vscode-on-windows)
 * [VSCode on Mac](#vscode-on-mac)
+* [VSCode on Linux](#vscode-on-linux)
 
 ## VSCode on Windows
 
@@ -64,6 +65,48 @@ You **must** build your mod first so that errors such as `#include <Geode/modify
 Make sure your mod built successfully, the exit code at the end should be 0.
 
 If the errors still persist, try restarting VS Code.
+
+## VSCode on Linux
+
+The setup is very similar to [VSCode on Mac](#vscode-on-mac), so you can follow that. The primary difference is you have to manually create a kit, which can be done like so:
+
+1. Open the Command Palette (with **F1** or **Ctrl+Shift+P**) and run the command **CMake: Edit User-Local CMake Kits** (requires CMake Tools extension and an opened CMake project)
+
+2. Add a new kit to the list:
+
+```json
+{
+    "name": "Geode Windows 64-bit",
+    "compilers": {
+        "C": "/usr/bin/clang",
+        "CXX": "/usr/bin/clang++"
+    },
+    "isTrusted": true,
+    "toolchainFile": "${userHome}/.local/share/Geode/cross-tools/clang-msvc-sdk/clang-msvc.cmake",
+    "cmakeSettings": {
+        "HOST_ARCH": "x86_64",
+        "SPLAT_DIR": "${userHome}/.local/share/Geode/cross-tools/splat"
+    }
+}
+```
+
+If the toolchain and/or splat were installed **not** via `geode sdk install-linux`, modify the paths accordingly.
+
+Additionally, if you have Ninja installed, it's a great idea to set it as the generator instead of `make`, as it's much faster and uses multiple CPU cores by default unlike `make`. Add this to the JSON object above:
+
+```json
+"preferredGenerator": {
+    "name": "Ninja"
+}
+```
+
+Now, you should be able to select the kit and build mods!
+
+Additionally, while this does not affect 90% of people, if you use SIMD intrinsics or include a library that does, you might get strange compile/link errors with the configuration above. This can be fixed by changing the compiler from `clang` to `clang-cl`, like so:
+
+* `"toolchainFile"` to `${userHome}/.local/share/Geode/cross-tools/clang-msvc-sdk/clang-cl-msvc.cmake`
+* `"compilers"` / `"C"` to `/usr/bin/clang-cl`
+* `"compilers"` / `"CXX"` to `/usr/bin/clang-cl`
 
 # Visual Studio
 
