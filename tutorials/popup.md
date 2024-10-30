@@ -44,8 +44,7 @@ protected:
         this->setTitle("Hi mom!");
 
         auto label = CCLabelBMFont::create(value.c_str(), "bigFont.fnt");
-        label->setPosition(this->m_mainLayer->getContentSize() / 2);
-        this->m_mainLayer->addChild(label);
+        m_mainLayer->addChildAtPosition(label, Anchor::Center);
 
         return true;
     }
