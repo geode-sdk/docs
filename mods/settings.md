@@ -579,6 +579,55 @@ $execute {
 }
 ```
 
+Incase you want to store a more complex value (e.g. a string or a custom class/struct), you'll have to implement all the required operators. This is done as follows:
+
+```cpp
+struct MyComplexSettingValue {
+    // Strings can't be used directly as they conflict with the string setting specialization
+    std::string value;
+
+    // Make sure it's comparable so that settings can check if the value has changed
+    bool operator==(MyComplexSettingValue& other) const {
+        return value == other.value;
+    }
+
+    // Optionally you can simplify the access to the value
+    operator std::string() const {
+        return value;
+    }
+
+    // Create a default implementation
+    MyComplexSettingValue() = default;
+
+    // Create a simple way to construct the value with the settings node
+    MyComplexSettingValue(std::string& value) : value(value) {}
+
+    // Create a copy constructor
+    MyComplexSettingValue(MyComplexSettingValue& other) : value(other.value) {}
+};
+
+// You'll have to manually implement the serialization for the value
+template<>
+struct matjson::Serialize<MyComplexSettingValue> {
+    // How to serialize the value to JSON. In this case we can store it as a string
+    static matjson::Value to_json(MyComplexSettingValue& settingValue) {
+        return settingValue.value;
+    }
+
+    // How to deserialize the value from JSON. In this case we can read it as a string
+    static MyComplexSettingValue from_json(matjson::Value& json) {
+        return MyComplexSettingValue(json.as_string());
+    }
+
+    // Validate the JSON value. In this case we can check if it's a string
+    static bool is_json(matjson::Value& json) {
+        return json.is_string();
+    }
+};
+
+// After that you can do the same as with simpler types
+```
+
 Custom settings do not necessarily need to inherit from the `SettingValueNodeV3<T>` helper. For example, if you wanted to make a non-conventional setting, like show a non-interactive graphic or button, you can inherit directly from `SettingV3`.
 
 **As an example, here's a custom setting type for a button that opens a website when clicked:**
