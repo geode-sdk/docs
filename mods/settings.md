@@ -600,7 +600,7 @@ struct MyComplexSettingValue {
     MyComplexSettingValue() = default;
 
     // Create a simple way to construct the value with the settings node
-    MyComplexSettingValue(std::string& value) : value(value) {}
+    MyComplexSettingValue(std::string_view value) : value(value) {}
 
     // Create a copy constructor
     MyComplexSettingValue(MyComplexSettingValue& other) : value(other.value) {}
