@@ -68,4 +68,4 @@ Mods should save other data (files, backups, etc.) to their specific save direct
 
 It should be noted that a mod can have a good reason to save data elsewhere - for example a mod that saves created levels as individual files instead of CCLocalLevels would be justified in saving directly under the GD save folder instead of the mod save folder, since the data its saving is not related to the mod.
 
-If you have data that the user should be able to edit (for example config files), these should go in the directory provided by `Mod::get()->getConfigDir()`.
+If you have data that the user should be able to edit (for example config files), these should go in the directory provided by `Mod::get()->getConfigDir()`. **Do not flood the main GD folder with config files or save data** - this will almost certainly get your mod rejected from the index unless you have a _very_ good reason for doing so!
