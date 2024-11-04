@@ -615,14 +615,14 @@ struct matjson::Serialize<MyComplexSettingValue> {
 
     // Deserialize the value from JSON, again taking advantage of strings being inherently
     // JSON-serializable
-    static MyComplexSettingValue from_json(matjson::Value& json) {
+    static MyComplexSettingValue from_json(matjson::Value const& json) {
         return MyComplexSettingValue(json.as_string());
     }
 
     // Validate that the JSON value is the type we expect. You can do more complex validation here,
     // but in practice most implementations just check if it's roughly the correct type (usually
     // object, array, or string)
-    static bool is_json(matjson::Value& json) {
+    static bool is_json(matjson::Value const& json) {
         return json.is_string();
     }
 };
