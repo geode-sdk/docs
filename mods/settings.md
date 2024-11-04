@@ -579,7 +579,7 @@ $execute {
 }
 ```
 
-Incase you want to store a more complex value (e.g. a string or a custom class/struct), you'll have to implement all the required operators. This is done as follows:
+If you want to store a more complex value (e.g. a string or a custom class/struct), you'll have to implement the copy constructor, comparison operator and a custom serialization implementation for the custom value type. This is done as follows:
 
 ```cpp
 struct MyComplexSettingValue {
@@ -587,9 +587,7 @@ struct MyComplexSettingValue {
     std::string value;
 
     // Make sure it's comparable so that settings can check if the value has changed
-    bool operator==(MyComplexSettingValue& other) const {
-        return value == other.value;
-    }
+    bool operator==(MyComplexSettingValue& other) const = default;
 
     // Optionally you can simplify the access to the value
     operator std::string() const {
@@ -599,27 +597,31 @@ struct MyComplexSettingValue {
     // Create a default implementation
     MyComplexSettingValue() = default;
 
+    // Create a copy constructor
+    MyComplexSettingValue(MyComplexSettingValue& other) = default;
+
     // Create a simple way to construct the value with the settings node
     MyComplexSettingValue(std::string_view value) : value(value) {}
-
-    // Create a copy constructor
-    MyComplexSettingValue(MyComplexSettingValue& other) : value(other.value) {}
 };
 
 // You'll have to manually implement the serialization for the value
 template<>
 struct matjson::Serialize<MyComplexSettingValue> {
-    // How to serialize the value to JSON. In this case we can store it as a string
+    // Serialize the value into JSON. In this case, we just return the value, as strings are
+    // inherently JSON-serializable
     static matjson::Value to_json(MyComplexSettingValue& settingValue) {
         return settingValue.value;
     }
 
-    // How to deserialize the value from JSON. In this case we can read it as a string
+    // Deserialize the value from JSON, again taking advantage of strings being inherently
+    // JSON-serializable
     static MyComplexSettingValue from_json(matjson::Value& json) {
         return MyComplexSettingValue(json.as_string());
     }
 
-    // Validate the JSON value. In this case we can check if it's a string
+    // Validate that the JSON value is the type we expect. You can do more complex validation here,
+    // but in practice most implementations just check if it's roughly the correct type (usually
+    // object, array, or string)
     static bool is_json(matjson::Value& json) {
         return json.is_string();
     }
