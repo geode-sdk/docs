@@ -63,3 +63,25 @@
 * `#include <matjson/stl_serialize.hpp>` -> `#include <matjson/std.hpp>`
 * Added new experimental `<matjson/reflect.hpp>` header, uses [qlibs/reflect](https://github.com/qlibs/reflect) to (de)serialize aggregate structs
     * Behavior might change in the future, so use with caution
+
+## Changes to `JsonChecker` / `JsonExpectedValue`
+* The JsonChecker class was previously marked deprecated, and is now removed. Now you should move to using `JsonExpectedValue` instead
+```cpp
+auto checker = JsonChecker(json);
+auto root = checker.root("[file.json]").obj();
+
+// ... code
+
+if (checker.isError()) {
+    return Err(checker.getError());
+}
+```
+is now
+```cpp
+auto root = checkJson(json, "[file.json]")
+
+// ... code
+
+GEODE_UNWRAP(root.ok());
+```
+* `JsonChecker::has` has different behavior to `JsonExpectedValue::has`, use `JsonExpectedValue::hasNullable` to keep old behavior with null values
