@@ -259,3 +259,45 @@ $execute {
 ```
 
 Note that if your code needs to interact with the Cocos2d UI **at all**, then you should probably be using an `EventListener` in some node or a manager class instead.
+
+## Chaining tasks
+
+You can chain tasks by using `Task::chain`. This allows you to take the result of a task once it finished and run another task right after, based on that return value. \
+Progress updates are only sent from the last Task in the chain, for simplicity
+
+```cpp
+Task<std::string> newTask =
+    startCalculation()
+    .chain([](uint64_t value) -> Task<std::string> {
+        // do something expensive with the value idk
+        // this is a bad example
+        return Task<std::string>::immediate(fmt::format("{}", value));
+    });
+```
+
+## Coroutines
+
+Tasks can be used in [C++20 coroutine](https://en.cppreference.com/w/cpp/language/coroutines) functions, easily allowing for multiple asynchronous calls to happen within the same code. Note that this may have a little performance overhead compared to regular Task code.
+
+```cpp
+Task<int> someTask() {
+    auto response = co_await web::WebRequest().get("https://example.com");
+    co_return response.code();
+}
+```
+
+There are a few specific things you should be aware of when using this syntax:
+* The body of the coroutine is ran in whatever thread it got called in
+* If the task the coroutine is waiting on is cancelled, the whole coroutine is cancelled
+* If the task returned by the coroutine is cancelled, any pending task that is running is cancelled
+
+You can also send progress values using `co_yield`
+
+```cpp
+Task<std::string, int> someTask() {
+    for (int i = 0; i < 10; i++) {
+        co_yield i;
+    }
+    co_return "done!";
+}
+```
