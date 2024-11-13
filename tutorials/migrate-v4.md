@@ -21,7 +21,27 @@
 
 ## Changes to the Geode Settings API
 * Settings v2 has been removed, V3 suffix from classes are now aliased
-* Code that already used SettingsV3 should still work
+* Most SettingV3 code should work fine, with the exception of some Result usages:
+```cpp
+static Result<std::shared_ptr<MyCustomSettingV3>> parse(std::string const&, std::string const&, matjson::Value const& json) {
+   auto res = std::make_shared<MyCustomSettingV3>();
+   auto root = checkJson(json, "MyCustomSettingV3");
+   // ... some code here ...
+   return root.ok(res);
+}
+// should now be:
+//                            ↓ here
+static Result<std::shared_ptr<SettingV3>> parse(std::string const&, std::string const&, matjson::Value const& json) {
+   auto res = std::make_shared<MyCustomSettingV3>();
+   auto root = checkJson(json, "MyCustomSettingV3");
+   // ... some code here ...
+   //             ↓ here
+   return root.ok(std::static_pointer_cast<SettingV3>(res));
+}
+```
+
+## Changes to `utils::MiniFunction`
+* Removed, use `std::function` now
 
 ## Changes to `geode::Layout`
 * No longer in cocos2d namespace
