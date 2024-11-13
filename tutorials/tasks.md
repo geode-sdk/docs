@@ -262,7 +262,7 @@ Note that if your code needs to interact with the Cocos2d UI **at all**, then yo
 
 ## Chaining tasks
 
-You can chain tasks by using `Task::chain`. This allows you to take the result of a task once it finished and run another task right after, based on that return value. \
+You can chain tasks by using `Task::chain`. This allows you to take the result of a task once it finishes and run another task right after, based on that return value. \
 Progress updates are only sent from the last Task in the chain, for simplicity
 
 ```cpp
@@ -277,7 +277,7 @@ Task<std::string> newTask =
 
 ## Coroutines
 
-Tasks can be used in [C++20 coroutine](https://en.cppreference.com/w/cpp/language/coroutines) functions, easily allowing for multiple asynchronous calls to happen within the same code. Note that this may have a little performance overhead compared to regular Task code.
+Tasks can be used in [C++20 coroutines](https://en.cppreference.com/w/cpp/language/coroutines), easily allowing for multiple asynchronous calls to happen within the same code. Note that this may have a little performance overhead compared to regular Task code.
 
 ```cpp
 Task<int> someTask() {
