@@ -77,6 +77,7 @@ static Result<std::shared_ptr<SettingV3>> parse(std::string const&, std::string 
 * Accessing missing properties with `Value::operator[]` will now return a null value instead of throwing an exception
 * Serialization methods have been changed:
     * `T from_json(matjson::Value const&)` -> `Result<T> fromJson(matjson::Value const&)`
+       *  **Make sure to return a Result!** much of the code relies on `fromJson` returning a Result.
     * `matjson::Value to_json(T const& value)` -> `matjson::Value toJson(T const& value)`
     * `is_json` is no longer used, instead just return an error in `fromJson`
 * `bool Value::is<T>()` removed
