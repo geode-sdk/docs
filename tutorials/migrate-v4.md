@@ -8,6 +8,15 @@
     * Snake case methods renamed to camel case
 * Universal `GEODE_UNWRAP(res)` and `GEODE_UNWRAP_INTO(value, res)` macros
     * These macros were already previously available, but this is just a reminder that they can help a lot when dealing with results.
+    ```cpp
+    Result<std::string> addValues(matjson::Value json) {
+       // Value::asInt() returns a Result<int>
+       GEODE_UNWRAP_INTO(int a, json["a"].asInt());
+       GEODE_UNWRAP_INTO(int b, json["b"].asInt());
+       // must wrap return value with Ok
+       return Ok(fmt::format("sum is {}", a + b));
+    }
+    ```
     * If you only ever expect to build your code with **clang**, you can use the `GEODE_UNWRAP` macro like so, for convenience:
     ```cpp
     Result<int> getInt();
