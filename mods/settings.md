@@ -419,7 +419,7 @@ public:
     // from its definition in `mod.json`. The signature must match this exactly, 
     // although the return type should point to a `SettingV3`-derivative rather 
     // than `std::shared_ptr<SettingV3>` directly
-    static Result<std::shared_ptr<MyCustomSettingV3>> parse(
+    static Result<std::shared_ptr<SettingV3>> parse(
         // The key of the setting, as defined in `mod.json`
         std::string const& key,
         // The mod ID this setting is being parsed for
@@ -456,7 +456,7 @@ public:
         root.checkUnknownKeys();
 
         // Return the resulting instance, or an Err if the JSON parsing failed
-        return root.ok(res);
+        return root.ok(std::static_pointer_cast<SettingV3>(res));
     }
     
     // This is defined at the end of the file, as it needs to know the  
