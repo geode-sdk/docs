@@ -215,6 +215,10 @@ Float settings are just like int settings, but for floats!
 }
 ```
 
+```cpp
+auto value = Mod::get()->getSettingValue<double>("float-setting-example");
+```
+
 ---
 
 ### String (`string`)
