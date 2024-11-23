@@ -59,7 +59,7 @@ static Result<std::shared_ptr<SettingV3>> parse(std::string const&, std::string 
 
 ## Changes to `getChildOfType`
 * Deprecated in 3.9.0, and now removed, use `CCNode::getChildByType<T>(int index)` instead:
-* `getChildOfType<CCLayer>(node, 1)` -> `node->getChildByType<CCLayer*>(1)`
+* `getChildOfType<CCLayer>(node, 1)` -> `node->getChildByType<CCLayer>(1)`
 * You can use this regex pattern to quickly find and replace:
    * `getChildOfType<(.+?)>\((.+?),\s*(.+?)\)` and replace with `$2->getChildByType<$1>($3)`
 
