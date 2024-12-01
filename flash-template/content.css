@@ -388,6 +388,7 @@ main div:not(.entity) {
 details.entity-desc {
     display: flex;
     width: fit-content;
+    flex-direction: column;
 }
 
 details.entity-desc[open] {
