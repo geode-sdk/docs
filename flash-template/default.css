@@ -1,0 +1,145 @@
+html {
+    height: 100%;
+    tab-size: 4;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--flash-body-bg);
+    color: var(--flash-white);
+    display: grid;
+    grid-template-columns: minmax(1rem, 26.5rem) 1fr;
+    grid-template-rows: 100% 100%;
+}
+
+@media only screen and (max-device-width: 250px) {
+    body > .overlay.theme {
+        display: none;
+    }
+}
+
+@media only screen and (max-device-width: 800px) {
+    body {
+        grid-template-columns: 1fr;
+    }
+    
+    nav {
+        position: absolute;
+        width: 100%;
+        transition: opacity .25s;
+    }
+
+    nav.collapsed {
+        opacity: 0%;
+        pointer-events: none;
+    }
+
+    nav:not(.collapsed) {
+        opacity: 100%;
+    }
+
+    nav:not(.collapsed) ~ .overlay.theme {
+        display: none;
+    }
+
+    body > .overlay.menu {
+        display: block;
+    }
+}
+
+@media only screen and (min-device-width: 800px) and (max-device-width: 1100px) {
+    body {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        position: absolute;
+        width: 30rem;
+        transition: left .25s;
+    }
+
+    nav:not(.collapsed) {
+        left: 0rem;
+        box-shadow: .25rem 0rem .5rem var(--flash-shadow);
+    }
+
+    nav.collapsed {
+        left: -30rem;
+    }
+
+    body > .overlay.menu {
+        display: block;
+    }
+}
+
+@media only screen and (min-device-width: 1100px) {
+    body > .overlay.menu {
+        display: none;
+    }
+}
+
+body > .overlay.menu {
+    left: 1rem;
+}
+
+body > .overlay.theme {
+    right: 1rem;
+}
+
+body > .overlay {
+    top: 1rem;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    border-radius: 9999px;
+    box-shadow: 0 .25rem .5rem var(--flash-shadow);
+    z-index: 4;
+}
+
+body > .overlay > button {
+    background-color: var(--flash-dark);
+    color: var(--flash-light);
+    border: none;
+    padding: .35rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+body > .overlay > button:first-child {
+    border-top-left-radius: 9999px;
+    border-bottom-left-radius: 9999px;
+}
+
+body > .overlay > button:last-child {
+    border-top-right-radius: 9999px;
+    border-bottom-right-radius: 9999px;
+}
+
+body > .overlay > button:hover:not(.selected) {
+    background-color: var(--flash-less-dark);
+    cursor: pointer;
+}
+
+body > .overlay > button.selected {
+    background-color: var(--flash-tab-selected-bg);
+    color: var(--flash-tab-selected-color);
+}
+
+body > .overlay > button > .feather {
+    height: 1.25rem;
+}
+
+.version {
+    font-weight: normal;
+    color: var(--flash-light);
+    margin-left: .25rem;
+}
+
+.stretch-apart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}

@@ -1,0 +1,119 @@
+.flash-theme-dark {
+    --flash-gray:           #272727;
+    --flash-gray-dark:      #222;
+    --flash-gray-darker:    #1a1a1a;
+    --flash-gray-darkest:   #111;
+    --flash-white:          #eee;
+    --flash-light:          #aaa;
+    --flash-less-light:     #888;
+    --flash-less-dark:      #6a6a6a;
+    --flash-dark:           #4a4a4a;
+    --flash-darker:         #3a3a3a;
+    --flash-blue:           #6a80d8;
+    --flash-cyan-light:     #7adff8;
+    --flash-cyan:           #6ac2d8;
+    --flash-cyan-dark:      #427b8a;
+    --flash-cyan-darker:    #294e57;
+    --flash-green:          #9ff4b7;
+    --flash-purple:         #9e6ad4;
+    --flash-pink:           #f49fe9;
+    --flash-skin:           #EC897C;
+    --flash-dark-skin:      #58342f;
+    --flash-red:            #e23485;
+    --flash-yellow:         #f5dd9f;
+    --flash-orange:         #f5c99f;
+    --flash-dark-orange:    #5c4c3e;
+    --flash-border:         rgba(255, 255, 255, .2);
+    --flash-hover:          rgba(255, 255, 255, .1);
+    --flash-hover-light:    rgba(255, 255, 255, .3);
+    --flash-shade:          rgba(0, 0, 0, .25);
+    --flash-shadow:         rgba(0, 0, 0, .2);
+
+    --flash-body-bg:            var(--flash-gray);
+    --flash-h1-color:           var(--flash-white);
+    --flash-tab-selected-bg:    var(--flash-light);
+    --flash-tab-selected-color: var(--flash-dark);
+    --flash-search-match:       var(--flash-blue);
+    --flash-nav-arrow:          var(--flash-light);
+    --flash-highlight:          var(--flash-cyan);
+}
+
+.flash-theme-ocean {
+    --flash-gray:           #272737;
+    --flash-gray-dark:      #223;
+    --flash-gray-darker:    #1a1a2a;
+    --flash-gray-darkest:   #112;
+    --flash-white:          #eee;
+    --flash-light:          #aac;
+    --flash-less-light:     #88a;
+    --flash-less-dark:      #6a6a8a;
+    --flash-dark:           #4a4a6a;
+    --flash-darker:         #3a3a5a;
+    --flash-blue:           #6a80d8;
+    --flash-cyan-light:     #7adff8;
+    --flash-cyan:           #6ac2d8;
+    --flash-cyan-dark:      #427b8a;
+    --flash-cyan-darker:    #294e57;
+    --flash-green:          #9ff4b7;
+    --flash-purple:         #9e6ad4;
+    --flash-pink:           #f49fe9;
+    --flash-skin:           #EC897C;
+    --flash-dark-skin:      #58342f;
+    --flash-red:            #e23485;
+    --flash-yellow:         #f5dd9f;
+    --flash-orange:         #f5c99f;
+    --flash-dark-orange:    #5c4c3e;
+    --flash-border:         rgba(155, 155, 255, .2);
+    --flash-hover:          rgba(255, 255, 255, .1);
+    --flash-hover-light:    rgba(255, 255, 255, .3);
+    --flash-shade:          rgba(0, 0, 0, .25);
+    --flash-shadow:         rgba(0, 0, 0, .2);
+
+    --flash-body-bg:            var(--flash-gray);
+    --flash-h1-color:           var(--flash-white);
+    --flash-tab-selected-bg:    var(--flash-blue);
+    --flash-tab-selected-color: var(--flash-white);
+    --flash-search-match:       var(--flash-cyan);
+    --flash-nav-arrow:          var(--flash-light);
+    --flash-highlight:          var(--flash-cyan);
+}
+
+.flash-theme-peach {
+    --flash-gray:           #372733;
+    --flash-gray-dark:      #342030;
+    --flash-gray-darker:    #2a1a28;
+    --flash-gray-darkest:   #221020;
+    --flash-white:          #eee;
+    --flash-light:          #bab;
+    --flash-less-light:     #a89;
+    --flash-less-dark:      #9a6a8a;
+    --flash-dark:           #6a4a5a;
+    --flash-darker:         #5a3a4a;
+    --flash-blue:           #6a80d8;
+    --flash-cyan-light:     #7adff8;
+    --flash-cyan:           #6ac2d8;
+    --flash-cyan-dark:      #427b8a;
+    --flash-cyan-darker:    #294e57;
+    --flash-green:          #9ff4b7;
+    --flash-purple:         #9e6ad4;
+    --flash-pink:           #f49fe9;
+    --flash-skin:           #EC897C;
+    --flash-dark-skin:      #58342f;
+    --flash-red:            #e23485;
+    --flash-yellow:         #f5dd9f;
+    --flash-orange:         #f5c99f;
+    --flash-dark-orange:    #5c4c3e;
+    --flash-border:         rgba(255, 225, 155, .2);
+    --flash-hover:          rgba(255, 255, 255, .1);
+    --flash-hover-light:    rgba(255, 255, 255, .3);
+    --flash-shade:          rgba(0, 0, 0, .25);
+    --flash-shadow:         rgba(0, 0, 0, .2);
+
+    --flash-body-bg:            var(--flash-gray);
+    --flash-h1-color:           var(--flash-yellow);
+    --flash-tab-selected-bg:    var(--flash-yellow);
+    --flash-tab-selected-color: var(--flash-dark);
+    --flash-search-match:       var(--flash-yellow);
+    --flash-nav-arrow:          var(--flash-white);
+    --flash-highlight:          var(--flash-yellow);
+}
