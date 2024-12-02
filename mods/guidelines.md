@@ -1,8 +1,8 @@
 # Mod Guidelines
 
-These are the guidelines for mods publihsed on the [mods index](https://geode-sdk.org/mods). **All mods on the index are required to follow these rules.**
+These are the guidelines for mods published on the [mods index](https://geode-sdk.org/mods). **All mods on the index are required to follow these rules.**
 
-It is the responsiblity of both the mod developer and the [person who verifies the mod](/mods/publishing#who-can-approve-mods) to make sure the mod abides by the rules. If a mod is mistakingly approved, or it receives an update the breaks the rules, **they may be applied retroactively**.
+It is the responsibility of both the mod developer and the [person who verifies the mod](/mods/publishing#who-can-approve-mods) to make sure the mod abides by the rules. If a mod is mistakingly approved, or it receives an update the breaks the rules, **they may be applied retroactively**.
 
 ## Ban rules
 
