@@ -18,6 +18,8 @@ Please note that a mod purposefully altering the experience of specific users (s
 
 > :information_source: As a TL;DR; the rule of thumb for whether something is allowed on the index is **compatability**. If the mod is or might be incompatible with other mods that it *should* be compatible with, that is usually grounds for a rejection.
 
+Repeated attemptation of breaking these rules can result in an **index-wide ban**. Try to make sure that your mod abides by the guidelines. You can contact the index staff if you have any questions about your specific case.
+
 A mod found breaking any of these rules will be **rejected unconditionally** from the index.
 
  * The mod contains **false information** about what it does
