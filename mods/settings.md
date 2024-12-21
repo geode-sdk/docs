@@ -590,7 +590,7 @@ struct MyComplexSettingValue {
     std::string value;
 
     // Make sure your value type is comparable
-    bool operator==(MyComplexSettingValue& other) const = default;
+    bool operator==(MyComplexSettingValue const& other) const = default;
 
     // If your value type is a thin wrapper around another type, you can allow 
     // implicit conversions from your type to the wrapped type
@@ -602,7 +602,7 @@ struct MyComplexSettingValue {
     MyComplexSettingValue(std::string_view value) : value(value) {}
 
     // Setting values must be copyable!
-    MyComplexSettingValue(MyComplexSettingValue&) = default;
+    MyComplexSettingValue(MyComplexSettingValue const&) = default;
 };
 
 // You'll have to manually implement JSON serialization for the value
@@ -610,21 +610,14 @@ template<>
 struct matjson::Serialize<MyComplexSettingValue> {
     // Serialize the value into JSON. In this case, we just return the value, 
     // as strings are inherently JSON-serializable
-    static matjson::Value to_json(MyComplexSettingValue& settingValue) {
+    static matjson::Value toJson(MyComplexSettingValue const& settingValue) {
         return settingValue.value;
     }
-
     // Deserialize the value from JSON, again taking advantage of strings being 
     // inherently JSON-serializable
-    static MyComplexSettingValue from_json(matjson::Value const& json) {
-        return MyComplexSettingValue(json.as_string());
-    }
-
-    // Validate that the JSON value is the type we expect. You can do more 
-    // complex validation here, but in practice most implementations just check 
-    // if it's roughly the correct type (usually object, array, or string)
-    static bool is_json(matjson::Value const& json) {
-        return json.is_string();
+    static Result<MyComplexSettingValue> fromJson(matjson::Value const& json) {
+        GEODE_UNWRAP_INTO(auto str, json.asString());
+        return Ok(MyComplexSettingValue(str));
     }
 };
 ```
@@ -639,6 +632,11 @@ Custom settings do not necessarily need to inherit from the `SettingValueNodeV3<
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/loader/Mod.hpp>
 
+// If you use PCH these are most likely not necessary
+#include <Geode/binding/ButtonSprite.hpp>
+#include <Geode/binding/CCMenuItemSpriteExtra.hpp>
+#include <Geode/binding/FLAlertLayer.hpp>
+
 using namespace geode::prelude;
 
 // Inherit from SettingV3 directly over SettingBaseValueV3, as our setting 
@@ -646,7 +644,7 @@ using namespace geode::prelude;
 class MyButtonSettingV3 : public SettingV3 {
 public:
     // Once again implement the parse function
-    static Result<std::shared_ptr<MyButtonSettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {
+    static Result<std::shared_ptr<SettingV3>> parse(std::string const& key, std::string const& modID, matjson::Value const& json) {
         auto res = std::make_shared<MyButtonSettingV3>();
         auto root = checkJson(json, "MyButtonSettingV3");
 
@@ -660,7 +658,7 @@ public:
         res->parseEnableIf(root);
         
         root.checkUnknownKeys();
-        return root.ok(res);
+        return root.ok(std::static_pointer_cast<SettingV3>(res));
     }
 
     // Since there's no data to save or load, these can just return true
