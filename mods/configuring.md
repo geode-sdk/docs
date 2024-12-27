@@ -110,6 +110,10 @@ Describes where users can report problems with the mod. Value is an object with 
 
 The dependencies of a mod; see [Dependencies](/mods/dependencies.md) for details
 
+### `incompatibilities`
+
+The incompatibilities of a mod. Very similar to [dependencies](/mods/dependencies.md) but the valid importances are `breaking`, `conflicting` and `superseded`.
+
 ### `settings`
 
 The settings of a mod; see [Settings](/mods/settings.md) for details
@@ -150,6 +154,6 @@ A list of tags to categorize the mod. A mod can have any amount of tags, but bet
 | `customization` | The mod adds new customization options to existing GD features |
 | `content` | The mod adds new content (new levels, gamemodes, etc.) |
 | `developer` | The mod is intended for mod developers only |
-| `cheats` | The mod adds cheats like noclip |
+| `cheat` | The mod adds cheats like noclip |
 | `paid` | The mod contains paid content, like a Pro tier, or if the mod acts as an installer for a fully paywalled mod |
 | `joke` | The mod is a joke. See [the docs](/mods/guidelines#joke-mods) for what joke mods are considered to be "meaningful" |
