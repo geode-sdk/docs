@@ -126,11 +126,11 @@ The resources of a mod; see [Resources](/mods/resources.md) for details
 
 If true, specifies that this mod must have finished loading before the loading screen appears in GD. For example, [TextureLdr](https://github.com/geode-sdk/textureldr) uses this to apply texture packs at startup.
 
-### `api` (since Geode `v1.0.0-beta3` / CLI `v1.4.0`)
+### `api`
 
 Specifies that this mod can be [used as a dependency](/mods/dependencies.md). Value is an object with the following properties:
 
-### `headers`
+#### `headers`
 
 An array specifying the list of headers that should bundled with this mod. Supports [globbing](/mods/resources.md).
 
