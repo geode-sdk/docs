@@ -92,6 +92,14 @@ Mods that are usable for free but have extra integrated paid features, such as a
 
 It is also okay to publish an **installer mod** for a paid mod on the index, aka something that just asks the user to authenticate and then installs the paid content. These mods also need to have the `Paid` tag.
 
+## Mods based on other people's mods
+
+Sometimes rather than making original ideas, modders want to for one reason or another make a mod based on someone else's mod, be that for porting it or for making an enhanced version of it. This is allowed under the following conditions:
+
+ * The original creator of the mod **must approve of it**. Stealing is never allowed!
+ * The new mod must have some **meaningful changes** compared to the original, for example major bugfixes or a port to a new GD version. Simply repackaging Click Between Frames as Superb Input Precision is not allowed
+ * The original mod **must be credited**, as per the no stealing rule
+
 ## Mods using Generative AI
 
 Due to controversy among developers regarding the subject, mods that utilize **Generative AI** have to follow these additional guidelines in relation to their AI usage.
