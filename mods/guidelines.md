@@ -78,11 +78,11 @@ However, do note that for a mod to be listed on the Index it has to be **meaning
 
 For example:
 
- - A mod that just changes the title of the game to Geometry Fart and nothing else is probably not enough to be accepted
- - A mod that deliberately crashes the game on every death is very unlikely to be accepted, as that is something which is funny for one YouTube video but so actively harmful no one would use it normally
- - A mod that changes physics to super weird ones might be enough to be accepted, as while most users won't have it permanently enabled, they may enable it every now and then to use together with other mods like Globed
- - A mod that turns the player icon into a badly drawn Sonic the Hedgehog is probably enough to be accepted
- - A mod that is a compilation of multiple different toggleable small jokes is absolutely enough to be accepted, provided it doesn't break any other rules
+ * A mod that just changes the title of the game to Geometry Fart and nothing else is probably not enough to be accepted
+ * A mod that deliberately crashes the game on every death is very unlikely to be accepted, as that is something which is funny for one YouTube video but so actively harmful no one would use it normally
+ * A mod that changes physics to super weird ones might be enough to be accepted, as while most users won't have it permanently enabled, they may enable it every now and then to use together with other mods like Globed
+ * A mod that turns the player icon into a badly drawn Sonic the Hedgehog is probably enough to be accepted
+ * A mod that is a compilation of multiple different toggleable small jokes is absolutely enough to be accepted, provided it doesn't break any other rules
 
 ## Paid mods
 
