@@ -14,7 +14,7 @@ Submitting a mod to the official mod index is as follows:
 4. Login to the index using the **CLI**: `geode index login`. This will prompt you to login using your GitHub account.
 5. Run `geode index mods create`
 6. Provide a **direct download link** to the .geode file (for example `https://github.com/HJfod/BetterEdit/releases/download/v6.3.3/hjfod.betteredit.geode`)
-7. If you are **verified** on the index, then the mod will be available to download immediately. If you are not verified, then an **index admin** will have to validate that your mod meets the [index guidelines](/mods/guidelines) and approve your mod.
+7. An **index admin** will have to validate that your mod meets the [index guidelines](/mods/guidelines) and approve your mod.
 
 ## Releasing updates
 
@@ -22,7 +22,15 @@ To release an update, use `geode index mods update`. You will have to be already
 
 If you are using GitHub releases (or any other system), **do not update an existing release** - create a new one instead. Updating an existing release **will break that version of the mod**, as the Geode package is checksummed.
 
-Make sure to **increase your mod version** when updating it! You should be following [Semantic Versioning](https://semver.org), especially if you're developing a mod with a public API.
+Make sure to **increase your mod version** when updating it! You should be following [Semantic Versioning](https://semver.org), especially if you're developing a mod with a **public API**.
+
+If you are a **verified** developer, then the update will automatically be accepted onto the index, without the need of approval from an **index admin**.
+
+## What are **verified** developers?
+
+Being a verified developer has the sole benefit of not requiring your mod updates to be checked by an **index admin** (and a cool role on the Discord server). **Newly created mods** will still have to go through the verification process. Of course, this means that we do not give the verified status easily. You can become a verified developer by having good quality mods (or mod, you don't have to upload tens of them), proving that you are trustworthy, and being an overall helpful figure in the modding community.
+
+Once you have your verified status, try and uphold the same quality standards you were keeping before getting the role. Having no update checks comes with the temptation of releasing updates **faster** and "figuring it out later if it breaks", which is not a mindset you should be having. Consistently having incidents where you release a broken update **will** lead to your verified status being removed. It also goes without saying that if you release mods / updates that break the **ban rules**, there will be consequences.
 
 ## What about closed source mods?
 
