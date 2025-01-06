@@ -1,16 +1,14 @@
-name: Create docs
+name: Deploy Geode docs
 
 on:
   workflow_dispatch:
   push:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -18,33 +16,31 @@ concurrency:
 jobs:
   deploy:
     name: Docs
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
-
-      # Clone Geode repo
-      - name: Checkout Geode repo
-        uses: actions/checkout@v3
+      - name: Checkout Geode repository
+        uses: actions/checkout@v4
         with:
           repository: 'geode-sdk/geode'
           path: 'geode'
 
-      - name: Checkout docs repo
-        uses: actions/checkout@v3
+      - name: Checkout docs repository
+        uses: actions/checkout@v4
         with:
           path: 'geode/docs'
-      
-      - name: Setup Ninja
-        uses: seanmiddleditch/gha-setup-ninja@master
-      
+
+      - name: Setup ninja
+        uses: larziwau/gha-setup-ninja@master
+
       - name: Download Flash
-        uses: robinraju/release-downloader@v1.5
+        uses: robinraju/release-downloader@v1
         with:
           repository: geode-sdk/flash
           latest: true
           fileName: "flash.exe"
           tarBall: false
           zipBall: false
-          out-file-path: "" 
+          out-file-path: ""
 
       - name: Create dist directory
         run: |
@@ -54,15 +50,15 @@ jobs:
         run: |
           cd dist
           ./../flash.exe -i ../geode -o .
-      
+
       - name: Setup Pages
-        uses: actions/configure-pages@v2
-      
+        uses: actions/configure-pages@v5
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
-        
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
