@@ -6,62 +6,107 @@ As an alternative to this system, Geode introduces **events**. Events are essent
 
 Events are primarily interacted with through three classes: [`Event`](/classes/geode/Event), [`EventListener`](/classes/geode/EventListener), and [`EventFilter`](/classes/geode/EventFilter). `Event` is the base class for the events that are being broadcast; `EventListener` listens for events, and it uses an `EventFilter` to decide which events to listen to. Let's explore how they work through **an example**.
 
+## Creating events
+
 Consider a system where one mod introduces a **drag-and-drop API** to Geode, so the user can just drag files over the GD window. Now, this mod itself probably won't know how to handle every single file type ever; instead, it exposes an API so other mods can handle actually dealing with different file types. However, using a delegate-based system here would be quite undesirable - there is definitely more than one file type in existence. While the mod could just have a list of delegates instead of a single one, those delegates have to manually deal with telling the mod to remove themselves from the list when they want to stop listening for events.
 
 Instead, the drag-and-drop API should leveradge the Geode event system by first defining a new type of event based on the `Event` base class:
 
 ```cpp
+// DragDropEvent.hpp
+
+#include <Geode/loader/Event.hpp> // Event
+#include <Geode/cocos/cocoa/CCGeometry.h> // CCPoint
+
+#include <vector> // std::vector
+#include <filesystem> // std::filesystem::path
+
 using namespace geode::prelude;
 
 class DragDropEvent : public Event {
-public:
-    using Files = std::vector<ghc::filesystem::path>;
-
 protected:
-    Files m_files;
+    std::vector<std::filesystem::path> m_files;
     CCPoint m_location;
 
 public:
-    DragDropEvent(Files const& files, CCPoint const& location);
+    DragDropEvent(std::vector<std::filesystem::path> const& files, CCPoint const& location);
 
-    Files getFiles() const;
+    std::vector<std::filesystem::path> getFiles() const;
     CCPoint getLocation() const;
 };
 ```
 
+> :warning: Note that we have structured the event this way (with protected variables and getters) so that it is **read-only**.
+
 Now, the drag-and-drop mod can post new events by simple creating a `DragDropEvent` and calling `post` on it.
 
 ```cpp
-void handleFilesDroppedOnWindow(...) {
-    ...
+// Assume those variables actually have useful values
+std::vector<std::filesystem::path> files;
+CCPoint location = CCPoint { 0.0f, 0.0f };
 
-    DragDropEvent(...).post();
-}
+DragDropEvent(files, location).post();
+
 ```
 
 That's all - the drag-and-drop mod can now rest assured that any mod expecting drag-and-drop events has received them.
 
-Let's see how that listening part goes, through an example mod that expects [GDShare](https://github.com/hjfod/GDShare-mod) level files and imports them:
+## Listening to events
+
+Listening to events is done using an `EventListener`. An event listener needs an `EventFilter`, so that it knows what events to listen to. This default EventFilter will pass a **pointer** to the event as the parameter to the callback we have to define. Here is a very simple example that listens to events for the **entire runtime of the game** - a **global listener**, as you might call it.
 
 ```cpp
+// main.cpp
+
+#include <Geode/DefaultInclude.hpp> // $execute
+#include <Geode/loader/Event.hpp> // EventListener, EventFilter
+
+#include "DragDropEvent.hpp" // Our created event
+
+using namespace geode::prelude;
+
+// Execute runs the code inside **when your mod is loaded**
+$execute {
+    // This technically doesn't leak memory, since the listener should live for the entirety of the program
+    new EventListener<EventFilter<DragDropEvent>>(+[](DragDropEvent* ev) {
+        for (std::filesystem::path& file : ev->getFiles()) {
+            log::debug("File dropped: {}", file);
+
+            // ... handle the files here
+        }
+
+        // We have to propagate the event further, so that other listeners
+        // can handle this event
+        return ListenerResult::Propagate;
+    });
+}
+```
+
+Notice that our callback returns a `ListenerResult`, more specifically `ListenerResult::Propagate`. This tells the event system that this specific event should **propagate** to the next listeners that are expecting this type of event. If you wish to **stop** this propagation from happening (let's say you don't want **.gmd** files to be propagated to other listeners), then you can return `ListenerResult::Stop`.
+
+```cpp
+// main.cpp
+
+#include <Geode/DefaultInclude.hpp> // $execute
+#include <Geode/loader/Event.hpp> // EventListener, EventFilter
+
+#include "DragDropEvent.hpp" // Our created event
+
 using namespace geode::prelude;
 
 $execute {
     new EventListener<EventFilter<DragDropEvent>>(+[](DragDropEvent* ev) {
-        for (auto& file : ev->getFiles()) {
+        for (std::filesystem::path& file : ev->getFiles()) {
+            log::debug("File dropped: {}", file);
             if (file.extension() == ".gmd") {
-                handleGMDImport(file);
+                log::info("Detected .gmd file: {}", file);
 
-                // This stops event propagation, marking the file as handled. 
-                // Stopping propagation is usually not needed, and shouldn't be 
-                // done by default, however sometimes you want to stop other 
-                // listeners from dealing with the event - such as here, where 
-                // importing the same file twice would be undesirable
+                // Stop event propagation after this listener.
                 return ListenerResult::Stop;
             }
         }
-        // Propagate this event down the chain; aka, let other listeners see 
-        // the event
+
+        // If no .gmd file was detected, propagate the event further
         return ListenerResult::Propagate;
     });
 }
@@ -69,13 +114,28 @@ $execute {
 
 This is all the mod needs to do to set up a **global listener** - one that exists for the entire duration of the mod. Now, whenever a `DragDropEvent` is posted, the mod catches it and can do whatever it wants with it.
 
-This code also uses the default templated `EventFilter` class, which just checks if an event is right type and then calls the callback if that is the case, stopping propagation if the callback requests it to do so. However, we sometimes also want to create custom filters.
+This code also uses the default templated `EventFilter` class, which just checks if an event is right type and then calls the callback if that is the case, stopping propagation if the callback requests it to do so. However, we sometimes also want to create **custom filters**.
 
-For example, let's say another mod wants to use the drag-and-drop API, but instead of always listening for events, it wants to have a specific node in the UI that the user should drop files over. In this case, the listener should only exist while the node exists, and only accept events if it's over the node. We could of course deal with this in the global callback, however we can simplify our code by creating a custom filter that handles accepting the event. We can also include the file types to listen for in the filter itself, simplifying our code even further.
+## Creating custom filters
+
+For example, let's say another mod wants to use the drag-and-drop API, but instead of always listening for events, it wants to have a **specific node in the UI that the user should drop files over**. In this case, the listener should only exist **while the node exists**, and only accept events if it's over the node. We could of course deal with this in the global callback, however we can simplify our code by creating a custom filter that handles accepting the event. We can also include the file types to listen for in the filter itself, simplifying our code even further.
 
 We can create a custom `EventFilter` by inheriting from it:
 
 ```cpp
+// DragDropOnNodeFilter.hpp
+
+#include <Geode/cocos/base_nodes/CCNode.h> // CCNode
+#include <Geode/loader/Event.hpp> // EventFilter
+
+#include "DragDropEvent.hpp" // Our event
+
+#include <filesystem> // std::filesystem::path
+#include <functional> // std::function
+#include <string> // std::string
+#include <unordered_set> // std::unordered_set
+#include <vector> // std::vector
+
 using namespace geode::prelude;
 
 class DragDropOnNodeFilter : public EventFilter<DragDropEvent> {
@@ -84,73 +144,109 @@ protected:
     std::unordered_set<std::string> m_filetypes;
 
 public:
-    // The callback does not need to return ListenerResult nor take the whole 
-    // DragDropEvent as a parameter - if the callback is called, then we know 
-    // the event was over the node and the file types were correct already
-    using Callback = void(std::vector<ghc::filesystem::path> const&);
+    // We HAVE to specify this alias, the EventListener makes use of it.
+    // The default EventFilter<DragDropEvent> would send the event itself as the callback argument
+    // For the default EventFilter<DragDropEvent>, the Callback alias looks like:
+    // using Callback = ListenerResult(DragDropEvent*)
+    //
+    // In this case, though, we want to filter the files that we need, so we will only use a vector of files.
+    using Callback = ListenerResult(std::vector<std::filesystem::path> const&);
 
-    ListenerResult handle(MiniFunction<Callback> fn, DragDropEvent* event);
-    DragDropOnNodeFilter(CCNode* target, std::unordered_set<std::string> const& types);
+    // This method also needs to exist
+    ListenerResult handle(std::function<Callback> fn, DragDropEvent* event);
+    DragDropOnNodeFilter(CCNode* target, std::unordered_set<std::string> const& types)
+        : m_target(target),
+        m_types(types) {}
 };
 ```
+
+> :warning: You have a lot of freedom when defining the EventFilter callback. Remember that the default `EventFilter<Event>` is of type `std::function<ListenerResult(Event*)>`, but your callback can look differently.
 
 For the implementation of `handle`, we need to check that the event occurred on top of the target node:
 
 ```cpp
-ListenerResult DragDropOnNodeFilter::handle(MiniFunction<Callback> fn, DragDropEvent* event) {
-    // Check if the event happened over the node
-    if (m_target->boundingBox().containsPoint(event->getLocation())) {
-        // Filter out only file types we can accept
-        std::vector<ghc::filesystem::path> valid;
-        for (auto& file : event->getFiles()) {
-            if (m_filetypes.contains(file.extension().string())) {
-                valid.push(file);
-            }
-        }
-        fn(valid);
-        // Mark dropped files as handled
-        return ListenerResult::Stop;
+ListenerResult DragDropOnNodeFilter::handle(std::function<Callback> fn, DragDropEvent* event) {
+    // If the event didn't happen over the node, just propagate the event further
+    if (!m_target->boundingBox().containsPoint(event->getLocation())) {
+        return ListenerResult::Propagate;
     }
-    // Otherwise let other listeners handle it
-    return ListenerResult::Propagate;
+
+    std::vector<std::filesystem::path> valid;
+
+    // Filter the files to only include valid ones
+    for (std::filesystem::path& file : event->getFiles()) {
+        if (m_filetypes.contains(file.extension().string())) {
+            valid.push_back(file);
+        }
+    }
+
+    // If there are no valid files, propagate the event further
+    if (valid.size() == 0) {
+        return ListenerResult::Propagate;
+    }
+
+    // Call the EventListener callback and return the ListenerResult that it gives us
+    return fn(valid);
 }
 ```
 
 Now, to install an event listener on a specific node, we have two options. If the node is our own class, we can just add it as a class member:
 
 ```cpp
+// DragDropNode.hpp
+
+#include <Geode/cocos/base_nodes/CCNode.h> // CCNode
+#include <Geode/loader/Event.hpp> // EventListener
+
+#include "DragDropOnNodeFilter.hpp" // Our filter
+
 class DragDropNode : public CCNode {
 protected:
     EventListener<DragDropOnNodeFilter> m_listener = {
-        // You can bind member functions as event listeners too!
         this, &DragDropNode::onDrop,
-        // The filter requires some args so we have to explicitly construct it
+        // We defined a constructor with some arguments, so we have to construct our filter now
         DragDropOnNodeFilter(this, { ".gmd", ".gmd2", ".lvl" })
     };
 
-    void onDrop(std::vector<ghc::filesystem::path> const& files) {
+    ListenerResult onDrop(std::vector<std::filesystem::path> const& files) {
         // Handle dropped files
+
+        return ListenerResult::Propagate;
     }
 };
 ```
 
-When `DragDropNode` is destroyed, the listener is automatically destroyed and unregistered aswell, so you don't need to do anything else.
+There are multiple ways to define a callback for our listener. The method above uses a **member function**. We can also define a **lambda**:
+```cpp
+EventListener<DragDropOnNodeFilter> m_listener = {
+    [](std::vector<std::filesystem::path> const& files) {
+        // Handle dropped files...
+
+        return ListenerResult::Propagate;
+    },
+    DragDropOnNodeFilter(this, { ".gmd", ".gmd2", ".lvl" })
+};
+```
+
+When our `DragDropNode` is destroyed, the EventListener is automatically destroyed and unregistered aswell, so you don't need to do anything else.
 
 However, using a member function is not always possible. For example, if you're hooking a class, [event listeners don't work in fields](/tutorials/fields.md#note-about-addresses); or if you want to listen for events on an existing node whose class you don't control.
 
 In these cases, there exists a Geode-specific helper called [`CCNode::addEventListener`](/classes/cocos2d/CCNode#addEventListener). You can use this to **add event listeners to any node** - including existing ones by GD!
 
+> :warning: Any `EventFilter` that is used in `addEventListener` **must** have their first **constructor param** as a `CCNode*`. The callback **lambda** should be the first argument passed to `addEventListener`, then you have to pass the next **constructor arguments** for your `EventFilter`
+
 ```cpp
 auto dragDropNode = CCNode::create();
 dragDropNode->addEventListener<DragDropOnNodeFilter>(
-    [dragDropNode](auto const& files) {
+    [dragDropNode](std::vector<std::filesystem::path> const& files) {
         // Handle dropped files
+
+        return ListenerResult::Propagate;
     },
     { ".gmd", ".gmd2", ".lvl" }
 );
 ```
-
-`addEventListener` is meant only for events that are have a target node - it assumes that the first parameter of the filter's constructor takes `this` as the argument. Other parameters to the filter's constructor, such as the file types here, can be passed as the rest of the argument list to `addEventListener`.
 
 Any event listener added with `addEventListener` is automatically destroyed aswell when the node is destroyed. You can also provide a string ID for the event listener as the first argument to `addEventListener`, and then manually remove the listener later using [`removeEventListener`](/classes/cocos2d/CCNode#removeEventListener).
 
