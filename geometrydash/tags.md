@@ -46,7 +46,7 @@ Wait!<d040> You shouldn't go there<d500>.<d500>.<d500>.
 
 In this example, the tag `<d...>` is used. The number next to the d specifies the number of milliseconds to wait. However, this number must be 3 digits. The GIF below shows what this looks like in-game (GIF from GDDocs):
 
-![GIF showing delay tag](/assets/geometrydash/delay_tag.gif)
+![GIF showing delay tag](/assets/delay_tag.gif)
 
 ## Shake
 
@@ -58,4 +58,12 @@ Shake tags make text shake. To use this, please follow the example below:
 
 In this example, the syntax for the shake tag is similar to the syntax of the delay tag. This is however based on the intensity of the shaking. For reference, the example above looks like this in the game (GIF from GDDocs):
 
-![GIF showing shake tag](/assets/geometrydash/shake_tag.gif)
+![GIF showing shake tag](/assets/shake_tag.gif)
+
+# Instant/Fade
+
+Fade Tags are used to fade in a block of text on screen instead of making it appear character by character. Similarly to colour tags, Fade tags have a start and end tag to denote which piece of text should appear instantly. The number is specified in centiseconds, which is 1/100th of a second.
+
+Usage: Hello, `<i100>world!</i>`
+
+![GIF showing fade tag](/assets/fadein_tag.gif)
