@@ -2,7 +2,7 @@
 
 One of the biggest pains in all UI design in general is positioning stuff. This is especially troublesome in GD mods, where you can't really be sure where stuff are located on the screen. If some mod changes the visual outlook of a layer, how are you supposed to figure out where you should position your buttons?
 
-The solution Geode introduces for this are **layouts** - small classes added to CCNodes that dictate how that node's children should be positioned. For example, a row layout would lay its children in a horizontal row, whereas a grid layout would lay its children out in a grid. Although, perhaps surprisingly, Geode only adds one type of layout: the [AxisLayout](/classes/cocos2d/AxisLayout) class, which actually handles all common types of layouts, including row, column, grid, and flex.
+The solution Geode introduces for this are **layouts** - small classes added to CCNodes that dictate how that node's children should be positioned. For example, a row layout would lay its children in a horizontal row, whereas a grid layout would lay its children out in a grid. Although, perhaps surprisingly, Geode only adds one type of layout: the [AxisLayout](/classes/geode/AxisLayout) class, which actually handles all common types of layouts, including row, column, grid, and flex.
 
 You can view what layouts are visible on screen using the [DevTools](https://github.com/geode-sdk/devtools) mod, which has an option to show all layouts in the current scene.
 
@@ -38,9 +38,9 @@ myMenu->setLayout(RowLayout::create());
 
 ## AxisLayout
 
-Geode only adds one type of layout, [AxisLayout](/classes/cocos2d/AxisLayout), which is meant to be an all-purpose general layout. It can arrange nodes in a row, column, grid, or even a flex-type flow layout. Geode also adds the [RowLayout](/classes/cocos2d/RowLayout) and [ColumnLayout](/classes/cocos2d/ColumnLayout) for readability, however you will find that these don't actually add anything new on top of AxisLayout - they're just syntactic sugar!
+Geode only adds one type of layout, [AxisLayout](/classes/geode/AxisLayout), which is meant to be an all-purpose general layout. It can arrange nodes in a row, column, grid, or even a flex-type flow layout. Geode also adds the [RowLayout](/classes/geode/RowLayout) and [ColumnLayout](/classes/geode/ColumnLayout) for readability, however you will find that these don't actually add anything new on top of AxisLayout - they're just syntactic sugar!
 
-By default, AxisLayout arranges its children in a single straight line. This can be changed using the [setGrowCrossAxis](/classes/cocos2d/AxisLayout#setGrowCrossAxis) method.
+By default, AxisLayout arranges its children in a single straight line. This can be changed using the [setGrowCrossAxis](/classes/geode/AxisLayout#setGrowCrossAxis) method.
 
 You can play around with the different options AxisLayout offers using the [DevTools](https://github.com/geode-sdk/devtools) mod.
 
@@ -48,4 +48,4 @@ You can play around with the different options AxisLayout offers using the [DevT
 
 ## Custom layouts
 
-If AxisLayout doesn't fully match your needs, you can also define entirely custom layouts by inheriting from the [Layout](/classes/cocos2d/Layout) class and implementing the `apply` method.
+If AxisLayout doesn't fully match your needs, you can also define entirely custom layouts by inheriting from the [Layout](/classes/geode/Layout) class and implementing the `apply` method.
