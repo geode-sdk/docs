@@ -71,7 +71,7 @@ We provide prebuilt Linux binaries in [the CLI releases page]((https://github.co
 
 Once you figure that out, it is recommended that you [set up a profile afterwards](#profile-setup).
 
-## NixOS
+## Nix
 
 You can install the CLI via a Flake or via `nix-build`
 ```bash
