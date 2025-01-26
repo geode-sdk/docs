@@ -109,6 +109,27 @@ auto hook1 = GEODE_UNWRAP(ObjcHook::create("EAGLView", "initWithFrame:", &MyFunc
 auto hook2 = GEODE_UNWRAP(ObjcHook::create("EAGLView", "initWithFrame:", &MyFunc, &emptyFunc));
 ```
 
+### geode::dir
+
+```cpp
+// This is where geode is located!
+auto geodeDir = dirs::getGeodeDir();
+
+// This is where geodes resources are stored!
+auto geodeResourcesDir = dirs::getGeodeResourcesDir();
+
+// This is where geodes saves its files!
+auto geodeSaveDir = dirs::getGeodeSaveDir();
+
+// This is where mod's save files are!
+auto modSaveDir = dirs::getModsSaveDir();
+
+// This is where GD saves its files!
+auto saveDir = dirs::getSaveDir();
+
+// Other directories also exist
+```
+
 ## Tasks
 
 Visit the [tasks](tasks.md) page for more information.
