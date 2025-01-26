@@ -85,11 +85,11 @@ bool init() override {
 }
 
 // This function is called when the escape key is pressed!
-void LobbiesLayer::keyBackClicked() override {
+void keyBackClicked() override {
     this->onBack(nullptr);
 }
 
-void LobbiesLayer::onBack(CCObject* sender) {
+void onBack(CCObject* sender) {
     CCDirector::get()->replaceScene(CCTransitionFade::create(0.5, MenuLayer::scene()));
 }
 
@@ -127,6 +127,11 @@ protected:
 		background->setID("background");
 		this->addChild(background);	
 	}
+	
+	// This function is called when the escape key is pressed!
+	void keyBackClicked() override {
+		this->onBack(nullptr);
+	}
 
 public:
 	static MyVeryOriginalLayer* create() {
@@ -143,6 +148,11 @@ public:
 		auto layer = MyVeryOriginalLayer::create();
 		switchToScene(layer);
 		return layer;
+	}
+
+
+	void onBack(CCObject* sender) {
+		CCDirector::get()->replaceScene(CCTransitionFade::create(0.5, MenuLayer::scene()));
 	}
 	
 }
