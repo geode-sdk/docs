@@ -174,4 +174,28 @@ Don't forget to reload CMake after you add new files to the project.
 
 ## CLion on Linux
 
-TODO
+Pretty much the same as on [Windows](#clion-on-windows) except for setting up the toolchain.
+
+First step is to create an environment file with the following content:
+
+```bash
+export GEODE_SDK=$HOME/Documents/Geode
+export SPLAT_DIR=$HOME/.local/share/Geode/cross-tools/splat
+export CMAKE_TOOLCHAIN_FILE=$HOME/.local/share/Geode/cross-tools/clang-msvc-sdk/clang-msvc.cmake
+export HOST_ARCH=x86_64
+```
+
+If the toolchain and/or splat weren't installed via `geode sdk install-linux`, modify the paths accordingly.
+
+Save it as `geode-env.sh` in your home directory (or wherever you want, just remember the path).
+
+> :warning: If you're using a non default shell (like fish), you might need to edit the environment file to use the correct syntax. For example, fish uses `set -gx VAR value` instead of `export VAR=value`.
+
+Now, in the toolchain settings on the right side of the **Name** field, click the *Add environment* button and select the file you just created.
+
+![Image showing how to configure crosscompiler toolchain in CLion](/assets/clion_toolchainlinux.png)
+
+After that, you can follow the same steps as on Windows to build your mod.
+
+For some specific mods/libraries (most people won't need this), you might also want to add the clang-cl toolchain. Everything is the same as with clang, except you have to use the `clang-cl-msvc.cmake` toolchain file instead. (Copy the environment file and change the `CMAKE_TOOLCHAIN_FILE` variable to point to the `clang-cl-msvc.cmake` file.)  
+Also make sure you're using `clang-cl` as the compiler in the toolchain settings.
