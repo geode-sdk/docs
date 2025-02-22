@@ -67,7 +67,7 @@ It is recommended that you [set up a profile afterwards](#profile-setup).
 
 ## Linux
 
-We provide prebuilt Linux binaries in [the CLI releases page]((https://github.com/geode-sdk/cli/releases/latest)). Since Linux distros differ between each other, you need to figure out yourself how to add this binary to your global path so CMake can find it. As long as `geode --version` works anywhere, everything should be fine.
+We provide prebuilt Linux binaries in [the CLI releases page](https://github.com/geode-sdk/cli/releases/latest). Since Linux distros differ between each other, you need to figure out yourself how to add this binary to your global path so CMake can find it. As long as `geode --version` works anywhere, everything should be fine.
 
 Once you figure that out, it is recommended that you [set up a profile afterwards](#profile-setup).
 
