@@ -10,6 +10,7 @@ class MyVeryOriginalLayer : public CCLayer {
 protected:
 	bool init() override {
 		log::info("Hi from my very original layer");
+  return true;
 	}
 
 public:
@@ -52,9 +53,10 @@ bool init() override {
 	addSideArt(this, SideArt::All, SideArtStyle::Layer);
 	
 	// And a background to the layer
-    auto background = createLayerBG();
-    background->setID("background");
-    this->addChild(background);	
+ auto background = createLayerBG();
+ background->setID("background");
+ this->addChild(background);	
+ return true;
 }
 ```
 
@@ -82,6 +84,7 @@ bool init() override {
 	// Add a back button the the top-left corner of the screen with a small offset.
 	menu->addChildAtPosition(backBtn, Anchor::TopLeft, {25, -25});
 	this->addChild(menu);
+ return true;
 }
 
 // This function is called when the escape key is pressed!
@@ -126,6 +129,7 @@ protected:
 		auto background = createLayerBG();
 		background->setID("background");
 		this->addChild(background);	
+  return true;
 	}
 	
 	// This function is called when the escape key is pressed!
