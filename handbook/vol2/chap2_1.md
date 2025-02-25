@@ -39,4 +39,4 @@ The three most important windows for our purposes are **Symbol Tree**, **Listing
 
 Now that we have Ghidra setup, it's time to learn how we can find a layer's `init` function.
 
-[Chapter 2.2: Finding `MenuLayer::init`](/handbook/vol2/chap2_3.md)
+[Chapter 2.2: Finding `MenuLayer::init`](/handbook/vol2/chap2_2.md)
