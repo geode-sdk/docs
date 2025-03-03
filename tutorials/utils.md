@@ -109,7 +109,7 @@ auto hook1 = GEODE_UNWRAP(ObjcHook::create("EAGLView", "initWithFrame:", &MyFunc
 auto hook2 = GEODE_UNWRAP(ObjcHook::create("EAGLView", "initWithFrame:", &MyFunc, &emptyFunc));
 ```
 
-### geode::dir
+### geode::dirs
 
 ```cpp
 // This is where geode is located!
