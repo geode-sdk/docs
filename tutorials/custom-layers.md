@@ -8,21 +8,21 @@ Creating a new scene is easy. You must create a new class extending `cocos2d:::C
 ```cpp
 class MyVeryOriginalLayer : public CCLayer {
 protected:
-	bool init() override {
-		log::info("Hi from my very original layer");
-  return true;
-	}
+    bool init() override {
+        log::info("Hi from my very original layer");
+        return true;
+    }
 
 public:
-	static MyVeryOriginalLayer* create() {
-		auto ret = new MyVeryOriginalLayer;
-		if (ret->init()) {
-			ret->autorelease();
-			return ret;
-		}
-		CC_SAFE_DELETE(ret);
-		return nullptr;
-	}
+    static MyVeryOriginalLayer* create() {
+        auto ret = new MyVeryOriginalLayer;
+        if (ret->init()) {
+            ret->autorelease();
+            return ret;
+        }
+        CC_SAFE_DELETE(ret);
+        return nullptr;
+    }
 }
 ```
 
@@ -44,19 +44,19 @@ Running this code and calling `MyVeryOriginalLayer::scene()` will transition the
 #include <Geode/ui/General.hpp>
 
 bool init() override {
-	log::info("Hi from my very original layer");
-	
-	// Create a new menu. UI elemnts should be added to here!
-	menu = CCMenu::create();
-	
-	// Add side art to the layer
-	addSideArt(this, SideArt::All, SideArtStyle::Layer);
-	
-	// And a background to the layer
- auto background = createLayerBG();
- background->setID("background");
- this->addChild(background);	
- return true;
+    log::info("Hi from my very original layer");
+
+    // Create a new menu. UI elemnts should be added to here!
+    menu = CCMenu::create();
+
+    // Add side art to the layer
+    addSideArt(this, SideArt::All, SideArtStyle::Layer);
+
+    // And a background to the layer
+    auto background = createLayerBG();
+    background->setID("background");
+    this->addChild(background);	
+    return true;
 }
 ```
 
@@ -72,19 +72,18 @@ Now the biggest problem with this layer is that you are stuck in it. To go back 
 ```cpp
 
 bool init() override {
+    // Create a back button with the back button sprites
+    auto backBtn = CCMenuItemSpriteExtra::create(
+        CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png"),
+        this,
+        menu_selector(MyVeryOriginalLayer::onBack)
+    );
 
-	// Create a back button with the back button sprites
-	auto backBtn = CCMenuItemSpriteExtra::create(
-		CCSprite::createWithSpriteFrameName("GJ_arrow_01_001.png"),
-		this,
-		menu_selector(MyVeryOriginalLayer::onBack)
-	);
-	
-	
-	// Add a back button the the top-left corner of the screen with a small offset.
-	menu->addChildAtPosition(backBtn, Anchor::TopLeft, {25, -25});
-	this->addChild(menu);
- return true;
+
+    // Add a back button the the top-left corner of the screen with a small offset.
+    menu->addChildAtPosition(backBtn, Anchor::TopLeft, {25, -25});
+    this->addChild(menu);
+    return true;
 }
 
 // This function is called when the escape key is pressed!
@@ -116,54 +115,54 @@ using namespace geode::prelude;
 
 class MyVeryOriginalLayer : public CCLayer {
 protected:
-	bool init() override {
-		log::info("Hi from my very original layer");
-		
-		// Create a new menu. UI elemnts should be added to here!
-		menu = CCMenu::create();
-		
-		// Add side art to the layer
-		addSideArt(this, SideArt::All, SideArtStyle::Layer);
-		
-		// And a background to the layer
-		auto background = createLayerBG();
-		background->setID("background");
-		this->addChild(background);	
-  return true;
-	}
-	
-	// This function is called when the escape key is pressed!
-	void keyBackClicked() override {
-		this->onBack(nullptr);
-	}
+    bool init() override {
+        log::info("Hi from my very original layer");
+        
+        // Create a new menu. UI elemnts should be added to here!
+        menu = CCMenu::create();
+        
+        // Add side art to the layer
+        addSideArt(this, SideArt::All, SideArtStyle::Layer);
+        
+        // And a background to the layer
+        auto background = createLayerBG();
+        background->setID("background");
+        this->addChild(background);	
+    return true;
+    }
+
+    // This function is called when the escape key is pressed!
+    void keyBackClicked() override {
+        this->onBack(nullptr);
+    }
 
 public:
-	static MyVeryOriginalLayer* create() {
-		auto ret = new MyVeryOriginalLayer;
-		if (ret->init()) {
-			ret->autorelease();
-			return ret;
-		}
-		CC_SAFE_DELETE(ret);
-		return nullptr;
-	}
-	
-	static MyVeryOriginalLayer* MyVeryOriginalLayer::scene() {
-		auto layer = MyVeryOriginalLayer::create();
-		switchToScene(layer);
-		return layer;
-	}
+    static MyVeryOriginalLayer* create() {
+        auto ret = new MyVeryOriginalLayer;
+        if (ret->init()) {
+            ret->autorelease();
+            return ret;
+        }
+        CC_SAFE_DELETE(ret);
+        return nullptr;
+    }
+
+    static MyVeryOriginalLayer* MyVeryOriginalLayer::scene() {
+        auto layer = MyVeryOriginalLayer::create();
+        switchToScene(layer);
+        return layer;
+    }
 
 
-	void onBack(CCObject* sender) {
-		CCDirector::get()->replaceScene(CCTransitionFade::create(0.5, MenuLayer::scene()));
-	}
-	
+    void onBack(CCObject* sender) {
+        CCDirector::get()->replaceScene(CCTransitionFade::create(0.5, MenuLayer::scene()));
+    }
+
 }
 
 class $modify(MenuLayer) {
-	void onMoreGames(CCObject* target) {
-		MyVeryOriginalLayer::scene();
-	}
+    void onMoreGames(CCObject* target) {
+        MyVeryOriginalLayer::scene();
+    }
 };
 ```
