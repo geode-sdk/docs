@@ -51,9 +51,9 @@ The mod `hjfod.gmd-api` contains utilities for working with [.GMD files](https:/
 
 ```json
 {
-    "dependencies": [
+    "dependencies": {
         "hjfod.gmd-api": ">=v1.0.0"
-    ]
+    }
 }
 ```
 
