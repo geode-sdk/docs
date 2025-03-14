@@ -39,7 +39,7 @@ Dependencies can be added to your mod by simply adding it to the `dependencies` 
 }
 ```
 
-Dependencies are defined as objects defined by the id of the dependency. The object associated with dependency id must include a version. Additionally, the dependency may have an [importance](#importance), which specifies if the dependency is required or not.
+Dependencies can be specified by using an object that maps from a mod id to a version, or more information if needed. The dependency may have an [importance](#importance), which specifies if the dependency is required or not. If this is not specified, the dependency is marked as required.
 
 The `version` field of a dependency may be written as `>=version`, `=version`, or `<=version`. The comparisons work as expected, with the addition that if the major versions are different, the comparison is always false. This means that if you depend on version `>=1.2.5` of a mod, version `v1.8.0` will be considered acceptable but `v2.0.0` will not. For this reason, [if you make a mod that is depended upon, you should follow strict semver](https://semver.org).
 
