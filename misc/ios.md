@@ -36,7 +36,7 @@ geode build -p ios
 ```
 Or if you want to build manually:
 ```bash
-cmake -B build -DCMAKE_SYSTEM_NAME=iOS -DGEODE_TARGET_PLATFORM=iOS -DCMAKE_BUILD_TYPE=RelWithDebInfo -DGEODE_DONT_INSTALL_MODS=1
+cmake -B build -DCMAKE_SYSTEM_NAME=iOS -DGEODE_TARGET_PLATFORM=iOS -DCMAKE_BUILD_TYPE=RelWithDebInfo -G Ninja
 cmake --build build
 ```
 
