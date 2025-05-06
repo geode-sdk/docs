@@ -20,7 +20,9 @@ Let's say we're looking for whatever function it is that shows this popup: level
 
 ![Level statistics popup for Zenith by HJfod](/assets/handbook/vol2/LevelStats.png)
 
-As a start, thanks to DevTools, we know this layer's name is `LevelInfoLayer` (todo: add picture), so we're looking for some callback in it.
+![The name of the current layer shown in DevTools](/assets/handbook/vol2/DevToolsLayerInfo.png)
+
+As a start, thanks to DevTools, we know this layer's name is `LevelInfoLayer`, so we're looking for some callback in it.
 
 Now, we know that the button that shows this has an info button sprite, whose sprite name is `GJ_infoIcon_001.png` (thanks, Geode VS Code extension).
 
