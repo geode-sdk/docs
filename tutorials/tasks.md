@@ -287,7 +287,7 @@ Task<int> someTask() {
 ```
 
 There are a few specific things you should be aware of when using this syntax:
-* The body of the coroutine is ran in whatever thread it got called in
+* The body of the coroutine is ran in the main thread, possibly only in the next frame.
 * If the task the coroutine is waiting on is cancelled, the whole coroutine is cancelled
 * If the task returned by the coroutine is cancelled, any pending task that is running is cancelled
 
