@@ -84,7 +84,7 @@ The version of the mod; should follow [semver](https://semver.org), especially i
 
 ### `developer`
 
-The name of the mod's developer. Should be a single name, like "HJfod" or "Alk". If the mod has multiple developers, this should be a team name like "Geode Team".
+The name of the mod's developer, displayed on the Installed tab. Should be a single name, like "HJfod" or "Alk". If the mod has multiple developers, this should be a team name like "Geode Team".
 
 ### `developers` 
 
