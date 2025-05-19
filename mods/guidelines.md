@@ -2,38 +2,38 @@
 
 These are the guidelines for mods published on the [mods index](https://geode-sdk.org/mods). **All mods on the index are required to follow these rules.**
 
-It is the responsibility of both the mod developer and the [person who verifies the mod](/mods/publishing#who-can-approve-mods) to make sure the mod abides by the rules. If a mod is mistakingly approved, or it receives an update the breaks the rules, **they may be applied retroactively**.
+It is the responsibility of both the mod developer and the [person who verifies the mod](/mods/publishing#who-can-approve-mods) to make sure the mod abides by the rules. If a mod is mistakingly approved, or it receives an update that breaks the rules, **they may be applied retroactively**. Mods that are found to break the rules due to accidents (or that accidentally start breaking the rules due to external circumstances such as a GD update) may be temporarily delisted until the issues are fixed.
 
 ## Ban rules
 
 A mod found breaking any of these rules will be rejected unconditionally from the index, as well as very likely leading to a total and permanent ban from posting on the index and a removal of all existing mods on the index.
 
- * The mod contains **malware**. This means any code with the purpose of causing harm to someone or something
+ * The mod contains **malware**. This means any code with the intent purpose of causing harm or any other unwilling negative effects to someone or something.
  * The mod **collects user data without consent**. Collecting data locally for the purpose of statistics is fine, but all sort of online data collection must be unambiguously explicit and able to be opted out of.
- * The mod is **stolen**. This means that it consists fully or nearly fully of the original code of another person with credit explicitly erased
+ * The mod is **stolen**. This means that it consists fully or nearly fully of the original code of another person with credit explicitly erased.
 
-Please note that a mod purposefully altering the experience of specific users (such as making gameplay unplayable) and mods harrassing specific people and/or their work **is considered malware**, regardless of the users in question, unless those users have personally consented to it. This specific form of malware is unlikely to lead to an index-wide ban and will just get the mod delisted, though that depends on the gravity of the situation.
+Please note that a mod purposefully altering the experience of specific users (such as making gameplay unplayable) and mods harrassing specific people and/or their work **is considered malware**, **regardless of the users in question**, unless those users have personally consented to it. This specific form of malware is unlikely to lead to an index-wide ban and will just get the mod delisted, though that depends on the gravity of the situation.
 
 ## Other rules
 
-> :information_source: As a TL;DR; the rule of thumb for whether something is allowed on the index is **compatability**. If the mod is or might be incompatible with other mods that it *should* be compatible with, that is usually grounds for a rejection.
+> :information_source: As a TL;DR; the rule of thumb for whether something is allowed on the index is **compatibility**. If the mod is or might be incompatible with other mods that it *should* be compatible with, that is usually grounds for a rejection.
 
-Repeated attemptation of breaking these rules can result in an **index-wide ban**. Try to make sure that your mod abides by the guidelines. You can contact the index staff if you have any questions about your specific case.
+Repeated attempts at breaking these rules can result in an **index-wide ban**. Try to make sure that your mod abides by the guidelines. You can contact the index staff if you have any questions about your specific case.
 
 A mod found breaking any of these rules will be **rejected unconditionally** from the index.
 
  * The mod contains **false information** about what it does
- * The mod does not use Geode's provided systems for hooking and patching, resulting in almost guaranteed **mod incompatability**
+ * The mod does not use Geode's provided systems for interfacing with GD (such as hooking and patching), resulting in almost guaranteed **mod incompatibility**
  * The mod introduces **severe security vulnerabilities** like RCE
  * The mod features **explicit content and/or profanity**. Note that the source code having comments, variable names, etc. containing profanity is fine, as long as they aren't visible to the end user
  * The mod **does not have appropriate metadata**. All mods on the Index must have a proper name, description, icon, and tags, [including jokes](#joke-mods)
  * The mod **removes Vanilla features** for no good reason
- * The mod **installs other mods from outside the Geode index**. You are not allowed to run any arbitary code downloaded off the internet. There are two exceptions to this rule: mods that introduce some sort of scripting system that runs *sandboxed* arbitary code, and mods installing additional paid features as a runtime library. Do note that for the purposes of verification, the code for all of those paid features must be included, including the code used to load them.
+ * The mod **installs and runs arbitary code**. You are not allowed to install other mods from outside the Geode index. There are two exceptions to this rule: mods that introduce some sort of scripting system that runs *sandboxed* arbitary code, and mods installing additional paid features as a runtime library. Do note that for the purposes of verification, the code for all of those paid features must be included, including the code used to load them.
 
 A mod found breaking any of these rules will likely be rejected, although depending on the situation, they could also still be approved.
 
- * The mod **breaks other mods** for no good reason
- * The mod has several common **game-breaking bugs** that haven't been fixed despite reports
+ * The mod **is incompatible with other mods for no good reason**. Note that mods can be fundamentally incompatible (such as two different texture pack managers)
+ * The mod **crashes the game** due to preventible issues
  * The mod **doesn't do anything meaningful**. Note that joke mods can be considered meaningful; see [our policy on them](#joke-mods)
 
 A mod found breaking any of these rules will likely still be approved, although constant and/or prolific breaking can result in a rejection.
@@ -61,7 +61,7 @@ Accessing & modifying members by their raw platform offset is totally okay, as t
 
 ```cpp
 if (this->querySelector("hjfod.gdshare/export-button")) {
-    // GDShare is loaded, compatability code
+    // GDShare is loaded, compatibility code
 }
 ```
 Checking that another mod is loaded by looking for identifying effects of them in the game is completely fine, as long as the checks are safe and don't make assumptions about things that haven't been checked. For example, just doing `Loader::get()->isModLoaded("hjfod.gdshare")` is NOT enough to guarantee all of GDShare's buttons exist, so you should always check for the buttons themselves!
