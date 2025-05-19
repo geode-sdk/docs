@@ -13,8 +13,11 @@ geode sdk install
 ```
 This *should* set the `GEODE_SDK` enviroment variable, which can you test after restarting your terminal:
 ```bash
-# On windows
+# On Windows CMD
 echo %GEODE_SDK%
+
+# On Windows PowerShell
+echo $env:GEODE_SDK
 
 # Elsewhere
 echo $GEODE_SDK
