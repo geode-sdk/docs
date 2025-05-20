@@ -71,16 +71,9 @@ public:
 
 `FLAlertLayer` supports colored text in the content field by default. You can add colors with **color tags**, for example `<cy>Hi mom!</c>` will produce yellow text. The built-in color tags in GD are:
 
-| Tag | Color                               |
-|-----|-------------------------------------|
-| cb  | <span style="color: #4a52e1">Blue</span>   |
-| cg  | <span style="color: #40e348">Green</span>  |
-| cl  | <span style="color: #60abef">Aqua</span>   |
-| cj  | <span style="color: #32c8ff">Cyan</span>   |
-| cy  | <span style="color: #ffff00">Yellow</span> |
-| co  | <span style="color: #ffa54b">Orange</span> |
-| cr  | <span style="color: #ff5a5a">Red</span>    |
-| cp  | <span style="color: #ff00ff">Pink</span>   |
+[Image showing all different color tags with additional tags](/assets/Popup_TagReference.png)
+
+> The other tags (Fade, Shake, Delay) only work for DialogLayer.
 
 ```cpp
 FLAlertLayer::create(
