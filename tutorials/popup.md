@@ -83,8 +83,6 @@ FLAlertLayer::create(
 )->show();
 ```
 
-Note that the closing tag **must be `</c>` only without the color specified again**. Doing otherwise will likely result in a crash.
-
 > You might wonder about how to use other colors than the ones listed; there are currently no plans in Geode to add that, but one could easily make a mod that adds support for arbitary color tags.
 
 ## Disabling the popup animation
