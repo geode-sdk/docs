@@ -114,6 +114,10 @@ The dependencies of a mod; see [Dependencies](/mods/dependencies.md) for details
 
 The incompatibilities of a mod. Very similar to [dependencies](/mods/dependencies.md) but the valid importances are `breaking`, `conflicting` and `superseded`.
 
+* `breaking` - prevents the incompatible mod from loading
+* `conflicting` - both mods load anyway but it shows a warning in mod list
+* `superseded` - only used in very special circumstances when your mod is meant to show up as an update to a different mod
+
 ### `settings`
 
 The settings of a mod; see [Settings](/mods/settings.md) for details
