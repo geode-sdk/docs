@@ -45,7 +45,7 @@ First, besides Git and Cmake, make sure you have `clang` and `lld` installed.
 On Ubuntu:
 
 ```bash
-apt install clang-17 clang-tools-17 lld-17
+apt install clang-19 clang-tools-19 lld-19
 ```
 
 On Arch-based systems:
