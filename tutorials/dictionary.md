@@ -100,7 +100,7 @@ A free tool many modders use for [reverse engineering](#reverse-engineering).
 
 ## .GMD Files
 
-A file format for storing GD levels, popularized by [GDShare](https://github.com/HJfod/GDShare-mod/). The level data is stored in plain text as its [Plist data](#plist) with a surrounding `<d>` tag.
+A file format for storing GD levels, popularized by [GDShare](https://github.com/HJfod/GDShare-mod/). The level data is stored in plain text as its [Plist data](#plist-files) with a surrounding `<d>` tag.
 
 ## .GMD2 Files
 
