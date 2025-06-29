@@ -64,6 +64,6 @@ In this example, the syntax for the shake tag is similar to the syntax of the de
 
 Fade Tags are used to fade in a block of text on screen instead of making it appear character by character. Similarly to colour tags, Fade tags have a start and end tag to denote which piece of text should appear instantly. The number is specified in centiseconds, which is 1/100th of a second.
 
-Usage: Hello, `<i100>world!</i>`
+Usage: `Hello, <i100>world!</i>`
 
 ![GIF showing fade tag](/assets/fadein_tag.gif)
