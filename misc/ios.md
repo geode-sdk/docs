@@ -4,7 +4,7 @@ title: iOS Development Setup
 
 # iOS Development Setup
 
-You will have to edit your `CMakeLists.txt` on your exiting mods. Newer created mods will already have this change
+You will have to edit your `CMakeLists.txt` on your existing mods. Newer created mods will already have this change
 ```cmake
 # At the beginning of your CMakeLists.txt, change this:
 #  set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
