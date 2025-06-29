@@ -18,18 +18,18 @@ concurrency:
 jobs:
   deploy:
     name: Docs
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
 
       # Clone Geode repo
       - name: Checkout Geode repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: 'geode-sdk/geode'
           path: 'geode'
 
       - name: Checkout docs repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: 'geode/docs'
       
@@ -55,14 +55,11 @@ jobs:
           cd dist
           ./../flash.exe -i ../geode -o .
       
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-      
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
         
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4

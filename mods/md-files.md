@@ -9,6 +9,10 @@ Geode mods can specify a long, free-form description typeset using Markdown by i
 
 This file is similar to a README, however **it's intended for people who use the mod**; you should also keep a README for developers interested in building / contributing to your mod.
 
+> :information_source: As of [CLI v3.5.0](https://github.com/geode-sdk/cli/releases/tag/v3.5.0), if a `README.md` is present but not an `about.md`, the readme will be used as the mod description. \
+> If you don't want this behavior, then make an `about.md` file like usual.
+
+
 ## Example
 
 ```md

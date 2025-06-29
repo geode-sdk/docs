@@ -29,17 +29,17 @@ Dependencies can be added to your mod by simply adding it to the `dependencies` 
     "name": "My example mod",
     "developer": "Me",
     "version": "v1.0.0",
-    "dependencies": [
-        {
-            "id": "someone-elses.mod",
+    "dependencies": {
+        "someones-mod": ">=v1.0.5",
+        "someone-elses.mod": {
             "version": ">=v1.2.5",
             "importance": "required"
         }
-    ]
+    }
 }
 ```
 
-Dependencies have two required properties: the ID of the dependency and the version depended on. Additionally, the dependency may have an [importance](#importance), which specifies if the dependency is required or not.
+Dependencies can be specified by using an object that maps from a mod id to a version, or more information if needed. The dependency may have an [importance](#importance), which specifies if the dependency is required or not. If this is not specified, the dependency is marked as required.
 
 The `version` field of a dependency may be written as `>=version`, `=version`, or `<=version`. The comparisons work as expected, with the addition that if the major versions are different, the comparison is always false. This means that if you depend on version `>=1.2.5` of a mod, version `v1.8.0` will be considered acceptable but `v2.0.0` will not. For this reason, [if you make a mod that is depended upon, you should follow strict semver](https://semver.org).
 
@@ -51,12 +51,9 @@ The mod `hjfod.gmd-api` contains utilities for working with [.GMD files](https:/
 
 ```json
 {
-    "dependencies": [
-        {
-            "id": "hjfod.gmd-api",
-            "version": ">=v1.0.0"
-        }
-    ]
+    "dependencies": {
+        "hjfod.gmd-api": ">=v1.0.0"
+    }
 }
 ```
 
@@ -129,5 +126,53 @@ $execute {
         },
         AttributeSetFilter("hjfod.cool-scrollbars/enable")
     );
+}
+```
+
+
+## Event Macro
+
+Included in [Geode v4.3.0](https://github.com/geode-sdk/geode/releases/tag/v4.3.0) is a macro to automate the process of exporting functions from API mods, in a way that works for optional dependencies.
+
+This makes use of events to grab a function pointer from the API mod, and call it from the dependent mod, hence the name.
+The exported functions must return a `geode::Result`, considering the API mod may not be available, and thus the function cannot be called.
+
+Two versions of the macro are available:
+```cpp
+// The event id will be determined from the function name and the macro MY_MOD_ID
+#define GEODE_EVENT_EXPORT(functionPointer, callArguments)
+
+// When using this, make sure to prefix the event id with your mod's id, to avoid conflicts.
+// **Do not use features such as _spr here**, it will not work properly.
+#define GEODE_EVENT_EXPORT_ID(functionPointer, callArguments, eventID)
+```
+
+### Example
+```cpp
+// (In your api distributed header file)
+// (such as include/api.hpp)
+#pragma once
+
+#include <Geode/loader/Dispatch.hpp>
+// You must **manually** declare the mod id, as macros like GEODE_MOD_ID will not
+// behave correctly to other mods using your api.
+#define MY_MOD_ID "dev.my-api"
+
+namespace api {
+    // Important: The function must be declared inline, and return a geode::Result,
+    // as it can fail if the api is not available.
+    inline geode::Result<int> addNumbers(int a, int b) GEODE_EVENT_EXPORT(&addNumbers, (a, b));
+}
+```
+
+Then, in **one** of your source files, you must define the exported functions:
+
+```cpp
+// MUST be defined before including the header.
+#define GEODE_DEFINE_EVENT_EXPORTS
+#include "../include/api.hpp"
+
+Result<int> api::addNumbers(int a, int b) {
+    return Ok(a + b);
 }
 ```

@@ -84,7 +84,7 @@ The version of the mod; should follow [semver](https://semver.org), especially i
 
 ### `developer`
 
-The name of the mod's developer. Should be a single name, like "HJfod" or "Alk". If the mod has multiple developers, this should be a team name like "Geode Team".
+The name of the mod's developer, displayed on the Installed tab. Should be a single name, like "HJfod" or "Alk". If the mod has multiple developers, this should be a team name like "Geode Team".
 
 ### `developers` 
 
@@ -113,6 +113,10 @@ The dependencies of a mod; see [Dependencies](/mods/dependencies.md) for details
 ### `incompatibilities`
 
 The incompatibilities of a mod. Very similar to [dependencies](/mods/dependencies.md) but the valid importances are `breaking`, `conflicting` and `superseded`.
+
+* `breaking` - prevents the incompatible mod from loading
+* `conflicting` - both mods load anyway but it shows a warning in mod list
+* `superseded` - only used in very special circumstances when your mod is meant to show up as an update to a different mod
 
 ### `settings`
 

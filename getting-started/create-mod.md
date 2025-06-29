@@ -62,7 +62,14 @@ If you [created a profile in CLI](/getting-started/geode-cli), then the mod shou
 
 To build mods for Android you must install the [Android NDK](https://developer.android.com/ndk/downloads). Extract it somewhere and set the `ANDROID_NDK_ROOT` enviroment variable to its path.
 
-On **Windows** you must also install [Ninja](https://github.com/ninja-build/ninja/releases). If you have Scoop, you can do this via `scoop install ninja`.
+> On **Windows** you must also install [Ninja](https://github.com/ninja-build/ninja/releases). If you have Scoop, you can do this via `scoop install ninja`.
+
+You must also get the Geode binaries for Android, you can do this using the CLI:
+```bash
+geode sdk install-binaries -p android64
+# Or if you're using a 32 bit phone
+geode sdk install-binaries -p android32
+```
 
 Now you can build your mod for Android via:
 ```bash

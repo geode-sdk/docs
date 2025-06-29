@@ -58,13 +58,13 @@ void functionLatePost() {
 
 **Always use** the before/after functions instead of doing arithmetic on priorities! Unless circular priorities happen, it is guaranteed for them to work consistently even if the other mods change their priorities.
 
-- If you want to run your code after some other mod's code before calling original, use `setHookPriorityAfterPre`.
+- If you want to run your code after some other mod's code and before calling original, use `setHookPriorityAfterPre`.
 
 - If you want to run your code before some other mod's code and before calling original, use `setHookPriorityBeforePre`.
 
-- If you want to run your code before some other mod's code after calling original, use `setHookPriorityBeforePost`.
+- If you want to run your code before some other mod's code and after calling original, use `setHookPriorityBeforePost`.
 
-- If you want to run your code after some other mod's ccodeand after calling original, use `setHookPriorityAfterPost`.
+- If you want to run your code after some other mod's code and after calling original, use `setHookPriorityAfterPost`.
 
 Using raw numbers as priorities is **strongly discouraged** for mod compatibility.
 There are tools for mod compatibilities! Please take advantage of them.

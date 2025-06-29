@@ -37,7 +37,7 @@ req.bodyJSON(myjson);
 req.header("Content-Type", "application/json");
 
 // Set a timeout for the request, in seconds
-req.timeout(30);
+req.timeout(std::chrono::seconds(30));
 ```
 
 There are more functions, regarding certificate verification, proxy settings. You can find more info about them by looking through the headers!

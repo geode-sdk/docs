@@ -48,7 +48,7 @@ auto value = Mod::get()->getSavedValue<float>("my-saved-value");
 auto data = Mod::get()->getSavedValue<MyCustomSaveData>("data", MyCustomSaveData { .x = 0, .y = 0 });
 ```
 
-As an useful little tip, `setSavedValue` returns the previous saved value, and if there is no previous saved value, default constructs it and returns that. You can use this knowledge, and combined with the knowledge that the default constructor for `bool` is false, to write one-time info popups using a single self-contained if statement:
+As a useful little tip, `setSavedValue` returns the previous saved value, and if there is no previous saved value, default constructs it and returns that. You can use this knowledge, and combined with the knowledge that the default constructor for `bool` is false, to write one-time info popups using a single self-contained if statement:
 
 ```cpp
 if (!Mod::get()->setSavedValue("shown-upload-guidelines", true)) {

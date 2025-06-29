@@ -230,7 +230,7 @@ EventListener<DragDropOnNodeFilter> m_listener = {
 
 When our `DragDropNode` is destroyed, the EventListener is automatically destroyed and unregistered aswell, so you don't need to do anything else.
 
-However, using a member function is not always possible. For example, if you're hooking a class, [event listeners don't work in fields](/tutorials/fields.md#note-about-addresses); or if you want to listen for events on an existing node whose class you don't control.
+However, using a member function is not always possible. For example, if you're hooking a class, [event listeners don't work in fields](/tutorials/fields/#note-about-addresses); or if you want to listen for events on an existing node whose class you don't control.
 
 In these cases, there exists a Geode-specific helper called [`CCNode::addEventListener`](/classes/cocos2d/CCNode#addEventListener). You can use this to **add event listeners to any node** - including existing ones by GD!
 
@@ -252,4 +252,4 @@ Any event listener added with `addEventListener` is automatically destroyed aswe
 
 ## Dispatched events
 
-There also exist special types of events called **dispatch events** - these are intended for use within optional dependencies. See [the tutorial on dependencies](/mods/dependencies.md#events) for more information.
+There also exist special types of events called **dispatch events** - these are intended for use within optional dependencies. See [the tutorial on dependencies](/mods/dependencies/#events) for more information.
