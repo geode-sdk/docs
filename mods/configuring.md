@@ -94,9 +94,17 @@ The name of the mod's developers. Replaces `developer`. Can be a single name, li
 
 A short description of the mod. Should only be a single sentence; for longer descriptions, see [about.md](/mods/md-files.md).
 
-### `repository`
+### `links`
 
-The Git repository of the mod.
+This key is an object for various links to socials. These include `community` for stuff like Discord, `source` for your source code, and `homepage` for your website.
+
+```json
+    "links": {
+        "community": "https://discord.gg/9e43WMKzhp",
+        "source": "https://github.com/geode-sdk/geode",
+        "homepage": "https://geode-sdk.org/"
+    }
+```
 
 ### `issues`
 
