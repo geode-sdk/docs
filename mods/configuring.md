@@ -96,15 +96,11 @@ A short description of the mod. Should only be a single sentence; for longer des
 
 ### `links`
 
-This key is an object for various links to socials. These include `community` for stuff like Discord, `source` for your source code, and `homepage` for your website.
+This key is an object for various links to socials.
 
-```json
-    "links": {
-        "community": "https://discord.gg/9e43WMKzhp",
-        "source": "https://github.com/geode-sdk/geode",
-        "homepage": "https://geode-sdk.org/"
-    }
-```
+* `community` - The link to the mod's Discord server.
+* `source` - The link to the GitHub repo.
+* `homepage` - Your or your mod(s)' website.
 
 ### `issues`
 
