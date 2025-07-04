@@ -94,9 +94,13 @@ The name of the mod's developers. Replaces `developer`. Can be a single name, li
 
 A short description of the mod. Should only be a single sentence; for longer descriptions, see [about.md](/mods/md-files.md).
 
-### `repository`
+### `links`
 
-The Git repository of the mod.
+This key is an object for various links to socials.
+
+* `community` - The link to the mod's Discord server or another community hub.
+* `source` - The link to the source code, usually a GitHub repository.
+* `homepage` - Your mod's website.
 
 ### `issues`
 
