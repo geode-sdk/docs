@@ -2,7 +2,15 @@
 
 These are the guidelines for mods published on the [mods index](https://geode-sdk.org/mods). **All mods on the index are required to follow these rules.**
 
-It is the responsibility of both the mod developer and the [person who verifies the mod](/mods/publishing#who-can-approve-mods) to make sure the mod abides by the rules. If a mod is mistakingly approved, or it receives an update that breaks the rules, **they may be applied retroactively**. Mods that are found to break the rules due to accidents (or that accidentally start breaking the rules due to external circumstances such as a GD update) may be temporarily delisted until the issues are fixed.
+It is the responsibility of both the mod developer and the [person who verifies the mod](/mods/publishing#who-can-approve-mods) to make sure the mod abides by the rules. If a mod is mistakingly approved, or it receives an update that breaks the rules, or a new rule is added later on, **they may be applied retroactively**. Mods that are found to break the rules due to accidents (or that accidentally start breaking the rules due to external circumstances such as a GD update) may be temporarily delisted until the issues are fixed.
+
+## Everything is Situational
+
+There are hundreds of Geode mods out there, and these guidelines can not possibly cover every single mod that ever has been or will be made. **These guidelines evolve and change over time alongside the modding community, and should at no point be considered a set-in-stone absolute list.** Every rule has exceptions and differing interpretations to it, old rules get removed as attitudes change and new rules get added as clarifications arise.
+
+At the end of the day, **the ultimate power to say what is and isn't allowed on the Index is vested in the Index moderators**\*. If they decide that a mod should or shouldn't be allowed, that's it. Despite the ambiguous wording, **these really are just guidelines, not laws**.
+
+> *Realistically speaking, ultimate authority is vested in Lead Developers, and practically speaking whatever HJfod says is usually considered absolute
 
 ## Ban rules
 
