@@ -1,6 +1,6 @@
 # Creating Popups
 
-Whenever you're designing an UI, you should always make it clear to the user whether an action is pending, if something has gone wrong and if something is succesful. For this purpose, you could always design your own dedicated solution for showing status, but in many cases that's a good idea, but in many other cases you should just use a common, simple solution: **popups**. They are ubiqutous in GD and in mods, as they are a very simple and quick way of showing the user information.
+Whenever you're designing an UI, you should always make it clear to the user whether an action is pending, if something has gone wrong and if something is succesful. For this purpose, you could always design your own dedicated solution for showing status, and in many cases that is a good idea, but in many other cases you should just use a common, simple solution: **popups**. They are ubiqutous in GD and in mods, as they are a very simple and quick way of showing the user information.
 
 The standard popup class in GD is `FLAlertLayer`. This class comes with a shaded background, title, text, buttons, and all the other stuff you expect. Using this class is pretty simple too:
 ```cpp
