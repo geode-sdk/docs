@@ -121,6 +121,40 @@ Due to controversy among developers regarding the subject, mods that utilize **G
 
 In addition, all mods utilizing AI **must be manually verified** on the index and **approved unilaterally by Geode lead developers**, regardless of whether the developer is verified on the index or not.
 
+## Possible pitfalls
+
+While nothing in this section are absolute rules, they are red flags that index staff look for while reviewing a mod. These pitfalls describe common issues that may cause crashes or incompatibility with other mods/the game.
+
+* Avoid generating exceptions.
+
+Due to compatibility issues, functions that generate C++ exceptions should be avoided, _even if you catch the exception_. Either verify that the exception will not be generated beforehand, or use an alternative function that does not throw one. One such function is `std::stoi` and `std::stof`, which should be replaced with Geode's [`numFromString`](/functions/geode/utils/numFromString/).
+
+Functions from the `<filesystem>` header should be handled carefully. Most filesystem functions have `std::error_code` overloads, which do not throw exceptions on failure. Use them. Calling `string()` on a `std::filesystem::path` must also be avoided - this may crash on certain setups. Instead, use [`pathToString`](/functions/geode/utils/string/pathToString/).
+
+Calling `unwrap()` on a [Result](/classes/geode/Result/) without first checking if it is `ok()` will lead to an instant rejection. You can never be certain that your web calls will always succeed!
+
+* Avoid usage of `dynamic_cast`.
+
+Due to how dynamic casting is implemented, usage of this function will usually fail for classes from other mods and the game. Instead, use [`typeinfo_cast`](/functions/geode/cast/typeinfo_cast/).
+
+* Avoid blocking the main thread.
+
+While it is unavoidable in some cases (or will cause additional instability), offloading expensive functions to a separate thread avoids the dreaded "application not responding" and greatly improves the user experience. [Tasks](/tutorials/tasks) were designed for this use case and can be used to wrap any callback-based async api. Mods blocking the main thread for web requests will be instantly rejected - please use Geode's [web utils](/tutorials/fetch).
+
+* Avoid reinventing the wheel.
+
+Hooking functions, especially heavily called ones, to accomplish tasks that can be done by other means may get your mod rejected. One example would be hooking `CCScheduler::update` to run code on each frame (use [`scheduleSelector`](/classes/cocos2d/CCScheduler#scheduleSelector) instead) or to keep a node across scenes (use [`SceneManager::keepAcrossScenes`](/classes/geode/SceneManager#keepAcrossScenes)). Besides creating performance issues, this may also reduce compatibility with other mods.
+
+While this isn't typically a rejection reason, new developers tend to find themselves "reinventing the wheel" and using platform-specific functions to accomplish tasks that are already covered by Geode utils. For example, [restarting the game](/functions/geode/utils/game/restart/), [opening a file picker](/functions/geode/utils/file/pick) and [splitting a string](/functions/geode/utils/string/split) are all built into the Geode utils. These functions have the most compatibility with other mods and are tested across all supported platforms. A basic list of them can be found [here](/tutorials/utils).
+
+Developers should also be aware of Geode's [directory functions](https://github.com/geode-sdk/geode/blob/main/loader/include/Geode/loader/Dirs.hpp), which can be used for storing mod files and determining the location of game data. Unless you have good reason, mod files should be stored within the mod's save directory, which can be determined with [`Mod::getSaveDir`](/classes/geode/Mod#getSaveDir) (using the config directory through `getConfigDir` is also fine).
+
+* Avoid submitting locally built mods.
+
+For new developers, we strongly recommend making use of the cross-platform [build-geode-mod](https://github.com/geode-sdk/build-geode-mod/) action that comes with the default mod template. This action helpfully builds your mod for all platforms, which makes it very easy for developers to support them. 
+
+Those who are uploading their code on platforms outside of GitHub should also be using the CI instances offered by those platforms for building their mod. This makes it easier for us to verify that a mod has not been tampered with.
+
 ## Hateful conduct
 
 Developers may be banned off the mods index and other Geode-related online spaces such as the Discord server and the GitHub organization, if they have committed acts in *or outside* the Geode community that are considered hateful, harmful, or otherwise detestable. **These include, but are not limited to:**
