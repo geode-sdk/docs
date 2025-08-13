@@ -69,7 +69,7 @@ public:
 
 ## Colored text
 
-`FLAlertLayer` supports colored text in the content field by default. You can add colors with **color tags**, for example `<cy>Hi mom!</c>` will produce yellow text. The built-in color tags in GD are available [here](../geometrydash/tags.md)
+`FLAlertLayer` supports colored text in the content field by default. You can add colors with **color tags**, for example `<cy>Hi mom!</c>` will produce yellow text. The built-in color tags in GD are listed [here](../geometrydash/tags.md)
 
 ## Disabling the popup animation
 
