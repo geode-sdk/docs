@@ -5,7 +5,9 @@ order: 1
 
 # Tags
 
-In Geometry Dash, there are tags you can use for things such as `FLAlertLayer` or `DialogLayer`. In this documentation, I will show you how to use these tags:
+In Geometry Dash, there are tags you can use for things such as `FLAlertLayer`, `DialogLayer`, or `MDPopup`...
+
+Let's learn how to use these tags:
 
 ## Color
 
@@ -44,7 +46,7 @@ In Geometry Dash, there are also delay tags to wait a certain amount of centisec
 Wait!<d040> You shouldn't go there<d500>.<d500>.<d500>.
 ```
 
-In this example, the tag `<d...>` is used. The number next to the `<d` specifies the number of milliseconds to wait. However, this number must be 3 digits. The GIF below shows what this looks like in-game (GIF from GDDocs):
+In this example, the tag `<d...>` is used. The number next to the `<d` specifies the number of centiseconds to wait. However, this number must be 3 digits. The GIF below shows what this looks like in-game (GIF from GDDocs):
 
 ![GIF showing delay tag](/assets/delay_tag.gif)
 
