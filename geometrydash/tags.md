@@ -52,7 +52,7 @@ In this example, the tag `<d...>` is used. The number next to the `<d` specifies
 
 ## Shake
 
-Shake tags make text shake. To use this, please follow the example below:
+Shake tags make text shake. Below is an example:
 
 ```
 <co>I HAVE SAID TOO MUCH! QUICKLY TO THE <s260>CHOPPER!</s></c>
