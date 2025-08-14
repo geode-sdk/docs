@@ -34,7 +34,7 @@ To use these tags, follow the syntax below:
 "Welcome to my red <cr>lair</c>! As you can see, my <cg>things</c> are green, and my <cb>doorframe</c> is blue! Why? That's up to <co>Rob</c><cj>Top</c> to answer!"
 ```
 
-By using `</c>`, you are closing the tag, and it doesn't matter which color tag it is. It will always be `</c>`.
+By using `</c>`, you are closing the tag. `</c>` closes all color tags.
 
 ## Delay
 
