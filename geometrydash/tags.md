@@ -28,7 +28,7 @@ In Geometry Dash, there are color tags, which change the color of text. Below is
 | `<cc>`  | `0xFFFF96`     | <p style="color: #FFFF96;">Sample</p> |
 | `<cf>`  | `0x96FFFF`     | <p style="color: #96FFFF;">Sample</p> |
 | `<cs>`  | `0xFFDC41`     | <p style="color: #FFDC41;">Sample</p> |
-| `<c_>`   | `0xFF0000`     | <p style="color: #FF0000;">Sample</p> |
+| `<c_>`  | `0xFF0000`     | <p style="color: #FF0000;">Sample</p> |
 
 To use these tags, follow the syntax below:
 
