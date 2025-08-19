@@ -58,7 +58,7 @@ Shake tags make text shake. Below is an example:
 <co>I HAVE SAID TOO MUCH! QUICKLY TO THE <s260>CHOPPER!</s></c>
 ```
 
-In this example, the syntax for the shake tag is similar to the syntax of the delay tag. This is however based on the intensity of the shaking. For reference, this is how it looks like in-game (GIF from GDDocs):
+In the `<s...>` tag, the number next to the `<s` specifies the intensity of the shaking. For reference, this is how it looks like in-game (GIF from GDDocs):
 
 ![GIF showing shake tag](/assets/shake_tag.gif)
 
