@@ -40,7 +40,7 @@ By using `</c>`, you are closing the tag. `</c>` closes all color tags.
 
 ## Delay
 
-In Geometry Dash, there are also delay tags to wait a certain amount of centiseconds (1/100 of a second) before more text appearing. To use this, follow the example below:
+In Geometry Dash, there are also delay tags to wait a certain amount of centiseconds (1/100 of a second) before more text appearing. Below is an example:
 
 ```
 Wait!<d040> You shouldn't go there<d500>.<d500>.<d500>.
