@@ -46,7 +46,7 @@ In Geometry Dash, there are also delay tags to wait a certain amount of centisec
 Wait!<d040> You shouldn't go there<d500>.<d500>.<d500>.
 ```
 
-In this example, the tag `<d...>` is used. The number next to the `<d` specifies the number of centiseconds to wait. However, this number must be 3 digits. The GIF below shows what this looks like in-game (GIF from GDDocs):
+In this example, the tag `<d...>` is used. The number next to the `<d` specifies the number of centiseconds to wait. However, this number must be 3 digits. This is how it looks like in-game (GIF from GDDocs):
 
 ![GIF showing delay tag](/assets/delay_tag.gif)
 
@@ -58,7 +58,7 @@ Shake tags make text shake. Below is an example:
 <co>I HAVE SAID TOO MUCH! QUICKLY TO THE <s260>CHOPPER!</s></c>
 ```
 
-In this example, the syntax for the shake tag is similar to the syntax of the delay tag. This is however based on the intensity of the shaking. For reference, the example above looks like this in the game (GIF from GDDocs):
+In this example, the syntax for the shake tag is similar to the syntax of the delay tag. This is however based on the intensity of the shaking. For reference, this is how it looks like in-game (GIF from GDDocs):
 
 ![GIF showing shake tag](/assets/shake_tag.gif)
 
