@@ -11,7 +11,7 @@ Let's learn how to use these tags:
 
 ## Color
 
-In Geometry Dash, there are color tags, which change the color of text. Here's a list of all the tags:
+In Geometry Dash, there are color tags, which change the color of text. Below is an example using some of these color tags:
 
 | **Tag** | **Color Code** | **Example**                           |
 |---------|----------------|---------------------------------------|
