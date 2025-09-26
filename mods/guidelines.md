@@ -37,6 +37,7 @@ A mod found breaking any of these rules will be **rejected unconditionally** fro
  * The mod **does not have appropriate metadata**. All mods on the Index must have a proper name, description, icon, and tags, [including jokes](#joke-mods)
  * The mod **removes Vanilla features** for no good reason
  * The mod **installs and runs arbitary code**. You are not allowed to install other mods from outside the Geode index. There are two exceptions to this rule: mods that introduce some sort of scripting system that runs *sandboxed* arbitary code, and mods installing additional paid features as a runtime library. Do note that for the purposes of verification, the code for all of those paid features must be included, including the code used to load them.
+ * The mod's **codebase entirely or mostly consists of AI-generated code**. If it appears the programmer does not understand the code that has been generated and is trying to get vibecoded mods on the index, this will result in a rejection. Using AI tools to boost productivity is fine, but fully vibecoding mods will inevitably lead to instability and crashes.
 
 A mod found breaking any of these rules will likely be rejected, although depending on the situation, they could also still be approved.
 
@@ -109,6 +110,8 @@ Sometimes rather than making original ideas, modders want to for one reason or a
  * The original mod **must be credited**, as per the no stealing rule
 
 ## Mods using Generative AI
+
+> :information_source: Note that mods *coded* using Generative AI are subject to [different rules](#other-rules); this section is about mods that bring Generative AI into the game itself
 
 Due to controversy among developers regarding the subject, mods that utilize **Generative AI** have to follow these additional guidelines in relation to their AI usage.
 
