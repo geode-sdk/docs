@@ -559,11 +559,11 @@ protected:
 public:
     static MyCustomSettingNodeV3* create(std::shared_ptr<MyCustomSettingV3> setting, float width) {
         auto ret = new MyCustomSettingNodeV3();
-        if (ret && ret->init(setting, width)) {
+        if (ret->init(setting, width)) {
             ret->autorelease();
             return ret;
         }
-        CC_SAFE_DELETE(ret);
+        delete ret;
         return nullptr;
     }
 };
@@ -746,11 +746,11 @@ protected:
 public:
     static MyButtonSettingNodeV3* create(std::shared_ptr<MyButtonSettingV3> setting, float width) {
         auto ret = new MyButtonSettingNodeV3();
-        if (ret && ret->init(setting, width)) {
+        if (ret->init(setting, width)) {
             ret->autorelease();
             return ret;
         }
-        CC_SAFE_DELETE(ret);
+        delete ret;
         return nullptr;
     }
 
