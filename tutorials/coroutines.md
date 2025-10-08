@@ -37,7 +37,7 @@ Task<std::string, int> someTask() {
 }
 ```
 
-One problem that stems from using Task for asynchronous handling is that it cannot support void. Sometimes you want a function to run asynchronously without returning a value, and for that we introduce `coro::CoTask`. CoTask is exactly like Task but it allows void:
+One problem that stems from using Task for asynchronous handling is that it has the `[[nodiscard]]` attribute. Often times, you want a coroutine without any given return value, which leads to annoyances with compiler warnings. `coro::CoTask` is the solution to this, as it's a discardable wrapper around Task:
 
 ```cpp
 #include <Geode/utils/web.hpp>
@@ -49,6 +49,8 @@ coro::CoTask<void> logResponseCode() {
 
    log::info("Response code: {}", res.code());
 }
+
+logResponseCode(); // No warning
 ```
 
 Creating a new function for just the asynchronous bits might get tedious. Luckily, you don't have to with the `$async` macro:
