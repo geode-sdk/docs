@@ -119,7 +119,7 @@ Here, once again the `$try` macro sets up a coroutine lambda that gets immediate
 
 When you need to perform operations on a series of values, it's sometimes preferred to lazily evaluate them instead of collecting everything into a vector. The `coro::Generator` object allows you to create coroutines that lazily yield values, just like Python generators.
 
-Here's what a basic fibbonacci generator looks like:
+Here's what a basic range generator looks like:
 
 ```cpp
 #include <Geode/utils/coro.hpp>
@@ -169,7 +169,7 @@ for (int num : fibbonacci()) {
 
 The caller of the generator is the one that determines when the sequence ends, not the callee, giving you lots of flexibility.
 
-Generators have two helper functions that quickly allow you to apply transformations: map and filter. These transformation functions yield more generators, allowing you to chain them as you please. You can use them on any generator to transform their output like so:
+Generators have two helper functions that quickly allow you to apply transformations: `map` and `filter`. These transformation functions yield more generators, allowing you to chain them as you please. You can use them on any generator to transform their output like so:
 
 ```cpp
 // Prints 0, -1, -2, ...
@@ -183,4 +183,4 @@ for (int num : range(0, 10).filter([](int n) { return n % 2 == 0; })) {
 }
 ```
 
-You can use the `coro::makeGenerator` function to construct a generator based on a vector
+You can use the `coro::makeGenerator` function to construct a generator based on a vector.
