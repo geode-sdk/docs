@@ -140,7 +140,7 @@ for (int i : range(0, 10)) {
 This will log numbers 0 through 9. Generators have a `begin()` and `end()` function that returns an STL-compatible iterator, meaning you can use them with any read-only standard library function that takes in an iterator:
 
 ```cpp
-auto gen = range(0, 6);
+auto gen = range(0, 200);
 auto sum = std::accumulate(gen.begin(), gen.end(), 0, std::plus()); // Sums all numbers from 0 to 199
 ```
 
