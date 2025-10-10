@@ -2,7 +2,7 @@
 
 [Coroutines](https://en.cppreference.com/w/cpp/language/coroutines) are an underutilized feature of C++20 that not many understand. Under the hood, they are very complex, but luckily Geode makes it quite simple for you. Geode lets you leverage the power of coroutines to write clean asynchronous code, tackle Result propagation, and build Python-style generators with ease.
 
-## Task and CoTask
+## Task
 
 For most asynchronous tasks, Geode provides the Task class. See [`Tasks`](/tutorials/tasks) for more information. Any function that returns a Task can be converted into a coroutine by simply using `co_await` on a different task.
 
@@ -37,21 +37,35 @@ Task<std::string, int> someTask() {
 }
 ```
 
-One problem that stems from using Task for asynchronous handling is that it has the `[[nodiscard]]` attribute. Often times, you want a coroutine without any given return value, which leads to annoyances with compiler warnings. `coro::CoTask` is the solution to this, as it's a discardable wrapper around Task:
+## Spawning from regular functions
+
+The correct way to launch a coroutine from a regular function is to use `coro::spawn`. You can do this in a number of ways:
 
 ```cpp
-#include <Geode/utils/web.hpp>
-#include <Geode/utils/coro.hpp>
+// Spawn from a Task via operator<<
+coro::spawn << someTask();
 
-coro::CoTask<void> logResponseCode() {
-    auto req = web::WebRequest();
-    auto res = co_await req.get("https://google.com");
+// Spawn from a coroutine via operator<<
+coro::spawn << [] -> Task<void> {
+	co_return;
+};
 
-   log::info("Response code: {}", res.code());
-}
+// Spawn from a Task via operator()
+coro::spawn(someTask());
 
-logResponseCode(); // No warning
+// Spawn from a coroutine via operator()
+coro::spawn([] -> Task<void> {
+	co_return;
+});
 ```
+
+You can use whichever syntax you prefer. It is crucial to use `coro::spawn` on coroutines that return Task to prevent it from canceling when it goes out of scope. In order to prevent Task's `[[nodiscard]]` attribute from getting in the way, using `coro::spawn` on a Task-based coroutine will return a one-item tuple containing the Task. If you wish to get the underlying Task out of the spawn, you can do so simply:
+
+```cpp
+auto [task] = coro::spawn << someTask();
+```
+
+## $async
 
 Creating a new function for just the asynchronous bits might get tedious. Luckily, you don't have to with the `$async` macro:
 
@@ -68,7 +82,7 @@ void logResponseCode(std::string const& url) {
 }
 ```
 
-Under the hood, `$async` sets a coroutine lambda and immediately invokes it. Any arguments within the macro body are lambda captures, so you could just as easily put `=` in there too.
+Under the hood, `$async` sets a coroutine lambda and immediately spawns it via `coro::spawn`. Any arguments within the macro body are lambda captures, so you could just as easily put `=` in there to. It is not recommended to capture by reference as it's not guaranteed that the lambda will finish before the references go out of scope.
 
 ## Result propagation
 
@@ -185,4 +199,4 @@ for (int num : range(0, 10).filter([](int n) { return n % 2 == 0; })) {
 }
 ```
 
-You can use the `coro::makeGenerator` function to construct a generator based on a vector.
+You can use the `coro::makeGenerator` function to construct a generator based on a vector or a CCArray.
