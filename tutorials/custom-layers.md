@@ -9,6 +9,12 @@ Creating a new scene is easy. You must create a new class extending `cocos2d:::C
 class MyVeryOriginalLayer : public CCLayer {
 protected:
     bool init() override {
+
+        if (!CCLayer::init()) {
+            // Something very bad happened
+            return false;
+        }
+
         log::info("Hi from my very original layer");
         return true;
     }
@@ -20,7 +26,7 @@ public:
             ret->autorelease();
             return ret;
         }
-        CC_SAFE_DELETE(ret);
+        delete ret;
         return nullptr;
     }
 }
@@ -46,14 +52,17 @@ Running this code and calling `MyVeryOriginalLayer::scene()` will transition the
 bool init() override {
     log::info("Hi from my very original layer");
 
-    // Create a new menu. UI elemnts should be added to here!
-    menu = CCMenu::create();
+    // Create a new menu. UI Buttons should be added to here.
+    auto menu = CCMenu::create();
+
+    // Using geode's built in utils for creating side art and background makes it easier for other mods to modify & change them.
+    // It is recommended to use these instead of manually adding them some other way.
 
     // Add side art to the layer
-    addSideArt(this, SideArt::All, SideArtStyle::Layer);
+    geode::addSideArt(this, SideArt::All, SideArtStyle::Layer);
 
     // And a background to the layer
-    auto background = createLayerBG();
+    auto background = geode::createLayerBG();
     background->setID("background");
     this->addChild(background);	
     return true;
@@ -62,12 +71,12 @@ bool init() override {
 
 The rest of the buttons and UI can be created the same way you would in a hook.
 
-> :warning: UI elements should **always** be added to a CCMenu object!
+> :warning: Button elements must be in CCMenu object!
 
 
 ## Back button
 
-Now the biggest problem with this layer is that you are stuck in it. To go back you would want to create a button whoes callback transitions to another scene. 
+Now the biggest problem with this layer is that you are stuck in it. To go back you would want to create a button whose callback transitions to another scene. 
 
 ```cpp
 
@@ -79,6 +88,9 @@ bool init() override {
         menu_selector(MyVeryOriginalLayer::onBack)
     );
 
+    // Not adding this function will disable keyBackClicked from being called.
+    // This makes it impossible to exit levels with the backspace key.
+    this->setKeypadEnabled(true);
 
     // Add a back button the the top-left corner of the screen with a small offset.
     menu->addChildAtPosition(backBtn, Anchor::TopLeft, {25, -25});

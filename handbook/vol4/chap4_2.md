@@ -1,9 +1,9 @@
 # Chapter 4.2: Searching through the docs
 
-At some point or another, you will need to find a class to hook or a function to call. This chapter explains how to search through the geode classes tab.
+At some point or another, you will need to find a class to hook or a function to call. This chapter explains how to search through the Geode classes tab.
 
 ## Seaching for classes
-Geode docs have a useful "classes" tab to search for classes. If you do not know what class something is, it is best to search through devtools first, then search it up the docs. However, if devtools does not tell you the classname, then you would have to find the class yourself.
+Geode docs have a useful "classes" tab to search for classes. If you do not know what class something is, it is best to search through [DevTools](https://github.com/geode-sdk/DevTools) first, then search it up the docs. However, if devtools does not tell you the classname, then you would have to find the class yourself.
 
 ## I found a class! What now?
 Congrats! You can now hook the object by copying the signiture of the function! [Geode's vscode](https://marketplace.visualstudio.com/items?itemName=GeodeSDK.geode) extension provides autocomplete for function signatures, so it is recommended to use that.
@@ -14,7 +14,8 @@ c++ lets you check if an object is nullptr and run code if it does exist.
 
 ```cpp
 if (auto level = GJBaseGameLayer::get()) {
-	// If you are in a level, run this code with level being the level
+	// This code will only run if you are in a level
+	// level is a pointer to your current level
 }
 
 else {
