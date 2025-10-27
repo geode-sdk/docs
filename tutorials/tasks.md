@@ -277,27 +277,4 @@ Task<std::string> newTask =
 
 ## Coroutines
 
-Tasks can be used in [C++20 coroutines](https://en.cppreference.com/w/cpp/language/coroutines), easily allowing for multiple asynchronous calls to happen within the same code. Note that this may have a little performance overhead compared to regular Task code.
-
-```cpp
-Task<int> someTask() {
-    auto response = co_await web::WebRequest().get("https://example.com");
-    co_return response.code();
-}
-```
-
-There are a few specific things you should be aware of when using this syntax:
-* The body of the coroutine is ran in the main thread, possibly only in the next frame.
-* If the task the coroutine is waiting on is cancelled, the whole coroutine is cancelled
-* If the task returned by the coroutine is cancelled, any pending task that is running is cancelled
-
-You can also send progress values using `co_yield`
-
-```cpp
-Task<std::string, int> someTask() {
-    for (int i = 0; i < 10; i++) {
-        co_yield i;
-    }
-    co_return "done!";
-}
-```
+Tasks can be used in [C++20 coroutines](https://en.cppreference.com/w/cpp/language/coroutines), easily allowing for multiple asynchronous calls to happen within the same code. Note that this may have a little performance overhead compared to regular Task code. See [Coroutines](/tutorials/coroutines) for more information.

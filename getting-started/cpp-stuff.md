@@ -7,7 +7,7 @@ order: 2
 
 To be able to use the Geode SDK, you **will** need at least the following:
  * [A C++ compiler](#compiler)
- * [CMake](https://cmake.org/download/) - Version 3.25+ is required - make sure to add to PATH when installing on Windows.
+ * [CMake](https://cmake.org/download/) - Version 3.29+ is required - make sure to add to PATH when installing on Windows.
  * [Git](https://git-scm.com/downloads) - Hey you. Yes, you! I know a lot of people skip this step **but you will need it**. Don't come at us asking for why you "could not find git for clone of json-populate".
 
 ## Compiler
@@ -40,7 +40,9 @@ Linux is a bit more complicated, as there's no official Linux release of GD (yet
 
 Because of that, this guide will set you up to [cross-compile](https://en.wikipedia.org/wiki/Cross_compiler) Windows Geode mods from Linux.
 
-First, besides Git and Cmake, make sure you have `clang` and `lld` installed.
+First, besides Git and CMake, make sure you have `clang` and `lld` installed.
+
+For CMake make sure you have at least version 3.29, some distributions like Debian and Linux Mint ship older versions which are not able to cross-compile Geode mods.
 
 On Ubuntu:
 

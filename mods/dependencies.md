@@ -104,24 +104,30 @@ $execute {
 
 An example of using dispatch events in practice [can be found in MouseAPI](https://github.com/geode-sdk/MouseAPI/blob/main/src/test.cpp#L54-L94).
 
-### Attributes
+### User Objects
 
-One way for mods to communicate with optional dependencies is through **node attributes**, which may contain any data. These are like the `setUserData` and `setUserObject` functions native to `CCNode`s, except that attributes have a string key associated with them. For example, a mod that adds scrollbars to layers might use the following check to see if a scrollbar should be added to a layer:
+One way for mods to communicate with optional dependencies is through **user objects**, which may contain any data. These are like the `setUserData` and `setUserObject` functions native to `CCNode`s, except that these objects have a string key associated with them. For example, a mod that adds scrollbars to layers might use the following check to see if a scrollbar should be added to a layer:
 
 ```cpp
-if (layer->getAttribute<bool>("hjfod.cool-scrollbars/enable")) {
+if (layer->getUserObject("hjfod.cool-scrollbars/enable")) {
     // add scrollbar
 }
 ```
 
-Other mods can set this attribute on their layers with the `CCNode::setAttribute` function.
+Other mods can add this user object to their layers with the `CCNode::setUserObject` function:
+
+```cpp
+layer->setUserObject("hjfod.cool-scrollbars/enable", CCBool::create(true));
+```
+
+As these are typical `CCObject`s, a mod can store any piece of information within a user object. This can range from objects as simple as a `CCBool` to more complicated, mod-specific ones that store multiple pieces of data.
 
 Mods can also add an event listener to listen for when attributes are added/changed:
 
 ```cpp
 $execute {
     new EventListener<AttributeSetFilter>(
-        +[](AttributeSetEvent* event) {
+        +[](UserObjectSetEvent* event) {
             addScrollbar(event->node);
         },
         AttributeSetFilter("hjfod.cool-scrollbars/enable")
