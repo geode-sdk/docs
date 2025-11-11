@@ -13,11 +13,11 @@ You can use one of the following IDEs for developing Geode mods. Using an IDE is
 
 # Visual Studio Code
 
-* [VSCode on Windows](#vscode-on-windows)
-* [VSCode on Mac](#vscode-on-mac)
-* [VSCode on Linux](#vscode-on-linux)
+* [VS Code on Windows](#vs-code-on-windows)
+* [VS Code on Mac](#vs-code-on-mac)
+* [VS Code on Linux](#vs-code-on-linux)
 
-## VSCode on Windows
+## VS Code on Windows
 
 For VS Code, we recommend a few extensions:
  * [`C/C++`](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
