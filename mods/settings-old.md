@@ -60,7 +60,7 @@ $execute {
 
 ## Supported setting types
 
-*Tip: If you have our VSCode extension, you will get validation for these setting types*
+*Tip: If you have our VS Code extension, you will get validation for these setting types*
 
 Most of these can have a `default` key to set a default value.
 ```json
@@ -261,3 +261,4 @@ $on_mod(Loaded) {
 ```
 
 You can find an example of custom settings [in the test dependency mod in Geode](https://github.com/geode-sdk/geode/blob/main/loader/test/dependency/main.cpp#L60-L145).
+
