@@ -53,11 +53,11 @@ For VS Code on Mac, we recommend a few extensions:
 
 There are a few steps you should follow to get proper intellisense (you should only need to do these once per project, ideally):
 
-1. With VSCode open on your project, press F1 and run `CMake: Select a Kit`. You should choose **Clang**.
+1. With VS Code open on your project, press F1 and run `CMake: Select a Kit`. You should choose **Clang**.
 
 Now, build your mod by pressing F1 and running `CMake: Build`. **You must build your mod first so that errors such as `#include <Geode/modify/MenuLayer.hpp> not found` go away.** If the mod was built successfully, the exit code at the end should be 0. If any errors still persist after building the mod, try restarting VS Code.
 
-## VSCode on Linux
+## VS Code on Linux
 
 The setup is very similar to [VSCode on Mac](#vscode-on-mac), so you can follow that. The primary difference is you have to manually create a kit, which can be done like so:
 
