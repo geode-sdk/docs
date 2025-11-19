@@ -39,6 +39,8 @@ If youre using an IDE such as Clion, VScode or Visual Studio, head over to the [
 
 If you're building for Android, check out the [Android section](#build-for-android).
 
+If you're building for iOS, check out the [iOS section](#build-for-ios)
+
 Otherwise if you want to build your mods manually from the command line you can do that by simply running these commands in your mod's folder:
 ```bash
 # Configures & builds for the current platform
@@ -82,6 +84,41 @@ You can then copy the built .geode file from the `build-android64` folder to you
 ```
 /storage/emulated/0/Android/media/com.geode.launcher/game/geode/mods/
 ```
+
+## Build for iOS
+
+To build mods for iOS, you will have to edit your `CMakeLists.txt` on your exiting mods. Newer created mods will already have this change.
+```cmake
+# At the beginning of your CMakeLists.txt, change this:
+#  set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
+# into:
+if ("${CMAKE_SYSTEM_NAME}" STREQUAL "iOS" OR IOS)
+    set(CMAKE_OSX_ARCHITECTURES "arm64")
+else()
+    set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
+endif()
+```
+
+You also need to have macOS alongside the iOS SDK installed from Xcode.
+
+Next step is to get the Geode binaries for iOS, you can do this with the CLI:
+```bash
+geode sdk install-binaries --platform ios
+```
+
+SDK Version 4.4.0 or higher is required, so make sure to update your SDK first.
+
+Now you can build your mod for iOS via:
+```bash
+geode build -p ios
+```
+Or if you want to build it manually:
+```bash
+cmake -B build -DCMAKE_SYSTEM_NAME=iOS -DGEODE_TARGET_PLATFORM=iOS -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cmake --build build
+```
+
+More information about developing mods for iOS in the [iOS Development Setup](/misc/ios.md) page.
 
 ## Building Windows mods on Linux
 
