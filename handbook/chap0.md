@@ -4,7 +4,7 @@ description: A complete tutorial for GD modding, directed at beginners
 
 # An Introduction to GD Modding (using Geode)
 
-Hello everyone! This is **an introduction to GD Modding (using Geode)**, a handbook that covers all of the essentials of GD Modding. To follow along with this handbook, you will need to have [**Geode** installed](/installation). This handbook is written as a **tutorial for beginners**, though even if you are an experienced GD modder already, getting a fresh-up on the basics can never do harm. Even if for some reason you don't use Geode, this handbook still contains **general information about modding and GD modding specifically**, however all practical code examples and the code project we will build later will use Geode.
+Hello everyone! This is **an introduction to GD Modding (using Geode)**, a handbook that covers all of the essentials of GD Modding. To follow along with this handbook, you will need to have [**Geode** installed](/getting-started/sdk). This handbook is written as a **tutorial for beginners**, though even if you are an experienced GD modder already, getting a fresh-up on the basics can never do harm. Even if for some reason you don't use Geode, this handbook still contains **general information about modding and GD modding specifically**, however all practical code examples and the code project we will build later will use Geode.
 
 ## Prerequisites
 
@@ -74,3 +74,4 @@ Many things in this handbook are referred to as "traditional modding". This mean
 ## Ready, set, go!
 
 **And with that, let us start with [Chapter 1.1](/handbook/vol1/chap1_1)!**
+
