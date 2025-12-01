@@ -50,6 +50,11 @@ On Ubuntu:
 apt install clang-19 clang-tools-19 lld-19
 ```
 
+On Fedora:
+```bash
+dnf install clang lld llvm
+```
+
 On Arch-based systems:
 
 ```bash
