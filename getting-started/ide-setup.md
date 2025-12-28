@@ -44,7 +44,7 @@ You should pick a **Visual Studio 2022+** compiler (specifically the `amd64` ver
 
 Now, build your mod by pressing F1 and running `CMake: Build`. **You must build your mod first so that errors such as `#include <Geode/modify/MenuLayer.hpp> not found` go away.** If the mod was built successfully, the exit code at the end should be 0. If any errors still persist after building the mod, try restarting VS Code.
 
-## VS Code on Mac
+## VSCode on Mac
 
 For VS Code on Mac, we recommend a few extensions:
  * [`clangd`](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd)
