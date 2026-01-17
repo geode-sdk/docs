@@ -112,7 +112,7 @@ void MyCoolClass::onSumTask(SumTask::Event* event) {
 To implement the actual business logic of our listener, we need to look at the details of the event. Note that the `Task::Event` type can report three different kinds of states: the Task having finished, the Task having progressed, and the Task having been cancelled. **You should pretty much always handle all three of these states**, unless the Task doesn't have any progress type, or you don't care about intermediate progress.
 
 ```cpp
-void MyCoolClass::onSumTask(PointlessTask::Event* event) {
+void MyCoolClass::onTask(PointlessTask::Event* event) {
     // Check if we have a value; getValue() always returns a pointer
     if (uint64_t* result = event->getValue()) {
         // The Task completed successfully! Do what you need with the value.
