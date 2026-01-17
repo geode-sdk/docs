@@ -104,7 +104,7 @@ m_taskListener.bind([](SumTask::Event* event) {
 // You can also assign a member function
 m_taskListener.bind(this, &MyCoolClass::onSumTask);
 
-void MyCoolClass::onTask(SumTask::Event* event) {
+void MyCoolClass::onSumTask(SumTask::Event* event) {
     // Handling code
 }
 ```
