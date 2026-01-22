@@ -35,7 +35,7 @@ Geode will also look for these special files within your mod folder:
 
 Now, to build your mod you have a few options:
 
-If youre using an IDE such as Clion, VScode or Visual Studio, head over to the [IDE Setup](/getting-started/ide-setup) page.
+If youre using an IDE such as Clion, VS Code or Visual Studio, head over to the [IDE Setup](/getting-started/ide-setup) page.
 
 If you're building for Android, check out the [Android section](#build-for-android).
 
