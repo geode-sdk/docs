@@ -51,6 +51,13 @@ Depending on which compiler you want to use, pick either:
 }
 ```
 
+Additionally, we recommend disabling clangd auto header insertion, as it doesn't work well with Geode and will spam useless headers in your project. Press F1 and run `Preferences: Open User Settings (JSON)` and add the following lines:
+```json
+"clangd.arguments": [
+    "-header-insertion=never"
+],
+```
+
 4. If instead of Clang you chose the **C/C++ extension**, you need to register CMake as the **Configuration Provider** for the C++ extension by pressing F1 and running `C/C++: Edit Configurations (UI)`. Scroll down to **Advanced** options, and set the Configuration Provider as `ms-vscode.cmake-tools`.
 
 ![Image showing the "C/C++: Edit Configurations (UI)" command being run in VS Code](/assets/win_usecmake.png)
