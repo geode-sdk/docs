@@ -19,26 +19,39 @@ You can use one of the following IDEs for developing Geode mods. Using an IDE is
 
 ## VSCode on Windows
 
-For VS Code, we recommend a few extensions:
- * [`C/C++`](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+Install the following VSCode extensions:
  * [`CMake Tools`](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
  * [`Geode`](https://marketplace.visualstudio.com/items?itemName=GeodeSDK.geode) - Not required, but will provide some nice features.
 
+As well as one of:
+ * [`clangd`](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd) - **if using Clang as compiler**
+ * [`C/C++`](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) - **if using MSVC / Visual Studio as compiler**
+
 There are a few steps you should follow to get proper intellisense and code completion (you should only need to do these once per project, ideally):
 
-1. With VS Code open on your project, press F1 and run `CMake: Select a Kit`. This will bring up a list of installed compilers on your machine.
+1. With VS Code open on your project, press F1 and run `CMake: Select a Kit`. This will bring up a list of installed compilers on your machine. This will also open automatically whenever opening a new project.
 
 ![Image showing a bunch of compilers CMake detected in VS Code](/assets/win_compilers.png)
 
-You should pick a **Visual Studio 2022+** compiler (specifically the `amd64` version), or Clang, but nothing else!
+Depending on which compiler you want to use, pick either:
+ * **Clang** (not `Clang-cl`) - recommended
+ * **Visual Studio 20xx Release - amd64** (not `amd64_x86` or any other ones)
 
-> :warning: Please pay attention to this
-
-2. Now to select the build variant, press F1 and run `CMake: Select Variant`. We recommend **RelWithDebInfo** for easier debugging, as Debug may sometimes cause obscure crashes.
+2. Now to select the build variant, press F1 and run `CMake: Select Variant`. We recommend **RelWithDebInfo** for easier debugging, as **Debug** may sometimes cause obscure crashes.
 
 ![Image showing available build types on Windows: Debug, Release, MinSizeRel, and RelWithDebInfo](/assets/win_relwithdebinfo.png)
 
-3. Register CMake as the **Configuration Provider** for the C++ extension by pressing F1 and running `C/C++: Edit Configurations (UI)`. Scroll down to **Advanced** options, and set the Configuration Provider as `ms-vscode.cmake-tools`.
+3. If using **Clang** with the **clangd** extension, press F1 and run `CMake: Edit User-Local CMake Kits`. This will open a file, in there find the chosen kit (one with Clang in the name) and add these keys to it:
+```json
+"cmakeSettings": {
+    "CMAKE_EXPORT_COMPILE_COMMANDS": 1
+},
+"preferredGenerator": {
+    "name": "Ninja"
+}
+```
+
+4. If instead of Clang you chose the **C/C++ extension**, you need to register CMake as the **Configuration Provider** for the C++ extension by pressing F1 and running `C/C++: Edit Configurations (UI)`. Scroll down to **Advanced** options, and set the Configuration Provider as `ms-vscode.cmake-tools`.
 
 ![Image showing the "C/C++: Edit Configurations (UI)" command being run in VS Code](/assets/win_usecmake.png)
 

@@ -13,19 +13,30 @@ To be able to use the Geode SDK, you **will** need at least the following:
 ## Compiler
 
 To use the Geode SDK, and in turn make Geometry Dash mods, you will need either:
- * [Visual Studio 2022+](#windows) on Windows
+ * [Clang](#windows-clang) (recommended) or [Visual Studio 2022+](#windows-visual-studio) on Windows
  * [Clang](#macos) on MacOS
  * [A secret third thing](#linux) on Linux
 
-### Windows
+### Windows (Clang)
 
-Download Visual Studio from [its website](https://visualstudio.microsoft.com/downloads/). If you want **just** the compiler and not the code editor, look for *Build Tools for Visual Studio* further down in the page.
+First, install [LLVM](https://github.com/llvm/llvm-project) and [Ninja](https://github.com/ninja-build/ninja). The easiest way is using Scoop:
+```
+scoop install llvm ninja
+```
 
-After launching the installer, select **Desktop development with C++**. You may choose other features, but you **will** need at least ***MSVC*** and ***Windows SDK*** installed.
+LLVM itself does not come with Windows SDK and CRT libraries, so you will need a minimal Visual Studio install for these, which is described in the next section.
+
+### Windows (Visual Studio)
+
+Please note that Visual Studio **2022** or higher is required. If you have an older version already installed, you should upgrade to the latest available.
+
+Unless you want to install Visual Studio (the editor) itself, we recommend installing just the build tools. Open the VS [download page](https://visualstudio.microsoft.com/downloads), scroll to the bottom, and under "Tools for Visual Studio" download **Build Tools for Visual Studio**.
+
+After launching the installer, select **Desktop development with C++** and optionally deselect all features except for **MSVC Build Tools** and **Windows SDK**, like on the screenshot below. Click Install and wait for it to finish.
+
+![Image showing VS installer](/assets/vs_installer.png)
 
 Once Visual Studio is installed, you should now have a working C++ compiler that is suited for GD mod development.
-
-Please note that Visual Studio **2022** or higher is required. 2019 or lower will not work, as they don't support C++20 properly.
 
 ### MacOS
 
