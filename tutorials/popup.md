@@ -33,12 +33,14 @@ This makes working with simple confirmation popups much simpler, as you don't ha
 
 ## Complex popups
 
-However, what if you want to make a popup that's more complex? For example, something with a different background and lots of buttons and other controls, like the move trigger popup? For this, the **unrecommended** GD way is to inherit from `FLAlertLayer` and override `init` with your own code. However, this is not ideal, as most complex popups share a lot of similar base functionality like a close button and a standard `GJ_squareXX` background. For this reason, Geode provides a convenience class `Popup<...>` for creating your own complex popups.
+However, what if you want to make a popup that's more complex? For example, something with a different background and lots of buttons and other controls, like the move trigger popup? For this, the **unrecommended** GD way is to inherit from `FLAlertLayer` and override `init` with your own code. However, this is not ideal, as most complex popups share a lot of similar base functionality like a close button and a standard `GJ_squareXX` background. For this reason, Geode provides a convenience class `Popup` for creating your own complex popups.
 ```cpp
-// specify parameters for the setup function in the Popup<...> template
-class MyPopup : public geode::Popup<std::string const&> {
+class MyPopup : public geode::Popup {
 protected:
-    bool setup(std::string const& value) override {
+    bool init(std::string const& value) {
+        if (!Popup::init(240.f, 160.f))
+            return false;
+
         // convenience function provided by Popup
         // for adding/setting a title to the popup
         this->setTitle("Hi mom!");
@@ -52,7 +54,7 @@ protected:
 public:
     static MyPopup* create(std::string const& text) {
         auto ret = new MyPopup();
-        if (ret->initAnchored(240.f, 160.f, text)) {
+        if (ret->init(text)) {
             ret->autorelease();
             return ret;
         }
@@ -63,7 +65,7 @@ public:
 };
 ```
 
-`Popup` contains one pure virtual member function: `setup`, whose parameters are the class template arguments. This function is called at the end of `Popup::init`, which initializes all the relevant `FLAlertLayer` members and adds a background and a close button. This abstracts away a lot of boilerplate and makes creating complex popups simple.
+`Popup::init` abstracts away a lot of boilerplate and makes creating complex popups simple, by initializing all the relevant `FLAlertLayer` members and adding a background with a close button.
 
 **This is the recommended way to create complex popups in Geode**, although as with question popups, this is not an interoperability concern and as such **you can do what fits your case**. If you are porting an existing mod that uses some other setup and it works just fine, no need to change it unless you want to make the codebase more easily refactorable.
 
