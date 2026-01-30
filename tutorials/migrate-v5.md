@@ -1,5 +1,14 @@
 # Migrating from Geode v4.x to v5.0
 
+## C++ Standard
+
+Geode now requires C++23 to build. The mod template has been updated a while ago, but for older mods you might need to open `CMakeLists.txt` and edit this line:
+```cmake
+set(CMAKE_CXX_STANDARD 20)
+```
+
+to say `23` instead of `20`.
+
 ## Changes to `Popup`
 
 `geode::Popup` is no longer templated, and instead accepts its own arguments in `Popup::init` (which also replaces `initAnchored`). It now uses the pattern similar to any other node. For example the following code:
@@ -54,6 +63,76 @@ protected:
     }
 };
 ```
+
+## Async changes (web, file picker, etc.)
+
+`geode::Task` has been replaced by an asynchronous system that utilizes C++ coroutines. This makes it much easier to write performant, concurrent code, but it also means there's a lot to change to port to the new system.
+
+Functions like `geode::utils::file::pick` or `web::WebRequest::get` now return a Future that can be awaited or spawned to run in parallel. For example, to launch a global file picker in v4, you would use this code:
+
+```cpp
+file::pick(...).listen([](Result<std::filesystem::path>* path) {
+    if (path && path->isOk()) {
+        auto path = path->unwrap();
+    }
+});
+```
+
+The new version for that would be:
+```cpp
+#include <Geode/utils/async.hpp>
+
+async::spawn(
+    file::pick(...),
+    [](Result<std::filesystem::path> path) { // note that this is not a pointer anymore!
+        if (path.isOk()) {
+            auto path = path.unwrap();
+        }
+    }
+);
+```
+
+This will behave similar to original, it will spawn `file::pick()` on the async runtime, and once completed, call the provided callback on the main thread. If you want more control over what happens (such as not calling your function on main thread), you can use the `Runtime` directly:
+```cpp
+arc::Runtime& rt = async::runtime();
+auto handle = rt.spawn([](this auto self) -> arc::Future<> {
+    auto result = co_await file::pick(...);
+    if (result.isOk()) {
+        auto path = result.unwrap();
+    }
+});
+```
+
+If you've instead used listeners, a `async::TaskHolder` class was added which has a similar API. For example, the following v4 code that makes requests:
+
+```cpp
+EventListener<WebTask> listener;
+
+auto req = WebRequest().get("https://example.org");
+listener.bind([](WebTask::Event* e) {
+    if (WebResponse* value = e->getValue()) {
+        log::debug("Response: ", value->code());
+    } else if (WebProgress* progress = e->getProgress()) {
+        log::debug("Progress: ", progress->downloadProgress());
+    }
+});
+listener.setFilter(req);
+```
+
+should now be changed to this:
+
+```cpp
+async::TaskHolder<WebResponse> listener;
+
+listener.spawn(
+    WebRequest().get("https://example.org"),
+    [](WebResponse value) {
+        log::debug("Response: {}", value.code());
+    }
+);
+```
+
+(TODO: we are yet to figure how to do progress)
 
 ## Changes to `std::function` arguments
 
