@@ -84,9 +84,14 @@ The new version for that would be:
 
 async::spawn(
     file::pick(...),
-    [](Result<std::filesystem::path> path) { // note that this is not a pointer anymore!
-        if (path.isOk()) {
-            auto path = path.unwrap();
+    [](Result<std::optional<std::filesystem::path>> result) { // note that this is not a pointer anymore!
+        if (result.isOk()) {
+            auto opt = path.unwrap();
+            if (opt) {
+                auto path = opt.value();
+            } else {
+                // User cancelled the dialog
+            }
         }
     }
 );
@@ -100,7 +105,7 @@ auto handle = rt.spawn([](this auto self) -> arc::Future<> {
     if (result.isOk()) {
         auto path = result.unwrap();
     }
-});
+}());
 ```
 
 If you've instead used listeners, a `async::TaskHolder` class was added which has a similar API. For example, the following v4 code that makes requests:
@@ -124,15 +129,35 @@ should now be changed to this:
 ```cpp
 async::TaskHolder<WebResponse> listener;
 
+auto req = WebRequest();
+
+// optional progress callback, you can also directly poll via `req.progress()`
+req.onProgress([](WebProgress const& progress) {
+    log::debug("Progress: ", progress.downloadProgress());
+});
+
 listener.spawn(
-    WebRequest().get("https://example.org"),
+    req.get("https://example.org"),
     [](WebResponse value) {
         log::debug("Response: {}", value.code());
     }
 );
 ```
 
-(TODO: we are yet to figure how to do progress)
+## Async cancellation
+
+The `geode::Task` class allowed tasks to be cancelled externally, or even by the task itself. The new futures are cancelled simply by destroying them, and tasks are cancelled by calling `abort()` on the handle. The aforementioned `TaskHolder` class automatically will call `abort` on the held task when destroyed, replaced by another `.spawn` call, or when you manually call `listener.cancel()`. For example, this code below will never actually complete the request:
+```cpp
+async::TaskHolder<WebResponse> listener;
+
+listener.spawn(
+    WebRequest().get("https://example.org"),
+    [](auto value) {}
+);
+listener.cancel();
+```
+
+When rewriting your own code that used `Task`, you can forget about checking for cancellation and leverage the power of coroutines - your task can be cancelled at any `co_await` point.
 
 ## Changes to `std::function` arguments
 
