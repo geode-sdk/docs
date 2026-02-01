@@ -159,6 +159,16 @@ listener.cancel();
 
 When rewriting your own code that used `Task`, you can forget about checking for cancellation and leverage the power of coroutines - your task can be cancelled at any `co_await` point.
 
+## `fmt::localtime`
+
+We updated our `fmt` dependency to v12, which removed the `fmt::localtime` function. Now Geode provides a drop-in replacement for it:
+```cpp
+#include <Geode/utils/general.hpp>
+
+std::time_t time = std::time(nullptr);
+std::tm local = geode::localtime(time);
+```
+
 ## Changes to `std::function` arguments
 
 Almost all parts of geode that accepted a `std::function` (such as `queueInMainThread`, `TextInput::setCallback`, etc.) have been changed to use `geode::Function` instead. The primary difference is that a `geode::Function` cannot be copied, only moved. Most proper usages should still compile and work properly, but if you have errors that are related to `std::function`, try adding `std::move`s or making sure to explicitly use `geode::Function` everywhere.
