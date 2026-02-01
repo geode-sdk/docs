@@ -159,6 +159,50 @@ listener.cancel();
 
 When rewriting your own code that used `Task`, you can forget about checking for cancellation and leverage the power of coroutines - your task can be cancelled at any `co_await` point.
 
+## Async in general
+
+This section is useful for those who have done multithreading in mods, whether via creating threads manually or using `geode::Task`. The new async system provides a much easier way for concurrency, as a central system shared between Geode and mods. Specifically, there are two types of jobs that can run in parallel: **Async Tasks** and **Blocking Tasks**.
+
+Async tasks are the most common ones, and they are useful for pretty much any concurrent tasks that aren't CPU heavy and don't block. For more examples on what you can do with them, see the [Arc README](https://github.com/dankmeme01/arc), but here's a small example of an asynchronous worker task that you previously could've only implemented with an `std::thread`:
+```cpp
+auto [tx, rx] = arc::mpsc::channel<int>();
+
+auto handle = async::runtime().spawn([](auto rx) -> arc::Future<> {
+    while (auto result = co_await rx.recv()) {
+        log::debug("Got value: {}", std::move(result).unwrap());
+        co_await arc::sleep(asp::Duration::fromMillis(100));
+    }
+}(std::move(rx)));
+
+// Then, in regular, sync code you can use the mpsc channel to communicate with the worker
+(void) tx.trySend(1);
+```
+
+There are a few things you should strictly avoid doing inside async tasks:
+* Blocking the thread (for networking use Arc sockets, for sleep use `arc::sleep`, for other blocks see below)
+* Using `std::mutex` (or other sync primitives) across await boundaries - prefer to use `arc::Mutex` or ensure you unlock the mutex before doing `co_await`
+* Running CPU intensive tasks or IO that isn't networking: decoding images, writing large files; these should be done as blocking tasks
+
+For when blocking is required, you can use the **blocking task pool** (and you should prefer doing that over using your own thread pool!):
+```cpp
+auto handle = async::runtime().spawnBlocking<uint64_t>([] {
+    // simulate some expensive calculation 
+    uint64_t x = 1;
+    for (int i = 0; i < 1024; i++) {
+        x = x * (x + i);
+    }
+    return x;
+});
+
+// The task now runs in parallel, and it will not be stopped if you discard the hnadle
+// To get the output value, you have two ways:
+
+// 1. await if inside an async task
+uint64_t value = co_await handle;
+// 2. block (only if NOT inside the async runtime!)
+uint64_t value = handle.blockOn();
+```
+
 ## `fmt::localtime`
 
 We updated our `fmt` dependency to v12, which removed the `fmt::localtime` function. Now Geode provides a drop-in replacement for it:
