@@ -100,12 +100,12 @@ async::spawn(
 This will behave similar to original, it will spawn `file::pick()` on the async runtime, and once completed, call the provided callback on the main thread. If you want more control over what happens (such as not calling your function on main thread), you can use the `Runtime` directly:
 ```cpp
 arc::Runtime& rt = async::runtime();
-auto handle = rt.spawn([](this auto self) -> arc::Future<> {
+auto handle = rt.spawn([] -> arc::Future<> {
     auto result = co_await file::pick(...);
     if (result.isOk()) {
         auto path = result.unwrap();
     }
-}());
+});
 ```
 
 If you've instead used listeners, a `async::TaskHolder` class was added which has a similar API. For example, the following v4 code that makes requests:
@@ -167,12 +167,12 @@ Async tasks are the most common ones, and they are useful for pretty much any co
 ```cpp
 auto [tx, rx] = arc::mpsc::channel<int>();
 
-auto handle = async::runtime().spawn([](auto rx) -> arc::Future<> {
+auto handle = async::runtime().spawn([rx = std::move(rx)] -> arc::Future<> {
     while (auto result = co_await rx.recv()) {
         log::debug("Got value: {}", std::move(result).unwrap());
         co_await arc::sleep(asp::Duration::fromMillis(100));
     }
-}(std::move(rx)));
+});
 
 // Then, in regular, sync code you can use the mpsc channel to communicate with the worker
 (void) tx.trySend(1);
