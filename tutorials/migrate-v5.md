@@ -86,7 +86,7 @@ async::spawn(
     file::pick(...),
     [](Result<std::optional<std::filesystem::path>> result) { // note that this is not a pointer anymore!
         if (result.isOk()) {
-            auto opt = path.unwrap();
+            auto opt = result.unwrap();
             if (opt) {
                 auto path = opt.value();
             } else {
