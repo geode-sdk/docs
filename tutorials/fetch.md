@@ -2,9 +2,9 @@
 
 Making web requests in C++ sucks, and GD doesn't really help with it. Cocos2d has the `CCHTTPRequest` class, which GD uses to make its web requests, but it's a complicated mess to try to get working and it's not really ergonomical.
 
-To fix this, Geode has the `WebRequest` API, which is much more versatile. All web requests are **asynchronous**, so they run on a separate thread.
+To fix this, Geode has the `WebRequest` API, which is much more versatile. All web requests are **asynchronous**, they run in background and don't block GD's UI thread. Internally, Geode uses `curl_multi` for requests, meaning they share the connection pool, DNS caches, etc., all meaning you should prefer to use Geode's web utils over your own.
 
-Under the hood, the `WebRequests` API uses [Tasks](/tutorials/tasks), so make sure you have read that guide before going into this one.
+This guide will require some knowledge of async, so make sure to read the [Async](/tutorials/async) tutorial first.
 
 ## Creating a web request
 
@@ -42,7 +42,7 @@ req.timeout(std::chrono::seconds(30));
 
 There are more functions, regarding certificate verification, proxy settings. You can find more info about them by looking through the headers!
 
-Now, let's send out request. The API has specific methods for POST, GET, PUT, PATCH. If you want to send a different method, you can use `.send()`. Calling these functions will return a **WebTask**, which is just an alias for `Task<WebResponse, WebProgress>`.
+Now, let's send out request. The API has specific methods for POST, GET, PUT, PATCH. If you want to send a different method, you can use `.send()`. Calling these functions will return a **WebFuture**, which can be awaited or spawned.
 
 ```cpp
 // We're still using the same 'req' object from the codeblock above...
@@ -50,51 +50,47 @@ Now, let's send out request. The API has specific methods for POST, GET, PUT, PA
 std::string url = "https://example.org";
 
 // Let's do a POST request
-auto task = req.post(url);
+auto future = req.post(url);
 ```
 
 ## Getting the response from our request
 
-If you remember the [Tasks](/tutorials/tasks) tutorial, you probably also remember that Tasks have to be listened to using the [Events](/tutorials/events) system. We can create an `EventListener` for our request and use it to get our response.
+If you remember the [Async](/tutorials/async) tutorial, you probably also remember that futures must be either awaited or spawned as a task. The most straightforward way is using a `TaskHolder`:
 
 ```cpp
 class MyCoolClass {
-    EventListener<WebTask> m_listener;
+    async::TaskHolder<web::WebResponse> m_listener;
 };
 
 // Continuing our code from above...
-
-m_listener.bind([] (web::WebTask::Event* e) {
-    if (web::WebResponse* value = e->getValue()) {
-        // The request finished!
-    } else if (web::WebProgress* progress = e->getProgress()) {
-        // The request is still in progress...
-    } else if (e->isCancelled()) {
-        // Our request was cancelled
+m_listener.spawn(
+    "Fetching Awesome Data",
+    std::move(future), // you can also do `req.post()` directly here instead
+    [](web::WebResponse response) {
+        // This is called once the request is finished, you can handle the response here
     }
-});
-m_listener.setFilter(task);
+);
 ```
 
-> :warning: Note that if the task itself goes out of scope, then the request will cancel. If the listener goes out of scope, then the callback will never be called, hence if you want to replace your request, you should cancel the current one, and call setFilter() on the listener instead of creating a new one.
+> :warning: Once the `TaskHolder` goes out of scope, the request is cancelled, and the callback will never be called. You must store the holder, or use `async::spawn()` directly to globally listen to a request.
 
 Once we receive our response, we can check multiple things on it! You can see the list of everything you can do with intellisense, or by checking the headers.
 
 ```cpp
 // Check if the response status code is 2xx
-res->ok();
+res.ok();
 // Get the actual status code
-res->code();
+res.code();
 // Get a specific header
-res->header("Content-Type");
+res.header("Content-Type");
 // Get all headers
-res->headers();
+res.headers();
 // Get the response body as bytes
-res->data();
+res.data();
 // Get the response body as a string
-res->string();
+res.string();
 // Get the response body as matjson::Value (json)
-res->json();
+res.json();
 ```
 
 ## A full example
@@ -110,7 +106,7 @@ using namespace geode::prelude;
 
 class $modify(MenuLayer) {
     struct Fields {
-        EventListener<web::WebTask> m_listener;
+        TaskHolder<web::WebResponse> m_listener;
     };
 
     bool init() {
@@ -118,19 +114,18 @@ class $modify(MenuLayer) {
             return false;
         }
 
-        m_fields->m_listener.bind([] (web::WebTask::Event* e) {
-            if (web::WebResponse* res = e->getValue()) {
-                log::info("{}", res->string().unwrapOr("Uh oh!"));
-            } else if (web::WebProgress* p = e->getProgress()) {
-                log::info("progress: {}", p->downloadProgress().value_or(0.f));
-            } else if (e->isCancelled()) {
-                log::info("The request was cancelled... So sad :(");
-            }
+        auto req = web::WebRequest();
+        req.onProgress([](web::WebProgress const& p) {
+            log::info("progress: {}", p.downloadProgress().value_or(0.f));
         });
 
-        auto req = web::WebRequest();
-        // Let's fetch... uhh...
-        m_fields->m_listener.setFilter(req.get("https://pastebin.com/raw/vNi1WHNF"));
+        m_fields->m_listener.spawn(
+            req.get("https://pastebin.com/raw/vNi1WHNF"),
+            [](web::WebResponse res) {
+                log::info("{}", res.string().unwrapOr("Uh oh!"));
+            }
+        );
+
         return true;
     }
 };
