@@ -175,7 +175,7 @@ While async is a great and powerful tool, in C++ it's unfortunately easy to misu
 
 ### Blocking
 
-Blocking a thread of the async runtime is one of the worst things you can do, as it prevents all other tasks from running. Take this code for example:
+Blocking a thread of the async runtime is one of the **worst** things you can do, as it prevents all other tasks from running. Take this code for example:
 
 ```cpp
 async::spawn([] -> arc::Future {
@@ -183,12 +183,7 @@ async::spawn([] -> arc::Future {
 });
 ```
 
-If you run this, you will likely get angry messages like this in your console:
-```
-[WARN] [Worker 1] task Task @ 0x7c4bc6fe0790 took 1.002s to yield
-```
-
-This is because an async runtime has a fixed number of threads, which drive all tasks together. When you invoke an operation that waits *asynchronously*, for example `arc::sleep`, you tell the runtime "Hey, you can run other tasks for now, wake me up when I need to run", and it simply suspends your task. When you invoke a *blocking* operation, you bypass the runtime, steal its thread and don't give other tasks an opportunity to run.
+This is quite bad, since an async runtime has a fixed number of threads, which drive all tasks together. When you invoke an operation that waits *asynchronously*, for example `arc::sleep`, you tell the runtime "Hey, you can run other tasks for now, wake me up when I need to run", and it simply *suspends* your task. When you invoke a **blocking** operation, you bypass the runtime, steal its thread and don't give other tasks an opportunity to run.
 
 Almost every blocking operation has a non-blocking counterpart in Arc:
 * Sleep -> `arc::sleep`
