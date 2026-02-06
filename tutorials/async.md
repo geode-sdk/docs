@@ -248,6 +248,28 @@ arc::Future<> coro() {
 }
 ```
 
+### Thread safety
+
+Remember that **all** async code runs in separate threads, meaning that any interaction with Cocos or GD will likely lead to a crash unless done correctly. For most cases, like spawning a web request and then handling the result, `async::spawn` and `async::TaskHolder` already provide simple ways to run a callback in the main thread. If this isn't enough for you, there are also two ways to run a piece of code in the main thread, depending on whether you need to wait for it to complete:
+
+```cpp
+// The classic queueInMainThread, can be used from anywhere
+geode::queueInMainThread([] {
+    log::debug("cocos is safe here :)");
+});
+
+// If you are inside a coroutine and need to wait for the callback to complete
+co_await async::waitForMainThread<void>([] {
+    log::debug("cocos is safe here :)");
+});
+
+// Unlike queueInMainThread, this also allows you to return values!
+std::optional<int> value = co_await async::waitForMainThread<int>([] {
+    log::debug("cocos is safe here :)");
+    return 42;
+});
+```
+
 ## Enabling features
 
 To reduce compile times, mods by default only include essential features of Arc (core and time utilities). You can opt into using other features by adding these lines in your CMakeLists.txt
