@@ -103,7 +103,8 @@ Note that this has nothing to do with GD's main thread, event listeners will alw
 
 ### `GlobalEvent`
 
-If you have an Event with a filter, it's not possible to have a listener for any filter args. In those cases, you should use `GlobalEvent`.
+If you have an `Event` with filter args, it's not possible to have an unfiltered listener (aka a listener that receives every event, regardless of the args). \
+In those cases, you should use `GlobalEvent`.
 
 ```cpp
 // std::string is a filter arg
