@@ -9,11 +9,128 @@ set(CMAKE_CXX_STANDARD 20)
 
 to say `23` instead of `20`.
 
+## Changes to `Event`
+
+The entire event system has been reworked. There are now multiple event classes for different purposes, and filters are far more performant, though a lot less dynamic. \
+Events now also have priority ordering, for defining the order in which listeners are handled.
+
+### Usage migration
+
+```cpp
+// BEFORE:
+// # Sending an event
+PlayerHealthEvent("joe123", 65).post();
+
+// # Listening to an event
+// leaking the EventListener
+new EventListener<EventFilter<PlayerHealthEvent>>(+[](PlayerHealthEvent* ev) {
+    if (ev->getName() == "alice_") {
+        log::info("Alice's health is now {}", ev->getHealth());
+    }
+    return ListenerResult::Propagate;
+});
+```
+
+```cpp
+// AFTER:
+// # Sending an event
+PlayerHealthEvent("joe123").send(65);
+
+// # Listening to an event
+// listener is a geode::comm::ListenerHandle
+auto listener = PlayerHealthEvent("alice_").listen([](int health) {
+    log::info("Alice's health is now {}", health);
+    return ListenerResult::Propagate;
+    // return false; would also be equivalent
+});
+// destroying the listener will prevent our callback from being called,
+// so leaking it is an option
+listener.leak();
+
+// # Priorities
+PlayerHealthEvent("joe123").listen([](int health) {
+    // if the lambda returns void then its treated the same as propagate
+}, Priority::VeryEarly);
+```
+
+### Migration for Event subclasses
+
+```cpp
+// BEFORE:
+class PlayerHealthEvent : public Event {
+public:
+    PlayerHealthEvent(std::string name, int health);
+
+    std::string m_name;
+    int m_health;
+};
+```
+
+```cpp
+// AFTER: the std::string is a filter argument for the player's name
+class PlayerHealthEvent : public Event<PlayerHealthEvent, bool(int health), std::string> {
+public:
+    using Event::Event;
+};
+```
+
+### Migration for `DispatchEvent`
+
+Renamed to `geode::Dispatch`, but `DispatchEvent` is kept as an alias for easier migration. Its a thread-safe event with one filter arg for the id:
+
+```cpp
+template <class... Args>
+class Dispatch : public ThreadSafeEvent<Dispatch<Args...>, bool(Args...), std::string> {
+    // [...]
+};
+
+template<class... Args>
+using DispatchEvent = Dispatch<Args...>;
+```
+
+Usage is the same as a regular event usage
+
+### Thread safety
+
+Thread safety is now opt-in for events, meaning that if you want to send/listen to an event from different threads you should use the `ThreadSafe` variants.
+
+```
+Event -> ThreadSafeEvent
+GlobalEvent -> ThreadSafeGlobalEvent
+```
+
+Note that this has nothing to do with GD's main thread, event listeners will always get triggered on the same thread that sent the event.
+
+### `GlobalEvent`
+
+If you have an Event with a filter, it's not possible to have a listener for any filter args. In those cases, you should use `GlobalEvent`.
+
+```cpp
+// std::string is a filter arg
+struct MyEvent : GlobalEvent<MyEvent, bool(int value), std::string> {
+    using GlobalEvent::GlobalEvent;
+};
+// if you want to be efficient and not copy the std::string for each listener you can use:
+// struct MyEvent : GlobalEvent<MyEvent, bool(std::string_view id, int value), bool(int value), std::string> { [...] }
+```
+Usage is mostly the same, except for `listen`:
+```cpp
+// These are both valid:
+MyEvent().listen([](auto id, auto value) {
+    // will receive all events, unfiltered
+});
+
+MyEvent("some-id").listen([](auto value) {
+    // will only trigger when id is "some-id"
+});
+```
+
 ## Changes to `Popup`
 
 `geode::Popup` is no longer templated, and instead accepts its own arguments in `Popup::init` (which also replaces `initAnchored`). It now uses the pattern similar to any other node. For example the following code:
 
 ```cpp
+// BEFORE:
 class MyPopup : public Popup<int> {
 public:
     static MyPopup* create(int value) {
