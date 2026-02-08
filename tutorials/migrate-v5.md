@@ -299,3 +299,65 @@ Almost all parts of geode that accepted a `std::function` (such as `queueInMainT
 A ton of functions that accepted `std::string_view`, `std::string` or `std::string const&` have been written uncarefully and inefficiently before, which v5 aimed to fix. For many cases, you don't need to change anything, but conversion between string types isn't always possible, so this might break some code. This applies to return values as well, certain commonly used functions like `CCNode::getID` have been changed to return `geode::ZStringView`, which is a type that attempts to be API-compatible with `string_view`, while keeping a guarantee of null termination. Here are some examples of code that breaks and how to fix it:
 
 TODO
+
+## Changes to dependencies and incompatibilities
+
+Dependencies and incompatibilites have received some breaking changes. The first is that the old array syntax has now been fully removed, and the second is that the old `"importance"` keys have been replaced by `"required": boolean` for dependencies and `"breaking": boolean` for incompatibilities. Suggestions and recommendations have been removed, but will be added back in a later update as a separate key.
+
+For example, the following v4 code:
+
+```json
+{
+    "dependencies": [
+        {
+            "id": "hjfod.gmd-api",
+            "version": "1.2.1",
+            "importance": "required"
+        },
+        {
+            "id": "hjfod.trashcan",
+            "version": "1.0.0",
+            "importance": "recommended"
+        },
+        {
+            "id": "alphalaneous.awesome_modifier_icons",
+            "version": "1.0.3",
+            "importance": "suggested"
+        }
+    ],
+    "incompatibilities": [
+        {
+            "id": "alphalaneous.improved_group_view",
+            "version": "1.0.0",
+            "importance": "breaking"
+        }
+    ]
+}
+```
+
+should now be written as:
+
+```json
+{
+    "dependencies": {
+        // Required dependencies can be written with the shorthand syntax
+        "hjfod.gmd-api": "1.2.1",
+        "hjfod.trashcan": {
+            "version": "1.0.0",
+            "required": false
+        }
+    },
+    "incompatibilities": {
+        // Or with the long form { "breaking": true, "version": "1.0.0" }
+        "alphalaneous.improved_group_view": "1.0.0"
+    }
+}
+```
+
+## Changes to mod error reporting
+
+ * `Mod::isEnabled` has been renamed to `Mod::isLoaded` to better describe its purpose
+ * `Mod::isOrWillBeEnabled` now reports whether the user has tried to enable the mod and does not consider if it succesfully loaded or not
+ * The `LoadProblem` class now has significantly fewer variants.
+   * All of the different functions related to checking different problems in `Mod` have been reduced to just `Mod::failedToLoad` (for major issues) and `Mod::getLoadProblem` (for all potential issues)
+ * `ModMetadata` parsing has been reduced to just the `create` and `createFromGeodeFile` functions, which now always return a `ModMetadata` instead of a result. The returned `ModMetadata` represents a best-effort parse, and any errors are reported in the `ModMetadata` itself that you can check via `hasErrors()` and `getErrors()`.
