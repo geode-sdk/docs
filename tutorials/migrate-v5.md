@@ -249,7 +249,7 @@ async::TaskHolder<WebResponse> listener;
 
 auto req = WebRequest();
 
-// optional progress callback, you can also directly poll via `req.progress()`
+// optional progress callback, you can also directly poll via `req.getProgress()`
 req.onProgress([](WebProgress const& progress) {
     log::debug("Progress: ", progress.downloadProgress());
 });
