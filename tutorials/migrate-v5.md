@@ -362,3 +362,9 @@ should now be written as:
  * The `LoadProblem` class now has significantly fewer variants.
    * All of the different functions related to checking different problems in `Mod` have been reduced to just `Mod::failedToLoad` (for major issues) and `Mod::getLoadProblem` (for all potential issues)
  * `ModMetadata` parsing has been reduced to just the `create` and `createFromGeodeFile` functions, which now always return a `ModMetadata` instead of a result. The returned `ModMetadata` represents a best-effort parse, and any errors are reported in the `ModMetadata` itself that you can check via `hasErrors()` and `getErrors()`.
+
+## getChild deprecation
+`getChild` in the global namespace has been removed, use CCNode::getChildByIndex instead, the behavior is identical.
+
+## "path" setting removal
+`path` setting type has been removed, use `file` instead, the behavior is identical.
