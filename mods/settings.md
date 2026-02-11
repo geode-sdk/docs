@@ -268,8 +268,6 @@ The default value for file settings support a set of known path prefixes to allo
 | `{mod_resources_dir}` | The resources directory for this mod |
 | `{temp_dir}` | The Geode directory for temporary files |
 
-> :warning: Note that there is an alternative name for this type - `path` - however, **the `path` type has been deprecated**. Use either the `file` or `folder` type.
-
 > :information_source: Some mods set the `default` value to be a description for what kind of file to pick instead of a path, as in `"default": "Please pick an image file."`. This is allowed, and Geode will even try its best to detect this and show the text in gray (like the built-in description), although it should be noted that this is in the end a hack and might cause unexpected issues.
 
 ```json
@@ -841,4 +839,5 @@ If you have used custom settings for the purpose of creating titles, you should 
 Unless your custom settings are particularly complex, **it is recommended to just rewrite them from scratch**. This will take a bit of effort, but should be pretty easy [if you follow the guide for creating custom settings](#custom-settings). It is also just good practice in general to (if possible) rewrite parts of your codebase every now and then to make sure everything is as refined as possible.
 
 It is heavily recommended to follow the practices laid out in the [Custom Settings part of this tutorial](#custom-settings) for setting nodes, as this results in conventional, easy-to-use and easy-to-maintain UIs. However, if you do have a reason to make a setting that has unconventional UI, you can of course always hide the name label and do what you want.
+
 
