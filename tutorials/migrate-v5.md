@@ -138,9 +138,9 @@ public:
         auto popup = new MyPopup;
         if (popup->initAnchored(320.f, 160.f, value)) {
             popup->autorelease();
-            return ret;
+            return popup;
         }
-        delete ret;
+        delete popup;
         return nullptr;
     }
 
@@ -163,9 +163,9 @@ public:
         auto popup = new MyPopup;
         if (popup->init(value)) {
             popup->autorelease();
-            return ret;
+            return popup;
         }
-        delete ret;
+        delete popup;
         return nullptr;
     }
 
