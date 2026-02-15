@@ -352,6 +352,64 @@ auto rgba = Mod::get()->getSettingValue<cocos2d::ccColor4B>("rgba-setting-exampl
 
 ---
 
+### Keybind (`keybind`)
+
+![An image showcasing a basic keybind setting](/assets/settings/keybind.png)
+
+Keybind settings allow the user to pick a key or combination of keys for a specified action, such as the keybind to open a mod's menu. The default keybind can be specified as either a single keybind or an array of keybinds.
+
+```json
+"keybind-example": {
+    "type": "keybind",
+    "name": "Groovy Menu Keybind",
+    "default": "Ctrl+Shift+G"
+}
+"multiple-keybind-example": {
+    "type": "keybind",
+    "name": "Groovy Action Keybinds",
+    "default": ["G", "Ctrl+W"]
+}
+```
+
+```cpp
+auto keybinds = Mod::get()->getSettingValue<std::vector<geode::Keybind>>("keybind-example");
+```
+
+You can listen for keybinds globally via the `listenForKeybindSettingPresses` function, or locally via an event listener for `KeybindSettingPressedEventV3`.
+
+```cpp
+#include <Geode/loader/GameEvent.hpp>
+#include <Geode/loader/SettingV3.hpp>
+
+using namespace geode::prelude;
+
+$on_game(Loaded) {
+    listenForKeybindSettingPresses("keybind-example", [](Keybind const& keybind, bool down, bool repeat) {
+        if (down && !repeat) {
+            // do something
+        }
+    });
+}
+
+class GroovyLayer : public CCLayer {
+protected:
+    bool init() {
+        if (!CCLayer::init())
+            return false;
+
+        this->addEventListener(KeybindSettingPressedEventV3(Mod::get(), "keybind-example"), [this](Keybind const& keybind, bool down, bool repeat) {
+            if (down && !repeat) {
+                // do something
+            }
+        });
+
+        return true;
+    }
+};
+```
+
+---
+
 ## Custom Settings
 
 Mods can also specify custom setting types. Unlike the old system, where custom settings where defined per-setting, under the new system you can reuse the same custom setting type for multiple settings.
@@ -839,5 +897,6 @@ If you have used custom settings for the purpose of creating titles, you should 
 Unless your custom settings are particularly complex, **it is recommended to just rewrite them from scratch**. This will take a bit of effort, but should be pretty easy [if you follow the guide for creating custom settings](#custom-settings). It is also just good practice in general to (if possible) rewrite parts of your codebase every now and then to make sure everything is as refined as possible.
 
 It is heavily recommended to follow the practices laid out in the [Custom Settings part of this tutorial](#custom-settings) for setting nodes, as this results in conventional, easy-to-use and easy-to-maintain UIs. However, if you do have a reason to make a setting that has unconventional UI, you can of course always hide the name label and do what you want.
+
 
 
