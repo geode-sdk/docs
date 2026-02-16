@@ -126,6 +126,40 @@ MyEvent("some-id").listen([](auto value) {
 });
 ```
 
+### Changes to settings change listeners
+
+`geode::listenForSettingChanges()` no longer infers the setting type. Aside from that, usage remains exactly the same:
+
+```cpp
+// BEFORE: type was inferred for listenForSettingChanges
+listenForSettingChanges("enabled", [](bool enabled) {
+    // logic runs here
+});
+```
+
+```cpp
+// AFTER: type specification is required for listenForSettingChanges
+listenForSettingChanges<bool>("enabled", [](bool enabled) {
+    // logic runs here
+});
+```
+
+`geode::listenForAllSettingChanges()` has recieved a new `std::string_view` argument representing the key of the setting whose value changed. Aside from that, usage remains mostly the same:
+
+```cpp
+// BEFORE: no "key" param
+listenForAllSettingChanges([](std::shared_ptr<SettingV3> setting) {
+    // logic runs here
+});
+```
+
+```cpp
+// AFTER: new "key" param
+listenForAllSettingChanges([](std::string_view key, std::shared_ptr<SettingV3> setting) {
+    // logic runs here
+});
+```
+
 ## Changes to `Popup`
 
 `geode::Popup` is no longer templated, and instead accepts its own arguments in `Popup::init` (which also replaces `initAnchored`). It now uses the pattern similar to any other node. For example the following code:
