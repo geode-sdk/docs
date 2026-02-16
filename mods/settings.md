@@ -408,6 +408,15 @@ protected:
 };
 ```
 
+A list of keybind names can be found [in the Geode repository](https://github.com/geode-sdk/geode/blob/main/loader/src/utils/Keyboard.cpp#L6). The supported modifier keys are:
+
+- "Control" or "Ctrl" for the Control key  
+- "Shift" for the Shift key
+- "Alt", "Opt", or "Option" for the Alt key (Option on macOS/iOS)
+- "Super", "Cmd", "Command", "Win", or "Windows" for the Super/Windows key (Command on macOS/iOS)
+
+Traditionally, due to conflicts with system keybinds, Geometry Dash on macOS assigns the same actions to Control and Command modifiers. This can be accomplished for any mod through per-platform default values.
+
 ---
 
 ## Custom Settings
@@ -897,6 +906,7 @@ If you have used custom settings for the purpose of creating titles, you should 
 Unless your custom settings are particularly complex, **it is recommended to just rewrite them from scratch**. This will take a bit of effort, but should be pretty easy [if you follow the guide for creating custom settings](#custom-settings). It is also just good practice in general to (if possible) rewrite parts of your codebase every now and then to make sure everything is as refined as possible.
 
 It is heavily recommended to follow the practices laid out in the [Custom Settings part of this tutorial](#custom-settings) for setting nodes, as this results in conventional, easy-to-use and easy-to-maintain UIs. However, if you do have a reason to make a setting that has unconventional UI, you can of course always hide the name label and do what you want.
+
 
 
 
