@@ -384,7 +384,7 @@ You can listen for keybinds globally via the `listenForKeybindSettingPresses` fu
 using namespace geode::prelude;
 
 $on_game(Loaded) {
-    listenForKeybindSettingPresses("keybind-example", [](Keybind const& keybind, bool down, bool repeat) {
+    listenForKeybindSettingPresses("keybind-example", [](Keybind const& keybind, bool down, bool repeat, double timestamp) {
         if (down && !repeat) {
             // do something
         }
@@ -397,7 +397,7 @@ protected:
         if (!CCLayer::init())
             return false;
 
-        this->addEventListener(KeybindSettingPressedEventV3(Mod::get(), "keybind-example"), [this](Keybind const& keybind, bool down, bool repeat) {
+        this->addEventListener(KeybindSettingPressedEventV3(Mod::get(), "keybind-example"), [this](Keybind const& keybind, bool down, bool repeat, double timestamp) {
             if (down && !repeat) {
                 // do something
             }
