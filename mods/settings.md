@@ -367,7 +367,10 @@ Keybind settings allow the user to pick a key or combination of keys for a speci
 "multiple-keybind-example": {
     "type": "keybind",
     "name": "Groovy Action Keybinds",
-    "default": ["G", "Ctrl+W"]
+    "default": ["G", "Ctrl+W"],
+    "category": "gameplay",
+    "priority": 1,
+    "migrate-from": "me.previous-groovy-mod/groovy-action"
 }
 ```
 
@@ -397,11 +400,14 @@ protected:
         if (!CCLayer::init())
             return false;
 
-        this->addEventListener(KeybindSettingPressedEventV3(Mod::get(), "keybind-example"), [this](Keybind const& keybind, bool down, bool repeat, double timestamp) {
-            if (down && !repeat) {
-                // do something
+        this->addEventListener(
+            KeybindSettingPressedEventV3(Mod::get(), "keybind-example"),
+            [this](Keybind const& keybind, bool down, bool repeat, double timestamp) {
+                if (down && !repeat) {
+                    // do something
+                }
             }
-        });
+        );
 
         return true;
     }
@@ -416,6 +422,41 @@ A list of keybind names can be found [in the Geode repository](https://github.co
 - "Super", "Cmd", "Command", "Win", or "Windows" for the Super/Windows key (Command on macOS/iOS)
 
 Traditionally, due to conflicts with system keybinds, Geometry Dash on macOS assigns the same actions to Control and Command modifiers. This can be accomplished for any mod through per-platform default values.
+
+Keybinds have three special keys: `priority`, `category`, and `migrate-from`.
+
+`priority` is an integer that defines the priority of the keybind (whether it should execute before or after other keybinds); higher values mean higher priority, meaning that the keybind executes first. **You should not specify priority unless you have a good reason to.**
+
+`category` is one of `editor` (keybinds that work in the level editor), `gameplay` (keybinds that works while playing levels), or `universal` (keybinds that work everywhere in the game). **Categories are not required**; they're intended for situations where your keybind clearly fits into one of the categories. If your keybind doesn't – for example, it's for a mod-specific layer – then just leave the category out.
+
+`migrate-from` is the name of a keybind from the old Custom Keybinds mod. For example, in the code snippet below is an old definition from BetterEdit for a keybind with the ID `"rotate-45-ccw"_spr` (aka `hjfod.betteredit/rotate-45-ccw`).
+
+```cpp
+BindManager::get()->registerBindable(BindableAction(
+    "rotate-45-ccw"_spr,
+    "Rotate 45 CCW",
+    "Rotate the Selected Object(s) 45 Degrees Counter-Clockwise",
+    { Keybind::create(KEY_Q, Modifier::Shift) },
+    Category::EDITOR_MODIFY
+));
+```
+
+Migration means that the user's configuration for this keybind is automatically migrated over to the new system. For example, if an user had bound the `rotate-45-ccw` keybind to `Shift+U`, then the migration system would automatically move that over. In other words, **if your keybindings existed under the old system, you should always specify `migrate-from`**.
+
+The key value needs to be the full key name, including mod ID. For example, to migrate the keybind above:
+
+```json
+{
+    "new-rotate-45-ccw": {
+        "type": "keybind",
+        "name": "Rotate 45 CCW",
+        "description": "Rotate the Selected Object(s) 45 Degrees Counter-Clockwise",
+        "default": ["Shift+Q"],
+        "category": "editor",
+        "migrate-from": "hjfod.betteredit/rotate-45-ccw"
+    }
+}
+```
 
 ---
 
