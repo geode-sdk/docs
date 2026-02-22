@@ -402,3 +402,6 @@ should now be written as:
 
 ## "path" setting removal
 `path` setting type has been removed, use `file` instead, the behavior is identical.
+
+## SceneManager replaced by OverlayManager
+SceneManager is gone now. Use OverlayManager. It's a CCNode. You use it: like any other CCNode.
