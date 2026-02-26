@@ -71,6 +71,20 @@ We provide prebuilt Linux binaries in [the CLI releases page](https://github.com
 
 Once you figure that out, it is recommended that you [set up a profile afterwards](#profile-setup).
 
+## Nix
+
+You can install the CLI via a Flake or via `nix-build`
+```bash
+# Via the Flake
+nix profile install github:geode-sdk/cli#default
+
+# Via nix-build
+git clone https://github.com/geode-sdk/cli
+cd cli
+nix-build
+nix-env -i -f .
+```
+
 # Profile Setup
 
 A profile is just an instance of Geometry Dash. The CLI allows keeping multiple separate installations of Geometry Dash at once, though most users will just have a single installation of GD with Geode on it. If you do have GDPSes with Geode on them installed, you can run `geode profile add` to add them to the list of known profiles. You need to have at least one profile set up so your mods can be automatically installed post build.
