@@ -39,7 +39,7 @@ Dependencies can be added to your mod by simply adding it to the `dependencies` 
 }
 ```
 
-Dependencies can be specified by using an object that maps from a mod id to a version, or more information if needed. The dependency may also be set as [required](#Required), which specifies if the mod is required for the dependant mod to load. If this is not specified, the dependency is marked as required. 
+Dependencies can be specified by using an object that maps from a mod id to a version, or more information if needed. The dependency may also be set as required, which specifies if the mod is required or [optional](#Optional-Dependencies) for the dependant mod to load. If this is not specified, the dependency is marked as required. 
 
 The `version` field of a dependency may be written as `>=version`, `=version`, or `<=version`. The comparisons work as expected, with the addition that if the major versions are different, the comparison is always false. This means that if you depend on version `>=1.2.5` of a mod, version `v1.8.0` will be considered acceptable but `v2.0.0` will not. For this reason, [if you make a mod that is depended upon, you should follow strict semver](https://semver.org).
 
@@ -66,7 +66,7 @@ Now, if you reconfigure your CMake (or if you're using CMake Tools in VS Code, i
 
 If you now go to compile and test your mod, everything should work out-of-the-box.
 
-## Required
+## Optional Dependencies
 
 In case the dependency is **not required**, it is not linked to, which in turn means that you can't use any of its exported functions. In cases like these, the dependency should provide ways through Geode to dynamically call its functions, such as through events.
 
@@ -195,5 +195,6 @@ void api::doSomething() {
     // ...
 }
 ```
+
 
 
