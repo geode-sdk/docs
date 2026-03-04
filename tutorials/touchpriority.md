@@ -30,8 +30,8 @@ Robtop has 3 main functions for dealing with force priority: `CCTouchDispatcher:
 
 If you're not dealing with any popups, chances are you don't need to deal with any of these either. But if you are, you should follow these guidelines.
 
-If your popup subclasses `geode::Popup<>`, the registering and unregistering is handled automatically.
+If your popup subclasses `geode::Popup`, the registering and unregistering is handled automatically.
 
-If you're not using `geode::Popup<>` class and directly subclassing `FLAlertLayer` instead, you should call `FLAlertLayer::init(int opacity)` inside your init. This will handle the registering of the force priority, along with creating the `m_mainLayer`. You should also override `registerWithTouchDispatcher` and call `CCTouchDispatcher::addTargetedDelegate` in it, since that will allow you to register the popup not as a prio targeted delegate. If you leave it the default, `FLAlertLayer` will have one less priority than your layers (-503 vs -502), meaning none of the touches will go to your layers since they will be consumed. And lastly, `~FLAlertLayer` handles unregistering of the force priority.
+If you're not using `geode::Popup` class and directly subclassing `FLAlertLayer` instead, you should call `FLAlertLayer::init(int opacity)` inside your init. This will handle the registering of the force priority, along with creating the `m_mainLayer`. You should also override `registerWithTouchDispatcher` and call `CCTouchDispatcher::addTargetedDelegate` in it, since that will allow you to register the popup not as a prio targeted delegate. If you leave it the default, `FLAlertLayer` will have one less priority than your layers (-503 vs -502), meaning none of the touches will go to your layers since they will be consumed. And lastly, `~FLAlertLayer` handles unregistering of the force priority.
 
 If you want to set the priorities manually (such as for an overlay), you can call `CCLayer::setTouchPriority`/`CCMenu::setHandlerPriority` on your layer with the `CCTouchDispatcher::getTargetPrio` value.

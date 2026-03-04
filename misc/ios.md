@@ -51,7 +51,7 @@ If your iOS device is not jailbroken, it is generally recommended to follow this
 
 > :warning: The web server for the TrollStore version of the launcher will not work properly. It is recommended to use `scp` to upload your mods instead.
 
-The web server is a feature bundled into the **Geode Launcher** that allows you to easily upload mods without needing to use iTunes. This eliminates the need to manually drag your geode mod into the mods directory, making the mod testing process more simpler.
+The web server is a feature bundled into the **Geode Launcher** that allows you to easily upload mods without needing to use iTunes. This eliminates the need to manually drag your geode mod into the mods directory, making the mod testing process simpler.
 
 To activate the web server:
 1. Open the launcher and navigate to settings

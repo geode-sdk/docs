@@ -43,6 +43,10 @@ Otherwise if you want to build your mods manually from the command line you can 
 ```bash
 # Configures & builds for the current platform
 geode build
+
+# If you installed Clang and Ninja earlier, this is required instead
+# If this does not work, update your Geode CLI or use CMake directly
+geode build --ninja
 ```
 
 > Check out `geode build --help` for other options!

@@ -6,7 +6,7 @@ description: How to install dependencies to Geode mods
 
 Geode provides utilities for mods to depend on other mods, to make sharing code easy.
 
-Note that Geode **only manages dependencies that are mods**. Normal C++ dependencies, like a JSON parsing library, ZIP library, or some networking utilities, **should just be installed like they are in any other C++ project**. Use CPM, Git submodules, copy the code to your project, whatever you prefer. If the library is dynamic, include the `.dll` with your mod through the `files` key in `resources`. 
+Note that Geode **only manages dependencies that are mods**. Normal C++ dependencies, like a JSON parsing library, ZIP library, or some networking utilities, **should just be installed like they are in any other C++ project**. Use CPM, Git submodules, copy the code to your project, whatever you prefer. If the library is dynamic, include the `.dll` with your mod through the `files` key in `resources`.
 
 However, sometimes you want to depend on code that can't just be used as a normal library; for example, **custom keybinds**. Geode does not provide any custom keybinds utilities out-of-the-box, so you need to use a library. However, it would not make much sense if every mod bundled their own incompatible systems for dealing with custom keybinds. Instead, there should be one mod that just adds the functionality, and then other mods can depend on that mod and call its functions to add keybinds.
 
@@ -160,6 +160,9 @@ Two versions of the macro are available:
 #pragma once
 
 #include <Geode/loader/Dispatch.hpp>
+#ifdef MY_MOD_ID
+    #undef MY_MOD_ID
+#endif
 // You must **manually** declare the mod id, as macros like GEODE_MOD_ID will not
 // behave correctly to other mods using your api.
 #define MY_MOD_ID "dev.my-api"
@@ -168,6 +171,13 @@ namespace api {
     // Important: The function must be declared inline, and return a geode::Result,
     // as it can fail if the api is not available.
     inline geode::Result<int> addNumbers(int a, int b) GEODE_EVENT_EXPORT(&addNumbers, (a, b));
+
+    // Alternatively, use the `_NORES` variant of the macro, which will return a default value
+    // if the api isn't available. Ex: this will return 0 if the mod is unavailable
+    inline int factorial(int x) GEODE_EVENT_EXPORT_NORES(&factorial, (x));
+
+    // It also works with void:
+    inline void doSomething() GEODE_EVENT_EXPORT_NORES(&doSomething, ());
 }
 ```
 
@@ -180,5 +190,13 @@ Then, in **one** of your source files, you must define the exported functions:
 
 Result<int> api::addNumbers(int a, int b) {
     return Ok(a + b);
+}
+
+int api::factorial(int x) {
+    return 42;
+}
+
+void api::doSomething() {
+    // ...
 }
 ```

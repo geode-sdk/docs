@@ -25,7 +25,7 @@ echo $GEODE_SDK
 
 If that command prints out the path you installed the SDK to, then it has worked correctly.
 
-To develop mods, you should will need to either build Geode from source, or just download the prebuilt binaries using this command:
+To develop mods, you will either need to build Geode from source, or install prebuilt binaries using the following command:
 ```bash
 geode sdk install-binaries
 ```

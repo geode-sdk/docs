@@ -262,11 +262,11 @@ The default value for file settings support a set of known path prefixes to allo
 |----------|------|
 | `{gd_dir}` | The main Geometry Dash directory (which contains `GeometryDash.exe` on Windows) |
 | `{gd_save_dir}` | The Geometry Dash save directory |
+| `{gd_resources_dir}` | The Geometry Dash resources directory |
 | `{mod_config_dir}` | The Geode-provided config directory for this mod |
 | `{mod_save_dir}` | The save directory for this mod |
+| `{mod_resources_dir}` | The resources directory for this mod |
 | `{temp_dir}` | The Geode directory for temporary files |
-
-> :warning: Note that there is an alternative name for this type - `path` - however, **the `path` type has been deprecated**. Use either the `file` or `folder` type.
 
 > :information_source: Some mods set the `default` value to be a description for what kind of file to pick instead of a path, as in `"default": "Please pick an image file."`. This is allowed, and Geode will even try its best to detect this and show the text in gray (like the built-in description), although it should be noted that this is in the end a hack and might cause unexpected issues.
 
@@ -348,6 +348,114 @@ Color settings prompt the user to pick a specified color. The `color` and `rgb` 
 ```cpp
 auto rgb  = Mod::get()->getSettingValue<cocos2d::ccColor3B>("rgb-setting-example");
 auto rgba = Mod::get()->getSettingValue<cocos2d::ccColor4B>("rgba-setting-example");
+```
+
+---
+
+### Keybind (`keybind`)
+
+![An image showcasing a basic keybind setting](/assets/settings/keybind.png)
+
+Keybind settings allow the user to pick a key or combination of keys for a specified action, such as the keybind to open a mod's menu. The default keybind can be specified as either a single keybind or an array of keybinds.
+
+```json
+"keybind-example": {
+    "type": "keybind",
+    "name": "Groovy Menu Keybind",
+    "default": "Ctrl+Shift+G"
+}
+"multiple-keybind-example": {
+    "type": "keybind",
+    "name": "Groovy Action Keybinds",
+    "default": ["G", "Ctrl+W"],
+    "category": "gameplay",
+    "priority": 1,
+    "migrate-from": "me.previous-groovy-mod/groovy-action"
+}
+```
+
+```cpp
+auto keybinds = Mod::get()->getSettingValue<std::vector<geode::Keybind>>("keybind-example");
+```
+
+You can listen for keybinds globally via the `listenForKeybindSettingPresses` function, or locally via an event listener for `KeybindSettingPressedEventV3`.
+
+```cpp
+#include <Geode/loader/GameEvent.hpp>
+#include <Geode/loader/SettingV3.hpp>
+
+using namespace geode::prelude;
+
+$on_game(Loaded) {
+    listenForKeybindSettingPresses("keybind-example", [](Keybind const& keybind, bool down, bool repeat, double timestamp) {
+        if (down && !repeat) {
+            // do something
+        }
+    });
+}
+
+class GroovyLayer : public CCLayer {
+protected:
+    bool init() {
+        if (!CCLayer::init())
+            return false;
+
+        this->addEventListener(
+            KeybindSettingPressedEventV3(Mod::get(), "keybind-example"),
+            [this](Keybind const& keybind, bool down, bool repeat, double timestamp) {
+                if (down && !repeat) {
+                    // do something
+                }
+            }
+        );
+
+        return true;
+    }
+};
+```
+
+A list of keybind names can be found [in the Geode repository](https://github.com/geode-sdk/geode/blob/main/loader/src/utils/Keyboard.cpp#L6). The supported modifier keys are:
+
+- "Control" or "Ctrl" for the Control key  
+- "Shift" for the Shift key
+- "Alt", "Opt", or "Option" for the Alt key (Option on macOS/iOS)
+- "Super", "Cmd", "Command", "Win", or "Windows" for the Super/Windows key (Command on macOS/iOS)
+
+Traditionally, due to conflicts with system keybinds, Geometry Dash on macOS assigns the same actions to Control and Command modifiers. This can be accomplished for any mod through per-platform default values.
+
+Keybinds have three special keys: `priority`, `category`, and `migrate-from`.
+
+`priority` is an integer that defines the priority of the keybind (whether it should execute before or after other keybinds); higher values mean higher priority, meaning that the keybind executes first. **You should not specify priority unless you have a good reason to.**
+
+`category` is one of `editor` (keybinds that work in the level editor), `gameplay` (keybinds that works while playing levels), or `universal` (keybinds that work everywhere in the game). **Categories are not required**; they're intended for situations where your keybind clearly fits into one of the categories. If your keybind doesn't – for example, it's for a mod-specific layer – then just leave the category out.
+
+`migrate-from` is the name of a keybind from the old Custom Keybinds mod. For example, in the code snippet below is an old definition from BetterEdit for a keybind with the ID `"rotate-45-ccw"_spr` (aka `hjfod.betteredit/rotate-45-ccw`).
+
+```cpp
+BindManager::get()->registerBindable(BindableAction(
+    "rotate-45-ccw"_spr,
+    "Rotate 45 CCW",
+    "Rotate the Selected Object(s) 45 Degrees Counter-Clockwise",
+    { Keybind::create(KEY_Q, Modifier::Shift) },
+    Category::EDITOR_MODIFY
+));
+```
+
+Migration means that the user's configuration for this keybind is automatically migrated over to the new system. For example, if an user had bound the `rotate-45-ccw` keybind to `Shift+U`, then the migration system would automatically move that over. In other words, **if your keybindings existed under the old system, you should always specify `migrate-from`**.
+
+The key value needs to be the full key name, including mod ID. For example, to migrate the keybind above:
+
+```json
+{
+    "new-rotate-45-ccw": {
+        "type": "keybind",
+        "name": "Rotate 45 CCW",
+        "description": "Rotate the Selected Object(s) 45 Degrees Counter-Clockwise",
+        "default": ["Shift+Q"],
+        "category": "editor",
+        "migrate-from": "hjfod.betteredit/rotate-45-ccw"
+    }
+}
 ```
 
 ---
@@ -839,3 +947,7 @@ If you have used custom settings for the purpose of creating titles, you should 
 Unless your custom settings are particularly complex, **it is recommended to just rewrite them from scratch**. This will take a bit of effort, but should be pretty easy [if you follow the guide for creating custom settings](#custom-settings). It is also just good practice in general to (if possible) rewrite parts of your codebase every now and then to make sure everything is as refined as possible.
 
 It is heavily recommended to follow the practices laid out in the [Custom Settings part of this tutorial](#custom-settings) for setting nodes, as this results in conventional, easy-to-use and easy-to-maintain UIs. However, if you do have a reason to make a setting that has unconventional UI, you can of course always hide the name label and do what you want.
+
+
+
+
