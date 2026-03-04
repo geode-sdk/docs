@@ -115,7 +115,7 @@ protected:
         // Increment button
         auto btn = CCMenuItemExt::createSpriteExtra(
             ButtonSprite::create("+1"),
-            [this](auto) { this->updateCounter(1); }
+            [this](CCMenuItemSpriteExtra* btn) { this->updateCounter(1); }
         );
         btn->setPosition(100.f, 100.f);
         menu->addChild(btn);
@@ -123,7 +123,7 @@ protected:
         // Decrement button
         auto btn2 = CCMenuItemExt::createSpriteExtra(
             ButtonSprite::create("-1"),
-            [this](auto) { this->updateCounter(-1); }
+            [this](CCMenuItemSpriteExtra* btn) { this->updateCounter(-1); }
         );
         btn2->setPosition(100.f, 60.f);
         menu->addChild(btn2);
@@ -235,7 +235,7 @@ protected:
         // Increment button
         auto btn = Button::createWithNode(
             ButtonSprite::create("+1"),
-            [this](auto) { this->updateCounter(1); }
+            [this](auto sender) { this->updateCounter(1); }
         );
         btn->setPosition(100.f, 100.f);
         this->addChild(btn);
@@ -243,7 +243,7 @@ protected:
         // Decrement button
         auto btn2 = Button::createWithNode(
             ButtonSprite::create("-1"),
-            [this](auto) { this->updateCounter(-1); }
+            [this](auto sender) { this->updateCounter(-1); }
         );
         btn2->setPosition(100.f, 60.f);
         this->addChild(btn2);
