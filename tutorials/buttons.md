@@ -1,10 +1,9 @@
 # Buttons
+One of the most common UI elements in GD is the humble **button**. I'm sure you already know what it is, so let's get straight to the point. Buttons are most commonly created using the `CCMenuItemSpriteExtra` class, which is a GD-specific derivation of `CCMenuItemSprite`. However, creating callbacks with `CCMenuItemSpriteExtra` requires writing separate functions, which leads to unreadable code and wastes the developer's time. Geode provides the `CCMenuItemExt` class to solve this. It has a create method called `createSpriteExtra` that lets you create `CCMenuItemSpriteExtra` buttons by passing callbacks as lambdas instead. See [this page](https://docs.geode-sdk.org/classes/geode/cocos/CCMenuItemExt) for all of the create methods available. You can also use any class that inherits from `CCMenuItem` as a button.
 
-One of the most common UI elements in GD is the humble **button**. I'm sure you already know what it is, so let's get straight to the point. Buttons are most commonly created in the form of the `CCMenuItemSpriteExtra` class, which is a GD-specific derivation of the `CCMenuItemSprite` class. However, using this directly takes a lot of steps, so Geode has it's own utility to easily create a `CCMenuItemSpriteExtra`, `CCMenuItemExt::createSpriteExtra`. This utility also contains other classes such as `CCMenuItemSprite`. See [this page](https://docs.geode-sdk.org/classes/geode/cocos/CCMenuItemExt) for all of the button classes available. You can also use any class that inherits from `CCMenuItem` as a button.
+Every button that inherits `CCMenuItem` **must be a child of a `CCMenu` to work**. This means that if you add a button as a child to a `CCLayer`, you will find that it can't be clicked. If you don't want to make a `CCMenu`, see the [**menuless buttons**](#menuless-buttons) section, which explains Geode's `Button` class.
 
-Every button that inherits `CCMenuItem` **must be a child of a `CCMenu` to work**. This means that if you add a button as a child to a `CCLayer`, you will find that it can't be clicked.
-
-The first argument of `CCMenuItemExt::createSpriteExtra` is a `CCNode*` parameter. This is the texture of the button; it can be any `CCNode`, like a label or even a whole layer, but usually most people use a sprite.
+The first parameter of `CCMenuItemExt::createSpriteExtra` is a `CCNode*`. This is the texture of the button; it can be any `CCNode`, like a label or even a whole layer, but usually most people use a sprite.
 
 If you want to create a button with some text, the most common option is the `ButtonSprite` class. If you want to create something like a circle button (like the 'New' button in GD), you can either use `CCSprite` or [the Geode-specific `CircleButtonSprite` class](#circle-button-sprites).
 
@@ -29,7 +28,7 @@ bool MyLayer::init() {
 This creates a button with the text `Hi mom!`.
 
 ## Callbacks
-Button callbacks are passed as the second argument to `CCMenuItemExt::createSpriteExtra` in a lambda. Here's an example on how you can make a callback with `CCMenuItemExt::createSpriteExtra`:
+Button callbacks are passed as the second parameter to `CCMenuItemExt::createSpriteExtra` in a lambda. Here's an example on how you can make a callback with `CCMenuItemExt::createSpriteExtra`:
 
 ```cpp
 class MyLayer : public CCLayer {
@@ -136,8 +135,125 @@ protected:
 };
 ```
 
-# Based button sprites
+# Menuless buttons
+Let's say you have a lot of buttons with callbacks and you don't want to create a huge amount of `CCMenu`s just to hold them. Thankfully, Geode has a `Button` class for this. This class allows you to create buttons with callbacks without needing a `CCMenu`, since unlike the previous classes, this class does not inherit `CCMenuItem`. See [this page](https://docs.geode-sdk.org/classes/geode/Button/) for all of the create methods available.
 
+```cpp
+bool MyLayer::init() {
+    // ...
+    
+    auto spr = ButtonSprite::create("Hi mom!");
+    
+    // Create methods other than createWithNode requires giving the sprite as a string in the first parameter, this is why we should use this for our ButtonSprite.
+    auto btn = Button::createWithNode(
+        spr,
+        nullptr
+    );
+    
+    this->addChild(btn); // Add the button directly to the layer! No need to add it to a CCMenu :3
+}
+```
+
+## Callbacks
+Button callbacks are usually passed as the second parameter to the `Button` class (position of the parameter depends on the create method) in a lambda. Here's an example on how you can make a callback with `Button::createWithNode`:
+
+```cpp
+class MyLayer : public CCLayer {
+protected:
+    bool init() {
+        // ...
+
+        auto btn = Button::createWithNode(
+            /* sprite */,
+            [this](auto sender) {
+                log::info("Button clicked!");
+            }
+        );
+
+        // ...
+    }
+};
+```
+
+## Example
+
+Here is the popular click counter example in cocos2d using `Button`:
+
+```cpp 
+class MyLayer : public CCLayer {
+protected:
+    // Class member that stores how many times 
+    // the button has been clicked
+    size_t m_clicked = 0;
+
+    bool init() {
+        if (!CCLayer::init()) return false;
+
+        auto btn = Button::createWithNode(
+            ButtonSprite::create("Click me!"),
+            [this](auto sender) { // This is where we add the callback!
+                m_clicked++;
+                
+                // getNormalImage returns the sprite of the button
+                auto spr = static_cast<ButtonSprite*>(sender->getNormalImage());
+                spr->setString(fmt::format("Clicked {} times", m_clicked).c_str());
+            }
+        );
+
+        btn->setPosition(100.f, 100.f);
+        this->addChild(btn);
+
+        return true;
+    }
+};
+```
+
+## Passing more parameters to callbacks
+One common issue when working with button callbacks is handling situations where you want to pass additional parameters to a function. For example, what if in the click counter example we also wanted to add a decrement button? We could write a separate callback for each button, but that would be unnecessary duplication. Instead, we can simply pass parameters **directly through lambda captures**.
+```cpp
+class MyLayer : public CCLayer {
+protected:
+    // Class member that stores how many times
+    // the button has been clicked
+    size_t m_clicked = 0;
+
+    // Label that displays the number of clicks
+    CCLabelBMFont* m_label = nullptr;
+
+    void updateCounter(int delta) {
+        m_clicked += delta;
+        m_label->setString(fmt::format("Clicked: {}", m_clicked).c_str());
+    }
+
+    bool init() {
+        if (!CCLayer::init()) return false;
+
+        m_label = CCLabelBMFont::create("Clicked: 0", "bigFont.fnt");
+        m_label->setPosition(100.f, 150.f);
+        this->addChild(m_label);
+
+        // Increment button
+        auto btn = Button::createWithNode(
+            ButtonSprite::create("+1"),
+            [this](auto) { this->updateCounter(1); }
+        );
+        btn->setPosition(100.f, 100.f);
+        this->addChild(btn);
+
+        // Decrement button
+        auto btn2 = Button::createWithNode(
+            ButtonSprite::create("-1"),
+            [this](auto) { this->updateCounter(-1); }
+        );
+        btn2->setPosition(100.f, 60.f);
+        this->addChild(btn2);
+
+        return true;
+    }
+};
+```
+
+# Based button sprites
 Geode comes with a concept known as **based button sprites**, which are button sprites that come with common GD button backgrounds and let you add your own sprite on top. These are useful for texture packs, as texture packers can just style the bases and don't have to individually make every mod fit their pack's style.
 
 > :information_source: This section only explains how to create based button sprites from a sprite frame name. For other creation methods, check the documentation of each button sprite class.
