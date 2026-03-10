@@ -407,4 +407,4 @@ should now be written as:
 SceneManager is gone now. Use OverlayManager. It's a CCNode. You use it: like any other CCNode.
 
 ## Custom Keybinds
-If your mod depends on Custom Keybinds, well, it doesn't anymore! See the [keybind setting documentation](mods/settings/#keybind) for more info including migration from the old system.
+If your mod depends on Custom Keybinds, well, it doesn't anymore! See the [keybind setting documentation](/mods/settings/#keybind) for more info including migration from the old system.
