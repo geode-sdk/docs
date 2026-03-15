@@ -72,6 +72,12 @@ On Arch-based systems:
 pacman -S clang lld llvm
 ```
 
+Alternatively, you can use [brew](https://brew.sh/) (Linuxbrew) on Linux just like on macOS:
+
+```bash
+brew install llvm
+```
+
 The next step will install the Windows SDK and a CMake toolchain. For ease of installation, first install [the Geode CLI](/getting-started/geode-cli.md) and then come back here. If you want to do it manually, you can follow [this guide](https://gist.github.com/matcool/abb65ee59ded3766717c673014c3a2a7).
 
 After installing the CLI, run this command to install all the needed tools:
