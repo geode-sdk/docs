@@ -15,6 +15,7 @@ Submitting a mod to the official mod index is as follows:
 5. Run `geode index mods create`
 6. Provide a **direct download link** to the .geode file (for example `https://github.com/HJfod/BetterEdit/releases/download/v6.3.3/hjfod.betteredit.geode`)
 7. An **index admin** will have to validate that your mod meets the [index guidelines](/mods/guidelines) and approve your mod.
+8. **Approval typically takes 1-7 days.** Please be patient - the team is reviewing mods as quickly as possible while ensuring quality and safety.
 
 ## Releasing updates
 
