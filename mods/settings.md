@@ -152,7 +152,7 @@ Integer settings are a whole number. By default, they have a slider, arrows to i
     // Maximum value
     "max": 10,
     // Define the controls for this setting
-    "controls": {
+    "control": {
         // Enable the small (green) arrow controls
         "arrows": true,
         // Control how much the small (green) arrows should increment/decrement 
@@ -194,7 +194,7 @@ Float settings are just like int settings, but for floats!
     "min": 0.5,
     "max": 2.5,
     // Define the controls for this setting
-    "controls": {
+    "control": {
         // Enable the small (green) arrow controls
         "arrows": true,
         // Control how much the small (green) arrows should increment/decrement 
