@@ -134,7 +134,7 @@ Now, before you build, make sure to change these settings (these need to be chan
 ![Image showing the Manage Configurations button in the drop-down](/assets/vs_manage_configurations.png)
 
 3. Change config type to `Release` or `RelWithDebInfo`. We recommend `RelWithDebInfo`, since it provides easier debugging. **You cannot use `Debug` for this!**
-4. Make sure the toolset is set to `x64`
+4. Make sure the toolset is set to `x64` (NOT `x64_x86` or any other variant)
 5. At this point you can also give your configuration a friendly name such as "default" or "release" or something like that
 6. And make sure to use Ctrl + S to save your changes
 
