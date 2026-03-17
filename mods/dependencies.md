@@ -130,6 +130,23 @@ $execute {
 }
 ```
 
+### User Flags
+
+User flags are a frequently used alternative to user objects which does not store a value. This makes them a more optimized solution for our aforementioned scrollbar example.
+
+```cpp
+layer->setUserFlag("hjfod.cool-scrollbars/enable");
+```
+
+```cpp
+if (layer->getUserFlag("hjfod.cool-scrollbars/enable")) {
+    // add scrollbar
+}
+```
+
+Do note that user flags and user objects are separate - `getUserFlag` and `getUserObject` are not interchangeable and need to be consistent with the setter used.
+
+Unlike user objects, user flags do not fire an event when set.
 
 ## Event Macro
 
