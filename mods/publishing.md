@@ -28,6 +28,9 @@ Submitting a mod to the official mod index is as follows:
 3. Navigate to [your user page](https://geode-sdk.org/me) by clicking your username in the top left corner
 4. Provide a **direct download link** to the .geode file (for example `https://github.com/HJfod/BetterEdit/releases/download/v6.3.3/hjfod.betteredit.geode`) in the **Submit a new mod** section.
 
+## Did my mod get accepted?
+You can track the status of your mod on [your user page](https://geode-sdk.org/me) on the Geode website. Tracking pending mods is also available in CLI with `geode index mods pending` but rejection reasons are not available there.
+
 ## Releasing updates
 
 To release an update using Geode CLI, use `geode index mods update`. You will have to be already logged in with the index to use this command.
@@ -38,7 +41,7 @@ If you are using GitHub releases (or any other system), **do not update an exist
 
 Make sure to **increase your mod version** when updating it! You should be following [Semantic Versioning](https://semver.org), especially if you're developing a mod with a **public API**.
 
-If you are a **verified** developer, then the update will automatically be accepted onto the index, without the need of approval from an **index admin**.
+If you are a **verified** developer, then the update will automatically be accepted onto the index, without the need of approval from an **index admin**. For non-verified developers they go through the standard approval process, which can be tracked in the same way as new mod submissions.
 
 ## What are **verified** developers?
 
