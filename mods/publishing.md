@@ -2,11 +2,15 @@
 
 Once your awesome mod is finished, it's time to publish it for all the world to see! Geode comes with an in-game "Download" section where users can download mods from, which gets its content from [the Geode Index](https://api.geode-sdk.org/v1/mods).
 
+Make sure to [read the **submission guidelines**](/mods/guidelines/) first to avoid common mistakes.
+
 ## Getting Your Mod on the Repo
 
-> :warning: All mods submitted on the index **must provide the source code**! If your mod is open source, just include a link to a Github repository or equivalent. For closed source mods, see [the dedicated section](#what-about-closed-source-mods)
+> :warning: All mods submitted on the index **must provide the source code**! If your mod is open source, just include a link to a Github repository or equivalent. For closed source mods, see [the dedicated section](#what-about-closed-source-mods).
 
 Submitting a mod to the official mod index is as follows:
+
+### Using Geode CLI
 
 1. Make sure you have the [**latest** CLI](/getting-started/geode-cli) set up.
 2. Build and release your mod somewhere - we highly recommend using GitHub releases, as this provides a straight-forward way to deal with versioning.
@@ -16,9 +20,19 @@ Submitting a mod to the official mod index is as follows:
 6. Provide a **direct download link** to the .geode file (for example `https://github.com/HJfod/BetterEdit/releases/download/v6.3.3/hjfod.betteredit.geode`)
 7. An **index admin** will have to validate that your mod meets the [index guidelines](/mods/guidelines) and approve your mod.
 
+### Using the website
+
+1. Log in on the website by using the "[Login](https://geode-sdk.org/login)" link at the bottom of the main page
+2. Build and release your mod somewhere - we highly recommend using GitHub releases, as this provides a straight-forward way to deal with versioning.
+   - Do **NOT** replace existing uploaded versions! This will change the hash and thus users will be unable to download the old version.
+3. Navigate to [your user page](https://geode-sdk.org/me) by clicking your username in the top left corner
+4. Provide a **direct download link** to the .geode file (for example `https://github.com/HJfod/BetterEdit/releases/download/v6.3.3/hjfod.betteredit.geode`) in the **Submit a new mod** section.
+
 ## Releasing updates
 
-To release an update, use `geode index mods update`. You will have to be already logged in with the index to use this command.
+To release an update using Geode CLI, use `geode index mods update`. You will have to be already logged in with the index to use this command.
+
+To release an update using the website, navigate to the mod page (available even for rejected mods) and copy the direct link into the `Modify` tab.
 
 If you are using GitHub releases (or any other system), **do not update an existing release** - create a new one instead. Updating an existing release **will break that version of the mod**, as the Geode package is checksummed.
 
