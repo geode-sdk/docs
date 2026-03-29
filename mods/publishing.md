@@ -2,7 +2,7 @@
 
 Once your awesome mod is finished, it's time to publish it for all the world to see! Geode comes with an in-game "Download" section where users can download mods from, which gets its content from [the Geode Index](https://api.geode-sdk.org/v1/mods).
 
-Make sure to [read the **submission guidelines**](/mods/guidelines/) first to avoid common mistakes.
+Make sure to [**read the submission guidelines**](/mods/guidelines/) first to avoid common mistakes.
 
 ## Getting Your Mod on the Repo
 
