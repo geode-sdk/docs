@@ -42,7 +42,7 @@ A mod found breaking any of these rules will be **rejected unconditionally** fro
 A mod found breaking any of these rules will likely be rejected, although depending on the situation, they could also still be approved.
 
  * The mod **is incompatible with other mods for no good reason**. Note that mods can be fundamentally incompatible (such as two different texture pack managers)
- * The mod **crashes the game** due to preventible issues
+ * The mod **crashes the game** due to preventible issues (see [possible pitfalls](#possible-pitfalls) for notes about throwing exceptions)
  * The mod **doesn't do anything meaningful**. Note that joke mods can be considered meaningful; see [our policy on them](#joke-mods)
 
 A mod found breaking any of these rules will likely still be approved, although constant and/or prolific breaking can result in a rejection.
@@ -50,12 +50,15 @@ A mod found breaking any of these rules will likely still be approved, although 
  * The mod has **several common bugs**
  * The mod can't **preserve state** between bootups (save data, load data) normally
  * The mod's **codebase is really hard to read**. The reason this might result in a rejection is if the people verifying the mod for the index are unable to properly ascertain if the mod breaks any of the other rules due to the (hopefully unintended) obfuscation
+ * The mod **doesn't attempt to be compatible** with other mods. Mods should really try to be compatible with at least mods that do the same features or popular mods that end users are likely to have installed. This can be done in many ways, and at a minimum:
+   * Nodes made by the mod *should* have IDs (and if they do, they should be prefixed with the mod id by using _spr: `node->setID("my-fun-node"_spr)`)
+   * The mod should also attempt to dodge or at least account for at a minimum Node IDs menus that may be expanded by other mods, such as `bottom-menu` in MenuLayer, but ideally should also account for places where mods might have added buttons
 
 ## Non-rules
 
 These are some things one might expect to result in a rejection, but actually most likely won't.
 
- * The mod is **logically incompatible** with another mod on the index (for example, two mods that completely reshape `MenuLayer` in different ways are never going to be compatible)
+ * The mod is **logically incompatible** with another mod on the index (for example, two mods that completely reshape `MenuLayer` in different ways are never going to be compatible) - but these mods should be marked as incompatible in the mod's mod.json if they are truly really incompatible
  * The mod **looks bad**. We won't shame you for not having HJfod's UI skills! However, if the mod's UI/UX is not just bad but actively harmful, it probably violates the "no false information" rule
  * The mod is **not in English**. That's just cool! It might take us a while to verify a mod whose source code is written in another language though
 
@@ -130,9 +133,9 @@ While nothing in this section are absolute rules, they are red flags that index 
 
 * Avoid generating exceptions.
 
-Due to compatibility issues, functions that generate C++ exceptions should be avoided, _even if you catch the exception_. Either verify that the exception will not be generated beforehand, or use an alternative function that does not throw one. One such function is `std::stoi` and `std::stof`, which should be replaced with Geode's [`numFromString`](/functions/geode/utils/numFromString/).
+Due to compatibility issues, functions that generate C++ exceptions should be avoided, _even if you catch the exception_ (since try/catch blocks **don't work** on all platforms). Either verify that the exception will not be generated beforehand, or use an alternative function that does not throw one. One such function is `std::stoi` and `std::stof`, which should be replaced with Geode's [`numFromString`](/functions/geode/utils/numFromString/).
 
-Functions from the `<filesystem>` header should be handled carefully. Most filesystem functions have `std::error_code` overloads, which do not throw exceptions on failure. Use them. Calling `string()` on a `std::filesystem::path` must also be avoided - this may crash on certain setups. Instead, use [`pathToString`](/functions/geode/utils/string/pathToString/).
+Functions from the `<filesystem>` header should be handled carefully. Most filesystem functions have `std::error_code` overloads, which do not throw exceptions on failure. **You should use error_code overloads**! Calling `string()` on a `std::filesystem::path` must also be avoided - this may crash on certain setups. Instead, use [`pathToString`](/functions/geode/utils/string/pathToString/).
 
 Calling `unwrap()` on a [Result](/classes/geode/Result/) without first checking if it is `ok()` will lead to an instant rejection. You can never be certain that your web calls will always succeed!
 
@@ -152,9 +155,11 @@ While this isn't typically a rejection reason, new developers tend to find thems
 
 Developers should also be aware of Geode's [directory functions](https://github.com/geode-sdk/geode/blob/main/loader/include/Geode/loader/Dirs.hpp), which can be used for storing mod files and determining the location of game data. Unless you have good reason, mod files should be stored within the mod's save directory, which can be determined with [`Mod::getSaveDir`](/classes/geode/Mod#getSaveDir) (using the config directory through `getConfigDir` is also fine).
 
-* Avoid submitting locally built mods.
+* Avoid submitting **locally built mods**.
 
-For new developers, we strongly recommend making use of the cross-platform [build-geode-mod](https://github.com/geode-sdk/build-geode-mod/) action that comes with the default mod template. This action helpfully builds your mod for all platforms, which makes it very easy for developers to support them. 
+You should be using the cross-platform [build-geode-mod](https://github.com/geode-sdk/build-geode-mod/) action that comes with the default mod template. This action helpfully builds your mod for all platforms, which makes it very easy for developers to support them. This will be the `.github/workflows/multi-platform.yml` file in your repo.
+
+If this doesn't exist, you likely said no to adding it when making the geode project (though this option has since been removed, and it will always be added). Add the [`multi-platform.yml`](https://github.com/geode-sdk/build-geode-mod/blob/main/examples/multi-platform.yml) file from the examples folder into `.github/workflows/multi-platform.yml`, then check the Actions tab in GitHub and take the Build Output from the most recent commit, take the .geode file out of it and place that in the release.
 
 Those who are uploading their code on platforms outside of GitHub should also be using the CI instances offered by those platforms for building their mod. This makes it easier for us to verify that a mod has not been tampered with.
 
