@@ -423,13 +423,15 @@ A list of keybind names can be found [in the Geode repository](https://github.co
 
 Traditionally, due to conflicts with system keybinds, Geometry Dash on macOS assigns the same actions to Control and Command modifiers. This can be accomplished for any mod through per-platform default values.
 
-Keybinds have three special keys: `priority`, `category`, and `migrate-from`.
+Keybinds have four special keys: `priority`, `category`, `migrate-from`, and `allow-in-text-inputs`.
 
 `priority` is an integer that defines the priority of the keybind (whether it should execute before or after other keybinds); higher values mean higher priority, meaning that the keybind executes first. **You should not specify priority unless you have a good reason to.**
 
 `category` is one of `editor` (keybinds that work in the level editor), `gameplay` (keybinds that works while playing levels), or `universal` (keybinds that work everywhere in the game). **Categories are not required**; they're intended for situations where your keybind clearly fits into one of the categories. If your keybind doesn't – for example, it's for a mod-specific layer – then just leave the category out.
 
 `migrate-from` is the name of a keybind from the old Custom Keybinds mod. For example, in the code snippet below is an old definition from BetterEdit for a keybind with the ID `"rotate-45-ccw"_spr` (aka `hjfod.betteredit/rotate-45-ccw`).
+
+`allow-in-text-inputs` determines whether the keybind will be triggered while a text input is active. By default this is `false`.
 
 ```cpp
 BindManager::get()->registerBindable(BindableAction(
