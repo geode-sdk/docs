@@ -33,7 +33,7 @@ void MenuLayer_onNewgrounds(MenuLayer* self, CCObject* sender) {
     log::info("After original!");
 }
 
-$execute {
+$on_mod(Loaded) {
     Mod::get()->addHook(
         reinterpret_cast<void*>(geode::base::get() + 0x27b480),
         &MenuLayer_onNewgrounds,

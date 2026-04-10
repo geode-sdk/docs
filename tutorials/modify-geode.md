@@ -31,7 +31,7 @@ These rules are in place because the Geode UI is a highly volatile place that **
 
 using namespace geode::prelude;
 
-$execute {
+$on_mod(Loaded) {
     new EventListener<EventFilter<ModLogoUIEvent>>(+[](ModLogoUIEvent* event) {
         if (event->getModID() == "geode.loader") {
             // Remember: no assumptions, even trivial ones!

@@ -60,15 +60,15 @@ Listening to events is done using an `EventListener`. An event listener needs an
 ```cpp
 // main.cpp
 
-#include <Geode/DefaultInclude.hpp> // $execute
+#include <Geode/DefaultInclude.hpp> // $on_mod(Loaded)
 #include <Geode/loader/Event.hpp> // EventListener, EventFilter
 
 #include "DragDropEvent.hpp" // Our created event
 
 using namespace geode::prelude;
 
-// Execute runs the code inside **when your mod is loaded**
-$execute {
+// on_mod(Loaded) runs the code inside **when your mod is loaded**
+$on_mod(Loaded) {
     // This technically doesn't leak memory, since the listener should live for the entirety of the program
     new EventListener<EventFilter<DragDropEvent>>(+[](DragDropEvent* ev) {
         for (std::filesystem::path& file : ev->getFiles()) {
@@ -89,14 +89,14 @@ Notice that our callback returns a `ListenerResult`, more specifically `Listener
 ```cpp
 // main.cpp
 
-#include <Geode/DefaultInclude.hpp> // $execute
+#include <Geode/DefaultInclude.hpp> // $on_mod(Loaded)
 #include <Geode/loader/Event.hpp> // EventListener, EventFilter
 
 #include "DragDropEvent.hpp" // Our created event
 
 using namespace geode::prelude;
 
-$execute {
+$on_mod(Loaded) {
     new EventListener<EventFilter<DragDropEvent>>(+[](DragDropEvent* ev) {
         for (std::filesystem::path& file : ev->getFiles()) {
             log::debug("File dropped: {}", file);
