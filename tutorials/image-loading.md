@@ -1,6 +1,6 @@
 # Image (Down)loading
 
-If your have to display **images** in your mod that are **not included** in the mod file (for example for reducing the **size** of the mod or for showing **user-generated content**), you can use geode's `LazySprite` class. It can **also** be used for ordinary image initialization, either from a path or from raw data, which would have slight performance improvements over `CCSprite::create`, as the image is lazily read and decoded **in the background**, without freezing the game. 
+If you have to display **images** in your mod that are **not included** in the mod file (for example for reducing the **size** of the mod or for showing **user-generated content**), you can use geode's `LazySprite` class. It can **also** be used for ordinary image initialization, either from a path or from raw data, which would have slight performance improvements over `CCSprite::create`, as the image is lazily read and decoded **in the background**, without freezing the game. 
 
 It is **recommended** to use this API instead of implementing custom solutions that mess with `CCTextureCache`. It is not straightforward to do this correctly, and multiple mods (and Geode itself) have in the past failed to do this without memory leaks and other bugs.
 
