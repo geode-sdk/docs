@@ -77,8 +77,8 @@ The key system Geode provides for optional mod interop are events. For example, 
 Usually however, events are defined in code in a way that requires linking by inheriting from the `Event` class. To avoid this, mods that want to support being used optionally should also provide events that are specializations of the `DispatchEvent` class:
 
 ```cpp
-using DragDropEvent = geode::DispatchEvent<ghc::filesystem::path>;
-using DragDropFilter = geode::DispatchFilter<ghc::filesystem::path>;
+using DragDropEvent = geode::DispatchEvent<std::filesystem::path>;
+using DragDropFilter = geode::DispatchFilter<std::filesystem::path>;
 
 // Posting events in source
 DragDropEvent("geode.drag-drop/default", "path/to/file").post();
@@ -90,7 +90,7 @@ Mods that use the dependency can now listen for drag-and-drop events:
 
 ```cpp
 $execute {
-    new EventListener(+[](ghc::filesystem::path const& path) {
+    new EventListener(+[](std::filesystem::path const& path) {
         log::info("File dropped: {}", path);
         return ListenerResult::Propagate;
     }, DragDropFilter("geode.drag-drop/default"));
