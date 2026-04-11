@@ -102,6 +102,27 @@ You still need to call the base destructor itself for calling the original.
 
 **This pattern is the same for constructors.**
 
+### Fields destructor
+
+Modifying destructors the traditional way is highly unreliable and outright broken in some Geode versions. The more recommended and more reliable way is utilizing the Fields struct and adding your destructor logic there.
+
+```cpp
+class $modify(CreatorLayer) {
+    struct Fields {
+        ~Fields {
+            log::info("CreatorLayer is destructed");
+        }
+    }
+
+    bool init() {
+        CreatorLayer::init();
+        m_fields.self();
+    }
+};
+```
+
+Do note that you need to initialize the Fields struct manually at some point during the class's lifespan for this to work. See the [Fields tutorial](/tutorials/fields.md) for more information.
+
 ## Using without macros
 
 If you need to refrain from using the `$modify` macro (clang-format really cries when it sees the macro so), here is how you would do it:
