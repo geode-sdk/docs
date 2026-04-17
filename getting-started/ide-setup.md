@@ -44,7 +44,7 @@ Depending on which compiler you want to use, pick either:
 3. If using **Clang** with the **clangd** extension, press F1 and run `CMake: Edit User-Local CMake Kits`. This will open a file, in there find the chosen kit (one with Clang in the name) and add these keys to it:
 ```json
 "cmakeSettings": {
-    "CMAKE_EXPORT_COMPILE_COMMANDS": 1
+    "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
 },
 "preferredGenerator": {
     "name": "Ninja"
@@ -97,7 +97,7 @@ The setup is very similar to [VSCode on Mac](#vscode-on-mac), so you can follow 
     "cmakeSettings": {
         "HOST_ARCH": "x86_64",
         "SPLAT_DIR": "${userHome}/.local/share/Geode/cross-tools/splat",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": 1
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
     }
 }
 ```
