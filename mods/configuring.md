@@ -2,7 +2,7 @@
 description: How to configure Geode mods using mod.json
 ---
 
-# Configuring mods
+# Configuring mods (mod.json)
 
 Geode mods are configured through a file called `mod.json`, located at the root of your project. The file contains general information about the mod, such as the name, ID, version, and also things like settings, resources, and dependencies.
 
@@ -116,11 +116,16 @@ The dependencies of a mod; see [Dependencies](/mods/dependencies.md) for details
 
 ### `incompatibilities`
 
-The incompatibilities of a mod. Very similar to [dependencies](/mods/dependencies.md) but the valid importances are `breaking`, `conflicting` and `superseded`.
+The incompatibilities of a mod. Very similar to [dependencies](/mods/dependencies.md).
 
-* `breaking` - prevents the incompatible mod from loading
-* `conflicting` - both mods load anyway but it shows a warning in mod list
-* `superseded` - only used in very special circumstances when your mod is meant to show up as an update to a different mod
+```json
+"incompatibilities": {
+    // Or with the long form { "breaking": true, "version": "1.0.0" }
+    "alphalaneous.improved_group_view": "1.0.0"
+}
+```
+
+Superseding is no longer handled by incompatibilities and has been replaced by server-side Mod Deprecations as of Geode v5.
 
 ### `settings`
 
