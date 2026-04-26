@@ -44,7 +44,7 @@ A mod found breaking any of these rules will be **rejected unconditionally** fro
 A mod found breaking any of these rules will likely be rejected, although depending on the situation, they could also still be approved.
 
  * (`reject-tradmod`) The mod does not use Geode's provided systems for interfacing with GD (such as hooking and patching), resulting in almost guaranteed **mod incompatibility**.
- * (`reject-crash`) The mod **crashes the game** due to [preventible issues](/mods/guidelines-tips.md#common-pitfalls).
+ * (`reject-crash`) The mod **crashes the game** due to [preventible issues](/mods/guidelines-tips#common-pitfalls).
  * (`reject-not-meaningful`) The mod **doesn't do anything meaningful**. Note that joke mods can be considered meaningful; see [our policy on them](#joke-mods).
  * (`reject-hateful`) The mod **contains hateful material**, such as those explained in our policy on [hateful conduct](#hateful-conduct). See also the section of ["Fuck X" mods](#fuck-x-mods).
 
