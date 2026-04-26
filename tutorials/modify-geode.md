@@ -14,11 +14,11 @@ You can listen to these events by using Geode's events system as usual, using th
 
 There are some guidelines on what you are and are not allowed to do when modifying the Geode UI. These are:
 
-1. The mod may **only access nodes by ID or member**. No matching types or indices, if the node the mod wants to modify doesn't have an ID and is not accessible by a member variable or direct class getter, the mod can not edit it
-2. The mod must **always check for null** on every node they access. It should never assume the existence of a node, even if it's trivial
+1. The mod may **only access nodes by ID or member**. No matching types or indices, if the node the mod wants to modify doesn't have an ID and is not accessible by a member variable or direct class getter, the mod may not edit it.
+2. The mod must **always check for null** on every node they access. It should never assume the existence of a node, even if it's trivial!
 3. The mod must **safely handle all possible failure states**, such as missing sprites. This includes failure states of other logic it runs; if the mod makes a web request, it must not crash on unexpected behaviour!
-4. If the mod finds any missing IDs, it must **undo any/all of its changes** and not make any more. The recommended way to do this is to first use `querySelector` to grab all the nodes in the scene it intends to modify beforehand, and then returning early if any of them are null
-5. The mod must **give all of its own nodes IDs prefixed by its mod ID (note) and check beforehand if its nodes have been added on all events**
+4. If the mod finds any missing IDs, it must **undo any/all of its changes** and not make any more. The recommended way to do this is to first use `querySelector` to grab all the nodes in the scene it intends to modify beforehand, and then returning early if any of them are null.
+5. The mod must **give all of its own nodes IDs prefixed by its mod ID (note) and check beforehand if its nodes have been added on all events**.
 
 These rules are in place because the Geode UI is a highly volatile place that **may change at any time**, and any mod causing the Geode UI itself to crash would make it impossible to disable without safe mode.
 
