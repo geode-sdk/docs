@@ -172,9 +172,7 @@ Two versions of the macro are available:
 #pragma once
 
 #include <Geode/loader/Dispatch.hpp>
-#ifdef MY_MOD_ID
-    #undef MY_MOD_ID
-#endif
+#undef MY_MOD_ID
 // You must **manually** declare the mod id, as macros like GEODE_MOD_ID will not
 // behave correctly to other mods using your api.
 #define MY_MOD_ID "dev.my-api"
