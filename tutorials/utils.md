@@ -70,7 +70,7 @@ auto read = clipboard::read();
 ```
 
 ### geode::utils::game
-    
+
 ```cpp
 game::exit();
 game::restart();
@@ -111,7 +111,7 @@ auto hook2 = GEODE_UNWRAP(ObjcHook::create("EAGLView", "initWithFrame:", &MyFunc
 
 ## Tasks
 
-Visit the [tasks](tasks.md) page for more information.
+Visit the [tasks](/tutorials/tasks) page for more information.
 
 ## Cocos related
 
@@ -200,7 +200,7 @@ A wrapper for CallFunc that takes a lambda.
 ### Touch priority
 
 ```cpp
-// recursively sets the touch priority of the children based on itself	
+// recursively sets the touch priority of the children based on itself
 handleTouchPriority(this)
 ```
 
@@ -299,7 +299,7 @@ intToHex
 numToString
 numToAbbreviatedString
 numFromString
-timePointAsString`
+timePointAsString
 ```
 
 ### ColorProvider

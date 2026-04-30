@@ -83,7 +83,7 @@ Here is the popular click counter example in cocos2d:
 ```cpp
 class MyLayer : public CCLayer {
 protected:
-    // Class member that stores how many times 
+    // Class member that stores how many times
     // the button has been clicked
     size_t m_clicked = 0;
 
@@ -128,7 +128,7 @@ One of the most common problems encountered when using menu selectors is situati
 ```cpp
 class MyLayer : public CCLayer {
 protected:
-    // Class member that stores how many times 
+    // Class member that stores how many times
     // the button has been clicked
     size_t m_clicked = 0;
 
@@ -185,7 +185,7 @@ If you want to pass something to a callback that can't be passed through tags li
 ```cpp
 class MyLayer : public CCLayer {
 protected:
-    // Class member that stores how many times 
+    // Class member that stores how many times
     // the button has been clicked
     size_t m_clicked = 0;
 

@@ -18,7 +18,7 @@ CCPoint getShowButtonPosition(EditorUI* self) {
             self->m_pTrashBtn->getPositionX() + 50.0f,
             self->m_pTrashBtn->getPositionY()
         };
-    
+
     return {
         self->m_pPlaybackBtn->getPositionX() + 45.0f,
         self->m_pPlaybackBtn->getPositionY()
@@ -67,7 +67,7 @@ matdash::add_hook<&MenuLayer_init>(base + 0x1907b0)
 
 ### GDMake
 
-No one will need this section but I'm adding it for the completeness sake. GDMake uses the `GDMAKE_HOOK` with the address and the symbol parameter to hook a specific function and `GDMAKE_ORIG` keyword to call the original function. 
+No one will need this section but I'm adding it for the completeness sake. GDMake uses the `GDMAKE_HOOK` with the address and the symbol parameter to hook a specific function and `GDMAKE_ORIG` keyword to call the original function.
 
 ```cpp
 GDMAKE_HOOK(0x1907b0, "_ZN9MenuLayer4initEv")
@@ -81,7 +81,7 @@ bool __fastcall MenuLayer_init(gd::MenuLayer* self, void* edx) {
 
 Since all of these hooks are static functions, a `self` parameter and a parameter for clobbing the edx register is added (except MAT dash) to match the calling convention for member functions. These parameters need to be removed when moving the hook inside a modify class. Likewise, all uses of `self->` need to be either removed or replaced with `this->`.
 
-Otherwise, all of the hooks can be replaced by a `Modify` class and the original calls can be replaced with a call the `OriginalClass::function` inside the modify hook with the needed parameters. 
+Otherwise, all of the hooks can be replaced by a `Modify` class and the original calls can be replaced with a call the `OriginalClass::function` inside the modify hook with the needed parameters.
 
 ```cpp
 class $modify(MenuLayer) {
@@ -96,7 +96,7 @@ class $modify(MenuLayer) {
 
 Patches are pretty easy to migrate. Geode has a `Mod::patch` function that takes in a byte vector and an address, which can be used for mod specific patches.
 
-## Miscellaneous 
+## Miscellaneous
 
 Some function signatures in gd.h are wrong: wrong as in they work for Windows, but not for any other platform. Geode uses the Android binary symbols to infer the function signatures, so the wrong function calls relating to this issue need to be fixed while migrating from gd.h.
 

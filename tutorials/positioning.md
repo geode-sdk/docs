@@ -75,8 +75,8 @@ You can also use **DevTools** to move nodes in real time and check their positio
 
 **Content size** dictates how much space a **node and its children** take up. This has many uses. First of all, we can use a node's content size to place children **relative** to the parent's borders, or relative to **other children** inside the layer. There are **2 main approaches** to setting a node's content size.
 
- * Setting the content size **prior** to adding any children, if we know how much space the parent should take beforehand. A great example for this approach are **popups**. If you have read the [Popup Tutorial](/tutorials/popup.md), then you probably remember that when creating a popup, you give it a **width** and a **height**. These values are used to give the popup its **content size**.
- * Setting the content size **after** adding and positioning the children. This is usually done by calculating the borders of the parent using the children that are the furthest from (0, 0). A good example of this would be **button menus**. Maybe we have a weird layout, that can't make use of [Layouts](/tutorials/layouts.md), or a menu that has children added to it **after it is initialised**. For that, we would have to calculate the **content size** of the parent. Of course, if you use **Layouts**, you just have to set a content size, and the layout will automatically resize the children to match that **content size** (if auto-scale is enabled), otherwise, you will also have to calculate the content size yourself.
+ * Setting the content size **prior** to adding any children, if we know how much space the parent should take beforehand. A great example for this approach are **popups**. If you have read the [Popup Tutorial](/tutorials/popup), then you probably remember that when creating a popup, you give it a **width** and a **height**. These values are used to give the popup its **content size**.
+ * Setting the content size **after** adding and positioning the children. This is usually done by calculating the borders of the parent using the children that are the furthest from (0, 0). A good example of this would be **button menus**. Maybe we have a weird layout, that can't make use of [Layouts](/tutorials/layouts), or a menu that has children added to it **after it is initialised**. For that, we would have to calculate the **content size** of the parent. Of course, if you use **Layouts**, you just have to set a content size, and the layout will automatically resize the children to match that **content size** (if auto-scale is enabled), otherwise, you will also have to calculate the content size yourself.
 
 Cocos nodes have different behaviour when it comes to content size. The most popular example to give here is **CCMenu**, which sets its content size to the **screen size**. RobTop doesn't modify this content size, which is a valid approach to this problem, but we are better than this!
 
@@ -106,7 +106,7 @@ bool MyLayer::init() {
     // We know that the button content size is {40.f, 40.f} (by checking with DevTools), so we will set the menu's content size accordingly.
 
     // Just enough to fit a 2x2 grid of buttons, we will place our buttons on a diagonal
-    menu->setContentSize({ 80.f, 80.f }); 
+    menu->setContentSize({ 80.f, 80.f });
 
     // Ignore this for now
     menu->ignoreAnchorPointForPosition(false);

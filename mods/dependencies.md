@@ -20,7 +20,7 @@ If a dependency is required, it is **linked to**; this means that for the mod th
 
 ## Adding dependencies
 
-Dependencies can be added to your mod by simply adding it to the `dependencies` key in [mod.json](/mods/configuring.md):
+Dependencies can be added to your mod by simply adding it to the `dependencies` key in [mod.json](/mods/configuring):
 
 ```json
 {
@@ -39,11 +39,11 @@ Dependencies can be added to your mod by simply adding it to the `dependencies` 
 }
 ```
 
-Dependencies can be specified by using an object that maps from a mod id to a version, or more information if needed. The dependency may also be set as required, which specifies if the mod is required or [optional](#Optional-Dependencies) for the dependant mod to load. If this is not specified, the dependency is marked as required. 
+Dependencies can be specified by using an object that maps from a mod id to a version, or more information if needed. The dependency may also be set as required, which specifies if the mod is required or [optional](#Optional-Dependencies) for the dependant mod to load. If this is not specified, the dependency is marked as required.
 
-The `version` field of a dependency may be written as `>=version`, `=version`, or `<=version`. The comparisons work as expected, with the addition that if the major versions are different, the comparison is always false. This means that if you depend on version `>=1.2.5` of a mod, version `v1.8.0` will be considered acceptable but `v2.0.0` will not. For this reason, [if you make a mod that is depended upon, you should follow strict semver](https://semver.org).
+The `version` field of a dependency may be written as `>=version`, `=version`, or `<=version`. The comparisons work as expected, with the addition that if the major versions are different, the comparison is always false. This means that if you depend on version `>=1.2.5` of a mod, version `v1.8.0` will be considered acceptable but `v2.0.0` will not. For this reason, [if you make a mod that is depended upon, you should follow strict semver](https://semver.org/).
 
-Once you have added a dependency to your `mod.json`, if you have [Geode CLI v1.4.0 or higher](/geode/installcli), its headers are automatically added to your project. If you have the mod installed, the headers from the installed version will be used. If you don't have the mod installed, Geode will install it from the mods index. The added dependency files for your project can be found in `build/geode-deps/<dep.id>`. Geode automatically adds `build/geode-deps` to your project's include path, and links whatever binaries are found in dependencies, meaning you most likely don't have to configure anything.
+Once you have added a dependency to your `mod.json`, if you have [Geode CLI v1.4.0 or higher](/getting-started/geode-cli), its headers are automatically added to your project. If you have the mod installed, the headers from the installed version will be used. If you don't have the mod installed, Geode will install it from the mods index. The added dependency files for your project can be found in `build/geode-deps/<dep.id>`. Geode automatically adds `build/geode-deps` to your project's include path, and links whatever binaries are found in dependencies, meaning you most likely don't have to configure anything.
 
 ## Example
 
@@ -74,30 +74,7 @@ In case the dependency is **not required**, it is not linked to, which in turn m
 
 The key system Geode provides for optional mod interop are events. For example, a mod that adds support for drag-and-dropping files on the GD window could define a drag-and-drop event that other mods can then listen to.
 
-Usually however, events are defined in code in a way that requires linking by inheriting from the `Event` class. To avoid this, mods that want to support being used optionally should also provide events that are specializations of the `DispatchEvent` class:
-
-```cpp
-using DragDropEvent = geode::DispatchEvent<std::filesystem::path>;
-using DragDropFilter = geode::DispatchFilter<std::filesystem::path>;
-
-// Posting events in source
-DragDropEvent("geode.drag-drop/default", "path/to/file").post();
-```
-
-All `DispatchEvent`s have an associated ID, which is specific for each `DispatchEvent` specialization. This can be used to differentiate between events; for example, the drag drop API might use this to let dependencies determine which file types they listen to.
-
-Mods that use the dependency can now listen for drag-and-drop events:
-
-```cpp
-$execute {
-    new EventListener(+[](std::filesystem::path const& path) {
-        log::info("File dropped: {}", path);
-        return ListenerResult::Propagate;
-    }, DragDropFilter("geode.drag-drop/default"));
-};
-```
-
-An example of using dispatch events in practice [can be found in MouseAPI](https://github.com/geode-sdk/MouseAPI/blob/main/src/test.cpp#L54-L94).
+See the [docs page on events](/tutorials/events) for more information.
 
 ### User Objects
 
@@ -117,19 +94,6 @@ layer->setUserObject("hjfod.cool-scrollbars/enable", CCBool::create(true));
 
 As these are typical `CCObject`s, a mod can store any piece of information within a user object. This can range from objects as simple as a `CCBool` to more complicated, mod-specific ones that store multiple pieces of data.
 
-Mods can also add an event listener to listen for when attributes are added/changed:
-
-```cpp
-$execute {
-    new EventListener<AttributeSetFilter>(
-        +[](UserObjectSetEvent* event) {
-            addScrollbar(event->node);
-        },
-        AttributeSetFilter("hjfod.cool-scrollbars/enable")
-    );
-}
-```
-
 ### User Flags
 
 User flags are a frequently used alternative to user objects which does not store a value. This makes them a more optimized solution for our aforementioned scrollbar example.
@@ -145,8 +109,6 @@ if (layer->getUserFlag("hjfod.cool-scrollbars/enable")) {
 ```
 
 Do note that user flags and user objects are separate - `getUserFlag` and `getUserObject` are not interchangeable and need to be consistent with the setter used.
-
-Unlike user objects, user flags do not fire an event when set.
 
 ## Event Macro
 
@@ -210,6 +172,3 @@ void api::doSomething() {
     // ...
 }
 ```
-
-
-

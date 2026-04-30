@@ -4,7 +4,7 @@ You probably had this issue of "Why does my button not work?" whenever you added
 
 ## What is touch priority?
 
-Every layer that has `setTouchEnabled(true)` has an assigned touch priority to it. This priority is used to determine which layer will consume the given touch. 
+Every layer that has `setTouchEnabled(true)` has an assigned touch priority to it. This priority is used to determine which layer will consume the given touch.
 
 This priority value is completely independent of the Z order of the layer, which would be the preferred way of doing this kind of thing. But we need to deal with what we have.
 
@@ -14,7 +14,7 @@ The smaller the priority value is, the higher its priority. This means a priorit
 
 Disregarding all popups, Geometry Dash touch priority is completely equivalent to how Cocos2d handles it. Every layer has touch priority 0 by default. `CCMenu`'s have a touch priority of -128. Other than these, Robtop classes such as `CCTextInputNode` and `SliderTouchLogic` have a touch priority of -500.
 
-### Force priority 
+### Force priority
 
 If you've been in the Geometry Dash modding community enough, you've probably heard of this term at least once. Force priority is the system Robtop implemented into Cocos2d in order to handle his popups. One of the most hated additions of Geometry Dash solely because how unintuitive it is.
 

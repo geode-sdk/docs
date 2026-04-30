@@ -10,8 +10,8 @@ But that's enough preface. Let's start actually **REing**!
 
 There are a lot of tools GD modders use for reverse engineering, but some of the most common ones include:
 
- * [Ghidra](https://ghidra-sre.org/)
- * [IDA Pro](https://hex-rays.com/IDA-pro/) (which every modder most definitely has legally bought :wink:)
+ * [Ghidra](https://github.com/NationalSecurityAgency/ghidra)
+ * [IDA Pro](https://hex-rays.com/ida-pro) (which every modder most definitely has legally bought :wink:)
  * [x64dbg](https://x64dbg.com/) (Windows)
  * [Cheat Engine](https://cheatengine.org/) (Windows)
  * [ReClass](https://github.com/ReClassNET/ReClass.NET) (Windows)
@@ -19,11 +19,11 @@ There are a lot of tools GD modders use for reverse engineering, but some of the
  * [Slicer](https://github.com/zorgiepoo/Bit-Slicer) (Mac)
  * [LLDB](https://lldb.llvm.org/)
 
-For this tutorial, we will be using **Ghidra** and **x64dbg**. 
+For this tutorial, we will be using **Ghidra** and **x64dbg**.
 
 ## Setting Up Ghidra
 
-First, [download Ghidra](https://ghidra-sre.org/) and install it on your machine. Open it, **create a new project**, and you should see something like this: 
+First, [download Ghidra](https://github.com/NationalSecurityAgency/ghidra/releases/latest) and install it on your machine. Open it, **create a new project**, and you should see something like this:
 
 ![Image showing the project page of Ghidra](/assets/handbook/vol2/ghidra_start.png)
 
@@ -39,4 +39,4 @@ The three most important windows for our purposes are **Symbol Tree**, **Listing
 
 Now that we have Ghidra setup, it's time to learn how we can find a layer's `init` function.
 
-[Chapter 2.2: Finding `MenuLayer::init`](/handbook/vol2/chap2_2.md)
+[Chapter 2.2: Finding `MenuLayer::init`](/handbook/vol2/chap2_2)

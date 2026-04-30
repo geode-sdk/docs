@@ -1,6 +1,6 @@
 # Tips for Getting Your Mod Approved
 
-These are an unsorted collection of some tips for making sure your mod adheres to the [index guidelines](/mods/guidelines.md).
+These are an unsorted collection of some tips for making sure your mod adheres to the [index guidelines](/mods/guidelines).
 
 ## Common pitfalls
 
@@ -24,7 +24,7 @@ While it is unavoidable in some cases (or will cause additional instability), of
 
 * Avoid reinventing the wheel.
 
-Hooking functions, especially heavily called ones, to accomplish tasks that can be done by other means may get your mod rejected. One example would be hooking `CCScheduler::update` to run code on each frame (use [`scheduleSelector`](/classes/cocos2d/CCScheduler#scheduleSelector) instead) or to keep a node across scenes (use [`SceneManager::keepAcrossScenes`](/classes/geode/SceneManager#keepAcrossScenes)). Besides creating performance issues, this may also reduce compatibility with other mods.
+Hooking functions, especially heavily called ones, to accomplish tasks that can be done by other means may get your mod rejected. One example would be hooking `CCScheduler::update` to run code on each frame (use [`scheduleSelector`](/classes/cocos2d/CCScheduler#scheduleSelector) instead) or to keep a node across scenes (use [`OverlayManager`](/classes/geode/OverlayManager) by calling `addChild`). Besides creating performance issues, this may also reduce compatibility with other mods.
 
 While this isn't typically a rejection reason, new developers tend to find themselves "reinventing the wheel" and using platform-specific functions to accomplish tasks that are already covered by Geode utils. For example, [restarting the game](/functions/geode/utils/game/restart/), [opening a file picker](/functions/geode/utils/file/pick) and [splitting a string](/functions/geode/utils/string/split) are all built into the Geode utils. These functions have the most compatibility with other mods and are tested across all supported platforms. A basic list of them can be found [here](/tutorials/utils).
 

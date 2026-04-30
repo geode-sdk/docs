@@ -24,7 +24,7 @@ If you like this mod, please check [my other mod](mod:my.other-mod)!
 
 ## Credits
 
-[Join my Discord](https://discord.gg/K9Kuh3hzTC)! Thanks to [Hu Tao](https://www.youtube.com/watch?v=8oap-n_OEgc) for helping with the mod!
+[Join my Discord](https://discord.gg/K9Kuh3hzTC)! Thanks to [Heinz Baked Beans](https://www.youtube.com/watch?v=-LVPjtLYia4) for helping with the mod!
 ```
 
 # `changelog.md`

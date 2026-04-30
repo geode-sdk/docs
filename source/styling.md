@@ -1,7 +1,7 @@
 # Styling guidelines
 
 ## General
-The maximum line limit is 80 characters. In the case of a line exceeding 80 charaters, wrapping rules should be applied. 
+The maximum line limit is 80 characters. In the case of a line exceeding 80 charaters, wrapping rules should be applied.
 
 ## Files & Directories
 Files should be in pascalcase.
@@ -21,8 +21,8 @@ For single line comments, there should be a single space padding.
 For multiline comments, the contents should start in a next line with a indent.
 ```cpp
 /*
-	This is quite correct.
-	Isn't it?
+    This is quite correct.
+    Isn't it?
 */
 
 /*This is
@@ -54,7 +54,7 @@ float delta = 0.016667;
 
 ## Variables
 
-Local variables should be in camelcase. 
+Local variables should be in camelcase.
 
 ```cpp
 // Correct
@@ -86,7 +86,7 @@ static CCNode* g_sharedNode = nullptr;
 static CCNode* sharedNode = nullptr;
 ```
 
-Since global variable initializations between platforms are inconsistent, the use of global variables is entirely discouraged. 
+Since global variable initializations between platforms are inconsistent, the use of global variables is entirely discouraged.
 
 ## Types
 
@@ -138,17 +138,17 @@ If, while and for statements should be on the same line, the scope should start 
 ```cpp
 // Correct
 while (thing == 54) {
-	thing = 53;
+    thing = 53;
 }
 if (thing == 54) thing = 53;
 for (int thing = 53; thing != 54; ++thing) {
-	// Stuff
+    // Stuff
 }
 
 // Wrong
-while (thing == 54) 
+while (thing == 54)
 {
-	thing = 53;
+    thing = 53;
 }
 if (thing == 54) { thing = 53; }
 ```
@@ -158,21 +158,21 @@ Switch statement labels should be on the same line as the statement. Every fallt
 ```cpp
 // Correct
 switch (thing) {
-	case TestEnum::Xd: [[fallthrough]];
-	case TestEnum::Lol:
-		value = 5;
-		break;
-	default:
-		value = 6;
-		break;
+    case TestEnum::Xd: [[fallthrough]];
+    case TestEnum::Lol:
+        value = 5;
+        break;
+    default:
+        value = 6;
+        break;
 }
 
 // Wrong
 switch (thing) {
 case TestEnum::Xd: [[fallthrough]];
 case TestEnum::Lol:
-	value = 5;
-	break;
+    value = 5;
+    break;
 }
 ```
 
@@ -183,7 +183,7 @@ Return type, the function and the parameters should be in the same line. Functio
 CCObject* copyWithMeme(CCMeme* meme);
 
 // Wrong
-CCObject* 
+CCObject*
 copyWithMeme (CCMeme* meme);
 ```
 
@@ -191,27 +191,27 @@ Definitions should start on the same line.
 ```cpp
 // Correct
 CCObject* copyWithMeme(CCMeme* meme) {
-	return nullptr; // funny meme if i do say so myself
+    return nullptr; // funny meme if i do say so myself
 }
 
 // Wrong
 CCObject* copyWithMeme(CCMeme* meme)
 {
-	return nullptr;
+    return nullptr;
 }
 ```
 
-Unless necessary, the trailing return type shouldn't be used. 
+Unless necessary, the trailing return type shouldn't be used.
 
 ```cpp
 // Correct
 CCObject* copyWithMeme(CCMeme* meme) {
-	return nullptr;
+    return nullptr;
 }
 
 // Wrong
 auto copyWithMeme(CCMeme* meme) -> CCObject* {
-	return nullptr;
+    return nullptr;
 }
 ```
 
@@ -226,7 +226,7 @@ namespace geode {
 
 // Wrong
 namespace the_old_lilac_namespace {
-	
+
 }
 ```
 
@@ -249,7 +249,7 @@ class BasedButton {
 };
 
 // Wrong
-class BasedButton 
+class BasedButton
 {
 
 };
@@ -260,19 +260,19 @@ Access specifiers should be on the same indentation as the classes.
 // Correct
 class BasedButton {
 public:
-	// Stuff
+    // Stuff
 };
 
 // Wrong
 class BasedButton {
  public:
-	// this one is for you camila
+    // this one is for you camila
 };
 
 // Wrong
 class BasedButton {
-	public:
-	// bad stuff
+    public:
+    // bad stuff
 };
 ```
 
@@ -281,22 +281,22 @@ Subclasses should be on the same line.
 // Correct
 class BasedButton : CCNode, FLAlertDelegate {
 public:
-	// Stuff
+    // Stuff
 };
 
 // Wrong
 class BasedButton
  : CCNode, FLAlertDelegate {
 public:
-	// Stuff
+    // Stuff
 };
 
 // Wrong
-class BasedButton : 
-	CCNode, 
-	FLAlertDelegate {
+class BasedButton :
+    CCNode,
+    FLAlertDelegate {
 public:
-	// Stuff
+    // Stuff
 };
 ```
 
@@ -305,13 +305,13 @@ Classes which shouldn't be extended should be marked as final.
 // Correct
 class BasedButton final : CCNode {
 public:
-	// I am the last implementer ok
+    // I am the last implementer ok
 };
 
 // Wrong
 class BasedButton : CCNode {
 public:
-	// pls dont subclass me okthxbai
+    // pls dont subclass me okthxbai
 };
 ```
 
@@ -322,18 +322,18 @@ Same rules of functions apply for member functions.
 // Correct
 class BasedButton : CCNode {
 public:
-	bool init() override {
-		return true;
-	}
+    bool init() override {
+        return true;
+    }
 };
 
 // Wrong
 class BasedButton : CCNode {
 public:
-	bool init() override
-	{
-		return true;
-	}
+    bool init() override
+    {
+        return true;
+    }
 };
 ```
 
@@ -342,38 +342,38 @@ Functions should be const qualified whenever they can.
 // Correct
 class BasedButton : CCNode {
 public:
-	void baseMyButton(BasedButton const* other) const {
-		// basing your button
-		// and not modifying you :)
-	}
+    void baseMyButton(BasedButton const* other) const {
+        // basing your button
+        // and not modifying you :)
+    }
 };
 
 // Wrong
 class BasedButton : CCNode {
 public:
-	void baseMyButton(BasedButton const* other) {
-		// basing your button
-		// and not modifying you :)
-	}
+    void baseMyButton(BasedButton const* other) {
+        // basing your button
+        // and not modifying you :)
+    }
 };
 ```
 
-Virtual overrides should be marked as override. 
+Virtual overrides should be marked as override.
 ```cpp
 // Correct
 class BasedButton : CCNode {
 public:
-	bool init() override {
-		return true;
-	}
+    bool init() override {
+        return true;
+    }
 };
 
 // Wrong
 class BasedButton : CCNode {
 public:
-	bool init() {
-		return true;
-	}
+    bool init() {
+        return true;
+    }
 };
 ```
 
@@ -381,13 +381,13 @@ Outofline definitions of member functions have the same rules applied to them.
 ```cpp
 // Correct
 bool BasedButton::init() {
-	return true;
+    return true;
 }
 
 // Wrong
-bool BasedButton::init() 
+bool BasedButton::init()
 {
-	return true;
+    return true;
 }
 ```
 

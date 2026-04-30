@@ -75,7 +75,7 @@ And besides, what we have done know is still just educated guesses, though they 
 
 Well, luckily, there is: Android!
 
-[Chapter 2.4: Comparing against Android](/handbook/vol2/chap2_4.md)
+[Chapter 2.4: Comparing against Android](/handbook/vol2/chap2_4)
 
 ## Notes
 

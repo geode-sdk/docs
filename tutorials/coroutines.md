@@ -1,6 +1,6 @@
 # Coroutines
 
-[Coroutines](https://en.cppreference.com/w/cpp/language/coroutines) are an underutilized feature of C++20 that not many understand. Under the hood, they are very complex, but luckily Geode makes it quite simple for you. Geode lets you leverage the power of coroutines to write clean asynchronous code, tackle Result propagation, and build Python-style generators with ease.
+[Coroutines](https://en.cppreference.com/cpp/language/coroutines) are an underutilized feature of C++20 that not many understand. Under the hood, they are very complex, but luckily Geode makes it quite simple for you. Geode lets you leverage the power of coroutines to write clean asynchronous code, tackle Result propagation, and build Python-style generators with ease.
 
 ## Task
 
@@ -47,7 +47,7 @@ coro::spawn << someTask();
 
 // Spawn from a coroutine via operator<<
 coro::spawn << [] -> Task<void> {
-	co_return;
+    co_return;
 };
 
 // Spawn from a Task via operator()
@@ -55,7 +55,7 @@ coro::spawn(someTask());
 
 // Spawn from a coroutine via operator()
 coro::spawn([] -> Task<void> {
-	co_return;
+    co_return;
 });
 ```
 
@@ -71,14 +71,14 @@ Creating a new function for just the asynchronous bits might get tedious. Luckil
 
 ```cpp
 void logResponseCode(std::string const& url) {
-	log::info("Starting request...");
+    log::info("Starting request...");
 
-	$async(url) {
-		auto req = web::WebRequest();
-		auto res = co_await req.get(url);
+    $async(url) {
+        auto req = web::WebRequest();
+        auto res = co_await req.get(url);
 
-		log::info("Response code: {}", res.code());
-	};
+        log::info("Response code: {}", res.code());
+    };
 }
 ```
 
@@ -141,13 +141,13 @@ Here's what a basic range generator looks like:
 #include <Geode/utils/coro.hpp>
 
 coro::Generator<int> range(int start, int end) {
-	for (int i = start; i < end; ++i) {
-		co_yield i;
-	}
+    for (int i = start; i < end; ++i) {
+        co_yield i;
+    }
 }
 
 for (int i : range(0, 10)) {
-	log::info("My number: {}", i);
+    log::info("My number: {}", i);
 }
 ```
 
@@ -166,20 +166,20 @@ Here's an example of an infinite fibbonacci generator:
 #include <Geode/utils/coro.hpp>
 
 coro::Generator<int> fibbonacci() {
-	int a = 0;
-	int b = 1;
-	while (true) {
-		co_yield a;
-		auto next = a + b;
-		a = b;
-		b = next;
-	}
+    int a = 0;
+    int b = 1;
+    while (true) {
+        co_yield a;
+        auto next = a + b;
+        a = b;
+        b = next;
+    }
 }
 
 
 for (int num : fibbonacci()) {
-	if (num > 1000) break;
-	log::info("My number: {}", num);
+    if (num > 1000) break;
+    log::info("My number: {}", num);
 }
 ```
 
@@ -190,12 +190,12 @@ Generators have two helper functions that quickly allow you to apply transformat
 ```cpp
 // Prints 0, -1, -2, ...
 for (int num : range(0, 10).map(std::negate())) {
-	log::info("My number: {}", num);
+    log::info("My number: {}", num);
 }
 
 // Prints only even numbers
 for (int num : range(0, 10).filter([](int n) { return n % 2 == 0; })) {
-	log::info("My number: {}", num);
+    log::info("My number: {}", num);
 }
 ```
 

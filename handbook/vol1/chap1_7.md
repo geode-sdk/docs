@@ -27,31 +27,31 @@ Since we want to add things to the layer, let's hook its `init` function, making
 #include <Geode/modify/MenuLayer.hpp>
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
-		
-		return true;
-	}
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
+
+        return true;
+    }
 };
 ```
 
 ## Adding the label
 
-Now it's time to actually show the text. As outlined in [Chapter 1.4](/handbook/vol1/chap1_4.md), Cocos2d is node-based; we don't do our own rendering, we leverage other nodes to do it for us. In this case, since we want to display text, we go for the standard `CCLabelBMFont` class:
+Now it's time to actually show the text. As outlined in [Chapter 1.4](/handbook/vol1/chap1_4), Cocos2d is node-based; we don't do our own rendering, we leverage other nodes to do it for us. In this case, since we want to display text, we go for the standard `CCLabelBMFont` class:
 
 ```cpp
 #include <Geode/modify/MenuLayer.hpp>
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto label = cocos2d::CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-		
-		return true;
-	}
+        auto label = cocos2d::CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+
+        return true;
+    }
 };
 ```
 
@@ -63,14 +63,14 @@ Everything Cocos2d-related lies in the `cocos2d` namespace, so we must prefix ou
 using namespace geode::prelude;
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-		
-		return true;
-	}
+        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+
+        return true;
+    }
 };
 ```
 
@@ -84,15 +84,15 @@ Now, the label isn't currently a child of any layer, so it won't show up anywher
 using namespace geode::prelude;
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-		this->addChild(label);
+        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+        this->addChild(label);
 
-		return true;
-	}
+        return true;
+    }
 };
 ```
 
@@ -106,17 +106,17 @@ The default position for any node is (0, 0) which is at bottom left of the scree
 using namespace geode::prelude;
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto winSize = CCDirector::get()->getWinSize();
+        auto winSize = CCDirector::get()->getWinSize();
 
-		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-		this->addChild(label);
+        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+        this->addChild(label);
 
-		return true;
-	}
+        return true;
+    }
 };
 ```
 
@@ -128,18 +128,18 @@ Next, to actually position our label, we call the `setPosition` method on it, pl
 using namespace geode::prelude;
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto winSize = CCDirector::get()->getWinSize();
+        auto winSize = CCDirector::get()->getWinSize();
 
-		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-		label->setPosition(winSize.width / 2, winSize.height / 2);
-		this->addChild(label);
+        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+        label->setPosition(winSize.width / 2, winSize.height / 2);
+        this->addChild(label);
 
-		return true;
-	}
+        return true;
+    }
 };
 ```
 
@@ -160,22 +160,22 @@ And with that, **we have completed our Hello, World! mod**. Here's what the fina
 using namespace geode::prelude;
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto winSize = CCDirector::get()->getWinSize();
+        auto winSize = CCDirector::get()->getWinSize();
 
-		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-		label->setPosition(winSize / 2);
-		this->addChild(label);
+        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+        label->setPosition(winSize / 2);
+        this->addChild(label);
 
-		return true;
-	}
+        return true;
+    }
 };
 ```
 
-To try the mod out, [create a new mod using `geode new`](/geode/creating), and then replace the code in `src/main.cpp` with the above. After building the mod, open up GD and you should see this:
+To try the mod out, [create a new mod using `geode new`](/getting-started/create-mod#creating-a-new-mod), and then replace the code in `src/main.cpp` with the above. After building the mod, open up GD and you should see this:
 
 ![Image showing the main menu in GD with a 'Hello, world' text on top](/assets/handbook/vol1/hello_world.png)
 
@@ -183,4 +183,4 @@ If it works for you, **congratulations!** You have now officially built your fir
 
 After drinking your juice however, it's time to get back into business. So we've got a Hello, World! going, that's great. Now it's time to start crafting something actually useful.
 
-In Volume 2 of the tutorial, we will start looking at **reverse engineering** and how making new mods actually works in practice. To start, let's once again ask the following question: [so how exactly does one make a mod?](/handbook/vol2/chap2_1.md).
+In Volume 2 of the tutorial, we will start looking at **reverse engineering** and how making new mods actually works in practice. To start, let's once again ask the following question: [so how exactly does one make a mod?](/handbook/vol2/chap2_1).

@@ -10,7 +10,7 @@ If you look at the Symbol Tree window in Ghidra, you will see it has a folder na
 
 Now, there is one problem with this list: **there are a lot of classes in GD**. Just browsing this list is most likely not going to help you figure out where the function you're looking for is. Instead, first you need to make some guess about where to start.
 
-For finding layers' `init` functions, this guess is very easy to make: just figure out the layer's name using DevTools, and it's probably in that class. 
+For finding layers' `init` functions, this guess is very easy to make: just figure out the layer's name using DevTools, and it's probably in that class.
 
 So, to find the `init` function for `MenuLayer`, lets first navigate to `MenuLayer`:
 
@@ -42,4 +42,4 @@ We can also fix the function's signature by right-clicking on it and selecting `
 
 Congratulations, you have reverse-engineered your first function! However, let's not stop here - let's find some other, a little more obscure `init` functions:
 
-[Chapter 2.3: Finding `LevelSettingsLayer::init`](/handbook/vol2/chap2_3.md)
+[Chapter 2.3: Finding `LevelSettingsLayer::init`](/handbook/vol2/chap2_3)
