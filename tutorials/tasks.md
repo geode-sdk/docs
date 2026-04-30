@@ -120,9 +120,9 @@ void MyCoolClass::onTask(PointlessTask::Event* event) {
     else if (int* progress = event->getProgress()) {
         // The progress callback was called.
     }
-    // This check is technically unnecessary, since Tasks can only ever have 
-    // three possible states, but it's good practice to always check it anyway 
-    // in case Task gains more states in the future, or if you get rid of the 
+    // This check is technically unnecessary, since Tasks can only ever have
+    // three possible states, but it's good practice to always check it anyway
+    // in case Task gains more states in the future, or if you get rid of the
     // progress check for example
     else if (event->isCancelled()) {
         // The Task was cancelled
@@ -150,8 +150,8 @@ SumTask startCalculationHalved() {
             // Return our result but divided by two
             return *result / 2;
         }
-        // We could also define a callback for mapping the progress value, and a 
-        // callback for handling the mapped Task being cancelled - by default, 
+        // We could also define a callback for mapping the progress value, and a
+        // callback for handling the mapped Task being cancelled - by default,
         // progress is just forwarded as-is
     );
 }
@@ -184,7 +184,7 @@ Often when working with Task-based code, you will encounter a situation where yo
 
 ```cpp
 SumTask startCalculation() {
-    // We already know what the sum of 1..10,000,000 is sillyhead! We don't 
+    // We already know what the sum of 1..10,000,000 is sillyhead! We don't
     // need to calculate that!
     return SumTask::immediate(49'999'995'000'000u);
 }
@@ -194,20 +194,20 @@ SumTask startCalculation() {
 
 Tasks are primarely geared towards running synchronous code in another thread. However, you may sometimes write a Task that needs to wait for another Task or other threaded calculation to finish. For example, maybe instead of writing our number summing logic ourselves, we delegate this responsibility to another library; however, that library's API creates its own thread and takes a callback to be called for the result.
 
-In these cases, you can't really write your Task using `Task::run`, which expects the callback to be synchronous. You could use [`std::condition_variable`](https://en.cppreference.com/w/cpp/thread/condition_variable), but that might be a bit hard to get to work with more complex scenarios. Instead, you can use `Task::runWithCallback`:
+In these cases, you can't really write your Task using `Task::run`, which expects the callback to be synchronous. You could use [`std::condition_variable`](https://en.cppreference.com/cpp/thread/condition_variable), but that might be a bit hard to get to work with more complex scenarios. Instead, you can use `Task::runWithCallback`:
 
 ```cpp
 SumTask startCalculation() {
     return SumTask::runWithCallback([](auto finish, auto progress, auto hasBeenCancelled) {
-        // Assuming we are using some external library for summing up numbers 
+        // Assuming we are using some external library for summing up numbers
         // that creates its own thread and calls a callback on finish
         external_library::sumRange(10'000'000U, [finish](uint64_t value) {
-            // Note that finish can only be called exactly once; the value can 
-            // never be changed, any new progress posted nor the Task cancelled 
-            // afterwards, so any code you run past this point can no longer 
+            // Note that finish can only be called exactly once; the value can
+            // never be changed, any new progress posted nor the Task cancelled
+            // afterwards, so any code you run past this point can no longer
             // influence the Task itself.
             finish(value);
-            // However, if you do need to run some code here like clean up 
+            // However, if you do need to run some code here like clean up
             // temporary files, that is completely fine and safe
         });
     }, "My epic task that sums up numbers for some reason");
@@ -222,7 +222,7 @@ Sometimes we have a bunch of similar Tasks running in parallel, and need to do s
 
 ```cpp
 Task<std::vector<uint64_t*>> startLotsOfCalculations() {
-    // SumTask::all takes a vector of Tasks and returns a Task that resolves 
+    // SumTask::all takes a vector of Tasks and returns a Task that resolves
     // into a vector of their results
     return SumTask::all({
         startCalculation(),
@@ -277,4 +277,4 @@ Task<std::string> newTask =
 
 ## Coroutines
 
-Tasks can be used in [C++20 coroutines](https://en.cppreference.com/w/cpp/language/coroutines), easily allowing for multiple asynchronous calls to happen within the same code. Note that this may have a little performance overhead compared to regular Task code. See [Coroutines](/tutorials/coroutines) for more information.
+Tasks can be used in [C++20 coroutines](https://en.cppreference.com/cpp/language/coroutines), easily allowing for multiple asynchronous calls to happen within the same code. Note that this may have a little performance overhead compared to regular Task code. See [Coroutines](/tutorials/coroutines) for more information.

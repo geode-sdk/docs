@@ -40,7 +40,7 @@ public:
 };
 ```
 
-Every node, and as such layer, has at least two functions: `create` and `init` [[Note 1]](#notes). `create`, as explained [in the previous chapter](/handbook/vol1/chap1_5.md), is what you use to create instances of the class.
+Every node, and as such layer, has at least two functions: `create` and `init` [[Note 1]](#notes). `create`, as explained [in the previous chapter](/handbook/vol1/chap1_5), is what you use to create instances of the class.
 
 What we're interested in right now however is `init`. This is the function where the node initializes itself; adds all of its subnodes, sets its delegates, etc.. As we can see in the definition of `create`, every instance of `SomeNode` is first created, and then its `init` function is invoked. On top of this, the `init` function is only called once per node, as it doesn't make sense to initialize the same node multiple times.
 
@@ -68,7 +68,7 @@ You will find that this declaration closely resembles a class, and underlyingly 
 
 The name and syntax of `$modify` comes from its purpose; it is to **modify classes**.
 
-For example, to modify the main menu, it would look like this (remembering from [the previous chapter](/handbook/vol1/chap1_5.md) that the main menu's layer is called `MenuLayer`):
+For example, to modify the main menu, it would look like this (remembering from [the previous chapter](/handbook/vol1/chap1_5) that the main menu's layer is called `MenuLayer`):
 
 ```cpp
 #include <Geode/modify/MenuLayer.hpp>
@@ -92,7 +92,7 @@ class $modify(MyModifiedMenuLayer, MenuLayer) {
 
 If you don't provide a name, Geode will automatically generate a random name for the class, which is meant to not cause any name collisions.
 
-> :warning: As `$modify` does not create a normal class, you should not expect standard C++ class things like adding members to work. Geode does come with [an utility for adding members to classes](/tutorials/fields.md), which is quite close to the normal way of declaring members, but not exactly the same.
+> :warning: As `$modify` does not create a normal class, you should not expect standard C++ class things like adding members to work. Geode does come with [an utility for adding members to classes](/tutorials/fields), which is quite close to the normal way of declaring members, but not exactly the same.
 
 ## Hooking `init`
 
@@ -113,7 +113,7 @@ class $modify(MenuLayer) {
 
 That's it! Now if you compiled this mod, installed it and opened the game, you would find that `MenuLayer` has turned completely blank, as we have overridden its `init` function, which means it can't add any of its nodes. You would also most likely find that the game would crash, since a lot of things depend on `MenuLayer` actually containing stuff.
 
-And, well, we don't want to _override_ MenuLayer; we just want to append stuff to it. Luckily, from [the hooking chapter](/handbook/vol1/chap1_2.md), we know there is a tool for this: just **call the original function**!
+And, well, we don't want to _override_ MenuLayer; we just want to append stuff to it. Luckily, from [the hooking chapter](/handbook/vol1/chap1_2), we know there is a tool for this: just **call the original function**!
 
 ...well, uh. How exactly do we do that?
 
@@ -137,9 +137,9 @@ class $modify(MenuLayer) {
 
 That's it. As previously stated, this is [quite close to the standard node design pattern](#the-structure-of-a-node).
 
-> :warning: It should be noted that not all layer's `init` functions have the same signature, and `$modify` requires the signature to **exactly match** in order to create a hook. Unfortunately, due to implementation problems, it also (currently) doesn't tell you if your signature is wrong, so you may find yourself scratching your head as to why your mod isn't working, only to realize the signature of `init` is off. Check [GeometryDash.bro](https://github.com/geode-sdk/bindings/blob/main/bindings/2.2074/GeometryDash.bro) to make sure the signature of your hook is correct!
+> :warning: It should be noted that not all layer's `init` functions have the same signature, and `$modify` requires the signature to **exactly match** in order to create a hook. Unfortunately, due to implementation problems, it also (currently) doesn't tell you if your signature is wrong, so you may find yourself scratching your head as to why your mod isn't working, only to realize the signature of `init` is off. Check [GeometryDash.bro](https://github.com/geode-sdk/bindings/blob/main/bindings/2.2081/GeometryDash.bro) to make sure the signature of your hook is correct!
 
-Now we are at an interesting point; we know how to hook functions, we know what function from a layer to hook in order to modify it, and we know how to work with nodes. So, let's tie all of this together! Only 7 chapters in, [it's time for **Hello, World!**](/handbook/vol1/chap1_7.md)
+Now we are at an interesting point; we know how to hook functions, we know what function from a layer to hook in order to modify it, and we know how to work with nodes. So, let's tie all of this together! Only 7 chapters in, [it's time for **Hello, World!**](/handbook/vol1/chap1_7)
 
 ## Notes
 

@@ -1,13 +1,13 @@
 # Publishing Geode Mods
 
-Once your awesome mod is finished, it's time to publish it for all the world to see! Geode comes with an in-game "Download" section where users can download mods from, which gets its content from [the Geode Index](https://api.geode-sdk.org/v1/mods).
+Once your awesome mod is finished, it's time to publish it for all the world to see! Geode comes with an in-game "Download" section where users can download mods from, which gets its content from [the Geode Index](https://api.geode-sdk.org/swagger/).
 
-Make sure to [**read the submission guidelines**](/mods/guidelines/) first to avoid common mistakes.
+Make sure to [**read the submission guidelines**](/mods/guidelines) first to avoid common mistakes.
 
 ## Getting Your Mod on the Repo
 
 > :warning: All mods submitted on the index **must provide the source code**! If your mod is open source, just include a link to a Github repository or equivalent. For closed source mods, see [the dedicated section](#what-about-closed-source-mods).
-
+`
 Submitting a mod to the official mod index is as follows:
 
 ### Using Geode CLI
@@ -39,7 +39,7 @@ To release an update using the website, navigate to the mod page (available even
 
 If you are using GitHub releases (or any other system), **do not update an existing release** - create a new one instead. Updating an existing release **will break that version of the mod**, as the Geode package is checksummed.
 
-Make sure to **increase your mod version** when updating it! You should be following [Semantic Versioning](https://semver.org), especially if you're developing a mod with a **public API**.
+Make sure to **increase your mod version** when updating it! You should be following [Semantic Versioning](https://semver.org/), especially if you're developing a mod with a **public API**.
 
 If you are a **verified** developer, then the update will automatically be accepted onto the index, without the need of approval from an **index admin**. For non-verified developers they go through the standard approval process, which can be tracked in the same way as new mod submissions.
 

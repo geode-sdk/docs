@@ -6,7 +6,7 @@ Mods will often want to have properties that the user can configure, such as how
 
 All settings have an associated key, or ID. This is the key of the settings object defined in `mod.json`. Each setting is defined as a JSON object, which contains at least one key: `type`. This key defines the type of the setting, including a wide range of built-in types but also the `custom:` prefix for [defining your own types](#custom-settings).
 
-> :information_source: Settings are intended for values the user can customize in-game. If you're looking for just saving some arbitary data in a quick cross-platform way, [see the tutorial for saving data](/mods/savedata.md).
+> :information_source: Settings are intended for values the user can customize in-game. If you're looking for just saving some arbitary data in a quick cross-platform way, [see the tutorial for saving data](/mods/savedata).
 
 ![An image showcasing the settings popup for the BetterEdit mod by HJfod](/assets/settings/popup.png)
 
@@ -14,7 +14,7 @@ All settings have an associated key, or ID. This is the key of the settings obje
 
 > :information_source: It is heavily recommended to have [the Geode VS Code Extension](/getting-started/ide-setup) installed, as it gives you automatic code completion and checking for settings in `mod.json`.
 
-Adding new settings to your mod happens through `mod.json`. Define the `settings` key as an object and then list out the settings you want to have: 
+Adding new settings to your mod happens through `mod.json`. Define the `settings` key as an object and then list out the settings you want to have:
 
 ```json
 { // mod.json
@@ -155,7 +155,7 @@ Integer settings are a whole number. By default, they have a slider, arrows to i
     "control": {
         // Enable the small (green) arrow controls
         "arrows": true,
-        // Control how much the small (green) arrows should increment/decrement 
+        // Control how much the small (green) arrows should increment/decrement
         // the setting's value when clicked
         "arrow-step": 1,
         // Enable the secondary (pink) arrow controls
@@ -197,7 +197,7 @@ Float settings are just like int settings, but for floats!
     "control": {
         // Enable the small (green) arrow controls
         "arrows": true,
-        // Control how much the small (green) arrows should increment/decrement 
+        // Control how much the small (green) arrows should increment/decrement
         // the setting's value when clicked
         "arrow-step": 0.1,
         // Enable the secondary (pink) arrow controls
@@ -235,10 +235,10 @@ String settings are simple strings that can be controlled by character limits or
     "default": "Stephen",
     // A regex pattern the setting must match
     "match": "[A-Z][a-z]+",
-    // A list of characters this setting can consist of, same as the 
+    // A list of characters this setting can consist of, same as the
     // CCTextInputNode character filter
     "filter": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    // A list of possible values. Turns the setting into an enum, where the 
+    // A list of possible values. Turns the setting into an enum, where the
     // user can simply use arrows to navigate the list of values
     "one-of": ["Stephen", "George", "Sarah", "Tiffany"]
 }
@@ -280,10 +280,10 @@ The default value for file settings support a set of known path prefixes to allo
         "android": "{gd_dir}/groovy.so"
     },
     "control": {
-        // The dialog to show when the user clicks the file selection button in the 
+        // The dialog to show when the user clicks the file selection button in the
         // UI. Either "save" or "open" - defaults to "open"
         "dialog": "open",
-        // Configure file filters in the open dialog. An "All (*.*)" filter is 
+        // Configure file filters in the open dialog. An "All (*.*)" filter is
         // added implicitly
         "filters": [
             {
@@ -416,7 +416,7 @@ protected:
 
 A list of keybind names can be found [in the Geode repository](https://github.com/geode-sdk/geode/blob/main/loader/src/utils/Keyboard.cpp#L6). The supported modifier keys are:
 
-- "Control" or "Ctrl" for the Control key  
+- "Control" or "Ctrl" for the Control key
 - "Shift" for the Shift key
 - "Alt", "Opt", or "Option" for the Alt key (Option on macOS/iOS)
 - "Super", "Cmd", "Command", "Win", or "Windows" for the Super/Windows key (Command on macOS/iOS)
@@ -492,7 +492,7 @@ Custom setting types must define two classes: a `SettingV3`-based definition cla
 
 using namespace geode::prelude;
 
-// Settings should have some way to store their value. Here we use an enum, but 
+// Settings should have some way to store their value. Here we use an enum, but
 // you can of course use a more complicated type aswell!
 // The main point is that the type *must implement `matjson::Serialize`*.
 enum class MyCustomEnum {
@@ -500,38 +500,38 @@ enum class MyCustomEnum {
     OtherValidEnumValue,
 };
 
-// The type of the setting must implement `matjson::Serialize` in order to use 
+// The type of the setting must implement `matjson::Serialize` in order to use
 // `SettingBaseValueV3`
 template <>
 struct matjson::Serialize<MyCustomEnum> {
-    // See https://github.com/geode-sdk/test-mod/blob/main/src/MyCustomSettingV3.cpp#L12-L30 
+    // See https://github.com/geode-sdk/test-mod/blob/main/src/MyCustomSettingV3.cpp#L12-L30
     // for the definition
 };
 
-// This is the most important part of the setting - this actually defines what 
-// properties the setting can have in `mod.json`, as well as keeps track of the 
+// This is the most important part of the setting - this actually defines what
+// properties the setting can have in `mod.json`, as well as keeps track of the
 // setting's current value.
-// You can inherit directly for `SettingV3`, but for most cases you'll want to 
-// inherit from `SettingBaseValueV3` instead, as it automatically provides the 
-// `"default"` property, defines most of the required virtuals from `SettingV3`, 
+// You can inherit directly for `SettingV3`, but for most cases you'll want to
+// inherit from `SettingBaseValueV3` instead, as it automatically provides the
+// `"default"` property, defines most of the required virtuals from `SettingV3`,
 // and provides getters and setters for the current value.
-// Using `SettingBaseValueV3` requires the value type to implement 
+// Using `SettingBaseValueV3` requires the value type to implement
 // `matjson::Serialize`.
-// For an example on how to inherit directly from `SettingV3` (for example for 
+// For an example on how to inherit directly from `SettingV3` (for example for
 // cosmetic purposes), see below for the `MyButtonSettingV3` example
 class MyCustomSettingV3 : public SettingBaseValueV3<MyCustomEnum> {
 protected:
-    // We don't need to store the value nor the default value ourselves, as 
+    // We don't need to store the value nor the default value ourselves, as
     // `SettingBaseValueV3` handles that for us :3
-    // However, we will add an additional property for the sake of showcasing 
-    // how one would deal with that. This property simply marks whether the 
+    // However, we will add an additional property for the sake of showcasing
+    // how one would deal with that. This property simply marks whether the
     // setting should be "splorgy", which by default is false.
     bool m_splorgy = false;
 
 public:
-    // All settings must provide a `parse` function for parsing the setting 
-    // from its definition in `mod.json`. The signature must match this exactly, 
-    // although the return type should point to a `SettingV3`-derivative rather 
+    // All settings must provide a `parse` function for parsing the setting
+    // from its definition in `mod.json`. The signature must match this exactly,
+    // although the return type should point to a `SettingV3`-derivative rather
     // than `std::shared_ptr<SettingV3>` directly
     static Result<std::shared_ptr<SettingV3>> parse(
         // The key of the setting, as defined in `mod.json`
@@ -543,42 +543,42 @@ public:
     ) {
         auto res = std::make_shared<MyCustomSettingV3>();
 
-        // It is recommended to use the JSON checking utilities in Geode for 
-        // actually parsing the setting, as this deals with type & error 
+        // It is recommended to use the JSON checking utilities in Geode for
+        // actually parsing the setting, as this deals with type & error
         // handling really nicely
         auto root = checkJson(json, "MyCustomSettingV3");
 
-        // You should basically always call `parseBaseProperties`, as this will 
-        // deal with all of the base keys like `"name"`, `"description"`, etc. 
-        // If you derive from `SettingBaseValueV3`, this will also parse the 
+        // You should basically always call `parseBaseProperties`, as this will
+        // deal with all of the base keys like `"name"`, `"description"`, etc.
+        // If you derive from `SettingBaseValueV3`, this will also parse the
         // `"default"` key appropriately.
-        // There is also an overload for parsing directly from JSON if you don't 
-        // want to use Geode's JSON checking utilities, as well as a fourth bool 
-        // argument for parsing just the `"name"` and `"description"` properties 
+        // There is also an overload for parsing directly from JSON if you don't
+        // want to use Geode's JSON checking utilities, as well as a fourth bool
+        // argument for parsing just the `"name"` and `"description"` properties
         // if your setting is only cosmetic.
-        
-        // If your setting doesn't even have a name or description, you must at 
+
+        // If your setting doesn't even have a name or description, you must at
         // the very least call `res->init(key, modID)`!
         res->parseBaseProperties(key, modID, root);
 
-        // This is where we parse any properties specific to this setting. In 
+        // This is where we parse any properties specific to this setting. In
         // our case, that will be splorgyness, which is optionally defined:
         root.has("splorgy").into(res->m_splorgy);
 
-        // This logs a warning into the console if the object contains keys you 
+        // This logs a warning into the console if the object contains keys you
         // haven't defined. You can remove it if you don't like logspam
         root.checkUnknownKeys();
 
         // Return the resulting instance, or an Err if the JSON parsing failed
         return root.ok(std::static_pointer_cast<SettingV3>(res));
     }
-    
-    // This is defined at the end of the file, as it needs to know the  
+
+    // This is defined at the end of the file, as it needs to know the
     // definition of the `MyCustomSettingNodeV3` class
     SettingNodeV3* createNode(float width) override;
 };
 
-// If you want to be able to use `Mod::getSettingValue` with your custom setting, 
+// If you want to be able to use `Mod::getSettingValue` with your custom setting,
 // specialize this type!
 // Afterwards, you can simply do `Mod::get()->getSettingValue<MyCustomEnum>("my-setting")`
 template <>
@@ -586,22 +586,22 @@ struct geode::SettingTypeForValueType<MyCustomEnum> {
     using SettingType = MyCustomSettingV3;
 };
 
-// The second most important part of the setting is defining the node for the 
-// UI. Again, here we use a helper class, which automatically defines a bunch 
-// of the required virtual functions for us. Note that using 
-// `SettingValueNodeV3` requires the setting type to implement 
+// The second most important part of the setting is defining the node for the
+// UI. Again, here we use a helper class, which automatically defines a bunch
+// of the required virtual functions for us. Note that using
+// `SettingValueNodeV3` requires the setting type to implement
 // `SettingBaseValueV3`!
 class MyCustomSettingNodeV3 : public SettingValueNodeV3<MyCustomSettingV3> {
 protected:
-    // If we use `SettingValueNodeV3`, we once again don't need to track the 
-    // current value ourselves - we just use the `getValue` and `setValue` 
+    // If we use `SettingValueNodeV3`, we once again don't need to track the
+    // current value ourselves - we just use the `getValue` and `setValue`
     // functions!
     std::vector<CCMenuItemToggler*> m_toggles;
 
     bool init(std::shared_ptr<MyCustomSettingV3> setting, float width) {
         if (!SettingValueNodeV3::init(setting, width))
             return false;
-        
+
         // Create toggles for each of our enum options
         for (auto value : {
             std::make_pair(MyCustomEnum::ValidEnumValue, "GJ_starsIcon_001.png"),
@@ -616,30 +616,30 @@ protected:
             toggle->m_notClickable = true;
             toggle->setTag(static_cast<int>(value.first));
             m_toggles.push_back(toggle);
-            
-            // You should add all of your menu components to the menu returned by 
+
+            // You should add all of your menu components to the menu returned by
             // `this->getButtonMenu()`
             this->getButtonMenu()->addChild(toggle);
         }
 
-        // You should resize the menu to fit your content, as this will 
-        // automatically resize the name label to give it the right amount of 
+        // You should resize the menu to fit your content, as this will
+        // automatically resize the name label to give it the right amount of
         // space
         this->getButtonMenu()->setContentWidth(40);
         this->getButtonMenu()->setLayout(RowLayout::create());
 
         // Remember to always call `updateState` at the end of your init!
         this->updateState(nullptr);
-        
+
         return true;
     }
-    
+
     void updateState(CCNode* invoker) override {
         // Remember to always call the base class's `updateState`!
         SettingValueNodeV3::updateState(invoker);
 
-        // If your setting supports "enable-if" schemes, you should make sure 
-        // that the UI is updated to reflect that. If `shouldEnable` returns 
+        // If your setting supports "enable-if" schemes, you should make sure
+        // that the UI is updated to reflect that. If `shouldEnable` returns
         // false, all toggles and buttons should be grayed out and disabled!
         auto shouldEnable = this->getSetting()->shouldEnable();
 
@@ -660,7 +660,7 @@ protected:
         this->setValue(
             // Get the value of the toggle
             static_cast<MyCustomEnum>(sender->getTag()),
-            // `setValue` eventually calls `updateState`, so it needs to know 
+            // `setValue` eventually calls `updateState`, so it needs to know
             // what the invoker of the state update was
             static_cast<CCNode*>(sender)
         );
@@ -697,16 +697,16 @@ If you want to store a more complex value (e.g. a string or a custom class/struc
 
 ```cpp
 struct MyComplexSettingValue {
-    // In case you're wondering why we can't just define a custom setting with 
-    // `std::string` as the value type: that would conflict with the built-in 
-    // string setting, so `Mod::getSettingValue<std::string>()` would  
+    // In case you're wondering why we can't just define a custom setting with
+    // `std::string` as the value type: that would conflict with the built-in
+    // string setting, so `Mod::getSettingValue<std::string>()` would
     // unexpectedly fail
     std::string value;
 
     // Make sure your value type is comparable
     bool operator==(MyComplexSettingValue const& other) const = default;
 
-    // If your value type is a thin wrapper around another type, you can allow 
+    // If your value type is a thin wrapper around another type, you can allow
     // implicit conversions from your type to the wrapped type
     operator std::string() const {
         return value;
@@ -722,12 +722,12 @@ struct MyComplexSettingValue {
 // You'll have to manually implement JSON serialization for the value
 template<>
 struct matjson::Serialize<MyComplexSettingValue> {
-    // Serialize the value into JSON. In this case, we just return the value, 
+    // Serialize the value into JSON. In this case, we just return the value,
     // as strings are inherently JSON-serializable
     static matjson::Value toJson(MyComplexSettingValue const& settingValue) {
         return settingValue.value;
     }
-    // Deserialize the value from JSON, again taking advantage of strings being 
+    // Deserialize the value from JSON, again taking advantage of strings being
     // inherently JSON-serializable
     static Result<MyComplexSettingValue> fromJson(matjson::Value const& json) {
         GEODE_UNWRAP_INTO(auto str, json.asString());
@@ -753,7 +753,7 @@ Custom settings do not necessarily need to inherit from the `SettingValueNodeV3<
 
 using namespace geode::prelude;
 
-// Inherit from SettingV3 directly over SettingBaseValueV3, as our setting 
+// Inherit from SettingV3 directly over SettingBaseValueV3, as our setting
 // doesn't actually control any value, but it just a simple button
 class MyButtonSettingV3 : public SettingV3 {
 public:
@@ -762,22 +762,22 @@ public:
         auto res = std::make_shared<MyButtonSettingV3>();
         auto root = checkJson(json, "MyButtonSettingV3");
 
-        // `parseBaseProperties` parses all base properties, including 
-        // `requires-restart` - which does not really make sense in our use case, 
+        // `parseBaseProperties` parses all base properties, including
+        // `requires-restart` - which does not really make sense in our use case,
         // as there's nothing in this setting that could require a restart.
-        // So, we instead parse the base properties that actually apply to this 
+        // So, we instead parse the base properties that actually apply to this
         // setting manually:
         res->init(key, modID, root);
         res->parseNameAndDescription(root);
         res->parseEnableIf(root);
-        
+
         root.checkUnknownKeys();
         return root.ok(std::static_pointer_cast<SettingV3>(res));
     }
 
     // Since there's no data to save or load, these can just return true
-    // Although you could use these for example to store how many times the 
-    // button has been clicked 
+    // Although you could use these for example to store how many times the
+    // button has been clicked
     bool load(matjson::Value const& json) override {
         return true;
     }
@@ -785,7 +785,7 @@ public:
         return true;
     }
 
-    // This setting can't ever have anything but the default value, as it has 
+    // This setting can't ever have anything but the default value, as it has
     // no value
     bool isDefaultValue() const override {
         return true;
@@ -796,8 +796,8 @@ public:
     SettingNodeV3* createNode(float width) override;
 };
 
-// We are inheriting from `SettingNodeV3` directly again, as we don't need the 
-// boilerplate `SettingValueNodeV3` fills in for us because our setting has no 
+// We are inheriting from `SettingNodeV3` directly again, as we don't need the
+// boilerplate `SettingValueNodeV3` fills in for us because our setting has no
 // value!
 class MyButtonSettingNodeV3 : public SettingNodeV3 {
 protected:
@@ -807,9 +807,9 @@ protected:
     bool init(std::shared_ptr<MyButtonSettingV3> setting, float width) {
         if (!SettingNodeV3::init(setting, width))
             return false;
-    
+
         // We just create the button and add it to the setting's menu
-        
+
         m_buttonSprite = ButtonSprite::create("Click Me!", "goldFont.fnt", "GJ_button_01.png", .8f);
         m_buttonSprite->setScale(.5f);
         m_button = CCMenuItemSpriteExtra::create(
@@ -820,15 +820,15 @@ protected:
         this->getButtonMenu()->updateLayout();
 
         this->updateState(nullptr);
-        
+
         return true;
     }
-    
+
     void updateState(CCNode* invoker) override {
         SettingNodeV3::updateState(invoker);
 
-        // In case there's an "enable-if" condition on this button, for example 
-        // if this played a test notification in a notification mod and you 
+        // In case there's an "enable-if" condition on this button, for example
+        // if this played a test notification in a notification mod and you
         // want to disable the button if notifications are disabled entirely
         auto shouldEnable = this->getSetting()->shouldEnable();
         m_button->setEnabled(shouldEnable);
@@ -848,7 +848,7 @@ protected:
         )->show();
     }
 
-    // Both of these can just be no-ops, since they make no sense for our 
+    // Both of these can just be no-ops, since they make no sense for our
     // setting as it's just a button
     void onCommit() override {}
     void onResetToDefault() override {}
@@ -864,7 +864,7 @@ public:
         return nullptr;
     }
 
-    // Both of these can just return false, since they make no sense for our 
+    // Both of these can just return false, since they make no sense for our
     // setting as it's just a button
     bool hasUncommittedChanges() const override {
         return false;
@@ -873,8 +873,8 @@ public:
         return false;
     }
 
-    // This is not necessary, but it makes it so you don't have to do the 
-    // pointer cast every time you want to access the properties of the button 
+    // This is not necessary, but it makes it so you don't have to do the
+    // pointer cast every time you want to access the properties of the button
     // setting
     std::shared_ptr<MyButtonSettingV3> getSetting() const {
         return std::static_pointer_cast<MyButtonSettingV3>(SettingNodeV3::getSetting());

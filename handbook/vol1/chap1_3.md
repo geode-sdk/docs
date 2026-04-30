@@ -1,10 +1,10 @@
 # Chapter 1.3: Functions & Addresses
 
-In [the last chapter](/handbook/vol1/chap1_2.md), we looked at hooking and how it works. However, the last chapter only touched hooking in theory. The code shown was not what actuals hooks in your code look like. For instance, we do not have access to GD's source code, so we can't exactly just write `return ourDetour()` at the start of the function we want to hook. Instead, we need to figure out some way to **insert hooks into GD's binary code**.
+In [the last chapter](/handbook/vol1/chap1_2), we looked at hooking and how it works. However, the last chapter only touched hooking in theory. The code shown was not what actuals hooks in your code look like. For instance, we do not have access to GD's source code, so we can't exactly just write `return ourDetour()` at the start of the function we want to hook. Instead, we need to figure out some way to **insert hooks into GD's binary code**.
 
 ## Manual hooking
 
-The main way to create hooks in Geode is using an abstraction called `$modify` - however, it is a very powerful tool and hard to explain without some preface. It is also just an abstraction; you can create hooks manually in Geode as well through the [`Mod::addHook`](/classes/geode/Mod#addHook) interface - although in practice **you should never be creating manual hooks unless necessary**.
+The main way to create hooks in Geode is using an abstraction called `$modify` - however, it is a very powerful tool and hard to explain without some preface. It is also just an abstraction; you can create hooks manually in Geode as well through the [`Mod::hook`](/classes/geode/Mod#hook) interface - although in practice **you should never be creating manual hooks unless necessary**.
 
 > :information_source: Manual hooks are sometimes necessary, for example to hook some obscure low-level functions that only exists on one platform, like GLFW on Windows. However, for 99% of mods, you should just be using `$modify`, since it makes your code much more portable and easier to work with.
 
@@ -55,7 +55,7 @@ What this means is that in order to hook a function in GD, **we need to know its
 
 ## Addresses
 
-So how do we find out these things? Usually, this is done through **reverse engineering**; however, RE is quite a complex skill, and would take far too much time to explain here, so it has its [own dedicated volume instead](https://docs.geode-sdk.org/handbook/vol2/chap2_1). And on top of that, **most common functions have already been found**. This means that instead of REing the function yourself, you can use the GD bindings that come packaged with Geode.
+So how do we find out these things? Usually, this is done through **reverse engineering**; however, RE is quite a complex skill, and would take far too much time to explain here, so it has its [own dedicated volume instead](/handbook/vol2/chap2_1). And on top of that, **most common functions have already been found**. This means that instead of REing the function yourself, you can use the GD bindings that come packaged with Geode.
 
 > :information_source: Traditionally, the most common GD header library was [**gd.h**](https://github.com/HJfod/gd.h). However, nowadays **gd.h is completely obsolete**, as it is only for 2.1 and fully unmaintained.
 
@@ -63,9 +63,9 @@ However, it is also important to note that **you still need to know how to rever
 
 As noted previously, you shouldn't usually be creating hooks manually. Instead, **Geode comes with a special hooking syntax called `$modify`**. How it works will be explained in a later chapter, but first we must talk a bit about GD's game engine: **Cocos2d**.
 
-[Chapter 1.4: Cocos2d](/handbook/vol1/chap1_4.md)
+[Chapter 1.4: Cocos2d](/handbook/vol1/chap1_4)
 
 ## Notes
 
-> [Note 1] Hook conflicts are a type of [**race condition**](https://en.m.wikipedia.org/wiki/Race_condition) and it happens when two mods try to hook the same function at the same time. If the mods do this sufficiently close to one another, there is a high chance that **one mod's hook will replace the other's**. The end result of this is that one of the mods functions incorrectly, when it fails to hook the function it expected to. In the best case, this just results in the mod losing functionality, but in the extreme case this **could cause crashes**.
+> [Note 1] Hook conflicts are a type of [**race condition**](https://en.wikipedia.org/wiki/Race_condition) and it happens when two mods try to hook the same function at the same time. If the mods do this sufficiently close to one another, there is a high chance that **one mod's hook will replace the other's**. The end result of this is that one of the mods functions incorrectly, when it fails to hook the function it expected to. In the best case, this just results in the mod losing functionality, but in the extreme case this **could cause crashes**.
 

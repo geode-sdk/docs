@@ -2,11 +2,11 @@
 
 Pretty much every mod will eventually enter the point where it needs to save some data on the user's machine, such as configuration settings or other user-customizable values. Geode has built-in support for **two kinds of savedata**: **user-editable settings** and **non-editable saved values**.
 
-Settings are covered [in their own tutorial](/mods/settings.md) - **this tutorial is about non-user-editable save data**.
+Settings are covered [in their own tutorial](/mods/settings) - **this tutorial is about non-user-editable save data**.
 
 Unlike settings, save data does not need to be declared in `mod.json`, or anywhere else for that matter. Save data is automatically brought to life when you set it for the first time. Save data is, as the name implies, saved when the game is closed, and its previous state loaded back up the next time the game is opened.
 
-You can save any type of value as long as it implements `matjson::Serialize` (see the [STL container implementations](https://github.com/geode-sdk/json/blob/main/include/matjson/stl_serialize.hpp) for an example).
+You can save any type of value as long as it implements `matjson::Serialize` (see the [STL container implementations](https://github.com/geode-sdk/json/blob/main/include/matjson/std.hpp) for an example).
 
 ## Setting & getting save data
 

@@ -6,11 +6,11 @@ description: How to include resources in Geode mods
 
 Geode mods may include any number of resources/assets in the mod package. Geode also provides utilities for automatically **generating spritesheets**, **turning TTF fonts to Bitmap ones**, and **creating Medium/Low versions of sprites**.
 
-In order for Geode to create the resources, [you must have Geode CLI installed](/geode/installcli).
+In order for Geode to create the resources, [you must have Geode CLI installed](/getting-started/geode-cli).
 
 ## Adding sprites
 
-Adding sprites is as simple as adding the PNG files somewhere in your mod's source directory (commonly under `resources`) and then adding them to your [mod.json](/mods/configuring.md).
+Adding sprites is as simple as adding the PNG files somewhere in your mod's source directory (commonly under `resources`) and then adding them to your [mod.json](/mods/configuring).
 
 Geometry Dash needs all sprites to have a High, Medium, and Low quality version for performance. **Geode assumes that the source sprites you provide are UHD quality, and creates the medium / low versions automatically.** You should only include the high quality version of your sprite in resources.
 

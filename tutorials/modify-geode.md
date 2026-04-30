@@ -8,7 +8,7 @@ Geode currently exposes three UI events through the `<Geode/ui/GeodeUI.hpp>` hea
 
 Note that **all Geode UI events may and will be posted _multiple times_!** This is because Geode UIs often have an initial created "loading" state, and then fetch data from the Geode servers that is updated onto the created node asynchronously. To allow mods to be notified of when this data is loaded, **the UI events are reposted whenever the state of the UI node changes**. For this reason, **mods can never add nodes without checking if they already exist first**.
 
-You can listen to these events by using Geode's events system as usual, using the [`EventFilter<T>`](/classes/geode/EventFilter) helper class. Note that you should always return `ListenerResult::Propagate` to allow other mods to modify the layer as well, like calling the original in a `$modify` hook!
+You can listen to these events by using Geode's [events system](/tutorials/events) as usual. Note that you should always return `ListenerResult::Propagate` to allow other mods to modify the layer as well, like calling the original in a `$modify` hook!
 
 ## Guidelines
 
@@ -25,6 +25,8 @@ These rules are in place because the Geode UI is a highly volatile place that **
 > (note): Nodes nested inside other nodes don't need to be prefixed, as long as the topmost parent is prefixed. For example, `my-mod.id/container > button` is completely fair!
 
 ## Example
+
+> :warning: This is out of date! See the [v5 migration docs](tutorials/migrate-v5#changes-to).
 
 ```cpp
 #include <Geode/ui/GeodeUI.hpp>

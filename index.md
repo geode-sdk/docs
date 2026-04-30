@@ -1,4 +1,4 @@
-![Geode Logo](https://github.com/geode-sdk.png?size=80) 
+![Geode Logo](https://github.com/geode-sdk.png?size=80)
 
 # Geode SDK
 
@@ -10,7 +10,7 @@
 
 The main goal of Geode is to **end mod incompatibility**. Traditional modding leads very easily to compatibility problems, many of which Geode attempts to address with better solutions.
 
-On top of this, and perhaps more interestingly, **Geode provides much better ergonomics for modding**. Instead of having to deal with calling conventions, trampolines, manually setting hooks (likely in another source file), you can have all the code relevant to hooks in a [nice, clean, readable syntax](/tutorials/modify.md) contained within a single source file.
+On top of this, and perhaps more interestingly, **Geode provides much better ergonomics for modding**. Instead of having to deal with calling conventions, trampolines, manually setting hooks (likely in another source file), you can have all the code relevant to hooks in a [nice, clean, readable syntax](/tutorials/modify) contained within a single source file.
 
 ## Help, Contributing, Etc.
 
@@ -35,4 +35,4 @@ See [Handbook](/handbook/chap0) for a beginner-friendly tutorial series on using
 ### Special Thanks
 
  * [NachoBIT](https://github.com/TheNachoBIT)
- * [RobTop Games](https://twitter.com/RobTopGames/) for making this amazing game and providing us and so many others with hours of entertainment ❤
+ * [RobTop Games](https://twitter.com/RobTopGames) for making this amazing game and providing us and so many others with hours of entertainment ❤

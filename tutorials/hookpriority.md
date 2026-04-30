@@ -4,7 +4,7 @@ Hook priority allows for a developer to control when their hook will be called i
 
 > :warning: This is advanced functionality! Most developers will not need to touch this system.
 
-The syntax, as previously mentioned in the [Hooking tutorial](/tutorials/modify.md), looks like this:
+The syntax, as previously mentioned in the [Hooking tutorial](/tutorials/modify), looks like this:
 
 ```cpp
 class $modify(cocos2d::CCLabelBMFont) {
@@ -113,7 +113,7 @@ This section details some additional tricks to the hook priority system.
 
 - Pre/Post values embedded into `Priority::` do exist, but they are not that recommended as arithmetic on them can be confusing. (Positive becomes negative for Post)
 
-- Manual hooks can have their priorities set through the [Hook::setPriority](/classes/geode/Hook/#setPriority) method.
+- Manual hooks can have their priorities set through the [Hook::setPriority](/classes/geode/Hook#setPriority) method.
 
 - It is not possible to set the priorities of multiple functions with overloaded parameters in the same modify class (as this would require specifying arguments). In this situation, either split the hooks into separate modify classes or manually hook.
 

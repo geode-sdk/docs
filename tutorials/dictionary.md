@@ -10,13 +10,13 @@ The location in the [raw program binary](#binary) where a function or other prog
 
 A "human-readable" form of [binary code](#binary).
 
-> Further reading: [Wikipedia](https://en.m.wikipedia.org/wiki/Assembly_language)
+> Further reading: [Wikipedia](https://en.wikipedia.org/wiki/Assembly_language)
 
 ## Binary
 
 Depending on context, may refer to the **program binary** of GD, aka GD's raw machine code found in `GeometryDash.exe` on Windows, or just **binary data** aka 1s and 0s in general.
 
-> Further reading: [Wikipedia](https://en.m.wikipedia.org/wiki/Machine_code)
+> Further reading: [Wikipedia](https://en.wikipedia.org/wiki/Machine_code)
 
 ## CacaoSDK
 
@@ -42,19 +42,19 @@ A [debugger](#debugger) commonly used by Windows modders.
 
 The game engine used by GD. The version used by GD is Cocos2d-x v2.2.3, however with many propietary modifications by RobTop, meaning that you need to use a specially prepared version that accounts for these changes such as [Geode](#geode) or [cocos-headers](#cocos-headers) in order to make mods.
 
-> [Homepage](https://github.com/cocos2d/cocos2d-x/tree/cocos2d-x-2.2.3/)
+> [Source](https://github.com/cocos2d/cocos2d-x/tree/cocos2d-x-2.2.3/)
 
 ## Cocos-headers
 
 A popular library used in [traditional mods](#traditional-modding) consisting of Cocos2d headers with many of RobTop's modifications added.
 
-> [Homepage](https://github.com/HJfod/cocos-headers)
+> [Source](https://github.com/HJfod/cocos-headers)
 
 ## Debugger
 
 A tool used for debugging another application (usually GD) for issues (usually crashes), such as [x64dbg](#x64dbg) or [Cheat Engine](#cheat-engine).
 
-> Further reading: [Wikipedia](https://en.m.wikipedia.org/wiki/Debugger)
+> Further reading: [Wikipedia](https://en.wikipedia.org/wiki/Debugger)
 
 ## Detour
 
@@ -66,7 +66,7 @@ The code you wrote that is run instead of the original function in a [hook](#hoo
 
 The central [manager class](#manager) in Cocos2d that manages the current [scene](#scene) and the nodes in it.
 
-> Further reading: [Cocos2d docs](https://docs.cocos2d-x.org/cocos2d-x/v4/en/basic_concepts/director.html)
+> Further reading: [Cocos2d Docs](https://docs.cocos2d-x.org/cocos2d-x/v4/en/basic_concepts/director.html) (Note: These are for Cocos v4, which is more up-to-date than GD's, 2.2.3, so the syntax may differ!)
 
 > Related words: [Node tree](#node-tree), [Scene](#scene), [Node](#node), [Menu](#menu), [Popup](#popup), [Layer](#layer)
 
@@ -76,17 +76,17 @@ A different name for mods that is usually used to refer to [Mega Hack](#mega-hac
 
 ## GD.h
 
-A popular library used in [traditional mods](#traditional-modding) that contains many GD functions and classes. Originally started by [PoweredByPie](https://github.com/poweredbypie), but the most popular version is the fork by [HJfod](https://github.com/HJfod).
+A popular library used in [traditional mods](#traditional-modding) that contains many GD functions and classes. Originally started by [PoweredByPie](https://github.com/poweredbypie), but the most popular version is the [fork by HJfod](https://github.com/HJfod/gd.h).
 
-> [Homepage](https://github.com/HJfod/gd.h)
+> [Source](https://github.com/HJfod/gd.h)
 
 > Related words: [Geode](#geode), [Traditional modding](#traditional-modding)
 
 ## Geode
 
-A framework meant as a replacement for [traditional modding](#traditional-modding) with the aim of standardizing many aspects of modding and fixing [mod incompatabilities](#mod-incompatabilities).
+A framework meant as a replacement for [traditional modding](#traditional-modding) with the aim of standardizing many aspects of modding and fixing [mod incompatibilities](#mod-incompatibilities).
 
-> [Homepage](https://github.com/geode-sdk/geode)
+> [Homepage](https://geode-sdk.org/)
 
 ## Geometry Dash
 
@@ -96,11 +96,11 @@ It's the game.
 
 A free tool many modders use for [reverse engineering](#reverse-engineering).
 
-> [Homepage](https://ghidra-sre.org/)
+> [Source](https://github.com/nationalsecurityagency/ghidra)
 
 ## .GMD Files
 
-A file format for storing GD levels, popularized by [GDShare](https://github.com/HJfod/GDShare-mod/). The level data is stored in plain text as its [Plist data](#plist-files) with a surrounding `<d>` tag.
+A file format for storing GD levels, popularized by [GDShare](https://geode-sdk.org/mods/hjfod.gdshare). The level data is stored in plain text as its [Plist data](#plist-files) with a surrounding `<d>` tag.
 
 ## .GMD2 Files
 
@@ -112,7 +112,7 @@ Another, more complex file format for storing GD levels, popularized by [GDShare
 
 Hijacking the execution of a function in GD and redirecting it to [your own function](#detour). The part of a mod that actually does the modifying; the most fundamental modding concept alongside [patching](#patching).
 
-> Further reading: [Handbook](/handbook/vol1/chap1_2.md), [Wikipedia](https://en.m.wikipedia.org/wiki/Hooking)
+> Further reading: [Handbook](/handbook/vol1/chap1_2), [Wikipedia](https://en.wikipedia.org/wiki/Hooking)
 
 > Related words: [Detour](#detour), [Patching](#patching), [Trampoline](#trampoline)
 
@@ -130,7 +130,7 @@ An old, never-released framework for creating GD mods. An important influencer t
 
 A [paid](https://www.youtube.com/watch?v=i8ju_10NkGY) tool many modders use for [reverse engineering](#reverse-engineering).
 
-> [Homepage](https://hex-rays.com/IDA-pro/)
+> [Homepage](https://hex-rays.com/ida-pro)
 
 ## Layer
 
@@ -172,9 +172,9 @@ A popular library used for [hooking](#hooking) in [traditional mods](#traditiona
 
 A program that modifies GD by adding, changing, and removing content using various techniques such as [hooking](#hooking) and [patching](#patching). [Traditionally made](#traditional-modding) using libraries such as [gd.h](#gdh) and [cocos-headers](#cocos-headers), but may also be made using a framework such as [Geode](#geode).
 
-## Mod Incompatabilities
+## Mod Incompatibilities
 
-When two mods become incompatible with each other, for example through a [hook conflict](#hook-conflict) or [accessing the node tree through absolute indices](/tutorials/nodetree.md).
+When two mods become incompatible with each other, for example through a [hook conflict](#hook-conflict) or [accessing the node tree through absolute indices](/tutorials/nodetree).
 
 ## Mod Loader
 
@@ -190,7 +190,7 @@ An instance of the `CCNode` class or its subclass. A singular visual element on 
 
 The hierarchy of [nodes](#node) that determines the order of visual elements on screen. At the top of the node tree sits a [scene](#scene), which contains child [layers](#layer) that in turn contain other child nodes.
 
-> Further reading: [Cocos2d docs](https://docs.cocos2d-x.org/cocos2d-x/v4/en/basic_concepts/scene.html)
+> Further reading: [Cocos2d Docs](https://docs.cocos2d-x.org/cocos2d-x/v4/en/basic_concepts/scene.html) (Note: These are for Cocos v4, which is more up-to-date than GD's, 2.2.3, so the syntax may differ!)
 
 ## Optcall
 
@@ -208,7 +208,7 @@ Also known as **byte patching**; the act of directly changing GD's program code 
 
 A file format used by GD, invented by Apple, that stores data as XML organized into key-value pairs.
 
-> Further reading: [Wikipedia](https://en.m.wikipedia.org/wiki/Property_list)
+> Further reading: [Wikipedia](https://en.wikipedia.org/wiki/Property_list)
 
 ## Popup
 
@@ -220,19 +220,19 @@ A [layer](#layer) that visually sits on top of another layer. Usually inherits f
 
 When two programs try to affect the same thing simultaniously and the result depends on the order in which they finish. Most commonly encountered in the form of [hook conflicts](#hook-conflict).
 
-> Further reading: [Wikipedia](https://en.m.wikipedia.org/wiki/Race_condition)
+> Further reading: [Wikipedia](https://en.wikipedia.org/wiki/Race_condition)
 
 ## Register
 
 A fixed-length memory location in a CPU that can store a small amount of data. Usually, for a CPU to operate on data that data has to be stored in a register.
 
-> Further reading: [Wikipedia](https://en.m.wikipedia.org/wiki/Processor_register)
+> Further reading: [Wikipedia](https://en.wikipedia.org/wiki/Processor_register)
 
 ## Reverse Engineering
 
 The process of disassembling, decompiling, and understanding how GD works. Usually done using specialized tools such as [Ghidra](#ghidra) or [IDA Pro](#ida-pro), but may also be done using [debuggers](#debugger), trial-and-error modding, or just playing GD.
 
-> Further reading: [Wikipedia](https://en.m.wikipedia.org/wiki/Reverse_engineering)
+> Further reading: [Wikipedia](https://en.wikipedia.org/wiki/Reverse_engineering)
 
 ## Scene
 
@@ -246,7 +246,7 @@ The node that is at the top of the [node tree](#node-tree). There may only be on
 
 A last-in first-out datastructure used for storing program memory. Way too complex of a topic for a simple dictionary.
 
-> Further reading: [Wikipedia](https://en.m.wikipedia.org/wiki/Stack_(abstract_data_type)), [Stack Overflow](https://stackoverflow.com/questions/556714/how-does-the-stack-work-in-assembly-language)
+> Further reading: [Wikipedia](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)), [Stack Overflow](https://stackoverflow.com/questions/556714/how-does-the-stack-work-in-assembly-language)
 
 ## Thiscall
 
@@ -274,7 +274,7 @@ Also, what most GD modders do once they become experts.
 
 Code where the C++ standard does not say what should happen, and as such the results are completely unpredictable. Your code is most likely full of this.
 
-> Further reading: [cppreference.com](https://en.cppreference.com/w/cpp/language/ub)
+> Further reading: [cppreference.com](https://en.cppreference.com/cpp/language/ub)
 
 ## x64dbg
 
