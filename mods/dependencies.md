@@ -172,6 +172,3 @@ void api::doSomething() {
     // ...
 }
 ```
-
-
-

@@ -144,4 +144,3 @@ Now we are at an interesting point; we know how to hook functions, we know what 
 ## Notes
 
 > [Note 1] There are some very rare cases of nodes that don't have an `init` or `create` function. However, for the purposes of this tutorial, we will pretend those don't exist.
-

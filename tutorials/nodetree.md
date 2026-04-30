@@ -46,6 +46,3 @@ It is recommended for you to also use string IDs in your own layers, as this mak
 ## Naming String IDs
 
 String IDs you give to nodes should be in kebab case with only lowercase a-z letters and no spaces.
-
-
-

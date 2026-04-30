@@ -94,4 +94,3 @@ At this point, we're getting very close to writing actual mod code. However, bef
 ## Notes
 
 > [Note 1] You can also add nodes directly to `CCDirector` and bypass the node tree, but this is very rarely done as nodes in the director don't have access to the touch system or any input for that matter.
-

@@ -299,7 +299,7 @@ intToHex
 numToString
 numToAbbreviatedString
 numFromString
-timePointAsString`
+timePointAsString
 ```
 
 ### ColorProvider

@@ -19,9 +19,9 @@ Adding new settings to your mod happens through `mod.json`. Define the `settings
 ```json
 { // mod.json
     "geode": "3.5.0",
-	"id": "me.my-mod",
-	"name": "My Awesome Mod!",
-	"version": "1.0.0",
+    "id": "me.my-mod",
+    "name": "My Awesome Mod!",
+    "version": "1.0.0",
     "settings": {
         "awesome-title": {
             "type": "title",
@@ -949,7 +949,3 @@ If you have used custom settings for the purpose of creating titles, you should 
 Unless your custom settings are particularly complex, **it is recommended to just rewrite them from scratch**. This will take a bit of effort, but should be pretty easy [if you follow the guide for creating custom settings](#custom-settings). It is also just good practice in general to (if possible) rewrite parts of your codebase every now and then to make sure everything is as refined as possible.
 
 It is heavily recommended to follow the practices laid out in the [Custom Settings part of this tutorial](#custom-settings) for setting nodes, as this results in conventional, easy-to-use and easy-to-maintain UIs. However, if you do have a reason to make a setting that has unconventional UI, you can of course always hide the name label and do what you want.
-
-
-
-

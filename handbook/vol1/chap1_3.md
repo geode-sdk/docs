@@ -13,16 +13,16 @@ The main way to create hooks in Geode is using an abstraction called `$modify` -
 Let's see a [real-world example](/tutorials/manualhooks) of creating manual hooks in Geode:
 ```cpp
 auto wrapFunction(uintptr_t address, tulip::hook::WrapperMetadata const& metadata) {
-	auto wrapped = geode::hook::createWrapper(reinterpret_cast<void*>(address), metadata);
-	if (wrapped.isErr()) {{
-		throw std::runtime_error(wrapped.unwrapErr());
-	}}
-	return wrapped.unwrap();
+    auto wrapped = geode::hook::createWrapper(reinterpret_cast<void*>(address), metadata);
+    if (wrapped.isErr()) {{
+        throw std::runtime_error(wrapped.unwrapErr());
+    }}
+    return wrapped.unwrap();
 }
 
 void MenuLayer_onNewgrounds(MenuLayer* self, CCObject* sender) {
     log::info("Hook reached!");
-	static auto original = wrapFunction(
+    static auto original = wrapFunction(
         geode::base::get() + 0x27b480,
         tulip::hook::WrapperMetadata{
             .m_convention = geode::hook::createConvention(tulip::hook::TulipConvention::Thiscall),
@@ -68,4 +68,3 @@ As noted previously, you shouldn't usually be creating hooks manually. Instead, 
 ## Notes
 
 > [Note 1] Hook conflicts are a type of [**race condition**](https://en.wikipedia.org/wiki/Race_condition) and it happens when two mods try to hook the same function at the same time. If the mods do this sufficiently close to one another, there is a high chance that **one mod's hook will replace the other's**. The end result of this is that one of the mods functions incorrectly, when it fails to hook the function it expected to. In the best case, this just results in the mod losing functionality, but in the extreme case this **could cause crashes**.
-

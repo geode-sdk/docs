@@ -25,4 +25,3 @@ Using DevTools, you can find the name of any layer. Just navigate to the layer w
 > :information_source: DevTools also comes with many other utilities, such as moving nodes in the scene around. However, this tutorial is not about DevTools, so you will have to look at its (currently non-existent) documentation for that ;)
 
 So now we know that the main menu is called `MenuLayer`, but so what? How can we actually modify it? For that, see [Chapter 1.6: Modifying Layers](/handbook/vol1/chap1_6)
-

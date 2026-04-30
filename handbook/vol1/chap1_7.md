@@ -27,12 +27,12 @@ Since we want to add things to the layer, let's hook its `init` function, making
 #include <Geode/modify/MenuLayer.hpp>
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		return true;
-	}
+        return true;
+    }
 };
 ```
 
@@ -44,14 +44,14 @@ Now it's time to actually show the text. As outlined in [Chapter 1.4](/handbook/
 #include <Geode/modify/MenuLayer.hpp>
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto label = cocos2d::CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+        auto label = cocos2d::CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
 
-		return true;
-	}
+        return true;
+    }
 };
 ```
 
@@ -63,14 +63,14 @@ Everything Cocos2d-related lies in the `cocos2d` namespace, so we must prefix ou
 using namespace geode::prelude;
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
 
-		return true;
-	}
+        return true;
+    }
 };
 ```
 
@@ -84,15 +84,15 @@ Now, the label isn't currently a child of any layer, so it won't show up anywher
 using namespace geode::prelude;
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-		this->addChild(label);
+        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+        this->addChild(label);
 
-		return true;
-	}
+        return true;
+    }
 };
 ```
 
@@ -106,17 +106,17 @@ The default position for any node is (0, 0) which is at bottom left of the scree
 using namespace geode::prelude;
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto winSize = CCDirector::get()->getWinSize();
+        auto winSize = CCDirector::get()->getWinSize();
 
-		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-		this->addChild(label);
+        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+        this->addChild(label);
 
-		return true;
-	}
+        return true;
+    }
 };
 ```
 
@@ -128,18 +128,18 @@ Next, to actually position our label, we call the `setPosition` method on it, pl
 using namespace geode::prelude;
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto winSize = CCDirector::get()->getWinSize();
+        auto winSize = CCDirector::get()->getWinSize();
 
-		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-		label->setPosition(winSize.width / 2, winSize.height / 2);
-		this->addChild(label);
+        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+        label->setPosition(winSize.width / 2, winSize.height / 2);
+        this->addChild(label);
 
-		return true;
-	}
+        return true;
+    }
 };
 ```
 
@@ -160,18 +160,18 @@ And with that, **we have completed our Hello, World! mod**. Here's what the fina
 using namespace geode::prelude;
 
 class $modify(MenuLayer) {
-	bool init() {
-		if (!MenuLayer::init())
-			return false;
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
 
-		auto winSize = CCDirector::get()->getWinSize();
+        auto winSize = CCDirector::get()->getWinSize();
 
-		auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
-		label->setPosition(winSize / 2);
-		this->addChild(label);
+        auto label = CCLabelBMFont::create("Hello, World!", "bigFont.fnt");
+        label->setPosition(winSize / 2);
+        this->addChild(label);
 
-		return true;
-	}
+        return true;
+    }
 };
 ```
 
