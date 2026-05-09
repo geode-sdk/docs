@@ -8,12 +8,12 @@ Let's say you have a callback, and in that you want to downcast the sender. You 
 
 ```cpp
 void MyClass::onClick(CCObject* sender) {
-	auto node = static_cast<CCNode*>(sender);
-	node->setPosition({0, 0});
+    auto node = static_cast<CCNode*>(sender);
+    node->setPosition({0, 0});
 }
 ```
 
-You are expected to use static cast when downcasting the objects you already know the type of. 
+You are expected to use static cast when downcasting the objects you already know the type of.
 
 ## Unknown original type
 
@@ -21,9 +21,9 @@ You need to downcast an object, but you don't know its original type. Using your
 
 ```cpp
 void MyClass::onClick(CCObject* sender) {
-	if (auto button = typeinfo_cast<CCMenuItemSpriteExtra*>(sender)) {
-		button->setSizeMult(1.2f);
-	}
+    if (auto button = typeinfo_cast<CCMenuItemSpriteExtra*>(sender)) {
+        button->setSizeMult(1.2f);
+    }
 }
 ```
 

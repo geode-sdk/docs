@@ -157,7 +157,7 @@ However, at this point it should be noted that **the syntax for hooking in Geode
 
 For now, we can leave hooking be, as before we can find any practical applications for it, we must first **find some functions to hook**.
 
-[Chapter 1.3: Functions & Addresses](/handbook/vol1/chap1_3.md)
+[Chapter 1.3: Functions & Addresses](/handbook/vol1/chap1_3)
 
 ## Notes
 

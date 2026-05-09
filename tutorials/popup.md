@@ -71,7 +71,7 @@ public:
 
 ## Colored text
 
-`FLAlertLayer` supports colored text in the content field by default. You can add colors with **color tags**, for example `<cy>Hi mom!</c>` will produce yellow text. The built-in color tags in GD are listed [here](../geometrydash/tags.md)
+`FLAlertLayer` supports colored text in the content field by default. You can add colors with **color tags**, for example `<cy>Hi mom!</c>` will produce yellow text. The built-in color tags in GD are listed [here](/geometrydash/tags)
 
 ## Disabling the popup animation
 
@@ -131,5 +131,5 @@ This will make the popup show correctly by adding it as a child to the new `Menu
 
 ## Examples
 
- * [`ModSettingsPopup` in Geode, which uses `Popup`](https://github.com/geode-sdk/geode/blob/v4.10.0/loader/src/ui/mods/settings/ModSettingsPopup.hpp)
- * [Use of `createQuickPopup` within it](https://github.com/geode-sdk/geode/blob/v4.10.0/loader/src/ui/mods/settings/ModSettingsPopup.cpp#L224-L236)
+ * [`ModtoberPopup` in Geode, which uses `Popup`](https://github.com/geode-sdk/geode/blob/main/loader/src/ui/mods/popups/ModtoberPopup.hpp)
+ * [Use of `createQuickPopup` within it](https://github.com/geode-sdk/geode/blob/main/loader/src/ui/mods/popups/ModtoberPopup.cpp#L26-L38)

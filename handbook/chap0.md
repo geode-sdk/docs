@@ -74,4 +74,3 @@ Many things in this handbook are referred to as "traditional modding". This mean
 ## Ready, set, go!
 
 **And with that, let us start with [Chapter 1.1](/handbook/vol1/chap1_1)!**
-

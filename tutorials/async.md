@@ -7,7 +7,7 @@ Since Geode v5.0.0, the task system has been replaced by a true **asynchronous**
 
 Async is **perfect** for any workload that consists of waiting - such as making a request to a server, waiting for a notification from another thread, waiting a few seconds between tasks, etc.
 
-Geode provides some async utilities in the `<Geode/utils/async.hpp>` header, as well a global async runtime used by mods. You are not forced to use it, but there's rarely a good reason not to. 
+Geode provides some async utilities in the `<Geode/utils/async.hpp>` header, as well a global async runtime used by mods. You are not forced to use it, but there's rarely a good reason not to.
 
 ## Coroutines / Futures / Pollables
 
@@ -195,7 +195,7 @@ If you must run an operation that blocks and have no way to go around it, use th
 
 ```cpp
 auto handle = async::runtime().spawnBlocking<uint64_t>([] {
-    // simulate some expensive calculation 
+    // simulate some expensive calculation
     uint64_t x = 1;
     for (int i = 0; i < 1024; i++) {
         x = x * (x + i);

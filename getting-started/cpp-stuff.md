@@ -7,8 +7,8 @@ order: 2
 
 To be able to use the Geode SDK, you **will** need at least the following:
  * [A C++ compiler](#compiler)
- * [CMake](https://cmake.org/download/) - Version 3.29+ is required - make sure to add to PATH when installing on Windows.
- * [Git](https://git-scm.com/downloads) - Hey you. Yes, you! I know a lot of people skip this step **but you will need it**. Don't come at us asking for why you "could not find git for clone of json-populate".
+ * [CMake](https://cmake.org/resources/) - Version 3.29+ is required - make sure to add to PATH when installing on Windows.
+ * [Git](https://git-scm.com/install/) - Hey you. Yes, you! I know a lot of people skip this step **but you will need it**. Don't come at us asking for why you "could not find git for clone of json-populate".
 
 ## Compiler
 
@@ -30,7 +30,7 @@ LLVM itself does not come with Windows SDK and CRT libraries, so you will need a
 
 Please note that Visual Studio **2022** or higher is required. If you have an older version already installed, you should upgrade to the latest available.
 
-Unless you want to install Visual Studio (the editor) itself, we recommend installing just the build tools. Open the VS [download page](https://visualstudio.microsoft.com/downloads), scroll to the bottom, and under "Tools for Visual Studio" download **Build Tools for Visual Studio**.
+Unless you want to install Visual Studio (the editor) itself, we recommend installing just the build tools. Open the VS [download page](https://visualstudio.microsoft.com/downloads/), scroll to the bottom, and under "Tools for Visual Studio" download **Build Tools for Visual Studio**.
 
 After launching the installer, select **Desktop development with C++** and optionally deselect all features except for **MSVC Build Tools** and **Windows SDK**, like on the screenshot below. Click Install and wait for it to finish.
 
@@ -86,4 +86,4 @@ After installing the CLI, run this command to install all the needed tools:
 geode sdk install-linux
 ```
 
-Now you can proceed to [setting up Geode CLI](/getting-started/geode-cli.md).
+Now you can proceed to [setting up Geode CLI](/getting-started/geode-cli).

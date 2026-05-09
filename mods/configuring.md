@@ -49,7 +49,7 @@ The target Geode version. Should be in the format of an exact version, such as `
 
 ### `gd`
 
-The target Geometry Dash version exactly, or `*` for **any** GD version (whether your mod actually works on any GD version is your responsibility.) 
+The target Geometry Dash version exactly, or `*` for **any** GD version (whether your mod actually works on any GD version is your responsibility.)
 
 This key is an object for specifying per platform GD version:
 ```json
@@ -80,19 +80,19 @@ The name of the mod that is displayed in-game, and in other situations where the
 
 ### `version`
 
-The version of the mod; should follow [semver](https://semver.org), especially if the mod can be used as a dependency (see [the API key](#api)).
+The version of the mod; should follow [semver](https://semver.org/), especially if the mod can be used as a dependency (see [the API key](#api)).
 
 ### `developer`
 
 The name of the mod's developer, displayed on the Installed tab. Should be a single name, like "HJfod" or "Alk". If the mod has multiple developers, this should be a team name like "Geode Team".
 
-### `developers` 
+### `developers`
 
 The name of the mod's developers. Replaces `developer`. Can be a single name, like \["HJfod"\] or \["Alk"\]. If the mod has multiple developers, you should list the names of each developer because, the `developers` property is a list/array. First developer listed is the main developer. If you have 3 or more developers listed, it will show `main developer + 2 more`. If you have 2 developers listed, it will show `Developer 1 & Developer 2`. If you list multiple developers, when someone clicks on your name(s), it will show the list of the developers, then you can click on one to see other mods they have made or are apart of.
 
 ### `description`
 
-A short description of the mod. Should only be a single sentence; for longer descriptions, see [about.md](/mods/md-files.md).
+A short description of the mod. Should only be a single sentence; for longer descriptions, see [about.md](/mods/md-files).
 
 ### `links`
 
@@ -112,11 +112,11 @@ Describes where users can report problems with the mod. Value is an object with 
 
 ### `dependencies`
 
-The dependencies of a mod; see [Dependencies](/mods/dependencies.md) for details
+The dependencies of a mod; see [Dependencies](/mods/dependencies) for details
 
 ### `incompatibilities`
 
-The incompatibilities of a mod. Very similar to [dependencies](/mods/dependencies.md).
+The incompatibilities of a mod. Very similar to [dependencies](/mods/dependencies).
 
 ```json
 "incompatibilities": {
@@ -129,11 +129,11 @@ Superseding is no longer handled by incompatibilities and has been replaced by s
 
 ### `settings`
 
-The settings of a mod; see [Settings](/mods/settings.md) for details
+The settings of a mod; see [Settings](/mods/settings) for details
 
 ### `resources`
 
-The resources of a mod; see [Resources](/mods/resources.md) for details
+The resources of a mod; see [Resources](/mods/resources) for details
 
 ### `early-load`
 
@@ -141,11 +141,11 @@ If true, specifies that this mod must have finished loading before the loading s
 
 ### `api`
 
-Specifies that this mod can be [used as a dependency](/mods/dependencies.md). Value is an object with the following properties:
+Specifies that this mod can be [used as a dependency](/mods/dependencies). Value is an object with the following properties:
 
 #### `headers`
 
-An array specifying the list of headers that should bundled with this mod. Supports [globbing](/mods/resources.md).
+An array specifying the list of headers that should bundled with this mod. Supports [globbing](/mods/resources).
 
 ### `tags`
 

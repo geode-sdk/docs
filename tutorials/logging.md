@@ -1,6 +1,6 @@
 # Logging
 
-Geode provides a builtin logger with [fmtlib](https://fmt.dev/latest/index.html) formatting, which you can view in real time via the [platform console](#platform-console), or later on by checking the logs in the:
+Geode provides a builtin logger with [fmtlib](https://fmt.dev/latest/) formatting, which you can view in real time via the [platform console](#platform-console), or later on by checking the logs in the:
 * `<GD FOLDER>/geode/logs` directory on `Windows` and `MacOS`
 * `Android/media/com.geode.launcher/game/geode/logs` directory on `Android`
 
@@ -46,10 +46,10 @@ geode::log::debug("Found node: {}", node->getID());
 > :warning: Debug logs are not shown by default. See the [Log filtering](#log-filtering) section to see how you can change this behavior.
 
 ## Syntax
-The logger uses [fmtlib](https://fmt.dev/latest/syntax.html) under the hood, which means you can use its syntax, which will get forwarded to fmtlib. Geode also provides formatters for a few common types, such as `CCPoint`, `CCNode`, etc.
+The logger uses [fmtlib](https://fmt.dev/latest/syntax/) under the hood, which means you can use its syntax, which will get forwarded to fmtlib. Geode also provides formatters for a few common types, such as `CCPoint`, `CCNode`, etc.
 
 ![Cheatsheet showing fmtlib syntax](https://hackingcpp.com/cpp/libs/fmt.png)
-*Image from [https://hackingcpp.com](https://hackingcpp.com/cpp/cheat_sheets.html)*
+*Image from [hackingcpp.com](https://hackingcpp.com/cpp/cheat_sheets)*
 
 As such, you are able to do things like this:
 ```cpp

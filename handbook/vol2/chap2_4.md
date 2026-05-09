@@ -12,7 +12,7 @@ Once you have acquired the Android binary, import it to Ghidra the same way you 
 
 ![Analyzing Android GD, with the `Non returning functions: discovered` option disabled](/assets/handbook/vol2/Android_analyz.png)
 
-So, let's verify the REing we did [in the last chapter](/handbook/vol2/chap2_3.md)!
+So, let's verify the REing we did [in the last chapter](/handbook/vol2/chap2_3)!
 
 Open up the class list on Android and look up `LevelSettingsLayer`:
 
@@ -64,4 +64,4 @@ Repeat the same for `LevelEditorLayer`, and now Ghidra lets us use them as param
 
 And there we go - we can now be pretty much certain that we have found the correct `LevelSettingsLayer::init`, and that our signature is right!
 
-[Chapter 2.5: Finding Callbacks](/handbook/vol2/chap2_5.md)
+[Chapter 2.5: Finding Callbacks](/handbook/vol2/chap2_5)

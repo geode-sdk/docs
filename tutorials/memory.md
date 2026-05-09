@@ -1,6 +1,6 @@
 # Memory Management
 
-Managing memory in general with C++ has been partially covered in [C++ tips](/cpp/tips.md), but Cocos2d comes with its own memory management system that is all modders have to learn at some point. On top of this, Geode adds two classes, [`Ref`](/classes/geode/Ref) and [`WeakRef`](/classes/geode/WeakRef), which Geode devs will tell you to use but not how to use them. This tutorial aims to remedy that, explaining how memory management in Cocos2d works in detail.
+Managing memory in general with C++ has been partially covered in [C++ tips](/cpp/tips), but Cocos2d comes with its own memory management system that is all modders have to learn at some point. On top of this, Geode adds two classes, [`Ref`](/classes/geode/Ref) and [`WeakRef`](/classes/geode/WeakRef), which Geode devs will tell you to use but not how to use them. This tutorial aims to remedy that, explaining how memory management in Cocos2d works in detail.
 
 ## Memory management
 

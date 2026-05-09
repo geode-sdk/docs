@@ -2,11 +2,11 @@
 
 Pretty much every mod will eventually enter the point where it needs to save some data on the user's machine, such as configuration settings or other user-customizable values. Geode has built-in support for **two kinds of savedata**: **user-editable settings** and **non-editable saved values**.
 
-Settings are covered [in their own tutorial](/mods/settings.md) - **this tutorial is about non-user-editable save data**.
+Settings are covered [in their own tutorial](/mods/settings) - **this tutorial is about non-user-editable save data**.
 
 Unlike settings, save data does not need to be declared in `mod.json`, or anywhere else for that matter. Save data is automatically brought to life when you set it for the first time. Save data is, as the name implies, saved when the game is closed, and its previous state loaded back up the next time the game is opened.
 
-You can save any type of value as long as it implements `matjson::Serialize` (see the [STL container implementations](https://github.com/geode-sdk/json/blob/main/include/matjson/stl_serialize.hpp) for an example).
+You can save any type of value as long as it implements `matjson::Serialize` (see the [STL container implementations](https://github.com/geode-sdk/json/blob/main/include/matjson/std.hpp) for an example).
 
 ## Setting & getting save data
 
@@ -68,4 +68,3 @@ Mods should save other data (files, backups, etc.) to their specific save direct
 It should be noted that a mod can have a good reason to save data elsewhere - for example a mod that saves created levels as individual files instead of CCLocalLevels would be justified in saving directly under the GD save folder instead of the mod save folder, since the data its saving is not related to the mod.
 
 If you have data that the user should be able to edit (for example config files), these should go in the directory provided by `Mod::get()->getConfigDir()`. **Do not flood the main GD folder with config files or save data** - this will almost certainly get your mod rejected from the index unless you have a _very_ good reason for doing so!
-
