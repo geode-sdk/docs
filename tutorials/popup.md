@@ -128,8 +128,20 @@ class $modify(MenuLayer) {
 };
 ```
 This will make the popup show correctly by adding it as a child to the new `MenuLayer` instead of the previous scene.
+### Showing a popup on game launch
+A common scenario is wanting to show a popup on game launch. Doing this through hooking `MenuLayer` would require custom tracking of whether the popup has been shown and also implementing the workarounds in section _Fixing keyboard input_. For this reason, Geode provides an event that handles most of this for you.
+```cpp
+$on_game(Loaded) {
+    auto alert = FLAlertLayer::create(
+        "Title",
+        "Hi mom!",
+        "OK"
+    );
+    alert->show();
+}
+```
 ### Fixing keyboard input
-If you use the example above, you will find that keyboard input still goes to the main layer instead of the popup. For `MenuLayer` specifically this can be solved by delaying the addition by a single frame:
+If you use the generic example from the main part of section _Popup not showing up_, you will find that keyboard input still goes to the main layer instead of the popup. For `MenuLayer` specifically this can be solved by delaying the addition by a single frame:
 ```cpp
 class $modify(MenuLayer) {
     bool init() {
