@@ -128,6 +128,31 @@ class $modify(MenuLayer) {
 };
 ```
 This will make the popup show correctly by adding it as a child to the new `MenuLayer` instead of the previous scene.
+### Fixing keyboard input
+If you use the example above, you will find that keyboard input still goes to the main layer instead of the popup. For `MenuLayer` specifically this can be solved by delaying the addition by a single frame:
+```cpp
+class $modify(MenuLayer) {
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
+
+        Loader::get()->queueInMainThread([self = Ref(this)] {
+            auto alert = FLAlertLayer::create(
+                "Title",
+                "Hi mom!",
+                "OK"
+            );
+            alert->m_scene = self;
+            alert->show();
+
+            return true;
+        });
+    }
+};
+```
+This can be useful for alerts that only show up when you open the game, however the issue still applies when the layer uses a transition fade. Since this is the most common scenario for showing popups on layer init, it is generally accepted as good enough.
+
+However, this solution is not completely foolproof for `MenuLayer` either, which uses a transition fade when backing out of submenus like `CreatorLayer`. The most reliable solution is adding the popup in a function like `onEnterTransitionFadeFinished`, however be aware that most functions do not have a custom implementation of this function, which means that you cannot hook it directly. A potential workaround is to create a custom `CCNode` class, which implements this function, and add it to the given layer in `init`.
 
 ## Examples
 
