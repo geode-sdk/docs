@@ -124,7 +124,7 @@ protected:
         // Decrement button
         auto decrementBtn = CCMenuItemExt::createSpriteExtra(
             ButtonSprite::create("-1"),
-            [this](CCMenuItemSpriteExtra* sneder) { this->updateCounter(-1); }
+            [this](CCMenuItemSpriteExtra* sender) { this->updateCounter(-1); }
         );
         decrementBtn->setPosition(100.f, 60.f);
         menu->addChild(decrementBtn);
@@ -156,7 +156,7 @@ bool MyLayer::init() {
 ```
 
 ## Callbacks
-Button callbacks are usually passed as the second parameter to the `Button` class (position of the parameter depends on the create method) in a lambda. Here's an example on how you can make a callback with `Button::createWithNode`:
+Button callbacks are usually passed as the second parameter to the `Button` class (the position of the parameter depends on the create method) in a lambda. Here's an example on how you can make a callback with `Button::createWithNode`:
 
 ```cpp
 class MyLayer : public CCLayer {
@@ -199,7 +199,7 @@ protected:
                 
                 // setString changes the text displayed by the ButtonSprite. It takes a
                 // C string (`const char*`), so you'll often need to call `.c_str()` when
-                // passing formatted strings to Cocos2d-x functions.
+                // passing formatted strings to cocos2d functions.
                 spr->setString(fmt::format("Clicked {} times", m_clicked).c_str());
             }
         );
