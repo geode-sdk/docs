@@ -6,7 +6,7 @@ Geode mods can have settings, specified in `mod.json`. These settings are automa
 
 Settings all have associated with them an ID, as well as a type and default value. There are a number of built-in types for common types of settings, but custom settings are supported aswell. All settings may also have a name and description. Some setting types also provide customizability over controls, such as whether to include a slider or not.
 
-> :information_source: Settings are intended for values the user can customize in-game. If you're looking for just saving some data, [see the tutorial for saving data](/mods/savedata.md).
+> :information_source: Settings are intended for values the user can customize in-game. If you're looking for just saving some data, [see the tutorial for saving data](/mods/savedata).
 
 ## Example
 
@@ -143,7 +143,7 @@ First, to declare a custom setting, the mod should specify that the setting's ty
 }
 ```
 
-The first class that the mod needs to provide for the setting is one that inherits [SettingValue](/classes/geode/SettingValue). This class manages the current value of the setting as well as saving and loading that value.
+The first class that the mod needs to provide for the setting is one that inherits [SettingValue](https://github.com/geode-sdk/geode/blob/v2.0.0-beta.24/loader/include/Geode/loader/Setting.hpp#L222). This class manages the current value of the setting as well as saving and loading that value.
 
 ```cpp
 using namespace geode::prelude;
@@ -177,7 +177,7 @@ public:
 };
 ```
 
-The second class the mod needs to provide is one that inherits [SettingNode](/classes/geode/SettingNode). This should be returned by the call to `MySettingValue::createNode`. It is used by Geode to display the setting's UI. Note that the node should only set the value of the setting when `commit` is called; this allows users to undo accidental changes.
+The second class the mod needs to provide is one that inherits [SettingNode](https://github.com/geode-sdk/geode/blob/v2.0.0-beta.24/loader/include/Geode/loader/SettingNode.hpp). This should be returned by the call to `MySettingValue::createNode`. It is used by Geode to display the setting's UI. Note that the node should only set the value of the setting when `commit` is called; this allows users to undo accidental changes.
 
 The setting node is provided the current width of the setting layer available in its `init` function; the height of the setting may be as large or as small as it needs. **You must set the content size of the setting node** in order to let Geode know the height of your setting.
 
@@ -246,7 +246,7 @@ public:
 };
 ```
 
-The last this the mod needs to do is register their setting value class to Geode. This should be done immediately when the mod is loaded, to ensure that the value of the setting is loaded from disk on time. Registering can either be done using the raw [registerCustomSetting](/classes/geode/Mod#registerCustomSetting) method, or the [addCustomSetting](/classes/geode/Mod#addCustomSetting) convenience function.
+The last this the mod needs to do is register their setting value class to Geode. This should be done immediately when the mod is loaded, to ensure that the value of the setting is loaded from disk on time. Registering can either be done using the raw [registerCustomSetting](https://github.com/geode-sdk/geode/blob/v2.0.0-beta.24/loader/include/Geode/loader/Mod.hpp#L148) method, or the [addCustomSetting](https://github.com/geode-sdk/geode/blob/v2.0.0-beta.24/loader/include/Geode/loader/Mod.hpp#L162) convenience function.
 
 ```cpp
 $on_mod(Loaded) {
@@ -260,4 +260,4 @@ $on_mod(Loaded) {
 }
 ```
 
-You can find an example of custom settings [in the test dependency mod in Geode](https://github.com/geode-sdk/geode/blob/main/loader/test/dependency/main.cpp#L60-L145).
+You can find an example of custom settings [in the test dependency mod in Geode](https://github.com/geode-sdk/geode/blob/main/loader/test/dependency/main.cpp#L20-L133).

@@ -1,6 +1,6 @@
 # Manual Hooks
 
-Sometimes, you need to hook some platform specific function that would be a hassle to manually add to bindings - or you want to provide support for adding hooks through other means than `$modify`, such as an embedded scripting language. In this case, you can also manually add hooks in Geode using [`Mod::addHook`](/classes/geode/Mod#addHook).
+Sometimes, you need to hook some platform specific function that would be a hassle to manually add to bindings - or you want to provide support for adding hooks through other means than `$modify`, such as an embedded scripting language. In this case, you can also manually add hooks in Geode using [`Mod::hook`](/classes/geode/Mod#hook).
 
 ## Example
 
@@ -11,15 +11,15 @@ The provided example hooks `MenuLayer::onNewgrounds` on Windows.
 ```cpp
 void MenuLayer_onNewgrounds(MenuLayer* self, CCObject* sender) {
     log::info("Hook reached!");
-    // You can call the original by calling it - in this case, since the 
-    // original is in bindings, you can just call it the same way as you 
+    // You can call the original by calling it - in this case, since the
+    // original is in bindings, you can just call it the same way as you
     // would with $modify
     // TODO: How to call original manually
     self->onNewgrounds(sender);
     log::info("After original!");
 }
 
-$execute {
+$on_mod(Loaded) {
     Mod::get()->hook(
         reinterpret_cast<void*>(geode::base::get() + 0x191E90), // address
         &MenuLayer_onNewgrounds, // detour
@@ -40,7 +40,7 @@ void myDrawCircle(const cocos2d::CCPoint& center, float radius, float angle, uns
     log::info("alright {}", radius);
 }
 
-$execute {
+$on_mod(Loaded) {
     Mod::get()->hook(
         reinterpret_cast<void*>(
             // All of this is to get the address of ccDrawCircle

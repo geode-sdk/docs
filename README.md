@@ -1,6 +1,6 @@
 # Geode Docs
 
-### [Visit the Docs site](https://docs.geode-sdk.org)
+### [Visit the Docs site](https://docs.geode-sdk.org/)
 
 This is the source code for Geode's docs, containing all the hand-written tutorials.
 
@@ -8,7 +8,7 @@ Class & function documentation is built automatically from [the Geode source cod
 
 ## Building
 
-The docs are built using [Flash](https://github.com/geode-sdk/flash). To build the docs, you need Flash, along with [CMake](https://cmake.org/install/) and [Clang](https://clang.llvm.org/).
+The docs are built using [Flash](https://github.com/geode-sdk/flash). To build the docs, you need Flash, along with [CMake](https://cmake.org/install) and [Clang](https://clang.llvm.org/).
 
 To build the docs, you first need to clone Geode, and then clone the docs inside the Geode root, for a folder structure like this:
 

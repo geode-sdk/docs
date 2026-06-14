@@ -36,7 +36,7 @@ class $modify(PlayerObject) {
 
 This code works even if you have multiple `PlayerObject`s, and the counter is initialized as 0 for each one, providing an elegant yet simple solution to the problem.
 
-Fields are declared just like normal member variables, but inside the special `Fields` struct. Even constructors and destructors work\*. 
+Fields are declared just like normal member variables, but inside the special `Fields` struct. Even constructors and destructors work\*.
 
 > :info: Fields are initialized only whenever they're first accessed, **not** when the modified class is originally created.
 
@@ -64,7 +64,7 @@ class $modify(PlayerObject) {
 
 Fields can be accessed outside your modified class like usual, with the help of some casting.
 
-> :warning: Do not use `typeinfo_cast` here, as it isn't actually an instance of `MyGameObject`. 
+> :warning: Do not use `typeinfo_cast` here, as it isn't actually an instance of `MyGameObject`.
 
 ```cpp
 class $modify(MyGameObject, GameObject) {

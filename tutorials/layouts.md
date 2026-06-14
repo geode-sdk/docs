@@ -4,7 +4,7 @@ One of the biggest pains in all UI design in general is positioning stuff. This 
 
 The solution Geode introduces for this are **layouts** - small classes added to CCNodes that dictate how that node's children should be positioned. For example, a row layout would lay its children in a horizontal row, whereas a grid layout would lay its children out in a grid. Although, perhaps surprisingly, Geode only adds one type of layout: the [AxisLayout](/classes/geode/AxisLayout) class, which actually handles all common types of layouts, including row, column, grid, and flex.
 
-You can view what layouts are visible on screen using the [DevTools](https://github.com/geode-sdk/devtools) mod, which has an option to show all layouts in the current scene.
+You can view what layouts are visible on screen using the [DevTools](https://github.com/geode-sdk/DevTools) mod, which has an option to show all layouts in the current scene.
 
 ![Image of the DevTools mod in GD, showcasing the layouts in MenuLayer](/assets/DevTools_layouts.png)
 
@@ -17,7 +17,7 @@ struct $modify(MenuLayer) {
     bool init() {
         if (!MenuLayer::init())
             return false;
-        
+
         auto menu = this->getChildByID("bottom-menu");
         menu->addChild(/* create button */);
         menu->updateLayout();
@@ -42,7 +42,7 @@ Geode only adds one type of layout, [AxisLayout](/classes/geode/AxisLayout), whi
 
 By default, AxisLayout arranges its children in a single straight line. This can be changed using the [setGrowCrossAxis](/classes/geode/AxisLayout#setGrowCrossAxis) method.
 
-You can play around with the different options AxisLayout offers using the [DevTools](https://github.com/geode-sdk/devtools) mod.
+You can play around with the different options AxisLayout offers using the [DevTools](https://github.com/geode-sdk/DevTools) mod.
 
 ![Image of the DevTools mod, showing the different options for AxisLayout](/assets/DevTools_layoutAttributes.png)
 

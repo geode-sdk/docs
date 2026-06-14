@@ -8,17 +8,17 @@ Geode currently exposes three UI events through the `<Geode/ui/GeodeUI.hpp>` hea
 
 Note that **all Geode UI events may and will be posted _multiple times_!** This is because Geode UIs often have an initial created "loading" state, and then fetch data from the Geode servers that is updated onto the created node asynchronously. To allow mods to be notified of when this data is loaded, **the UI events are reposted whenever the state of the UI node changes**. For this reason, **mods can never add nodes without checking if they already exist first**.
 
-You can listen to these events by using Geode's events system as usual, using the [`EventFilter<T>`](/classes/geode/EventFilter) helper class. Note that you should always return `ListenerResult::Propagate` to allow other mods to modify the layer as well, like calling the original in a `$modify` hook!
+You can listen to these events by using Geode's [events system](/tutorials/events) as usual. Note that you should always return `ListenerResult::Propagate` to allow other mods to modify the layer as well, like calling the original in a `$modify` hook!
 
 ## Guidelines
 
 There are some guidelines on what you are and are not allowed to do when modifying the Geode UI. These are:
 
-1. The mod may **only access nodes by ID or member**. No matching types or indices, if the node the mod wants to modify doesn't have an ID and is not accessible by a member variable or direct class getter, the mod can not edit it
-2. The mod must **always check for null** on every node they access. It should never assume the existence of a node, even if it's trivial
+1. The mod may **only access nodes by ID or member**. No matching types or indices, if the node the mod wants to modify doesn't have an ID and is not accessible by a member variable or direct class getter, the mod may not edit it.
+2. The mod must **always check for null** on every node they access. It should never assume the existence of a node, even if it's trivial!
 3. The mod must **safely handle all possible failure states**, such as missing sprites. This includes failure states of other logic it runs; if the mod makes a web request, it must not crash on unexpected behaviour!
-4. If the mod finds any missing IDs, it must **undo any/all of its changes** and not make any more. The recommended way to do this is to first use `querySelector` to grab all the nodes in the scene it intends to modify beforehand, and then returning early if any of them are null
-5. The mod must **give all of its own nodes IDs prefixed by its mod ID (note) and check beforehand if its nodes have been added on all events**
+4. If the mod finds any missing IDs, it must **undo any/all of its changes** and not make any more. The recommended way to do this is to first use `querySelector` to grab all the nodes in the scene it intends to modify beforehand, and then returning early if any of them are null.
+5. The mod must **give all of its own nodes IDs prefixed by its mod ID (note) and check beforehand if its nodes have been added on all events**.
 
 These rules are in place because the Geode UI is a highly volatile place that **may change at any time**, and any mod causing the Geode UI itself to crash would make it impossible to disable without safe mode.
 
@@ -26,12 +26,14 @@ These rules are in place because the Geode UI is a highly volatile place that **
 
 ## Example
 
+> :warning: This is out of date! See the [v5 migration docs](tutorials/migrate-v5#changes-to).
+
 ```cpp
 #include <Geode/ui/GeodeUI.hpp>
 
 using namespace geode::prelude;
 
-$execute {
+$on_mod(Loaded) {
     new EventListener<EventFilter<ModLogoUIEvent>>(+[](ModLogoUIEvent* event) {
         if (event->getModID() == "geode.loader") {
             // Remember: no assumptions, even trivial ones!

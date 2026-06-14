@@ -50,11 +50,11 @@ Cocos2d is a **sprite-based** framework, meaning that instead of rendering thing
 It is important to use the correct `create` function for `CCSprite`, as the wrong one will return `nullptr` and cause an error if not properly handled. If the sprite you're creating is contained in its own file, like `GJ_button_01.png`, then you should use `CCSprite::create`; otherwise, if the sprite is in a spritesheet like `GJ_infoIcon_001.png` in `GJ_GameSheet03`, use `CCSprite::createWithSpriteFrameName` instead.
 
 ```cpp
-// Uh oh! This will return null as GJ_infoIcon_001.png is not its own file but 
+// Uh oh! This will return null as GJ_infoIcon_001.png is not its own file but
 // contained in a spritesheet
 auto infoSpriteFail = CCSprite::create("GJ_infoIcon_001.png");
 
-// You don't have to specify the name of the spritesheet you're loading from anywhere, 
+// You don't have to specify the name of the spritesheet you're loading from anywhere,
 // as GD has already loaded GJ_GameSheet03 into memory
 auto infoSpriteCorrect = CCSprite::createWithSpriteFrameName("GJ_infoIcon_001.png");
 ```
@@ -65,7 +65,7 @@ How to add your own sprites to use in Geode mods will be discussed in a later ch
 
 ## Menus & Buttons
 
-Another important class to know of is `CCMenu`. Most mods need some sort of [buttons](/tutorials/buttons.md) for their UI, and for that, the most common class to use is `CCMenuItemSpriteExtra`. However, all `CCMenuItem`-derived classes **must be part of a `CCMenu` to work**. In practice, this means that all of your buttons must be the direct children of some menu.
+Another important class to know of is `CCMenu`. Most mods need some sort of [buttons](/tutorials/buttons) for their UI, and for that, the most common class to use is `CCMenuItemSpriteExtra`. However, all `CCMenuItem`-derived classes **must be part of a `CCMenu` to work**. In practice, this means that all of your buttons must be the direct children of some menu.
 
 You can actually see the effects of this in-game; hold down on some button, and then without releasing move your cursor over other buttons in the same scene. You will find that some buttons display their bounce animation indicating they are usable, and others don't. This is because of the Cocos2d **touch system**, which will be discussed in detail later, but in essence, only buttons in the same menu are clickable when you start holding down from one.
 
@@ -89,9 +89,8 @@ layer->addChild(button);
 
 At this point, we're getting very close to writing actual mod code. However, before we can get to that, we must first discuss **GD layers** and the `$modify` macro in Geode.
 
-[Chapter 1.5: Layers](/handbook/vol1/chap1_5.md)
+[Chapter 1.5: Layers](/handbook/vol1/chap1_5)
 
 ## Notes
 
 > [Note 1] You can also add nodes directly to `CCDirector` and bypass the node tree, but this is very rarely done as nodes in the director don't have access to the touch system or any input for that matter.
-

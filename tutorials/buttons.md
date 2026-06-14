@@ -55,7 +55,7 @@ Here is the popular click counter example in cocos2d using `CCMenuItemExt`:
 ```cpp
 class MyLayer : public CCLayer {
 protected:
-    // Class member that stores how many times 
+    // Class member that stores how many times
     // the button has been clicked
     int m_clicked = 0;
 

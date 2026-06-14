@@ -71,30 +71,7 @@ public:
 
 ## Colored text
 
-`FLAlertLayer` supports colored text in the content field by default. You can add colors with **color tags**, for example `<cy>Hi mom!</c>` will produce yellow text. The built-in color tags in GD are:
-
-| Tag | Color                               |
-|-----|-------------------------------------|
-| cb  | <span style="color: #4a52e1">Blue</span>   |
-| cg  | <span style="color: #40e348">Green</span>  |
-| cl  | <span style="color: #60abef">Aqua</span>   |
-| cj  | <span style="color: #32c8ff">Cyan</span>   |
-| cy  | <span style="color: #ffff00">Yellow</span> |
-| co  | <span style="color: #ffa54b">Orange</span> |
-| cr  | <span style="color: #ff5a5a">Red</span>    |
-| cp  | <span style="color: #ff00ff">Pink</span>   |
-
-```cpp
-FLAlertLayer::create(
-    "Color Example",
-    "This is <cp>pink text</c>!",
-    "OK"
-)->show();
-```
-
-Note that the closing tag **must be `</c>` only without the color specified again**. Doing otherwise will likely result in a crash.
-
-> You might wonder about how to use other colors than the ones listed; there are currently no plans in Geode to add that, but one could easily make a mod that adds support for arbitary color tags.
+`FLAlertLayer` supports colored text in the content field by default. You can add colors with **color tags**, for example `<cy>Hi mom!</c>` will produce yellow text. The built-in color tags in GD are listed [here](/geometrydash/tags)
 
 ## Disabling the popup animation
 
@@ -151,8 +128,45 @@ class $modify(MenuLayer) {
 };
 ```
 This will make the popup show correctly by adding it as a child to the new `MenuLayer` instead of the previous scene.
+### Showing a popup on game launch
+A common scenario is wanting to show a popup on game launch. Doing this through hooking `MenuLayer` would require custom tracking of whether the popup has been shown and also implementing the workarounds in section _Fixing keyboard input_. For this reason, Geode provides an event that handles most of this for you.
+```cpp
+$on_game(Loaded) {
+    auto alert = FLAlertLayer::create(
+        "Title",
+        "Hi mom!",
+        "OK"
+    );
+    alert->show();
+}
+```
+### Fixing keyboard input
+If you use the generic example from the main part of section _Popup not showing up_, you will find that keyboard input still goes to the main layer instead of the popup. For `MenuLayer` specifically this can be solved by delaying the addition by a single frame:
+```cpp
+class $modify(MenuLayer) {
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
+
+        Loader::get()->queueInMainThread([self = Ref(this)] {
+            auto alert = FLAlertLayer::create(
+                "Title",
+                "Hi mom!",
+                "OK"
+            );
+            alert->m_scene = self;
+            alert->show();
+
+            return true;
+        });
+    }
+};
+```
+This can be useful for alerts that only show up when you open the game, however the issue still applies when the layer uses a transition fade. Since this is the most common scenario for showing popups on layer init, it is generally accepted as good enough.
+
+However, this solution is not completely foolproof for `MenuLayer` either, which uses a transition fade when backing out of submenus like `CreatorLayer`. The most reliable solution is adding the popup in a function like `onEnterTransitionFadeFinished`, however be aware that most functions do not have a custom implementation of this function, which means that you cannot hook it directly. A potential workaround is to create a custom `CCNode` class, which implements this function, and add it to the given layer in `init`.
 
 ## Examples
 
- * [`ModSettingsPopup` in Geode, which uses `Popup`](https://github.com/geode-sdk/geode/blob/v4.10.0/loader/src/ui/mods/settings/ModSettingsPopup.hpp)
- * [Use of `createQuickPopup` within it](https://github.com/geode-sdk/geode/blob/v4.10.0/loader/src/ui/mods/settings/ModSettingsPopup.cpp#L224-L236)
+ * [`ModtoberPopup` in Geode, which uses `Popup`](https://github.com/geode-sdk/geode/blob/main/loader/src/ui/mods/popups/ModtoberPopup.hpp)
+ * [Use of `createQuickPopup` within it](https://github.com/geode-sdk/geode/blob/main/loader/src/ui/mods/popups/ModtoberPopup.cpp#L26-L38)

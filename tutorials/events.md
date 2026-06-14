@@ -1,12 +1,12 @@
 # Events
 
-> :warning: This section of the documentation is currently out of date. Please see [the v5 migration guide](tutorials/migrate-v5) for differences required for Geode v5.
+> :warning: This section of the documentation is currently out of date. Please see [the v5 migration guide](/tutorials/migrate-v5) for differences required for Geode v5.
 
 For most things in GD, such as `CCTextInputNode`, GD and Cocos2d-x use a **delegate-based event system**, where you install a delegate on the target class, and the delegate receives events via overridden virtual functions. This system works fine for most situations, but is often quite clumsy to use and runs into a few important issues: you have to manually deal with removing the delegate if the target class outlives the delegate, and more importantly, you can only have one delegate per target.
 
 As an alternative to this system, Geode introduces **events**. Events are essentially just small messages broadcast across the whole system: instead of having to install a single delegate, an unlimited number of classes can listen for events. The target that emits the events does not need to have any knowledge of its consumers; it just broadcasts events, and any receivers there are can handle them.
 
-Events are primarily interacted with through three classes: [`Event`](/classes/geode/Event), [`EventListener`](/classes/geode/EventListener), and [`EventFilter`](/classes/geode/EventFilter). `Event` is the base class for the events that are being broadcast; `EventListener` listens for events, and it uses an `EventFilter` to decide which events to listen to. Let's explore how they work through **an example**.
+Events are primarily interacted with through three classes: [`Event`](https://github.com/geode-sdk/geode/blob/v4.10.2/loader/include/Geode/loader/Event.hpp#L241), [`EventListener`](https://github.com/geode-sdk/geode/blob/v4.10.2/loader/include/Geode/loader/Event.hpp#L134), and [`EventFilter`](https://github.com/geode-sdk/geode/blob/v4.10.2/loader/include/Geode/loader/Event.hpp#L97). `Event` is the base class for the events that are being broadcast; `EventListener` listens for events, and it uses an `EventFilter` to decide which events to listen to. Let's explore how they work through **an example**.
 
 ## Creating events
 
@@ -60,15 +60,15 @@ Listening to events is done using an `EventListener`. An event listener needs an
 ```cpp
 // main.cpp
 
-#include <Geode/DefaultInclude.hpp> // $execute
+#include <Geode/DefaultInclude.hpp> // $on_mod(Loaded)
 #include <Geode/loader/Event.hpp> // EventListener, EventFilter
 
 #include "DragDropEvent.hpp" // Our created event
 
 using namespace geode::prelude;
 
-// Execute runs the code inside **when your mod is loaded**
-$execute {
+// on_mod(Loaded) runs the code inside **when your mod is loaded**
+$on_mod(Loaded) {
     // This technically doesn't leak memory, since the listener should live for the entirety of the program
     new EventListener<EventFilter<DragDropEvent>>(+[](DragDropEvent* ev) {
         for (std::filesystem::path& file : ev->getFiles()) {
@@ -89,14 +89,14 @@ Notice that our callback returns a `ListenerResult`, more specifically `Listener
 ```cpp
 // main.cpp
 
-#include <Geode/DefaultInclude.hpp> // $execute
+#include <Geode/DefaultInclude.hpp> // $on_mod(Loaded)
 #include <Geode/loader/Event.hpp> // EventListener, EventFilter
 
 #include "DragDropEvent.hpp" // Our created event
 
 using namespace geode::prelude;
 
-$execute {
+$on_mod(Loaded) {
     new EventListener<EventFilter<DragDropEvent>>(+[](DragDropEvent* ev) {
         for (std::filesystem::path& file : ev->getFiles()) {
             log::debug("File dropped: {}", file);
@@ -232,7 +232,7 @@ EventListener<DragDropOnNodeFilter> m_listener = {
 
 When our `DragDropNode` is destroyed, the EventListener is automatically destroyed and unregistered aswell, so you don't need to do anything else.
 
-However, using a member function is not always possible. For example, if you're hooking a class, [event listeners don't work in fields](/tutorials/fields/#note-about-addresses); or if you want to listen for events on an existing node whose class you don't control.
+However, using a member function is not always possible. For example, if you're hooking a class, [event listeners don't work in fields](/tutorials/fields#note-about-addresses); or if you want to listen for events on an existing node whose class you don't control.
 
 In these cases, there exists a Geode-specific helper called [`CCNode::addEventListener`](/classes/cocos2d/CCNode#addEventListener). You can use this to **add event listeners to any node** - including existing ones by GD!
 
@@ -254,4 +254,4 @@ Any event listener added with `addEventListener` is automatically destroyed aswe
 
 ## Dispatched events
 
-There also exist special types of events called **dispatch events** - these are intended for use within optional dependencies. See [the tutorial on dependencies](/mods/dependencies/#events) for more information.
+There also exist special types of events called **dispatch events** - these are intended for use within optional dependencies. See [the tutorial on dependencies](/mods/dependencies#events) for more information.
