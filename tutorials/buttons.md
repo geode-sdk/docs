@@ -3,7 +3,7 @@ One of the most common UI elements in GD is the humble **button**. I'm sure you 
 
 Every button that inherits `CCMenuItem` (which both `CCMenuItemSpriteExtra` and methods in `CCMenuItemExt` do) **must be a child of a `CCMenu` to work**. This means that if you add a button as a child to a `CCLayer`, you will find that it can't be clicked. If you don't want to make a `CCMenu`, see the [**menuless buttons**](#menuless-buttons) section, which explains Geode's `Button` class.
 
-The first parameter of `CCMenuItemExt::createSpriteExtra` is a `CCNode*`. This is the texture of the button; it can be any `CCNode`, like a label or even a whole layer, but usually most people use a sprite.
+The first parameter of `CCMenuItemExt::createSpriteExtra` is a `CCNode*`. This is the display node of the button; it can be any `CCNode`, like a label or even a whole layer, but usually most people use a sprite.
 
 If you want to create a button with some text, the most common option is the `ButtonSprite` class. If you want to create something like a circle button (like the 'New' button in GD), you can either use `CCSprite` or [the Geode-specific `CircleButtonSprite` class](#circle-button-sprites).
 
@@ -69,7 +69,8 @@ protected:
             [this](CCMenuItemSpriteExtra* btn) { // This is where we add the callback!
                 m_clicked++;
                 
-                // getNormalImage returns the sprite of the button
+                // getNormalImage returns the display node of the button.
+                // Make sure to cast it to the type used by the button.
                 auto spr = static_cast<ButtonSprite*>(btn->getNormalImage());
                 spr->setString(fmt::format("Clicked {} times", m_clicked).c_str());
             }
@@ -113,20 +114,20 @@ protected:
         auto menu = CCMenu::create();
 
         // Increment button
-        auto btn = CCMenuItemExt::createSpriteExtra(
+        auto incrementBtn = CCMenuItemExt::createSpriteExtra(
             ButtonSprite::create("+1"),
-            [this](CCMenuItemSpriteExtra* btn) { this->updateCounter(1); }
+            [this](CCMenuItemSpriteExtra* sender) { this->updateCounter(1); }
         );
-        btn->setPosition(100.f, 100.f);
-        menu->addChild(btn);
+        incrementBtn->setPosition(100.f, 100.f);
+        menu->addChild(incrementBtn);
 
         // Decrement button
-        auto btn2 = CCMenuItemExt::createSpriteExtra(
+        auto decrementBtn = CCMenuItemExt::createSpriteExtra(
             ButtonSprite::create("-1"),
-            [this](CCMenuItemSpriteExtra* btn) { this->updateCounter(-1); }
+            [this](CCMenuItemSpriteExtra* sneder) { this->updateCounter(-1); }
         );
-        btn2->setPosition(100.f, 60.f);
-        menu->addChild(btn2);
+        decrementBtn->setPosition(100.f, 60.f);
+        menu->addChild(decrementBtn);
 
         this->addChild(menu);
 
@@ -196,11 +197,16 @@ protected:
             [this, spr](auto sender) { // This is where we add the callback! Make sure to also catch the sprite inside the lambda so you can use it.
                 m_clicked++;
                 
-                // setString sets the string (the label) of ButtonSprite
+                // setString changes the text displayed by the ButtonSprite. It takes a
+                // C string (`const char*`), so you'll often need to call `.c_str()` when
+                // passing formatted strings to Cocos2d-x functions.
                 spr->setString(fmt::format("Clicked {} times", m_clicked).c_str());
             }
         );
-        // If you ever need to access the sprite somewhere else in your code, you can use `btn->getDisplayNode();`, which returns a CCNode*.
+
+        // You can access the display node of the button with `getDisplayNode()`.
+        // Just like with `CCMenuItemSprite::getNormalImage()`, cast it to the
+        // type used by the button, then use it as normal.
 
         btn->setPosition(100.f, 100.f);
         this->addChild(btn);
@@ -235,20 +241,20 @@ protected:
         this->addChild(m_label);
 
         // Increment button
-        auto btn = Button::createWithNode(
+        auto incrementBtn = Button::createWithNode(
             ButtonSprite::create("+1"),
             [this](auto sender) { this->updateCounter(1); }
         );
-        btn->setPosition(100.f, 100.f);
-        this->addChild(btn);
+        incrementBtn->setPosition(100.f, 100.f);
+        this->addChild(incrementBtn);
 
         // Decrement button
-        auto btn2 = Button::createWithNode(
+        auto decrementBtn = Button::createWithNode(
             ButtonSprite::create("-1"),
             [this](auto sender) { this->updateCounter(-1); }
         );
-        btn2->setPosition(100.f, 60.f);
-        this->addChild(btn2);
+        decrementBtn->setPosition(100.f, 60.f);
+        this->addChild(decrementBtn);
 
         return true;
     }
