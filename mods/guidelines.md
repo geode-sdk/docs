@@ -118,17 +118,21 @@ Mods that are usable for free but have extra integrated paid features, such as a
 
 It is also okay to publish an **installer mod** for a paid mod on the index, aka something that just asks the user to authenticate and then installs the paid content. These mods also need to have the `Paid` tag.
 
+## Closed source mods
+
+> :information_source: Specific details on submitting closed source mods can be seen [here](/mods/publishing/#what-about-closed-source-mods) instead.
+
 ## Mods based on other people's mods
 
 Sometimes rather than making original ideas, modders want to for one reason or another make a mod based on someone else's mod, be that for porting it or for making an enhanced version of it. This is allowed under the following conditions:
 
- * The original creator of the mod **must approve of it**. Stealing is never allowed!
- * The new mod must have some **meaningful changes** compared to the original, for example major bugfixes or a port to a new GD version. Simply repackaging Click Between Frames as Superb Input Precision is not allowed
- * The original mod **must be credited**, as per the no stealing rule
+ * You have **evidence** proving the original creator of the mod **approves of your changes** to their existing work, and are **willing to include this evidence as part of your mod's repository** before submitting it to the index. **Stealing is never allowed!**
+ * The new mod must have some **meaningful changes** compared to the original, for example major bugfixes or a port to a new GD version. Simply repackaging Click Between Frames as Superb Input Precision is not allowed.
+ * The original mod and mod developer **must be credited in `about.md`**, as per the no stealing rule.
 
 ## Mods using Generative AI
 
-> :information_source: Note that mods *coded* using Generative AI are subject to [different rules](#other-rules); this section is about mods that bring Generative AI into the game itself
+> :information_source: Note that mods *coded* using Generative AI are subject to [different rules](#rejection-rules); this section is about mods that bring Generative AI into the game itself
 
 Due to controversy among developers regarding the subject, mods that utilize **Generative AI** have to follow these additional guidelines in relation to their AI usage.
 
@@ -137,7 +141,7 @@ Due to controversy among developers regarding the subject, mods that utilize **G
  * The mod **may not grant an unfair advantage** in gameplay or anything else to people through the use of AI
  * The mod **may not compromise the integrity of user-created content**. In essence, this means that **no mod is allowed to use AI for placing, modifying, or deleting objects**, though it is not limited to just those.
  * The AI model is only, and as provably as one can reasonably expect, **trained on consentually and transparently obtained data**. Any mod found to be breaking this rule would be found to be in violation of the "collecting user data without consent" hard-ban rule, and subsequently result in the developer being immediately and permanently banned from the index
- * The mod **must visibly and unambiguously communicate to the user its use of AI** prior to them clicking on it. This can be as simple as adding "AI" or "GPT" to the name of the mod.
+ * The mod **must visibly and unambiguously communicate to the user its use of AI** prior to them viewing more information about the mod (either through Geode's in-game UI or the Geode website). This can be as simple as adding "AI" or "GPT" to the name of the mod.
 
 In addition, all mods utilizing AI **must be manually verified** on the index and **approved unilaterally by Geode lead developers**, regardless of whether the developer is verified on the index or not.
 
@@ -152,7 +156,7 @@ Developers may be banned off the mods index and other Geode-related online space
 
 This ruling is in place to ensure that Geode stays a **safe and welcoming place for everyone**. This is a mod loader for a children's video game - we do not want to indirectly publicize mean people or their actions with it!
 
-Do take note that **the list above is not comprehensive nor set in stone**, and what qualifies as hateful conduct may and will change and mold over time, with the final say always being left to the Geode team of that time.
+Do take note that **the list above is not comprehensive nor set in stone**, and what qualifies as hateful conduct may and will change and mold over time, with the final say always being left to the Geode Team of that time.
 
 Do also note that these rules may very well be enforced retroactively. While we do believe in and hope for people to grow to be better, any person ruled to have committed hateful conduct in the past must give reason for the Geode Team to believe they actually have changed to overturn the verdict.
 
