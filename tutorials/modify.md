@@ -111,7 +111,7 @@ Modifying destructors the traditional way is highly unreliable and outright brok
 ```cpp
 class $modify(CreatorLayer) {
     struct Fields {
-        ~Fields {
+        ~Fields() {
             log::info("CreatorLayer is destructed");
         }
     }
