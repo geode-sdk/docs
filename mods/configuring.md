@@ -167,7 +167,7 @@ A list of tags to categorize the mod. A mod can have any amount of tags, but bet
 | `customization` | The mod adds new customization options to existing GD features |
 | `content` | The mod adds new content (new levels, gamemodes, etc.) |
 | `developer` | The mod is intended for mod developers only |
-| `gdps` | The mod is intended for Geometry Dash Private Servers (GDPSs) |
+| `gdps` | The mod is related to Geometry Dash Private Servers (GDPSs) |
 | `cheat` | The mod adds cheats like noclip |
 | `paid` | The mod contains paid content, like a Pro tier, or if the mod acts as an installer for a fully paywalled mod |
 | `joke` | The mod is a joke. See [the docs](/mods/guidelines#joke-mods) for what joke mods are considered to be "meaningful" |
