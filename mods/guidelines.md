@@ -156,7 +156,7 @@ Developers may be banned off the mods index and other Geode-related online space
 
 This ruling is in place to ensure that Geode stays a **safe and welcoming place for everyone**. This is a mod loader for a children's video game - we do not want to indirectly publicize mean people or their actions with it!
 
-Do take note that **the list above is not comprehensive nor set in stone**, and what qualifies as hateful conduct may and will change and mold over time, with the final say always being left to the Geode Team of that time.
+Do take note that **the list above is not comprehensive nor set in stone**, and what qualifies as hateful conduct may and will change and mold over time, with the final say always being left to the Geode team of that time.
 
 Do also note that these rules may very well be enforced retroactively. While we do believe in and hope for people to grow to be better, any person ruled to have committed hateful conduct in the past must give reason for the Geode Team to believe they actually have changed to overturn the verdict.
 
