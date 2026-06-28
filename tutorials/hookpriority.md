@@ -75,7 +75,7 @@ There are tools for mod compatibilities! Please take advantage of them.
 
 - If you want your function to run _after_ the original function, but _before_ other hooks, use `Priority::First` with `setHookPriorityPost` and call the original function at the start.
 
-- If you're _reimplementing_ the original function and do not call the original, use `Priority::Last` with `setHookPriorityPre`.
+- If you're _reimplementing_ the original function and do not call the original, use `Priority::Replace` with `setHookPriorityPre`.
 
 Obviously, these are not strict rules. Feel free to choose the hook priority that best fits your situation.
 
