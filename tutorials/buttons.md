@@ -1,7 +1,11 @@
 # Buttons
-One of the most common UI elements in GD is the humble **button**. I'm sure you already know what it is, so let's get straight to the point. Buttons are most commonly created using the `CCMenuItemSpriteExtra` class, which is a GD-specific derivation of `CCMenuItemSprite`. However, creating callbacks with `CCMenuItemSpriteExtra` requires writing separate functions, which leads to unreadable code and wastes the developer's time. Geode provides the `CCMenuItemExt` class to solve this. It has a create method called `createSpriteExtra` that lets you create `CCMenuItemSpriteExtra` buttons by passing callbacks as lambdas instead. See [this page](https://docs.geode-sdk.org/classes/geode/cocos/CCMenuItemExt) for all of the create methods available. You can also use any class that inherits from `CCMenuItem` as a button.
+One of the most common UI elements in GD is the humble **button**. I'm sure you already know what it is, so let's get straight to the point. Buttons are most commonly created using the `CCMenuItemSpriteExtra` class, which is a GD-specific derivation of `CCMenuItemSprite`.
+Creating callbacks with `CCMenuItemSpriteExtra` normally requires writing separate callback functions, which can make UI code unnecessarily verbose. Geode provides `CCMenuItemExt` to solve this. `CCMenuItemExt` is a wrapper around `CCMenuItem` that adds convenient factory methods for creating existing `CCMenuItem` classes with lambda callbacks. For example, `createSpriteExtra` creates a normal `CCMenuItemSpriteExtra`, but lets you define its callback inline instead of writing a separate function. See the `CCMenuItemExt` documentation by clicking [here](https://docs.geode-sdk.org/classes/geode/cocos/CCMenuItemExt) for the full list of available factory methods.
 
-Every button that inherits `CCMenuItem` (which both `CCMenuItemSpriteExtra` and methods in `CCMenuItemExt` do) **must be a child of a `CCMenu` to work**. This means that if you add a button as a child to a `CCLayer`, you will find that it can't be clicked. If you don't want to make a `CCMenu`, see the [**menuless buttons**](#menuless-buttons) section, which explains Geode's `Button` class.
+You can also use any class that inherits from `CCMenuItem` as a button.
+
+Every button that inherits `CCMenuItem` (which both `CCMenuItemSpriteExtra` and the `CCMenuItemExt` wrapper do) **must be a child of a `CCMenu` to work**. This means that if you add a button as a child to a `CCLayer`, you will find that it can't be clicked. If you don't want to make a `CCMenu`, see the [**menuless buttons**](#menuless-buttons) section, which explains Geode's `Button` class.
+For `CCMenuItem`-based buttons, **scale the sprite, not the button**. Scaling the button itself **will cause its scale to reset when it is clicked**. Geode's `Button` class does not have this limitation, so it can be scaled directly.
 
 The first parameter of `CCMenuItemExt::createSpriteExtra` is a `CCNode*`. This is the display node of the button; it can be any `CCNode`, like a label or even a whole layer, but usually most people use a sprite.
 
@@ -28,7 +32,7 @@ bool MyLayer::init() {
 This creates a button with the text `Hi mom!`.
 
 ## Callbacks
-Button callbacks are passed as the second parameter to `CCMenuItemExt::createSpriteExtra` in a lambda. Here's an example on how you can make a callback with `CCMenuItemExt::createSpriteExtra`:
+Button callbacks are passed as the second parameter to `CCMenuItemExt::createSpriteExtra` as a lambda. If you want to access members of your layer inside the callback, capture `this`. Otherwise, you don't need to capture anything. Here's an example of creating a callback with `CCMenuItemExt::createSpriteExtra`:
 
 ```cpp
 class MyLayer : public CCLayer {
@@ -38,7 +42,7 @@ protected:
 
         auto btn = CCMenuItemExt::createSpriteExtra(
             /* sprite */,
-            [this](CCMenuItemSpriteExtra* btn) {
+            [](CCMenuItemSpriteExtra*) {
                 log::info("Button clicked!");
             }
         );
@@ -50,7 +54,7 @@ protected:
 
 ## Example
 
-Here is the popular click counter example in cocos2d using `CCMenuItemExt`:
+Here is the popular click counter example in cocos2d-x using `CCMenuItemExt`:
 
 ```cpp
 class MyLayer : public CCLayer {
@@ -65,13 +69,15 @@ protected:
         auto menu = CCMenu::create();
 
         auto btn = CCMenuItemExt::createSpriteExtra(
-            
-            [this](CCMenuItemSpriteExtra* btn) { // This is where we add the callback!
+            ButtonSprite::create("Click me!"),
+            [this](CCMenuItemSpriteExtra* sender) { // This is where we add the callback!
+                // Increment the counter.
                 m_clicked++;
-                
+
                 // getNormalImage returns the display node of the button.
                 // Make sure to cast it to the type used by the button.
-                auto spr = static_cast<ButtonSprite*>(btn->getNormalImage());
+                // Only use `static_cast` if you're the one who owns the button, else use `typeinfo_cast`.
+                auto spr = static_cast<ButtonSprite*>(sender->getNormalImage());
                 spr->setString(fmt::format("Clicked {} times", m_clicked).c_str());
             }
         );
@@ -109,14 +115,14 @@ protected:
 
         m_label = CCLabelBMFont::create("Clicked: 0", "bigFont.fnt");
         m_label->setPosition(100.f, 150.f);
-        this->addChild(m_label);
+        addChild(m_label);
 
         auto menu = CCMenu::create();
 
         // Increment button
         auto incrementBtn = CCMenuItemExt::createSpriteExtra(
             ButtonSprite::create("+1"),
-            [this](CCMenuItemSpriteExtra* sender) { this->updateCounter(1); }
+            [this](CCMenuItemSpriteExtra* sender) { updateCounter(1); }
         );
         incrementBtn->setPosition(100.f, 100.f);
         menu->addChild(incrementBtn);
@@ -124,39 +130,68 @@ protected:
         // Decrement button
         auto decrementBtn = CCMenuItemExt::createSpriteExtra(
             ButtonSprite::create("-1"),
-            [this](CCMenuItemSpriteExtra* sender) { this->updateCounter(-1); }
+            [this](CCMenuItemSpriteExtra* sender) { updateCounter(-1); }
         );
         decrementBtn->setPosition(100.f, 60.f);
         menu->addChild(decrementBtn);
 
-        this->addChild(menu);
+        addChild(menu);
 
         return true;
     }
 };
 ```
 
+## Creating toggles
+`CCMenuItemExt` comes with `CCMenuItemToggler` wrappers for creating toggles. One such example is `createTogglerWithStandardSprites`, which automatically places the checkmark sprites for you. Example:
+
+```cpp
+bool MyLayer::init() {
+    if (!CCLayer::init()) return false;
+
+    auto menu = CCMenu::create();
+    addChild(menu);
+
+    auto toggleBtn = CCMenuItemExt::createTogglerWithStandardSprites(
+        1.f, // scale
+        [](CCMenuItemToggler* sender) {
+            if (!sender->isToggled()) { // Due to a quirk, you have to invert the condition.
+                log::info("Button toggled on!");
+            } else {
+                log::info("Button toggled off!");
+            }
+        }
+    );
+    toggleBtn->setPosition(100.f, 100.f);
+    menu->addChild(toggleBtn);
+
+    return true;
+}
+```
+
 # Menuless buttons
-Let's say you have a lot of buttons with callbacks and you don't want to create a huge amount of `CCMenu`s just to hold them. Thankfully, Geode has a `Button` class for this. This class allows you to create buttons with callbacks without needing a `CCMenu`, since unlike the previous classes, this class does not inherit `CCMenuItem`. See [this page](https://docs.geode-sdk.org/classes/geode/Button/) for all of the create methods available.
+If you don't want to create a `CCMenu` to support callbacks on your button, Geode has a `Button` class for that. This class allows you to create buttons with callbacks without needing a `CCMenu`, since unlike the previous classes, this class does not inherit `CCMenuItem`. See [this page](https://docs.geode-sdk.org/classes/geode/Button/) for all of the create methods available.
 
 ```cpp
 bool MyLayer::init() {
     // ...
-    
-    auto spr = ButtonSprite::create("Hi mom!");
-    
-    // Create methods other than createWithNode require the sprite to be specified by its string name in the first parameter, so we should use this one for our ButtonSprite, which as the name implies, creates the button with a node (CCNode).
+
+    // Use `createWithNode` if you want to create the button with a node (`CCNode`).
+    // `ButtonSprite` here is a node.
+    // Other methods take the sprite name as a string.
     auto btn = Button::createWithNode(
-        spr,
-        nullptr
+        ButtonSprite::create("Hi mom!"),
+        [](Button*) { 
+            // do nothing
+        }
     );
-    
-    this->addChild(btn); // Add the button directly to the layer! No need to add it to a CCMenu :3
+
+    this->addChild(btn); // Add the button directly to the layer! No need to add it to a menu, and the callback will work! :3
 }
 ```
 
 ## Callbacks
-Button callbacks are usually passed as the second parameter to the `Button` class (the position of the parameter depends on the create method) in a lambda. Here's an example on how you can make a callback with `Button::createWithNode`:
+Button callbacks are usually passed as the second parameter to the `Button` class (the position of the parameter depends on the create method) in a lambda. If you want to access members of your layer inside the callback, capture `this`. Here's an example on how you can make a callback with `Button::createWithNode`:
 
 ```cpp
 class MyLayer : public CCLayer {
@@ -166,7 +201,7 @@ protected:
 
         auto btn = Button::createWithNode(
             /* sprite */,
-            [this](auto sender) {
+            [](Button*) {
                 log::info("Button clicked!");
             }
         );
@@ -178,38 +213,34 @@ protected:
 
 ## Example
 
-Here is the popular click counter example in cocos2d using `Button`:
+Here is the popular click counter example in cocos2d-x using `Button`:
 
 ```cpp 
 class MyLayer : public CCLayer {
 protected:
-    // Class member that stores how many times 
+    // Class member that stores how many times
     // the button has been clicked
     int m_clicked = 0;
 
     bool init() {
         if (!CCLayer::init()) return false;
-        
-        auto spr = ButtonSprite::create("Click me!");
-        
+
         auto btn = Button::createWithNode(
-            spr,
-            [this, spr](auto sender) { // This is where we add the callback! Make sure to also catch the sprite inside the lambda so you can use it.
+            ButtonSprite::create("Click me!"),
+            [this](Button* sender) { // This is where we add the callback!
+                // Increment the counter.
                 m_clicked++;
-                
-                // setString changes the text displayed by the ButtonSprite. It takes a
-                // C string (`const char*`), so you'll often need to call `.c_str()` when
-                // passing formatted strings to cocos2d functions.
+
+                // The equivalent of `getNormalImage` in `geode::Button` is `getDisplayNode`.
+                // Works exactly like `getNormalImage`, you cast it with the type used by the button.
+                // Only use `static_cast` if you're the one who owns the button, else use `typeinfo_cast`.
+                auto spr = static_cast<ButtonSprite*>(sender->getDisplayNode());
                 spr->setString(fmt::format("Clicked {} times", m_clicked).c_str());
             }
         );
 
-        // You can access the display node of the button with `getDisplayNode()`.
-        // Just like with `CCMenuItemSprite::getNormalImage()`, cast it to the
-        // type used by the button, then use it as normal.
-
         btn->setPosition(100.f, 100.f);
-        this->addChild(btn);
+        addChild(btn);
 
         return true;
     }
@@ -218,6 +249,7 @@ protected:
 
 ## Passing more parameters to callbacks
 Just like in the earlier `CCMenuItemExt` example, you may run into cases where a `Button` callback needs extra information beyond the sender itself. For instance, suppose we want to extend the click counter with a decrement button as well; writing a separate function for each button would be redundant, so instead we rely on **lambda captures** to pass in the needed parameters.
+
 ```cpp
 class MyLayer : public CCLayer {
 protected:
@@ -243,7 +275,7 @@ protected:
         // Increment button
         auto incrementBtn = Button::createWithNode(
             ButtonSprite::create("+1"),
-            [this](auto sender) { this->updateCounter(1); }
+            [this](Button*) { this->updateCounter(1); }
         );
         incrementBtn->setPosition(100.f, 100.f);
         this->addChild(incrementBtn);
@@ -251,7 +283,7 @@ protected:
         // Decrement button
         auto decrementBtn = Button::createWithNode(
             ButtonSprite::create("-1"),
-            [this](auto sender) { this->updateCounter(-1); }
+            [this](Button*) { this->updateCounter(-1); }
         );
         decrementBtn->setPosition(100.f, 60.f);
         this->addChild(decrementBtn);
