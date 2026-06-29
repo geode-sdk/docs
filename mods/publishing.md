@@ -51,9 +51,9 @@ Once you have your verified status, try and uphold the same quality standards yo
 
 ## What about closed source mods?
 
-Even if your mod is **closed source**, you still need to submit the source code for verification. Do so by asking [someone who can approve new mods](#who-can-approve-mods) on the index repository and send them the source code privately, for example by adding them temporarily as a contributor to your private repository.
+Even if your mod is **closed source**, you still need to submit the source code for verification. Do so by asking [someone who can approve new mods](#who-can-approve-mods) via [the Discord Server](https://discord.gg/9e43WMKzhp) or **the discussions tab** on [the main Geode repository on Github](https://github.com/geode-sdk/geode/discussions), explain why you chose to go closed-source, and send them the source code privately by adding them as a contributor to your private repository.
 
-**Geode developers will never leak or steal your source code!** If you find that the person who verified your mod has breached this vital level of trust, **do let the other Geode lead developers know immediately**.
+**Geode lead developers and index admins will never leak or steal your source code!** If you find that the person who verified your mod has breached this vital level of trust, **do let the other Geode lead developers know immediately**.
 
 ## What about paid mods?
 
