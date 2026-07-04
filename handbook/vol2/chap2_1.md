@@ -41,11 +41,9 @@ The three most important windows for our purposes are **Symbol Tree**, **Listing
 
 ## Scripts Intermission
 
-Ghidra comes with the ability to run scripts, which may be useful while reverse engineering. You can access the Script Manager through the menu bar `Window > Script Manager` or through its icon on the main toolbar:
+Ghidra comes with the ability to run scripts, which may be useful while reverse engineering. You can access the Script Manager through the menu bar `Window > Script Manager` or through its icon on the main toolbar, which looks like a green circle with a white play icon inside (▶).
 
-![Image showing the Script Manager icon, which is a green circle with a white triangle inside](/assets/handbook/vol2/ghidra_scriptmanager_icon.png)
-
-If you have checked out the [Geode bindings](https://github.com/geode-sdk/bindings/) to a local directory (which you should if you're planning on adding functions to them), you will also want to tell Ghidra to look at its scripts directory. To do so, using the Script Manager window, click the "Manage Script Directories" button in the toolbar. Then, add the path to the binding's scripts directory (it should end with `/bindings/scripts/ghidra`). Click the Refresh button at the top of that window to finish your changes.
+If you have checked out the [Geode bindings](https://github.com/geode-sdk/bindings/) to a local directory (which you should if you are planning on adding functions to them), you will also want to tell Ghidra to look at its scripts directory. To do so, using the Script Manager window, click the "Manage Script Directories" button in the toolbar. Then, add the path to the binding's scripts directory (it should end with `/bindings/scripts/ghidra`). Click the Refresh button at the top of that window to finish your changes.
 
 If you have done this correctly, you should see a "GeodeSDK" folder in the Script Manager:
 
