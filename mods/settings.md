@@ -93,7 +93,6 @@ All setting types, including custom ones if they opt-in, share a common set of b
 | `platforms` | Array | List of platforms this setting is available on, i.e. `["win", "android"]` |
 | `enable-if` | [`enable-if` Scheme](#enable-if) | A way to disable settings based on other settings; see [Enable If Schemes](#enable-if) for more |
 | `enable-if-description` | String | Human-readable description for what the `enable-if` scheme does. If not provided, Geode will try to synthesize a legible one from the `enable-if` scheme itself. However, specifying a custom description is heavily recommended if you use saved values, or have more complex schemes |
-| `button` | | Adds a button, presses can be listened to using events. More detailed documentation TBA |
 
 ---
 
@@ -460,6 +459,12 @@ The key value needs to be the full key name, including mod ID. For example, to m
     }
 }
 ```
+
+### Button
+See https://github.com/geode-sdk/geode/pull/1903 ; better documentation TBA
+
+### Title
+See https://github.com/geode-sdk/geode/pull/1903 ; better documentation TBA
 
 ---
 
