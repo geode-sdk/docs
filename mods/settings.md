@@ -460,10 +460,10 @@ The key value needs to be the full key name, including mod ID. For example, to m
 }
 ```
 
-### Button
+### Button (`button`)
 See https://github.com/geode-sdk/geode/pull/1903 ; better documentation TBA
 
-### Title
+### Info (`info`)
 See https://github.com/geode-sdk/geode/pull/1903 ; better documentation TBA
 
 ---
