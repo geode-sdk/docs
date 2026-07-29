@@ -130,7 +130,7 @@ bool MyLayer::init() {
 Here is what the result will look like ingame:
 ![image-of-the-created-ccmenu](/assets/positioning_contentsize1.png)
 
-As you can see, the the menu has the perfect content size, and the buttons are placed in their right spots.
+As you can see, the menu has the perfect content size, and the buttons are placed in their right spots.
 
 You might say "Why did we use the buttons' content sizes to place them inside the menu? This doesn't make any sense!". To answer that, we have to talk about **anchor points**.
 
