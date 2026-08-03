@@ -172,3 +172,12 @@ void api::doSomething() {
     // ...
 }
 ```
+
+### Limitations
+Event exported functions currently **cannot** be called from within the mod (attempting to do so will crash the game). A possible way to get around this is to have a separate set of external and internal functions and have the external functions only serve as wrappers for the internal ones.
+
+```cpp
+int EditorIDs::getID(GJGameLevel* level) {
+    return EditorIDs::Internal::getID(level);
+}
+```
