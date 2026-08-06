@@ -36,7 +36,7 @@ After launching the installer, select **Desktop development with C++** and optio
 
 Once Visual Studio is installed, you should now have a working C++ compiler that is suited for GD mod development.
 
-Note that although it is possible to use MSVC from Visual Studio, we **do not** recommend using it, since you may not be able to compile your mod using it, or use Clang-only macros.
+Note that although it is possible to use MSVC from Visual Studio on its own to compile Geode mods, we **do not** recommend using it, since you may not be able to compile a mod using it (MSVC likes to run into segfaults while compiling certain libraries), and it is also slower overall.
 
 ### MacOS
 
