@@ -5,7 +5,7 @@ order: 7
 
 # What next?
 
-You should now be set on your journey to develope GD mods! If you are completely new to GD modding, a good place to start is [the Handbook](/handbook/chap0), which covers all of the basics of creating a Hello World.
+You should now be set on your journey to develop GD mods! If you are completely new to GD modding, a good place to start is [the Handbook](/handbook/chap0), which covers all of the basics of creating a Hello World.
 
 ## Geode Features
 

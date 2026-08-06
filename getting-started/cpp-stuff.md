@@ -13,30 +13,30 @@ To be able to use the Geode SDK, you **will** need at least the following:
 ## Compiler
 
 To use the Geode SDK, and in turn make Geometry Dash mods, you will need either:
- * [Clang](#windows-clang) (recommended) or [Visual Studio 2022+](#windows-visual-studio) on Windows
+ * [Clang](#windows) on Windows
  * [Clang](#macos) on MacOS
  * [A secret third thing](#linux) on Linux
 
-### Windows (Clang)
+### Windows
 
 First, install [LLVM](https://github.com/llvm/llvm-project) and [Ninja](https://github.com/ninja-build/ninja). The easiest way is using Scoop:
 ```
 scoop install llvm ninja
 ```
 
-LLVM itself does not come with Windows SDK and CRT libraries, so you will need a minimal Visual Studio install for these, which is described in the next section.
-
-### Windows (Visual Studio)
-
-Please note that Visual Studio **2022** or higher is required. If you have an older version already installed, you should upgrade to the latest available.
+LLVM itself does not come with Windows SDK and CRT libraries, so you will need a minimal Visual Studio install for these.
 
 Unless you want to install Visual Studio (the editor) itself, we recommend installing just the build tools. Open the VS [download page](https://visualstudio.microsoft.com/downloads/), scroll to the bottom, and under "Tools for Visual Studio" download **Build Tools for Visual Studio**.
+
+Please note that Visual Studio **2022** or higher is required. If you have an older version already installed, you should upgrade to the latest available.
 
 After launching the installer, select **Desktop development with C++** and optionally deselect all features except for **MSVC Build Tools** and **Windows SDK**, like on the screenshot below. Click Install and wait for it to finish.
 
 ![Image showing VS installer](/assets/vs_installer.png)
 
 Once Visual Studio is installed, you should now have a working C++ compiler that is suited for GD mod development.
+
+Note that although it is possible to use MSVC from Visual Studio, we **do not** recommend using it, since you may not be able to compile your mod using it, or use Clang-only macros.
 
 ### MacOS
 
