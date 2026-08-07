@@ -53,23 +53,24 @@ Because of that, this guide will set you up to [cross-compile](https://en.wikipe
 
 First, besides Git and CMake, make sure you have `clang` and `lld` installed.
 
-For CMake make sure you have at least version 3.29, some distributions like Debian and Linux Mint ship older versions which are not able to cross-compile Geode mods.
+For CMake make sure you have at least version 3.29, some distributions like Debian 12 and Linux Mint ship older versions which are not able to cross-compile Geode mods.
 
-On Ubuntu:
+On Debian-based systems (Ubuntu, Linux Mint, ...):
 
 ```bash
-apt install clang clang-tools cmake lld llvm
+apt install clang clang-tools lld llvm cmake git
 ```
+Note: Some LTS distributions (Linux Mint) may offer old versions of Clang and CMake by default. As of the writing of this page, Clang 19 (available by appending `-19` to every package name except cmake and git on outdated distros) is the absolute minimum usable for compiling Geode mods, though version 21 or higher are recommended and compatiblity with Clang 19 may not be maintained. For updating CMake you may use the official [Kitware APT Repository](https://apt.kitware.com/).
 
 On Fedora:
 ```bash
-dnf install clang lld llvm
+dnf install clang lld llvm cmake git
 ```
 
 On Arch-based systems:
 
 ```bash
-pacman -S clang lld llvm
+pacman -S clang lld llvm cmake git
 ```
 
 Alternatively, you can use [brew](https://brew.sh/) (Linuxbrew) on Linux just like on macOS:
