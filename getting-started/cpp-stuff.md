@@ -58,7 +58,7 @@ For CMake make sure you have at least version 3.29, some distributions like Debi
 On Ubuntu:
 
 ```bash
-apt install clang-19 clang-tools-19 lld-19
+apt install clang clang-tools cmake lld llvm
 ```
 
 On Fedora:
