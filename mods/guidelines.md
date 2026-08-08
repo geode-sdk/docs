@@ -92,17 +92,19 @@ Checking that another mod is loaded by looking for identifying effects of them i
 
 ## Mods using Generative AI
 
+Mods programmed primarily with LLM assistance pose a unique set of challenges to the index. Developers of these mods tend to prioritize the end product over the code (and effort) required to create it, viewing the mod more as a toy than a project. This results in a mod that initially seems to function, but falls apart over time, especially once the developers lose interest in their mod. For the sake of users and other developers, we have to be confident that mod developers will remain invested in maintaining their mod. We also want to ensure that those developers have the skills necessary to update their own code when incompatibilities or bugs appear.
+
 Mods that use generative AI for anything on a mod's repository **must disclose their usage** in a location accessible to reviewers. This may be the mod's `ABOUT.md`, the repository's `README.md`, or as a comment on the mod submission. This disclosure must be in detail, describing where in the codebase generative AI was used and how it was used. Usage of LLMs for review or planning does not have to be disclosed, as long as those conversations _do not end up in the repository_. Developers found being **intentionally dishonest** about their use of AI for development will have their mod removed, and may be banned from the index.
 
-Our expectation is that AI generated code **must be exceptional**. The code must be clean and well-documented, and the mod itself **must be thoroughly tested**. Compatibility issues with other mods **must be resolved** prior to submission. We expect **all testing** to be provably **done by humans**. Enforcement of this policy is left [up to individual reviewers](#everything-is-situational). Reviewers are under no obligation to explain why a mod was rejected for generative AI use.
+AI generated code should be _kept to a minimum_. This code **must be thoroughly tested** and kept to a reasonable standard of **maintainability**. This code should not create **incompatibilities** with other mods. We expect all testing to be provably **done by humans**. Enforcement of this policy is left [up to individual reviewers](#everything-is-situational). Index Staff are under no obligation to explain why a mod was rejected for generative AI use.
 
-Please respect the time of our human reviewers. The developer must be fully accountable for their codebase, and should not need to consult a LLM when asked questions about it. If a reviewer or another developer is expected to read something, it should not be written by an LLM. This means that _all documentation_ (including the disclosure notice) must be human-written.
+Please respect the time of our human reviewers. The developer must be fully accountable for their codebase, and should not need to consult a LLM when asked questions about it. If an Index Staff or another developer is expected to read something, it should not be written by an LLM. This means that _all documentation_ (including the disclosure notice) must be human-written.
 
 Mods must not use generative AI for **any public asset**, including mod icons, sprites, and the various descriptions (about, changelog, etc.).
 
 This policy **does not apply** to content _outside_ of the mod submission, such as backend servers used by the mod or external companion tools.
 
-If you believe that your mod was erroneously rejected for generative AI use, please reach out to an index staff.
+If you believe that your mod was erroneously rejected for generative AI use, please reach out to an Index Staff.
 
 ## Mods modifying the Geode UI
 
