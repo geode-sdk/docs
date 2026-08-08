@@ -38,8 +38,8 @@ A mod found breaking any of these rules will be **rejected unconditionally** fro
  * (`reject-bad-metadata`) The mod **does not have appropriate metadata**. All mods on the Index must have a proper name, description, icon, and tags, [including jokes](#joke-mods).
  * (`reject-enshittification`) The mod **removes Vanilla features** for no good reason.
  * (`reject-runtime-code`) The mod **installs and runs arbitary code**. You are not allowed to install other mods from outside the Geode index. There are two exceptions to this rule: mods that introduce some sort of scripting system that runs *sandboxed* arbitary code, and mods installing additional paid features as a runtime library. Do note that for the purposes of verification, the code for all of those paid features must be included, including the code used to load them.
- * (`reject-vibecoded`) The mod's **codebase entirely or mostly consists of AI-generated code**. If it appears the programmer does not understand the code that has been generated and is trying to get vibecoded mods on the index, this will result in a rejection. Using AI tools to boost productivity is fine, but fully vibecoding mods will inevitably lead to instability and crashes.
- * (`reject-llm`) The mod **adds an LLM to the game** that does not [adhere to our rules on generative AI](#mods-using-generative-ai).
+ * (`reject-vibecoded`) The mod's **codebase entirely or mostly consists of AI-generated code**. If it appears the programmer does not understand the code that has been generated and is trying to get vibecoded mods on the index, this will result in a rejection. Using AI tools to boost productivity is fine, but fully vibecoding mods will inevitably lead to instability and crashes. For more information, see the section on [using generative AI](#mods-using-generative-ai).
+ * (`reject-llm`) The mod **adds an LLM to the game** that does not [adhere to our rules on generative AI](#mods-with-generative-ai-features).
 
 A mod found breaking any of these rules will likely be rejected, although depending on the situation, they could also still be approved.
 
@@ -130,9 +130,9 @@ Sometimes rather than making original ideas, modders want to for one reason or a
  * The new mod must have some **meaningful changes** compared to the original, for example major bugfixes or a port to a new GD version. Simply repackaging Click Between Frames as Superb Input Precision is not allowed.
  * The original mod and mod developer **must be credited in `about.md`**, as per the no stealing rule.
 
-## Mods using Generative AI
+## Mods with Generative AI features
 
-> :information_source: Note that mods *coded* using Generative AI are subject to [different rules](#rejection-rules); this section is about mods that bring Generative AI into the game itself
+> :information_source: Note that mods *coded* using Generative AI are subject to [different rules](#mods-using-generative-ai); this section is about mods that bring Generative AI into the game itself
 
 Due to controversy among developers regarding the subject, mods that utilize **Generative AI** have to follow these additional guidelines in relation to their AI usage.
 
@@ -144,6 +144,20 @@ Due to controversy among developers regarding the subject, mods that utilize **G
  * The mod **must visibly and unambiguously communicate to the user its use of AI** prior to them viewing more information about the mod (either through Geode's in-game UI or the Geode website). This can be as simple as adding "AI" or "GPT" to the name of the mod.
 
 In addition, all mods utilizing AI **must be manually verified** on the index and **approved unilaterally by Geode lead developers**, regardless of whether the developer is verified on the index or not.
+
+## Mods using Generative AI
+
+Mods that use generative AI for anything on a mod's repository **must disclose their usage** in a location accessible to reviewers. This may be the mod's `ABOUT.md`, the repository's `README.md`, or as a comment on the mod submission. This disclosure must be in detail, describing where in the codebase generative AI was used and how it was used. Usage of LLMs for review or planning does not have to be disclosed, as long as those conversations _do not end up in the repository_. Developers found being **intentionally dishonest** about their use of AI for development will have their mod removed, and may be banned from the index.
+
+Our expectation is that AI generated code **must be exceptional**. The code must be clean and well-documented, and the mod itself **must be thoroughly tested**. Compatibility issues with other mods **must be resolved** prior to submission. We expect **all testing** to be provably **done by humans**. Enforcement of this policy is left [up to individual reviewers](#everything-is-situational). Reviewers are under no obligation to explain why a mod was rejected for generative AI use.
+
+Please respect the time of our human reviewers. The developer must be fully accountable for their codebase, and should not need to consult a LLM when asked questions about it. If a reviewer or another developer is expected to read something, it should not be written by an LLM. This means that _all documentation_ (including the disclosure notice) must be human-written.
+
+Mods must not use generative AI for **any public asset**, including mod icons, sprites, and the various descriptions (about, changelog, etc.).
+
+This policy **does not apply** to content _outside_ of the mod submission, such as backend servers used by the mod or external companion tools.
+
+If you believe that your mod was erroneously rejected for generative AI use, please reach out to an index staff.
 
 ## Hateful conduct
 
