@@ -90,6 +90,20 @@ if (this->querySelector("hjfod.gdshare/export-button")) {
 ```
 Checking that another mod is loaded by looking for identifying effects of them in the game is completely fine, as long as the checks are safe and don't make assumptions about things that haven't been checked. For example, just doing `Loader::get()->isModLoaded("hjfod.gdshare")` is NOT enough to guarantee all of GDShare's buttons exist, so you should always check for the buttons themselves!
 
+## Mods using Generative AI
+
+Mods that use generative AI for anything on a mod's repository **must disclose their usage** in a location accessible to reviewers. This may be the mod's `ABOUT.md`, the repository's `README.md`, or as a comment on the mod submission. This disclosure must be in detail, describing where in the codebase generative AI was used and how it was used. Usage of LLMs for review or planning does not have to be disclosed, as long as those conversations _do not end up in the repository_. Developers found being **intentionally dishonest** about their use of AI for development will have their mod removed, and may be banned from the index.
+
+Our expectation is that AI generated code **must be exceptional**. The code must be clean and well-documented, and the mod itself **must be thoroughly tested**. Compatibility issues with other mods **must be resolved** prior to submission. We expect **all testing** to be provably **done by humans**. Enforcement of this policy is left [up to individual reviewers](#everything-is-situational). Reviewers are under no obligation to explain why a mod was rejected for generative AI use.
+
+Please respect the time of our human reviewers. The developer must be fully accountable for their codebase, and should not need to consult a LLM when asked questions about it. If a reviewer or another developer is expected to read something, it should not be written by an LLM. This means that _all documentation_ (including the disclosure notice) must be human-written.
+
+Mods must not use generative AI for **any public asset**, including mod icons, sprites, and the various descriptions (about, changelog, etc.).
+
+This policy **does not apply** to content _outside_ of the mod submission, such as backend servers used by the mod or external companion tools.
+
+If you believe that your mod was erroneously rejected for generative AI use, please reach out to an index staff.
+
 ## Mods modifying the Geode UI
 
 Some mods may want to **extend Geode's own UI**, for example to add custom features to their own mod's page. This is allowed, however with some caveats. See [the tutorial page](/tutorials/modify-geode) for more.
@@ -144,20 +158,6 @@ Due to controversy among developers regarding the subject, mods that utilize **G
  * The mod **must visibly and unambiguously communicate to the user its use of AI** prior to them viewing more information about the mod (either through Geode's in-game UI or the Geode website). This can be as simple as adding "AI" or "GPT" to the name of the mod.
 
 In addition, all mods utilizing AI **must be manually verified** on the index and **approved unilaterally by Geode lead developers**, regardless of whether the developer is verified on the index or not.
-
-## Mods using Generative AI
-
-Mods that use generative AI for anything on a mod's repository **must disclose their usage** in a location accessible to reviewers. This may be the mod's `ABOUT.md`, the repository's `README.md`, or as a comment on the mod submission. This disclosure must be in detail, describing where in the codebase generative AI was used and how it was used. Usage of LLMs for review or planning does not have to be disclosed, as long as those conversations _do not end up in the repository_. Developers found being **intentionally dishonest** about their use of AI for development will have their mod removed, and may be banned from the index.
-
-Our expectation is that AI generated code **must be exceptional**. The code must be clean and well-documented, and the mod itself **must be thoroughly tested**. Compatibility issues with other mods **must be resolved** prior to submission. We expect **all testing** to be provably **done by humans**. Enforcement of this policy is left [up to individual reviewers](#everything-is-situational). Reviewers are under no obligation to explain why a mod was rejected for generative AI use.
-
-Please respect the time of our human reviewers. The developer must be fully accountable for their codebase, and should not need to consult a LLM when asked questions about it. If a reviewer or another developer is expected to read something, it should not be written by an LLM. This means that _all documentation_ (including the disclosure notice) must be human-written.
-
-Mods must not use generative AI for **any public asset**, including mod icons, sprites, and the various descriptions (about, changelog, etc.).
-
-This policy **does not apply** to content _outside_ of the mod submission, such as backend servers used by the mod or external companion tools.
-
-If you believe that your mod was erroneously rejected for generative AI use, please reach out to an index staff.
 
 ## Hateful conduct
 
