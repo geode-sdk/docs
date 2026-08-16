@@ -134,6 +134,8 @@ Two versions of the macro are available:
 #pragma once
 
 #include <Geode/loader/Dispatch.hpp>
+// This undef is not strictly required, however the define that follows will throw a warning
+// if MY_MOD_ID happens to be set by some other api and it is not undefined like this.
 #undef MY_MOD_ID
 // You must **manually** declare the mod id, as macros like GEODE_MOD_ID will not
 // behave correctly to other mods using your api.
@@ -178,6 +180,8 @@ Event exported functions currently **cannot** be called from within the mod (att
 
 ```cpp
 int EditorIDs::getID(GJGameLevel* level) {
+    // In this example EditorIDs::getID is the exported function accessible to other mods
+    // and EditorIDs::Internal::getID is only accessible from within the mod itself.
     return EditorIDs::Internal::getID(level);
 }
 ```
