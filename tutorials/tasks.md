@@ -1,5 +1,7 @@
 # Tasks
 
+> :warning: The Tasks API was deprecated in Geode v5. The [Async API](/tutorials/async) is recommended as an alternative.
+
 The Tasks API is Geode's primary abstraction for running **asynchronous multi-threaded code**. Manually dealing with multi-threaded code in GD is a pain, since you need to make sure all UI and Cocos manipulations happen in the main thread. Tasks abstract this issue away by integrating with the the `EventListener` API, using events to signal when the Task is finished, as well as optionally signaling progress events like download percentage.
 
 ## Creating a Task

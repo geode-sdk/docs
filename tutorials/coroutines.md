@@ -1,5 +1,7 @@
 # Coroutines
 
+> :warning: The Tasks API was deprecated in Geode v5. The [Async API](/tutorials/async) is recommended as an alternative.
+
 [Coroutines](https://en.cppreference.com/cpp/language/coroutines) are an underutilized feature of C++20 that not many understand. Under the hood, they are very complex, but luckily Geode makes it quite simple for you. Geode lets you leverage the power of coroutines to write clean asynchronous code, tackle Result propagation, and build Python-style generators with ease.
 
 ## Task
