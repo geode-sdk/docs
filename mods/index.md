@@ -1,6 +1,6 @@
 ---
 description: A collection of tutorials for working with Geode mods
-order: 3
+order: 4
 ---
 
 # Geode Mods
