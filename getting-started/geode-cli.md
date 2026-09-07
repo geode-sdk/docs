@@ -5,7 +5,7 @@ order: 3
 
 # Geode CLI
 
-Geode has its own CLI tool to aid in many tasks involved in making mods, such as packing assets, generating fonts, managing installed SDK versions, etc.. While it is technically possible to use Geode without the CLI, there is little reason not to install it as **it's required for nearly everything in practice**.
+Geode has its own CLI tool to aid in many tasks involved in making mods, such as packing assets, generating fonts, managing installed SDK versions, etc. While it is technically possible to use Geode without the CLI, there is little reason not to install it as **it's required for nearly everything in practice**.
 
 # Installation
 

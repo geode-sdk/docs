@@ -22,10 +22,9 @@ You can use one of the following IDEs for developing Geode mods. Using an IDE is
 Install the following VSCode extensions:
  * [`CMake Tools`](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
  * [`Geode`](https://marketplace.visualstudio.com/items?itemName=GeodeSDK.geode) - Not required, but will provide some nice features.
-
-As well as one of:
  * [`clangd`](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd) - **if using Clang as compiler**
- * [`C/C++`](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) - **if using MSVC / Visual Studio as compiler**
+<!-- consider still recommending because it provides an integrated debugger on windows but it will break clangd unless you disable intellisense -->
+<!-- * [`C/C++`](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) - **if using MSVC / Visual Studio as compiler** -->
 
 There are a few steps you should follow to get proper intellisense and code completion (you should only need to do these once per project, ideally):
 
@@ -33,15 +32,13 @@ There are a few steps you should follow to get proper intellisense and code comp
 
 ![Image showing a bunch of compilers CMake detected in VS Code](/assets/win_compilers.png)
 
-Depending on which compiler you want to use, pick either:
- * **Clang** (not `Clang-cl`) - recommended
- * **Visual Studio 20xx Release - amd64** (not `amd64_x86` or any other ones)
+You should pick **Clang** from the list (not `Clang-cl` or `Visual Studio`).
 
-2. Now to select the build variant, press F1 and run `CMake: Select Variant`. We recommend **RelWithDebInfo** for easier debugging, as **Debug** may sometimes cause obscure crashes.
+2. Now to select the build variant, press F1 and run `CMake: Select Variant`. We recommend **RelWithDebInfo** for easier debugging, as **Debug** may sometimes cause obscure crashes, and Debug builds cannot be distributed outside of your system.
 
 ![Image showing available build types on Windows: Debug, Release, MinSizeRel, and RelWithDebInfo](/assets/win_relwithdebinfo.png)
 
-3. If using **Clang** with the **clangd** extension, press F1 and run `CMake: Edit User-Local CMake Kits`. This will open a file, in there find the chosen kit (one with Clang in the name) and add these keys to it:
+3. Press F1 and run `CMake: Edit User-Local CMake Kits`. This will open a file, in there find the chosen kit (one with Clang in the name) and add these keys to it:
 ```json
 "cmakeSettings": {
     "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
@@ -57,10 +54,6 @@ Additionally, we recommend disabling clangd auto header insertion, as it doesn't
     "-header-insertion=never"
 ],
 ```
-
-4. If instead of Clang you chose the **C/C++ extension**, you need to register CMake as the **Configuration Provider** for the C++ extension by pressing F1 and running `C/C++: Edit Configurations (UI)`. Scroll down to **Advanced** options, and set the Configuration Provider as `ms-vscode.cmake-tools`.
-
-![Image showing the "C/C++: Edit Configurations (UI)" command being run in VS Code](/assets/win_usecmake.png)
 
 Now, build your mod by pressing F1 and running `CMake: Build`. **You must build your mod first so that errors such as `#include <Geode/modify/MenuLayer.hpp> not found` go away.** If the mod was built successfully, the exit code at the end should be 0. If any errors still persist after building the mod, try restarting VS Code.
 
@@ -173,7 +166,7 @@ After that, in the Open Project Wizard, you need to make sure that:
 2. Toolchain is set to *Visual Studio* or *Clang/LLVM*
 3. Generator is set to *Visual Studio 17 2022* or *Ninja* (if you have it installed)
 
-In the end it should look like this:  
+In the end it should look like this:
 
 ![Image showing the CLion Open Project Wizard set up for Geode](/assets/clion_openprojectwizardsetup.png)
 
@@ -217,5 +210,5 @@ Now, in the toolchain settings on the right side of the **Name** field, click th
 
 After that, you can follow the same steps as on Windows to build your mod.
 
-For some specific mods/libraries (most people won't need this), you might also want to add the clang-cl toolchain. Everything is the same as with clang, except you have to use the `clang-cl-msvc.cmake` toolchain file instead. (Copy the environment file and change the `CMAKE_TOOLCHAIN_FILE` variable to point to the `clang-cl-msvc.cmake` file.)  
+For some specific mods/libraries (most people won't need this), you might also want to add the clang-cl toolchain. Everything is the same as with clang, except you have to use the `clang-cl-msvc.cmake` toolchain file instead. (Copy the environment file and change the `CMAKE_TOOLCHAIN_FILE` variable to point to the `clang-cl-msvc.cmake` file.)
 Also make sure you're using `clang-cl` as the compiler in the toolchain settings.
