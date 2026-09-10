@@ -6,7 +6,6 @@
   - [geode::Popup](#geodepopup)
   - [Tasks](#tasks)
   - [Keybinds](#keybinds)
-  - [Game restarting](#game-restarting)
   - [Settings](#settings)
   - [Miscellaneous](#miscellaneous)
 <!--toc:end-->
@@ -127,17 +126,12 @@ As a result of the migration to `geode::Label`, the following breaking changes w
 
 ## Tasks
 
-Tasks have been **completely removed**. Please switch to using [async](/tutorials/async)
+- Tasks have been **completely removed**. Please switch to using [async](/tutorials/async)
 for all your task-related needs
 
 ## Keybinds
 
 - Added keybind modifier **fallthrough** (see [this pull request](https://github.com/geode-sdk/geode/pull/2000) for more information)
-
-## Game restarting
-
-- `geode::utils::game::restart(bool saveData)` has been removed; you will have to
-use `geode::utils::game::restart(bool saveData, bool safeMode)`.
 
 ## Settings
 
@@ -146,4 +140,6 @@ use `geode::utils::game::restart(bool saveData, bool safeMode)`.
 
 ## Miscellaneous
 
+- (ABI break) `geode::utils::game::restart(bool saveData)` has been removed; you
+will have to use `geode::utils::game::restart(bool saveData, bool safeMode = false)`
 - Updated **fmtlib** to **12.2.0**
