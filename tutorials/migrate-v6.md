@@ -21,7 +21,7 @@ efficient alternative to `CCLabelBMFont`. It is **NOT** a subclass of
 Additionally, `geode::Label` also implements `CCBlendProtocol`.
 Besides the new API, the Label also works a little differently under the hood.
 Instead of containing one `CCSprite` child for each glyph, the Label renders text
-using **OpenGL quads**.
+using **quads**.
 
 Compared to `CCLabelBMFont`, `geode::Label` brings much improved performance,
 **Unicode glyph support** (if the font you're using contains them), **emojis**
