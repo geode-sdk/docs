@@ -120,7 +120,7 @@ As a result of the migration to `geode::Label`, the following breaking changes w
 - `SliderNode::getLinkedLabel()`: changed return type
 - `SimpleTextArea::getLines()`: returns `std::vector<geode::Label*>`
 
-## `geode::Popup`
+## geode::Popup
 
 - `Popup::m_title` is now of type `geode::Label`
 - The vanilla **fast menu** option will now be respected by default
@@ -129,6 +129,10 @@ As a result of the migration to `geode::Label`, the following breaking changes w
 
 Tasks have been **completely removed**. Please switch to using [async](/tutorials/async)
 for all your task-related needs
+
+## Keybinds
+
+- Added keybind modifier **fallthrough** (see [this pull request](https://github.com/geode-sdk/geode/pull/2000) for more information)
 
 ## Game restarting
 
@@ -143,7 +147,3 @@ use `geode::utils::game::restart(bool saveData, bool safeMode)`.
 ## fmt
 
 - Updated fmtlib to **12.2.0**
-
-## Keybinds
-
-- Added keybind modifier **fallthrough** (see [this pull request](https://github.com/geode-sdk/geode/pull/2000) for more information)
