@@ -1,14 +1,14 @@
 # Migrating from Geode v5.x to v6.x
 
 <!--toc:start-->
-- [Migrating from Geode v5.x to v6.x](#migrating-from-v5x-to-v6x)
+- [Migrating from Geode v5.x to v6.x](#migrating-from-geode-v5x-to-v6x)
   - [geode::Label](#geodelabel)
   - [geode::Popup](#geodepopup)
   - [Tasks](#tasks)
+  - [Keybinds](#keybinds)
   - [Game restarting](#game-restarting)
   - [Settings](#settings)
-  - [fmt](#fmt)
-  - [Keybinds](#keybinds)
+  - [Miscellaneous](#miscellaneous)
 <!--toc:end-->
 
 > :warning: Geode v6.x is still *work-in-progress*, this guide will be updated
@@ -144,6 +144,6 @@ use `geode::utils::game::restart(bool saveData, bool safeMode)`.
 - `SettingV3::updateState2()` has been removed
 - `SettingV3::updateState()` now has **public** visibility
 
-## fmt
+## Miscellaneous
 
-- Updated fmtlib to **12.2.0**
+- Updated **fmtlib** to **12.2.0**
