@@ -1,12 +1,12 @@
-# Migrating from v5.x to v6.x
+# Migrating from Geode v5.x to v6.x
 
 <!--toc:start-->
-- [Migrating from v5.x to v6.x](#migrating-from-v5x-to-v6x)
-  - [`geode::Label`](#geodelabel)
-  - [`geode::Popup`](#geodepopup)
+- [Migrating from Geode v5.x to v6.x](#migrating-from-v5x-to-v6x)
+  - [geode::Label](#geodelabel)
+  - [geode::Popup](#geodepopup)
   - [Tasks](#tasks)
   - [Game restarting](#game-restarting)
-  - [`Settings`](#settings)
+  - [Settings](#settings)
   - [fmt](#fmt)
   - [Keybinds](#keybinds)
 <!--toc:end-->
@@ -14,7 +14,7 @@
 > :warning: Geode v6.x is still *work-in-progress*, this guide will be updated
 > as breaking changes are made
 
-## `geode::Label`
+## geode::Label
 
 `geode::Label` is a new (also available in **Geode v5**), highly
 efficient alternative to `CCLabelBMFont`. It is **NOT** a subclass of
@@ -37,14 +37,18 @@ Here's a small example:
 // ------------
 // -- BEFORE --
 // ------------
-cocos2d::CCLabelBMFont* label = cocos2d::CCLabelBMFont::create("Hello, world!", "bigFont.fnt");
+cocos2d::CCLabelBMFont* label = cocos2d::CCLabelBMFont::create(
+  "Hello, world!", "bigFont.fnt"
+);
 
 label->setString("new string");
 
 std::string variable = "string from variable";
 
-label->setString(variable.c_str()); // setString requires a const char*
-label->limitLabelWidth(180.0f, 0.6f, 0.1f); // max width, max scale, min scale
+// setString requires a const char*
+label->setString(variable.c_str());
+// max width, max scale, min scale
+label->limitLabelWidth(180.0f, 0.6f, 0.1f);
 label->setFntFile("goldFont.fnt");
 const char* fontFile = label->getFntFile();
 CCBMFontConfiguration* font = label->getConfiguration();
@@ -62,15 +66,22 @@ label->setString("new string");
 
 std::string variable = "string from variable";
 
-label->setString(variable.c_str()); // setString requires a const char*
-label->setText(variable); // setText requires a `std::string`, so...
-label->setText(std::move(variable)); // we can move into it, taking ownership of the variable
+// setString requires a const char*
+label->setString(variable.c_str());
+// setText requires a `std::string`, so...
+label->setText(variable);
+// we can move into it, taking ownership of the variable
+label->setText(std::move(variable));
 label->setRichText("We can also set <cr>colored</c> text!");
 
-label->setLimitLabelWidth(180.0f, 0.6f, 0.1f); // instead of `limitLabelWidth`, we use `setLimitLabelWidth`, and...
-label->setLimitLabelHeight(32.0f, 0.6f, 0.1f); // we can also...
-label->setLimitLabelSize(cocos2d::CCSize{ 180.0f, 32.0f }, 0.6f, 0.1f); // do more!
-label->removeLabelSizeLimit(); // or don't...
+// instead of `limitLabelWidth`, we use `setLimitLabelWidth`, and...
+label->setLimitLabelWidth(180.0f, 0.6f, 0.1f);
+// we can also...
+label->setLimitLabelHeight(32.0f, 0.6f, 0.1f);
+// do more!
+label->setLimitLabelSize(cocos2d::CCSize{ 180.0f, 32.0f }, 0.6f, 0.1f);
+// or don't...
+label->removeLabelSizeLimit();
 
 label->setExtraKerning(0.5f); // we can even set some kerning
 
@@ -86,7 +97,7 @@ label->setAlignment(geode::Label::Alignment::Center); // beautiful!
 
 As a quick migration cheat sheet:
 
-| `cocos2d::CCLabelBMFont`                            | `geode::Label`                                         |
+| cocos2d::CCLabelBMFont                              | geode::Label                                           |
 |-----------------------------------------------------|--------------------------------------------------------|
 | `cocos2d::CCLabelBMFont::create(str, fnt)`          | `geode::Label::create(str, fnt)`                       |
 | `label->setWidth(width)`                            | `label->setMaxWidth(width)`                            |
@@ -124,7 +135,7 @@ for all your task-related needs
 - `geode::utils::game::restart(bool saveData)` has been removed; you will have to
 use `geode::utils::game::restart(bool saveData, bool safeMode)`.
 
-## `Settings`
+## Settings
 
 - `SettingV3::updateState2()` has been removed
 - `SettingV3::updateState()` now has **public** visibility
