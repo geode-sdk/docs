@@ -144,7 +144,7 @@ listenForSettingChanges<bool>("enabled", [](bool enabled) {
 });
 ```
 
-`geode::listenForAllSettingChanges()` has recieved a new `std::string_view` argument representing the key of the setting whose value changed. Aside from that, usage remains mostly the same:
+`geode::listenForAllSettingChanges()` has received a new `std::string_view` argument representing the key of the setting whose value changed. Aside from that, usage remains mostly the same:
 
 ```cpp
 // BEFORE: no "key" param
