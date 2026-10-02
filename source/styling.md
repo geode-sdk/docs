@@ -1,4 +1,5 @@
 # Styling guidelines
+This page contains the styling guidelines for contributions made to Geode directly. Submitted mods are not required to follow these.
 
 ## General
 The maximum line limit is 80 characters. In the case of a line exceeding 80 charaters, wrapping rules should be applied.
