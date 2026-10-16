@@ -143,3 +143,5 @@ for all your task-related needs
 - (ABI break) `geode::utils::game::restart(bool saveData)` has been removed; you
 will have to use `geode::utils::game::restart(bool saveData, bool safeMode = false)`
 - Updated **fmtlib** to **12.2.0**
+- `geode::utils::cocos::switchToScene` now has a `replace` argument. It defaults to `false` making the default behavior `pushScene` instead of the former `replaceScene`.
+- Native binaries path has changed from `resources/<modid>/binaries` to just `binaries`
