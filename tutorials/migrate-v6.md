@@ -2,6 +2,8 @@
 
 <!--toc:start-->
 - [Migrating from Geode v5.x to v6.x](#migrating-from-geode-v5x-to-v6x)
+  - [Filesystem](#filesystem)
+  - [Event exports](#event-export)
   - [geode::Label](#geodelabel)
   - [geode::Popup](#geodepopup)
   - [Tasks](#tasks)
@@ -12,6 +14,103 @@
 
 > :warning: Geode v6.x is still *work-in-progress*, this guide will be updated
 > as breaking changes are made
+
+## Filesystem
+
+Due to issues with encoding and an easy-to-misuse exception based API, Geode v6 fully abandons the `std::filesystem` module, with the `asp::fs` module of the `asp` library serving as a replacement. You are *not* required to use it everywhere, but all Geode APIs have been switched to it, so functions like `Mod::getSaveDir` will all return a `asp::fs::Path`.
+
+The `asp::fs::Path` and `asp::fs::PathView` classes are essentially wrappers over a `std::string` and `std::string_view`, but with a bunch of path/filesystem related functions, so replacing `std::filesystem::path` is easy.
+
+```cpp
+// old, std::filesystem based code
+std::filesystem::path dir = Mod::get()->getSaveDir();
+
+std::error_code ec;
+if (!std::filesystem::exists(dir, ec)) {
+    return;
+}
+
+std::filesystem::remove_all(dir, ec);
+std::filesystem::create_directories(dir, ec);
+
+auto filePath = dir / "file.txt";
+std::ofstream stream(filePath);
+stream << "hi" << std::endl;
+stream.close();
+
+for (auto entry : std::filesystem::directory_iterator(filePath.parent_path())) {
+    if (entry.is_regular_file()) {
+        log::debug("file: {}", utils::string::pathToString(entry.path()));
+    }
+}
+
+
+// new, asp::fs based code
+asp::fs::Path dir = Mod::get()->getSaveDir();
+if (!dir.exists()) {
+    return false;
+}
+
+asp::fs::removeDirAll(dir).unwrap();
+asp::fs::createDirAll(dir).unwrap();
+
+auto filePath = dir / "file.txt";
+auto file = asp::fs::File::create(dir / "file.txt").unwrap();
+file.write("hi\n");
+file.close(); // optional, to flush immediately
+
+for (auto result : asp::fs::iterDir(filePath.parent().value()).unwrap()) {
+    auto& entry = result.unwrap();
+    if (entry.isFile()) {
+        log::debug("file: {}", entry.path.string()); // no more pathToString!
+    }
+}
+```
+
+There are multiple benefits to using `asp::fs` APIs:
+* Less accidental encoding issues; paths returned by system APIs are (typically on Unix, guaranteed on Windows) **UTF-8**, instead of using system codepage like `std::fs::path::string()`.
+* Same and consistent path everywhere, no wide strings
+* No hidden exceptions, convenient `Result` based API you know and love
+* Small and contained headers that are much lighter on compile time than heavy `<filesystem>` includes
+
+However, if this doesn't suit you and you have to call some `std::filesystem` functions, you can always convert paths back and forth by including `<asp/fs/std.hpp>` and calling `Path::fromStdPath` or `toStdPath()`.
+
+## Event exports
+
+The syntax of the `GEODE_EVENT_EXPORT` macro was changed completely, due to previous syntax not being flexible enough. The new syntax fixes ODR violations (it is now legal to call exported functions in the same mod that exports them) and overloads work out of the box, without needing to define IDs:
+
+```cpp
+// Old
+inline Result<int> addNumbers(int a, int b) GEODE_EVENT_EXPORT(&addNumbers, (a, b));
+inline Result<int> addNumbers2(float a, float b) GEODE_EVENT_EXPORT(&addNumbers2, (a, b));
+// ^ overload would error unless we use another name or define event ID manually
+
+struct Test {
+    Result<int> addNumbers(int a, int b) GEODE_EVENT_EXPORT(&Test::addNumbers, (this, a, b));
+};
+
+
+// New
+// macro arguments: (return, name, args, call)
+GEODE_EVENT_EXPORT(Result<int>, addNumbers, (int a, int b), (a, b));
+GEODE_EVENT_EXPORT(Result<int>, addNumbers, (float a, float b), (a, b));
+
+struct Test {
+    // note the `_MEMBER` in the name and class name as first arg
+    GEODE_EVENT_EXPORT_MEMBER(Test, Result<int>, addNumbers, (float a, float b), (this, a, b));
+};
+```
+
+Another change is that the `_NORES` versions of the macro are gone, and the return value on error is determined automatically:
+```cpp
+// If the mod is not loaded, calling `addNumbers` with this definition will return error "Unable to call method"
+GEODE_EVENT_EXPORT(Result<int>, addNumbers, (int a, int b), (a, b));
+
+// And with this signature, it will simply return 0, like the GEODE_EVENT_EXPORT_NORES macro used to
+GEODE_EVENT_EXPORT(int, addNumbers, (int a, int b), (a, b));
+```
+
+Other aspects are unchanged: the `.cpp` file with function definitions stay the same, and consumers call the functions as they did before. Only the API headers need to change.
 
 ## geode::Label
 
@@ -126,8 +225,8 @@ As a result of the migration to `geode::Label`, the following breaking changes w
 
 ## Tasks
 
-- Tasks have been **completely removed**. Please switch to using [async](/tutorials/async)
-for all your task-related needs
+- Legacy tasks (`geode::Task`) have been **completely removed**. Please switch to using [async](/tutorials/async)
+for all your task-related needs. This does *not* concern `arc::Task`.
 
 ## Keybinds
 
