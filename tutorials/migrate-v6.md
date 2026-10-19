@@ -3,7 +3,7 @@
 <!--toc:start-->
 - [Migrating from Geode v5.x to v6.x](#migrating-from-geode-v5x-to-v6x)
   - [Filesystem](#filesystem)
-  - [Event exports](#event-export)
+  - [Event exports](#event-exports)
   - [geode::Label](#geodelabel)
   - [geode::Popup](#geodepopup)
   - [Tasks](#tasks)
@@ -48,22 +48,56 @@ for (auto entry : std::filesystem::directory_iterator(filePath.parent_path())) {
 // new, asp::fs based code
 asp::fs::Path dir = Mod::get()->getSaveDir();
 if (!dir.exists()) {
-    return false;
 }
 
-asp::fs::removeDirAll(dir).unwrap();
-asp::fs::createDirAll(dir).unwrap();
+// asp::fs functions cannot throw, but they return a Result that you should handle
+auto result = asp::fs::removeDirAll(dir);
+if (!result) {
+    log::warn("failed to delete: {}", result.unwrapErr());
+    return;
+}
+
+// for the sake of keeping the example simple, we will just ignore the error string in next lines
+if (asp::fs::createDirAll(dir).isErr()) return;
 
 auto filePath = dir / "file.txt";
 auto file = asp::fs::File::create(dir / "file.txt").unwrap();
-file.write("hi\n");
+if (!file.write("hi\n")) return;
+
 file.close(); // optional, to flush immediately
 
-for (auto result : asp::fs::iterDir(filePath.parent().value()).unwrap()) {
+auto iterator = asp::fs::iterDir(filePath.parent().value());
+if (!iterator) return;
+
+for (auto result : iterator.unwrap()) {
+    if (!result) return;
     auto& entry = result.unwrap();
+    
     if (entry.isFile()) {
         log::debug("file: {}", entry.path.string()); // no more pathToString!
     }
+}
+```
+
+If this seems like too much result handling, we recommend converting your functions that perform many file operations to also be Result-based:
+```cpp
+Result<> processDir(asp::fs::Path dir) {
+    GEODE_UNWRAP_INTO(auto iterator, asp::fs::iterDir(dir));
+    for (auto result : iterator) {
+        GEODE_UNWRAP_INTO(auto entry, result);
+
+        if (entry.isFile()) {
+            // ...
+        }
+    }
+
+    return Ok();
+}
+
+// then, the function returns an error if anything failed:
+auto result = processDir("files");
+if (!result) {
+    log::warn("processing failed: {}", result.unwrapErr());
 }
 ```
 
