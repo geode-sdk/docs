@@ -9,6 +9,7 @@
   - [Tasks](#tasks)
   - [Keybinds](#keybinds)
   - [Settings](#settings)
+  - [GD and cocos2d headers](#gd-and-cocos2d-headers)
   - [Miscellaneous](#miscellaneous)
 <!--toc:end-->
 
@@ -255,6 +256,7 @@ As a result of the migration to `geode::Label`, the following breaking changes w
 ## geode::Popup
 
 - `Popup::m_title` is now of type `geode::Label`
+- `Popup::onClose` is now public
 - The vanilla **fast menu** option will now be respected by default
 
 ## Tasks
@@ -265,11 +267,22 @@ for all your task-related needs. This does *not* concern `arc::Task`.
 ## Keybinds
 
 - Added keybind modifier **fallthrough** (see [this pull request](https://github.com/geode-sdk/geode/pull/2000) for more information)
+- No solution has been implemented to integrate with RobTop's keybind system *as of now*
 
 ## Settings
 
-- `SettingV3::updateState2()` has been removed
-- `SettingV3::updateState()` now has **public** visibility
+- `SettingNodeV3::updateState2()` has been removed
+- `SettingNodeV3::updateState()` now has **public** visibility
+
+## GD and cocos2d headers
+
+- Replaced all usage of `gd::*` classes with `std::*`, bye bye gnustl!
+- `CCMouseDelegate::scrollWheel` returns `bool`
+- `CCTouchDispatcher::registerForcePrio` takes an additional `int`
+- `ZipUtils::compressString` gains a `level` argument and `ZipUtils::ccDeflateMemory` gains an `int` argument
+- `DS_Dictionary::loadRootSubDictToCompressedFile`, `DS_Dictionary::saveRootSubDictToCompressedFile` gained an additional `bool` argument
+- Updated `CCKeyboardDispatcher` member names
+- Renamed `CCNode::m_bUnkBool2` to `CCNode::m_bDisableScheduling`
 
 ## Miscellaneous
 
@@ -278,3 +291,7 @@ will have to use `geode::utils::game::restart(bool saveData, bool safeMode = fal
 - Updated **fmtlib** to **12.2.0**
 - `geode::utils::cocos::switchToScene` now has a `replace` argument. It defaults to `false` making the default behavior `pushScene` instead of the former `replaceScene`.
 - Native binaries path has changed from `resources/<modid>/binaries` to just `binaries`
+- Reduced includes across the whole codebase, you might need to import some additional headers
+- Removed `utils::Timer`, `LogPerformance`
+- Moved sha256 utilities from `Geode/utils/hash.hpp` into `Geode/utils/crypto.hpp`
+- `async::waitForMainThread` now infers return type instead of returning `void`
