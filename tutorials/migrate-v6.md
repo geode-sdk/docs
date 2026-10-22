@@ -22,6 +22,8 @@ Due to issues with encoding and an easy-to-misuse exception based API, Geode v6 
 
 The `asp::fs::Path` and `asp::fs::PathView` classes are essentially wrappers over a `std::string` and `std::string_view`, but with a bunch of path/filesystem related functions, so replacing `std::filesystem::path` is easy.
 
+> :warning: One of the biggest differences in the API is that `extension()` returns extension without the dot, aka `txt`, `exe`. This is different from `std::filesystem` which includes the dot. This is a very easy thing to miss, as your compiler won't warn you but your checks might work incorrectly.
+
 ```cpp
 // old, std::filesystem based code
 std::filesystem::path dir = Mod::get()->getSaveDir();
