@@ -1,48 +1,198 @@
 # Getting nodes
 
-There comes a time in every GD modder's life when they are faced with the same eternal question: how to get a specific node from a certain layer. The easiest, and **incontestably best** way to do this is through **member variable access**. If the desired node is stored as a member in the layer, for example `m_playtestBtn` in `EditorUI`, you should __always__ access it through that.
+Finding nodes in the Cocos2d-x tree comes up in almost every mod, whether you want to read game state, change existing UI, or place your own content next to vanilla elements. Fragile lookups cause most mod incompatibility, crashes, and layout breakage after game updates or alongside other mods, so please pick the sturdiest method that fits.
 
-However, this is far from always possible, as not all nodes are stored as members in their containing layers. This poses a problem, the easiest solution to which has been the source of **hours of pain and misery**. The solution referred to here is **getting nodes by their absolute index**.
+In order of preference:
 
-It should be stressed here, at the very start, that **you should __NEVER__ get nodes by their index unless ABSOLUTELY __necessary__**. It should always be left as a last resort. The Cocos2d node tree is _not_ a stabile or predictable environment; child indexes can change rapidly due to game features, Z-order reordering, or most commonly due to other mods. If you do `node->getChildren()->objectAtIndex(5)`, you have no guarantees of getting the same node every time.
+1. [Members](#getting-via-members)
+2. [IDs via `getChildByID`](#getting-via-ids-using-getchildbyid)
+3. [Type via `getChildByType`](#getting-via-type-using-getchildbytype)
+4. [Queries via `querySelector`](#getting-via-queries-using-queryselector)
+5. [Iteration via `CCArrayExt`](#getting-via-iteration-using-ccarrayext)
+6. [More extreme approaches](#more-extreme-approaches)
 
-Using absolute indexes also requires a lot of work, as the **indexes are shuffled around** after a layer's `init` function due to Z-order reordering. This means that if you look at a node through [CocosExplorer](https://github.com/matcool/CocosExplorer) or [DevTools](https://github.com/geode-sdk/DevTools) and see that is is at index 5, it is more than likely that during the layer's `init` function (where you will most likely be working with the node) this will not be the case.
+Related: [Setting IDs](#setting-ids-using-setid), [Viewing string IDs](#viewing-string-ids), [If IDs are missing](#if-ids-are-missing).
 
-On top of this, in old GD modding frameworks, there were unfortunately basically no alternatives to members and getting by index. There are node **tags**, however tags are mostly used to implement differing functionality for buttons that use the same callback. The result of this was a lot of mods using raw indexes to position their own additions to GD's UI. Surprise surprise, this lead to [even mods by the same developer messing up their button positions due to indexes being different than expected](https://discord.com/channels/822510988409831486/858820729234391063/881436739250585610). Using raw indexes are one of the biggest sources of **mod incompatability**; and as Geode is meant to help with solving that, it introduces a whole new way of getting nodes:
+Child order shifts with game logic and other mods, and the order DevTools shows after load often differs from the order during `init` where most mod code runs. So please treat index based lookup as a **last resort**.
 
-## String IDs
+## Getting via members
 
-String IDs are a **Geode-specific addition** to the `CCNode` class that come in three main functions: `CCNode::getID`, `CCNode::setID` and `CCNode::getChildByID`. In all their simplicity, it means that you can assign any `CCNode` a string ID, and get a child by its string ID. On the surface, this may seem quite trivial, but this is actually an **incredibly powerful alternative** to using raw indexes. Whereas raw indexes are shuffled around and unreliable, you can be **almost certain** that `node->getChildByID("specific-node-id")` will **always** return the same node.
+The most reliable way is **member variable access**. If the layer stores the node, for example `m_playtestBtn` on `EditorUI`, just use it:
 
-For example, using string IDs, adding a new button to the left of the icon kit button in the main menu is as simple as this:
 ```cpp
-class $modify(MenuLayer) {
-    bool init() {
-        auto menu = this->getChildByID("main-menu");
-        auto iconKitBtn = menu->getChildByID("icon-kit-button");
-
-        auto btn = /* create button */;
-        btn->setPosition(iconKitBtn->getPosition() - CCPoint { -50.f, 0.f });
-        menu->addChild(btn);
-    }
-};
+// inside $modify(EditorUI), no searching needed
+m_playtestBtn->setVisible(false);
 ```
-Notice that there are no hardcoded indexes. Even if `main-menu` is at a completely different index than expected, as long as the main menu in `MenuLayer` has the ID `main-menu`, the code will always find it and work as expected.
 
-Although, this code does also have another interoperability concern: sure, we can be sure we added our node to the right place, but what if some other mod does the same? If another mod adds a button to the left of the icon kit button, they would overlap. To solve this issue, Geode introduces [layouts](/tutorials/layouts), which are discussed in their own tutorial.
+Inside `$modify`, your class inherits from the target, so you can use its members directly, including all `m_` fields from the bindings (which declare everything public, even members that are private in the original game code). Members stay stable across game updates and other mods. Only use the methods below when the node is **not** stored as a member.
 
-This also highlights the **problem with string IDs**: **someone has to assign them**. Whereas raw indexes are an intrinsic property of all CCNodes, the default ID of a node is an empty string (`""`). Geode does come with [default IDs for common classes like `MenuLayer`](https://github.com/geode-sdk/geode/blob/main/loader/src/ids/MenuLayer.cpp), but there are unfortunately too many layers in GD to label all of them.
+## Getting via IDs using `getChildByID`
 
-This has, however, been taken in mind when designing the string ID system. If you find a layer you want to get a child of is missing string IDs, what you can do is **add them yourself** (using members or raw indexes), and either [send your code for adding them to Geode](https://github.com/geode-sdk/geode/compare) or [let others know your mod adds these IDs](https://discord.gg/9e43WMKzhp). This way, someone else who wants to get the same children from the same layer can easily piggyback off of your logic. While the string ID system is ultimately and unfortunately based on raw indexes, its point is to **provide a single source of truth for those indexes**; once someone has done the work, no one should have to do it again.
+String IDs are a **Geode-specific addition** to `CCNode`. You can give any node a string ID and fetch a direct child by it. Unlike indexes, `node->getChildByID("specific-node-id")` keeps returning the same node:
 
-## Viewing String IDs
+```cpp
+// inside MenuLayer::init
+auto bottomMenu = this->getChildByID("bottom-menu");
+auto settingsBtn = bottomMenu->getChildByID("settings-button");
 
-You can see if a layer's nodes have string IDs using the [DevTools](https://github.com/geode-sdk/DevTools) mod, which shows them in the **Tree** view.
+auto name = static_cast<CCLabelBMFont*>(this->getChildByID("player-username"));
+```
 
-## String IDs in your own layers
+`getChildByID` only searches **immediate children** and returns `nullptr` when nothing matches, so please always check the result and only cast when you need a concrete type. `getChildByIDRecursive` searches the **whole subtree** instead, and `removeChildByID` is shorthand for `removeChild(getChildByID(...))`. Geode ships with [default IDs for vanilla layers](https://github.com/geode-sdk/geode/tree/main/loader/src/ids); for the rest, see [what to do if IDs are missing](#if-ids-are-missing).
 
-It is recommended for you to also use string IDs in your own layers, as this makes mod-modifying-mod interoperability much easier.
+## Setting IDs using `setID`
 
-## Naming String IDs
+Every `CCNode` starts with an empty ID. Give it one with `setID`, and please do the same in your own layers to help debugging and other mods:
 
-String IDs you give to nodes should be in kebab case with only lowercase a-z letters and no spaces.
+```cpp
+auto label = Label::create("Hello!", "bigFont.fnt");
+label->setID("hello-label");
+m_mainLayer->addChild(label);
+```
+
+### IDs in your own layers: do not use `_spr`
+
+Your own layer is fully yours, so use plain readable IDs like `"title-label"`. The `_spr` prefix only adds noise there.
+
+### IDs added to game layers: always use `_spr`
+
+Game layers are shared, so prefix IDs you add there with your mod ID to avoid collisions (`"author.mod-id/my-button"`). The `_spr` literal adds it for you:
+
+```cpp
+using namespace geode::prelude;
+
+auto btn = Button::createWithSprite("my-cool-button.png"_spr, [](Button* sender) {});
+btn->setID("my-cool-button"_spr);
+menu->addChild(btn);
+```
+
+Vanilla IDs added by Geode stay plain (`getChildByID("main-menu")`). Use `_spr` when setting and getting your own nodes, and write out the full prefixed ID when using another mod's node (`getChildByID("geode.loader/geode-button")`).
+
+### Naming string IDs
+
+Use kebab-case with lowercase `a-z`, `0-9`, and `-`, without spaces: `"my-cool-button"`. The part after the `/` follows the same rule.
+
+## Getting via type using `getChildByType`
+
+When a node has no ID but you know its C++ type, use `CCNode::getChildByType`. It returns the matching child of that type at the given index, or `nullptr`:
+
+```cpp
+// bottom-menu is the 2nd CCMenu in MenuLayer
+auto bottomMenu = this->getChildByType<CCMenu>(1);
+```
+
+The index defaults to `0` and negative values count back from the end. This pairs well with IDs: narrow down with `getChildByID`, then pick the unlabeled node inside by type.
+
+## Getting via queries using `querySelector`
+
+`CCNode::querySelector` finds nodes nested several levels deep with a small selector language. A space means "anywhere below" and `>` means "directly below":
+
+```cpp
+auto settingsBtn = this->querySelector("bottom-menu > settings-button");
+auto userLabel = static_cast<CCLabelBMFont*>(this->querySelector("player-username"));
+```
+
+It returns the **first** match or `nullptr`, so please check the result. Only ID characters are allowed in queries. For simple one level lookups, prefer `getChildByID`.
+
+## Getting via iteration using `CCArrayExt`
+
+`CCArrayExt<T>` (from `<Geode/utils/cocos.hpp>`) makes it easier to loop through children. `getChildrenExt<T>()` wraps a node's children and `asExt<T>()` wraps any `CCArray`:
+
+```cpp
+#include <Geode/utils/cocos.hpp>
+
+using namespace geode::prelude;
+
+// Get all the buttons in the CCMenu
+for (auto btn : bottomMenu->getChildrenExt<CCMenuItem>()) {}
+
+// asExt works on any CCArray, not just children
+for (auto obj : PlayLayer::get()->m_objects->asExt<GameObject>()) {}
+```
+
+It does not check types for you, so only use a derived type when every element has it. Otherwise iterate as the base type and filter with `typeinfo_cast`:
+
+```cpp
+for (auto child : this->getChildrenExt()) {
+    if (auto btn = typeinfo_cast<CCMenuItemSpriteExtra*>(child)) {}
+}
+```
+
+Use this to search by properties IDs cannot express (sprite, text, position) or to debug unlabeled children. If you repeat the same search in several mods, consider [assigning IDs once](#if-ids-are-missing) instead.
+
+## More extreme approaches
+
+> [!WARNING]
+> These approaches are far more brittle, and we strongly encourage you to keep these approaches to a minimum if you publish a Geode mod using these functions for the sake of mod compatibility.
+
+When nothing above fits, these helpers cover the stubborn cases. They all return `nullptr` when nothing matches, so please always check the result. A good rule of thumb is to use one just long enough to [give the node a stable ID](#if-ids-are-missing), then use that ID everywhere else.
+
+### Sprite name via `getChildBySpriteName` and `getChildBySpriteFrameName`
+
+If the only standout feature of a child is how it looks, search by its sprite (from `<Geode/utils/cocos.hpp>`):
+
+```cpp
+#include <Geode/utils/cocos.hpp>
+
+// First immediate child using this image file
+if (auto spr = geode::cocos::getChildBySpriteName(this, "GJ_button_01.png")) {}
+// First immediate child using this sprite frame
+if (auto spr = geode::cocos::getChildBySpriteFrameName(this, "GJ_playBtn_001.png")) {}
+```
+
+Use `getChildBySpriteName` for loose `.png` files and `getChildBySpriteFrameName` for sprites packed into a `.plist`. Both also find buttons showing that sprite, search **immediate children only**, and return the **first** match. For deeper searches, combine `isSpriteName` or `isSpriteFrameName` with a loop or `findFirstChildRecursive`. Sprite lookups stop matching when GD changes its sprites, so please turn a match into a `setID` right away.
+
+### Tag via `getChildByTag` and `getChildByTagRecursive`
+
+Tags are integers from Cocos2d-x. To find a direct child by tag:
+
+```cpp
+// Direct child with tag 42, or nullptr
+if (auto found = this->getChildByTag(42)) {}
+```
+
+When the depth is unknown, search below a node instead (from `<Geode/utils/cocos.hpp>`):
+
+```cpp
+#include <Geode/utils/cocos.hpp>
+
+// Tag 42 anywhere below this node, including this node
+if (auto found = geode::cocos::getChildByTagRecursive(this, 42)) {}
+```
+
+Tags have no namespacing, so different mods can reuse the same tag. Please combine a tag match with a `typeinfo_cast` check when possible, and avoid tag `0`, which matches almost everything since it is the default.
+
+### Index via `getChildByIndex`
+
+Position based lookup breaks easily when another mod adds or moves a child. When you need it, please use the bounds checked lookup, which returns `nullptr` for a missing index. A negative index counts back from the end:
+
+```cpp
+// Child at position 5, or nullptr
+if (auto menu = this->getChildByIndex<CCMenu>(5)) {}
+auto lastChild = this->getChildByIndex(-1);
+```
+
+It searches **immediate children only** and does **not** verify the type, so please pass the correct type or `CCNode`. Only use an index when the position stays fixed, and avoid copying an index seen in DevTools after load into an `init` hook, since the order often differs there.
+
+### Recommendation order
+
+When nothing above applies, please try these in order:
+
+1. `geode::cocos::getChildBySpriteName` for image files, then `geode::cocos::getChildBySpriteFrameName` for sprite frames.
+2. `getChildByTag` or `geode::cocos::getChildByTagRecursive` when GD assigns a meaningful tag.
+3. `getChildByIndex` when the position stays fixed and known.
+
+## Viewing string IDs
+
+The [DevTools](https://github.com/geode-sdk/DevTools) mod shows IDs in its **Tree** view.
+
+## If IDs are missing
+
+Geode ships default IDs for common layers, but many layers are still unlabeled. You can **add them yourself** (using members, `getChildByType`, or the [more extreme approaches](#more-extreme-approaches) above, ideally in `$modify::init` right after the original `init`):
+
+```cpp
+// Assign once so everyone can use getChildByID("bottom-menu")
+this->getChildByType<CCMenu>(1)->setID("bottom-menu");
+```
+
+Then please [make a pull request to Node IDs](https://github.com/geode-sdk/nodeids) with your additions so every mod can use them. Its point is to **provide a single source of truth**; once someone has done the work, no one should have to do it again.
