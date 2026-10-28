@@ -6,6 +6,7 @@
   - [Event exports](#event-exports)
   - [geode::Label](#geodelabel)
   - [geode::Popup](#geodepopup)
+  - [geode::OverlayManager](#geodeoverlaymanager)
   - [Tasks](#tasks)
   - [Keybinds](#keybinds)
   - [Settings](#settings)
@@ -260,6 +261,21 @@ As a result of the migration to `geode::Label`, the following breaking changes w
 - `Popup::m_title` is now of type `geode::Label`
 - `Popup::onClose` is now public
 - The vanilla **fast menu** option will now be respected by default
+
+## geode::OverlayManager
+
+Now removes all children on texture unload (switching fullscreen / windowed, etc.). If you have nodes that always
+sit in `OverlayManager` (like mod menu buttons for mobile), make sure to listen to `$on_game(TexturesLoaded)` to add them.
+
+```cpp
+#include <Geode/ui/OverlayManager.hpp>
+
+using namespace geode::prelude;
+
+$on_game(TexturesLoaded) {
+    OverlayManager::get()->addChild(/* your cool node here */);
+}
+```
 
 ## Tasks
 
