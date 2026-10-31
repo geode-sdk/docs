@@ -5,6 +5,7 @@
   - [Filesystem](#filesystem)
   - [Event exports](#event-exports)
   - [geode::Label](#geodelabel)
+  - [geode::Toggler](#geodetoggler)
   - [geode::Popup](#geodepopup)
   - [geode::OverlayManager](#geodeoverlaymanager)
   - [Tasks](#tasks)
@@ -255,6 +256,100 @@ As a result of the migration to `geode::Label`, the following breaking changes w
 - `SliderNode::linkLabel()`: requires `geode::Label` for 1st param
 - `SliderNode::getLinkedLabel()`: changed return type
 - `SimpleTextArea::getLines()`: returns `std::vector<geode::Label*>`
+
+## geode::Toggler
+
+`geode::Toggler` is a new alternative to `CCMenuItemToggler`. It is based on
+`geode::Button`, so it does **NOT** need to be added to a `CCMenu` to receive
+touches. It is **NOT** a subclass of `CCMenuItemToggler`.
+
+`geode::Toggler` also fixes the inverted state of `CCMenuItemToggler`:
+`CCMenuItemToggler::isToggled()` returns `true` when the toggle is *off*
+(which is why you had to write `!toggler->isToggled()`), while
+`geode::Toggler::isToggled()` returns `true` when the toggle is *on*.
+
+You are *not* required to use `geode::Toggler` in your mods.
+
+Here's a small example:
+
+```cpp
+// ------------
+// -- BEFORE --
+// ------------
+auto menu = cocos2d::CCMenu::create();
+
+auto toggler = CCMenuItemToggler::createWithStandardSprites(
+  this, menu_selector(MyLayer::onToggle), 1.0f
+);
+menu->addChild(toggler);
+
+toggler->toggle(true);
+// like `toggle`, but also runs the callback
+toggler->toggleWithCallback(true);
+auto sized = CCMenuItemToggler::createWithSize(
+  "off.png"_spr, "on.png"_spr, this, menu_selector(MyLayer::onToggle), 0.8f
+);
+// inverted: `true` means the toggle is OFF
+bool enabled = !toggler->isToggled();
+
+void MyLayer::onToggle(cocos2d::CCObject* sender) {
+  auto toggler = static_cast<CCMenuItemToggler*>(sender);
+  // the callback runs *before* the state flips, so this is the old state
+  bool wasEnabled = !toggler->isToggled();
+}
+
+// -----------
+// -- AFTER --
+// -----------
+#include <Geode/ui/Toggler.hpp>
+
+// no CCMenu needed, and no target / selector
+auto toggler = geode::Toggler::createWithStandardSprites(
+  [](geode::Toggler* sender, bool isToggled) {
+    log::info("Toggle state: {}", isToggled);
+  }
+);
+this->addChild(toggler);
+
+// the scale is an optional overload
+auto scaled = geode::Toggler::createWithStandardSprites(0.8f, [](geode::Toggler* sender, bool isToggled) {
+  // ...
+});
+
+// the callback is not triggered by default,
+// pass `true` as the 2nd argument to trigger it
+toggler->setToggled(true);
+toggler->setToggled(true, true);
+toggler->toggle();
+
+bool enabled = toggler->isToggled(); // not inverted!
+
+// custom visuals, same as `CCMenuItemToggler::create`
+auto custom = geode::Toggler::create(offNode, onNode);
+auto fromFiles = geode::Toggler::createWithSprites("off.png"_spr, "on.png"_spr);
+auto fromFrames = geode::Toggler::createWithSpriteFrameNames("off.png"_spr, "on.png"_spr);
+
+custom->setToggleCallback([](geode::Toggler* sender, bool isToggled) {
+  // ...
+});
+custom->setOffNode(newOffNode);
+custom->setOnNode(newOnNode);
+```
+
+As a quick migration cheat sheet:
+
+| cocos2d::CCMenuItemToggler                                       | geode::Toggler                                                   |
+|------------------------------------------------------------------|------------------------------------------------------------------|
+| `CCMenuItemToggler::create(off, on, this, sel)`                  | `geode::Toggler::create(off, on, cb)`                            |
+| `CCMenuItemToggler::createWithStandardSprites(this, sel, scale)` | `geode::Toggler::createWithStandardSprites(scale, cb)`           |
+| `CCMenuItemToggler::createWithSize(off, on, this, sel, scale)`   | `geode::Toggler::createWithSpriteFrameNames(off, on, scale, cb)` |
+| *(create the `CCSprite`s yourself)*                              | `geode::Toggler::createWithSprites(off, on, scale, cb)`          |
+| `!toggler->isToggled()`                                          | `toggler->isToggled()`                                           |
+| `toggler->toggle(!value)`                                        | `toggler->setToggled(value)`                                     |
+| `toggler->toggleWithCallback(!value)`                            | `toggler->setToggled(value, true)`                               |
+
+`sel` is a `menu_selector`, `cb` is a `geode::Toggler::ToggleCallback`, and
+`scale` is optional in every `geode::Toggler` create method.
 
 ## geode::Popup
 
