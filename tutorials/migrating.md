@@ -99,7 +99,3 @@ Patches are pretty easy to migrate. Geode has a `Mod::patch` function that takes
 ## Miscellaneous
 
 Some function signatures in gd.h are wrong: wrong as in they work for Windows, but not for any other platform. Geode uses the Android binary symbols to infer the function signatures, so the wrong function calls relating to this issue need to be fixed while migrating from gd.h.
-
-## TODO
-
-Add settings, data saving
