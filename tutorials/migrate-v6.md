@@ -148,6 +148,23 @@ GEODE_EVENT_EXPORT(Result<int>, addNumbers, (int a, int b), (a, b));
 GEODE_EVENT_EXPORT(int, addNumbers, (int a, int b), (a, b));
 ```
 
+Additionally, the header you need to include to use these macros is now different:
+```cpp
+// previously was Dispatch.hpp
+#include <Geode/loader/EventExport.hpp>
+```
+
+This header does not have `#pragma once` which allows it to be included twice. This can be useful in a situation where a mod needs to use another mod's API functions in the same file where it defines its own, for example:
+```cpp
+// We are including an API of another mod, we do NOT define their functions
+#undef GEODE_DEFINE_EVENT_EXPORTS
+#include <another.mod/API.hpp>
+
+// We are including our own API header, and we want to define our functions
+#define GEODE_DEFINE_EVENT_EXPORTS
+#include <MyAPI.hpp>
+```
+
 Other aspects are unchanged: the `.cpp` file with function definitions stay the same, and consumers call the functions as they did before. Only the API headers need to change.
 
 ## geode::Label
