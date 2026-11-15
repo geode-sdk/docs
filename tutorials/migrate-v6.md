@@ -334,6 +334,13 @@ custom->setToggleCallback([](geode::Toggler* sender, bool isToggled) {
 });
 custom->setOffNode(newOffNode);
 custom->setOnNode(newOnNode);
+
+// add extra callbacks on top of the one set above; the id identifies
+// the listener, and the callback receives only the new state
+custom->addToggleCallback("my-listener"_spr, [](bool isToggled) {
+  log::info("Toggle state: {}", isToggled);
+  return false;
+});
 ```
 
 As a quick migration cheat sheet:
@@ -347,6 +354,7 @@ As a quick migration cheat sheet:
 | `!toggler->isToggled()`                                          | `toggler->isToggled()`                                           |
 | `toggler->toggle(!value)`                                        | `toggler->setToggled(value)`                                     |
 | `toggler->toggleWithCallback(!value)`                            | `toggler->setToggled(value, true)`                               |
+| *(only one `this, sel` target)*                                  | `toggler->addToggleCallback(id, cb)`                             |
 
 `sel` is a `menu_selector`, `cb` is a `geode::Toggler::ToggleCallback`, and
 `scale` is optional in every `geode::Toggler` create method.
