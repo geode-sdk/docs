@@ -4,75 +4,67 @@ For most things in GD, such as `CCTextInputNode`, GD and Cocos2d-x use a **deleg
 
 As an alternative to this system, Geode introduces **events**. Events are essentially just small messages broadcast across the whole system: instead of having to install a single delegate, an unlimited number of classes can listen for events. The target that emits the events does not need to have any knowledge of its consumers; it just broadcasts events, and any receivers there are can handle them.
 
-There are multiple types of events, each with their own unique purpose, such as [`Event`](https://github.com/geode-sdk/geode/blob/v5.10.1/loader/include/Geode/utils/Task.hpp#L213), [`GlobalEvent`](https://github.com/geode-sdk/geode/blob/v5.10.1/loader/include/Geode/loader/Event.hpp#L1063), and [`DispatchEvent`/`Dispatch`](https://github.com/geode-sdk/geode/blob/v5.10.1/loader/include/Geode/loader/Dispatch.hpp#L15).
+There are multiple types of events, each with their own unique purpose, such as [`Event`](/classes/geode/Event/), [`GlobalEvent`](/classes/geode/GlobalEvent/), and [`DispatchEvent`](#dispatched-events).
+
+# Examples
 
 ## Creating events
 
-Consider a MMORPG system, where every player has a set amount of health. Obviously, since this is Geode, other mods might want to do something when a player has their health changed. If we were to use delegates, this brings up an issue. A delegate-based system for this kind of system would be quite undesirable - there are definitely more names than just "Player". While the mod could just have a list of delegates instead of a single one, those delegate have to manually deal with telling the mod to remove themselves from the list when they want to stop listening for events.
+Consider a multiplayer game, where every player has a set amount of health. Obviously, since this is Geode, other mods might want to do something when a player has their health changed.
+You could write a delegate-like API, where users of the api have to override virtuals and you have to keep track of delegate lifetimes, which can be a hefty amount of code.
 
-Instead, the MMORPG API should leverage the Geode event system by first defining a new type of `Event`:
+Instead, the API could leverage the Geode event system by first defining a new type of `Event`:
 
 ```cpp
 // PlayerHealthEvent.hpp
 
-#include <Geode/loader/Event.hpp> // Event
-
+#include <Geode/loader/Event.hpp>
 #include <string>
 
 using namespace geode::prelude;
 
-class PlayerHealthEvent : public Event<PlayerHealthEvent, bool(int health), std::string> {
-public:
+struct PlayerHealthEvent : Event<PlayerHealthEvent, bool(int health), void(std::string name)> {
     using Event::Event;
 };
 ```
 
-Notice the template parameters we provided to `Event`. The `PlayerHealthEvent` parameter we passed tells `Event` what type of event it is. The `bool(int health)` parameter acts as the arguments to receive and send. Lastly, the `std::string` parameter is our **filter**. With them, we can send and listen to events with specific conditions, without the need to define an if statement or logic.
+Notice the template parameters we provided to `Event`. The `PlayerHealthEvent` parameter we passed tells `Event` what type of event it is. The `bool(int health)` parameter acts as the arguments to receive and send. Lastly, the `void(std::string name)` parameter is our **filter**. With them, we can send and listen to events with specific conditions, without the need to define an if statement or logic.
 
-Now, the MMORPG mod can send new health events by simply creating a `PlayerHealthEvent` and calling `send` on it.
+Now, the multiplayer mod can send new health events by simply creating a `PlayerHealthEvent` and calling `send` on it.
 
 ```cpp
-PlayerHealthEvent("joey").send(100); // send our event for our listeners to use
+// the event is created with the filter args we specified in `void(std::string name)`
+// 100 is the health from earlier, defined in `bool(int health)`
+PlayerHealthEvent("joey").send(100);
 ```
-
-That's all - the MMORPG mod can now rest assured that any mod expecting health events has received them.
 
 ## Listening to events
 
 Listening to events is done by using the `listen` method in an `Event`.
 
 ```cpp
-// main.cpp
-
-#include <Geode/DefaultInclude.hpp> // $on_mod(Loaded)
-#include <Geode/loader/Event.hpp>
-
+#include <Geode/Geode.hpp>
 #include "PlayerHealthEvent.hpp" // Our previously created event
 
 using namespace geode::prelude;
 
-// on_mod(Loaded) runs the code inside **when your mod is loaded**
 $on_mod(Loaded) {
+    // this will only listen to events triggered with name = "joey"
     auto listener = PlayerHealthEvent("joey").listen([](int health) {
         log::info("Joey's health is now {}", health);
-        return ListenerResult::Propagate;
-
-        // We have to propagate the event further, so that other listeners
-        // can handle this event
+        // this is equivalent to return false; or no return at all
         return ListenerResult::Propagate;
     });
-    listener.leak(); // We leak the listener to prevent it from being destroyed at the end of the Loaded callback.
+    // the listener is scoped, so destroying it will make it stop listening to events,
+    // so we leak the it to stop that
+    listener.leak();
 }
 ```
 
 Notice that our callback returns a `ListenerResult`, more specifically `ListenerResult::Propagate`. This tells the event system that this specific event should **propagate** to the next listeners that are expecting this type of event. If you wish to **stop** this propagation from happening (let's say you don't want to handle players whose health is an impossible value), then you can return `ListenerResult::Stop`.
 
 ```cpp
-// main.cpp
-
-#include <Geode/DefaultInclude.hpp> // $on_mod(Loaded)
-#include <Geode/loader/Event.hpp>
-
+#include <Geode/Geode.hpp>
 #include "PlayerHealthEvent.hpp"
 
 using namespace geode::prelude;
@@ -83,13 +75,10 @@ $on_mod(Loaded) {
             return ListenerResult::Stop;
         }
         log::info("Joey's health is now {}", health);
-        return ListenerResult::Propagate;
 
-        // We have to propagate the event further, so that other listeners
-        // can handle this event
         return ListenerResult::Propagate;
     });
-    listener.leak(); // We leak the listener to prevent it from being destroyed at the end of the Loaded callback.
+    listener.leak();
 }
 ```
 
@@ -97,18 +86,16 @@ This is all the mod needs to do to set up a **global listener** - one that exist
 
 ## Global Events
 
-Now, you may be asking, "OK, but what if I want to handle the health event for ALL players?". Don't worry, Geode has you covered with `GlobalEvent`. With GlobalEvent, you don't have to explicitly filter out events. You can create one just like this:
+If you want an event that can be filtered by the player name, but also want to handle the health event for all players, then you should use `GlobalEvent`. With GlobalEvent, your listener can be unfiltered and all events will be received.
 
 ```cpp
 // PlayerHealthEventGlobal.hpp
 
-#include <Geode/loader/Event.hpp> // Event
+#include <Geode/loader/Event.hpp>
 
 using namespace geode::prelude;
 
-// Notice how we are now using a struct instead of a class.
-struct PlayerHealthEventGlobal : public GlobalEvent<PlayerHealthEventGlobal, bool(int health), std::string> {
-public:
+struct PlayerHealthEventGlobal : GlobalEvent<PlayerHealthEventGlobal, bool(int health), void(std::string name)> {
     using GlobalEvent::GlobalEvent;
 };
 ```
@@ -117,17 +104,40 @@ Usage is mostly the same, **however**, there is a difference for `listen`:
 
 ```cpp
 // Both of these are valid:
-PlayerHealthEventGlobal().listen([](int health) {
+
+// Note how the filter args come first in the lambda
+PlayerHealthEventGlobal().listen([](std::string const& name, int health) {
     // Handling code goes here..
 });
 
 PlayerHealthEventGlobal("joey").listen([](int health) {
-    // Handling code goes here.. 
+    // Handling code goes here..
 });
 ```
 
-Congrats! You have now made an event that will fire regardless of filters!
+## Node bound listeners
+
+You can store a `geode::ListenerHandle` in a class, meaning it will only receive events for as long as the class exists:
+
+```cpp
+class MyHealthNode : public cocos2d::CCNode {
+    ListenerHandle m_handle;
+
+    bool init() {
+        // ...
+
+        m_handle = PlayerHealthEvent("john").listen([this](int health) {
+            // ...
+        });
+        // no need for leak(), the listener handle is alive as long as the node is
+    }
+};
+```
+
+In case of an existing node, or even just for one off listeners, there exists a Geode-specific helper called [`CCNode::addEventListener`](/classes/cocos2d/CCNode#addEventListener). You can use this to **add event listeners to any node** - including existing ones by GD!
 
 ## Dispatched events
 
 There also exist special types of events called **dispatch events** - these are intended for use within optional dependencies. See [the tutorial on dependencies](/mods/dependencies#events) for more information.
+
+# Specification
