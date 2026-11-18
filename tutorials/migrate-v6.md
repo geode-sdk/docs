@@ -4,6 +4,7 @@
 - [Migrating from Geode v5.x to v6.x](#migrating-from-geode-v5x-to-v6x)
   - [Filesystem](#filesystem)
   - [Event exports](#event-exports)
+  - [Events](#events)
   - [geode::Label](#geodelabel)
   - [geode::Popup](#geodepopup)
   - [geode::OverlayManager](#geodeoverlaymanager)
@@ -166,6 +167,22 @@ This header does not have `#pragma once` which allows it to be included twice. T
 ```
 
 Other aspects are unchanged: the `.cpp` file with function definitions stay the same, and consumers call the functions as they did before. Only the API headers need to change.
+
+## Events
+
+`ThreadSafeEvent` and `ThreadSafeGlobalEvent` have been removed, as now `Event` is always thread safe. Simply replace these classes with `Event` and `GlobalEvent` in your code respectively.
+
+Filter arguments can now be function types, which can help with documentation:
+```cpp
+// This still works
+struct PlayerHealthEvent : public Event<PlayerHealthEvent, bool(int health), std::string> {
+  using Event::Event;
+};
+// Now this is also possible, and is used in the same way. It just helps documentation
+struct PlayerHealthEvent : public Event<PlayerHealthEvent, bool(int health), void(std::string playerName)> {
+  using Event::Event;
+};
+```
 
 ## geode::Label
 
