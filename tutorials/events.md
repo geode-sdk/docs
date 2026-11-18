@@ -141,3 +141,103 @@ In case of an existing node, or even just for one off listeners, there exists a 
 There also exist special types of events called **dispatch events** - these are intended for use within optional dependencies. See [the tutorial on dependencies](/mods/dependencies#events) for more information.
 
 # Specification
+
+## Event
+
+[`Event`](/classes/geode/Event) allows you to define data that will be sent and received by the listeners, along with filters. Listeners have to provide a filter, unlike [`GlobalEvent`](#globalevent). \
+For performance, the filter arguments have to be hashable.
+
+```cpp
+struct MyEvent : Event<
+    MyEvent, // your event subclass, used for type-based hashing
+    bool(int value), // defines the arguments used for send() and listen() callbacks
+    std::string // the rest is filter arguments, can be empty
+> {
+    // This is needed so the subclass inherits the ctor
+    using Event::Event;
+};
+// This is equivalent, but allows you to document the filter arg names. the return type must be void
+struct MyEvent : Event<MyEvent, bool(int value), void(std::string id)> // ...
+// This is similar, but means listeners will always propagate the event
+struct MyEvent : Event<MyEvent, void(int value), void(std::string id)> // ...
+
+// Multiple filter arguments can be specified
+struct MyEvent2 : Event<MyEvent2, void(int value), void(std::string id, std::string category)> // ...
+// Or none
+struct MouseInputEvent : Event<MouseInputEvent, void(MouseInputData& data)> // ...
+```
+
+### Custom filtering
+
+Filters must match exactly the values specified. If you want more complex filtering, consider providing your own `listen()` method:
+
+```cpp
+struct ComplexEvent : Event<ComplexEvent, bool(CCNode* node)> {
+    using Event::Event;
+
+    template <class Callable>
+    ListenerHandle listen(std::string nodeID, Callable listener) const {
+        return Event::listen([nodeID, listener = std::move(listener)](CCNode* node) {
+            // only call listener if the node has the specified nodeID
+            if (node->getID() == nodeID) {
+                std::invoke(listener, node);
+            }
+        });
+    }
+};
+```
+
+### Listeners
+
+Listeners are just functions that get called with the event arguments. They can either return void (nothing), a boolean or `ListenerResult::Propagate`/`ListenerResult::Stop`.
+
+Returning nothing, `false` and `ListenerResult::Propagate` all do the same thing, it means the event is still dispatched to the remaining listeners.
+
+Returning `true` or `ListenerResult::Stop` will stop the event from being dispatched to the remaining listeners.
+
+Listeners can specify different **priorities**, so high priority listeners get called first:
+
+```cpp
+PlayerHealthEvent("joe123").listen([](int health) {
+    // ...
+}, Priority::VeryEarly);
+```
+
+## GlobalEvent
+
+[`GlobalEvent`](/classes/geode/GlobalEvent) allows unfiltered listeners along with filtered ones. This works internally by sending the event to filtered listeners first, and then to unfiltered ones, so they have higher priority.
+
+```cpp
+struct SettingEvent : GlobalEvent<SettingEvent, bool(Setting*), void(std::string settingKey)> {
+    using GlobalEvent::GlobalEvent;
+};
+
+// Filtered listener: lambda only has Setting* argument
+SettingEvent("brightness").listen([](Setting* sett) {
+    // ...
+}).leak();
+
+// Unfiltered listener: event is constructed with no args,
+// lambda contains filters + args
+SettingEvent().listen([](std::string const& key, Setting* sett) {
+    // ...
+}).leak();
+```
+
+`GlobalEvent` can be defined in two ways, one sometimes being more efficient as it can avoid copies:
+
+```cpp
+// unfiltered listener is implicitely filter args + event args
+struct SettingEvent : GlobalEvent<SettingEvent, bool(Setting*), void(std::string settingKey)> {
+    using GlobalEvent::GlobalEvent;
+};
+
+// avoids std::string copies by defining the unfiltered listener function type manually.
+// the first few arguments **have** to match with the filter args, whether exactly
+// or be implicitly convertible types.
+struct SettingEvent : GlobalEvent<SettingEvent, bool(std::string_view settingKey, Setting*), bool(Setting*), void(std::string settingKey)> {
+    using GlobalEvent::GlobalEvent;
+};
+```
+
+Like with `Event`, `GlobalEvent` also has listener priorities.
