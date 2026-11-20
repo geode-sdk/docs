@@ -8,6 +8,7 @@
   - [geode::Label](#geodelabel)
   - [geode::Popup](#geodepopup)
   - [geode::OverlayManager](#geodeoverlaymanager)
+  - [geode::TextInput](#geodetextinput)
   - [Tasks](#tasks)
   - [Keybinds](#keybinds)
   - [Settings](#settings)
@@ -310,6 +311,45 @@ $on_game(TexturesLoaded) {
     OverlayManager::get()->addChild(/* your cool node here */);
 }
 ```
+
+## geode::TextInput
+
+`geode::TextInput` has been rewritten from scratch and no longer wraps a `CCTextInputNode`. It now supports text selection, multiline, context menus, shortcuts and more.
+
+Most methods remained the same, but `TextInputDelegate` has been removed. Switch to callbacks (or listeners, if you need multiple subscribers).
+
+A few methods were also renamed or removed:
+
+| v5                | v6                 |
+|-------------------|--------------------|
+| `input->defocus()`| `input->unfocus()` |
+| `input->setTextAlign(TextInputAlign::Left)` | `input->setAlignment(Label::Alignment::Left)` |
+| `input->setWidth(w)` | `input->setContentWidth(w)` |
+| `input->getInputNode()` | removed |
+| `input->setDelegate()` | removed |
+
+`geode::CommonFilter` has been changed into a bitmask for easier control and ability to combine parts. It was also extended to support Latin, Cyrillic, Greek and emojis.
+
+> :warning: `CommonFilter::Any` now means "anything in bigFont.fnt" (Alphanumeric | Printable). It does not include any new charsets. Use `CommonFilter::Text` if your font supports them.
+
+`TextInput` now has native multiline support (`TextInput::createMultiline`). It allows users to split lines as well as scroll the text with their mouse wheel or by dragging cursor.
+
+The node now also supports a wide variety of keyboard shortcuts you may find in other programs, including:
+- **Ctrl+A (⌘+A)** - select all text
+- **Ctrl+C (⌘+C)** - copy selected text (disabled for password mode)
+- **Ctrl+X (⌘+X)** - cut selected text (disabled for password mode)
+- **Ctrl+V (⌘+V)** - paste text
+- **Ctrl+Left/Right (Option+Left/Right)** - move cursor a whole word to the left/right
+- **⌘+Left/Right** - move cursor a whole line left/right (macOS only)
+- **Shift+Left/Right** - text selection (can be combined with word wrap)
+- **Home** - set cursor to the start of the line
+- **End** - set cursor to the end of the line
+
+Most combinations you would expect also should work.
+
+A really useful feature was added for numeric inputs (`TextInput::setNumericMode`) which can be used to force numeric keyboard on mobile devices. If you've used inputs for numbers, make sure to add `input->setNumericMode(true);` as well. Note that this doesn't enforce any filters on its own and you still should use `input->setCommonFilter(CommonFilter::Int);` or similar. 
+
+Emojis (and :emoji: tags) conversions are enabled by default for `chatFont.fnt` fields. If you wish to disable them, use `input->setDisplayEmojis(false);`.
 
 ## Tasks
 
