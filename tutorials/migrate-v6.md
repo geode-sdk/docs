@@ -134,11 +134,13 @@ By default this only works for folders named `include/`, but you can customize i
 }
 ```
 
-You can now package cmake files, and the file `cmake/DependencyMain.cmake` will be executed at configure time for users of your dependency
+You can now package cmake files, and if there's a file `cmake/DependencyMain.cmake` it will be automatically included at configure time for users of your dependency
 ```json
 "api": {
   "cmake": [
-    "cmake/DependencyMain.cmake"
+    "cmake/DependencyMain.cmake",
+    "cmake/other.cmake",
+    "cmake/*.cmake"
   ]
 }
 ```
