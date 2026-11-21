@@ -3,6 +3,7 @@
 <!--toc:start-->
 - [Migrating from Geode v5.x to v6.x](#migrating-from-geode-v5x-to-v6x)
   - [Filesystem](#filesystem)
+  - [Dependency Headers](#dependency-headers)
   - [Event exports](#event-exports)
   - [Events](#events)
   - [geode::Label](#geodelabel)
@@ -114,6 +115,33 @@ There are multiple benefits to using `asp::fs` APIs:
 * Small and contained headers that are much lighter on compile time than heavy `<filesystem>` includes
 
 However, if this doesn't suit you and you have to call some `std::filesystem` functions, you can always convert paths back and forth by including `<asp/fs/std.hpp>` and calling `Path::fromStdPath` or `toStdPath()`.
+
+## Dependency Headers
+
+Starting with v6, the Geode CLI now strips `include/` from API headers by default, meaning:
+```cpp
+// Before
+#include <dev123.my-api/include/Foo.hpp>
+
+// After
+#include <dev123.my-api/Foo.hpp>
+```
+By default this only works for folders named `include/`, but you can customize it:
+```json
+"api": {
+  "include": ["something/*.hpp"],
+  "include_strip_prefix": "something/",
+}
+```
+
+You can now package cmake files, and the file `cmake/DependencyMain.cmake` will be executed at configure time for users of your dependency
+```json
+"api": {
+  "cmake": [
+    "cmake/DependencyMain.cmake"
+  ]
+}
+```
 
 ## Event exports
 
