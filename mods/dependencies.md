@@ -60,7 +60,7 @@ The mod `hjfod.gmd-api` contains utilities for working with [.GMD files](https:/
 Now, if you reconfigure your CMake (or if you're using CMake Tools in VS Code, it should be reconfigured automatically), Geode should automatically find `hjfod.gmd-api` in your installed mods. If the mods index, and install it for you.
 
 ```cpp
-#include <hjfod.gmd-api/include/GMD.hpp>
+#include <hjfod.gmd-api/GMD.hpp>
 // do things with gmd-api's functions
 ```
 
