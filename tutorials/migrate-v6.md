@@ -417,3 +417,4 @@ will have to use `geode::utils::game::restart(bool saveData, bool safeMode = fal
 - Removed `utils::Timer`, `LogPerformance`
 - Moved sha256 utilities from `Geode/utils/hash.hpp` into `Geode/utils/crypto.hpp`
 - `async::waitForMainThread` now infers return type instead of returning `void`
+- Old fallback texture userObject (`geode.texture-loader/fallback`) is removed, use `isUsingFallback()` instead
