@@ -17,9 +17,6 @@
   - [Miscellaneous](#miscellaneous)
 <!--toc:end-->
 
-> :warning: Geode v6.x is still *work-in-progress*, this guide will be updated
-> as breaking changes are made
-
 ## Filesystem
 
 Due to issues with encoding and an easy-to-misuse exception based API, Geode v6 fully abandons the `std::filesystem` module, with the `asp::fs` module of the `asp` library serving as a replacement. You are *not* required to use it everywhere, but all Geode APIs have been switched to it, so functions like `Mod::getSaveDir` will all return a `asp::fs::Path`.
