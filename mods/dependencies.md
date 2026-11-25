@@ -115,17 +115,6 @@ Do note that user flags and user objects are separate - `getUserFlag` and `getUs
 Included in [Geode v4.3.0](https://github.com/geode-sdk/geode/releases/tag/v4.3.0) is a macro to automate the process of exporting functions from API mods, in a way that works for optional dependencies.
 
 This makes use of events to grab a function pointer from the API mod, and call it from the dependent mod, hence the name.
-The exported functions must return a `geode::Result`, considering the API mod may not be available, and thus the function cannot be called.
-
-Two versions of the macro are available:
-```cpp
-// The event id will be determined from the function name and the macro MY_MOD_ID
-#define GEODE_EVENT_EXPORT(functionPointer, callArguments)
-
-// When using this, make sure to prefix the event id with your mod's id, to avoid conflicts.
-// **Do not use features such as _spr here**, it will not work properly.
-#define GEODE_EVENT_EXPORT_ID(functionPointer, callArguments, eventID)
-```
 
 ### Example
 ```cpp
@@ -133,7 +122,7 @@ Two versions of the macro are available:
 // (such as include/api.hpp)
 #pragma once
 
-#include <Geode/loader/Dispatch.hpp>
+#include <Geode/loader/EventExport.hpp>
 // This undef is not strictly required, however the define that follows will throw a warning
 // if MY_MOD_ID happens to be set by some other api and it is not undefined like this.
 #undef MY_MOD_ID
@@ -142,16 +131,30 @@ Two versions of the macro are available:
 #define MY_MOD_ID "dev.my-api"
 
 namespace api {
-    // Important: The function must be declared inline, and return a geode::Result,
-    // as it can fail if the api is not available.
-    inline geode::Result<int> addNumbers(int a, int b) GEODE_EVENT_EXPORT(&addNumbers, (a, b));
+    // The canonical way for defining an exported function.
+    // If the mod is not loaded or the function is unavailable, the result will be an error. Otherwise, it's the result returned by the API.
+    GEODE_EVENT_EXPORT(Result<int>, factorial, (int x), (x));
 
-    // Alternatively, use the `_NORES` variant of the macro, which will return a default value
-    // if the api isn't available. Ex: this will return 0 if the mod is unavailable
-    inline int factorial(int x) GEODE_EVENT_EXPORT_NORES(&factorial, (x));
+    // If you prefer to *not* deal with results, that's an option too.
+    // On failure, this will return a default value (0 in case of integers)
+    GEODE_EVENT_EXPORT(int, factorialSimple, (int x), (x));
 
-    // It also works with void:
-    inline void doSomething() GEODE_EVENT_EXPORT_NORES(&doSomething, ());
+    // Overloads are natively supported:
+    GEODE_EVENT_EXPORT(float, factorialSimple, (float x), (x));
+
+    // With a different macro, you can even export member functions inside classes!
+    struct Number {
+        int m_value;
+
+        // Same macro parameters, but with the class name at the start and `this` in the argument list
+        GEODE_EVENT_EXPORT_MEMBER(Number, void, add, (const Number& other), (this, other));
+
+        // Static members are supported with the `_STATIC` variant, syntax is the same as the non-member macro
+        GEODE_EVENT_EXPORT_MEMBER_STATIC(int, random, (int min, int max), (min, max));
+
+        // Const-qualified functions can be declared with the `_CONST` variant
+        GEODE_EVENT_EXPORT_MEMBER_CONST(Number, Number, multiply, (const Number& other), (this, other));
+    };
 }
 ```
 
@@ -166,22 +169,44 @@ Result<int> api::addNumbers(int a, int b) {
     return Ok(a + b);
 }
 
-int api::factorial(int x) {
+int api::factorialSimple(int x) {
     return 42;
 }
 
-void api::doSomething() {
-    // ...
+float api::factorialSimple(float x) {
+    return 42.f;
+}
+
+void api::Number::add(const Number& other) {
+    m_value += other.m_value;
+}
+
+int api::Number::random(int min, int max) {
+    return min + (max - min) / 2;
+}
+
+api::Number api::Number::multiply(const Number& other) const {
+    return Number(m_value * other.m_value);
 }
 ```
 
-### Limitations
-Event exported functions currently **cannot** be called from within the mod (attempting to do so will crash the game). A possible way to get around this is to have a separate set of external and internal functions and have the external functions only serve as wrappers for the internal ones.
-
+For the users of the API, calling is no different than calling regular C++ functions:
 ```cpp
-int EditorIDs::getID(GJGameLevel* level) {
-    // In this example EditorIDs::getID is the exported function accessible to other mods
-    // and EditorIDs::Internal::getID is only accessible from within the mod itself.
-    return EditorIDs::Internal::getID(level);
+#include <dev.my-api/api.hpp>
+using namespace geode::prelude;
+
+void test() {
+    Result<int> r = api::factorial(4);
+    if (r.isOk()) {
+        log::info("Factorial: {}", r.unwrap());
+    } else {
+        log::warn("Failed to compute factorial: {}", r.unwrapErr());
+    }
+
+    int simple = api::factorialSimple(5);
+    log::info("Factorial (or 0): {}", simple);
+
+    int num = api::Number::random(10, 100);
+    log::info("Random number: {}", num);
 }
 ```
